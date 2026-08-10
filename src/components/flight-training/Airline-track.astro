@@ -1,0 +1,155 @@
+---
+// Airline Pilot Track Data
+const trackData = {
+  title: "The Airline Pilot Roadmap",
+  subtitle:
+    "A structured, high-integrity path from your first discovery flight to the flight deck of a major carrier.",
+  steps: [
+    {
+      id: "01",
+      name: "Private Pilot License (PPL)",
+      description:
+        "The foundation of your career. Learn the fundamentals of flight, navigation, and safety at New Century AirCenter.",
+      duration: "3-6 Months",
+      milestone: "First Solo Flight",
+      aos: "fade-right",
+      href: "/flight-training/private-pilot/",
+    },
+    {
+      id: "02",
+      name: "Instrument Rating (IR)",
+      description:
+        "Learn to fly by reference to instruments. This is critical for airline operations, allowing you to fly in low visibility and clouds.",
+      duration: "4 Months",
+      milestone: "Cross-Country IFR",
+      aos: "fade-left",
+      href: "/flight-training/instrument-rating/",
+    },
+    {
+      id: "03",
+      name: "Commercial Pilot License (CPL)",
+      description:
+        "Refine your skills to a professional standard. This certificate allows you to be compensated for flying.",
+      duration: "4 Months",
+      milestone: "10-hour Complex/TAA",
+      aos: "fade-right",
+      href: "/flight-training/commercial-pilot/",
+    },
+    {
+      id: "04",
+      name: "CFI & CFII Academy",
+      description:
+        "Become an instructor. At PIC, we give priority hiring to students who complete their instructor ratings with us.",
+      duration: "2 Months",
+      milestone: "Priority Hiring Eligibility",
+      aos: "fade-left",
+      href: "/flight-training/certified-flight-instructor-cfi/",
+    },
+    {
+      id: "05",
+      name: "Time Building & Mentorship",
+      description:
+        "Work as a senior-led instructor at PIC to reach the 1,500-hour airline minimum while being mentored by jet-rated pilots.",
+      duration: "12-18 Months",
+      milestone: "1,500 Hours Total Time",
+      aos: "fade-right",
+      href: "/flight-training/certified-flight-instructor-instrument-cfii/",
+    },
+  ],
+  proTip: {
+    title: "The PIC Advantage",
+    content:
+      "From your first lesson, PIC trains with the end goal in mind: airline readiness. Structured syllabi, standardized procedures, and performance-based progression keep your training focused and efficient.",
+  },
+};
+---
+
+<section class="bg-[#fcfaf8] py-24 px-6 overflow-hidden">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-20" data-aos="fade-up">
+      <span class="text-[#745e4d] font-bold uppercase tracking-[0.3em] text-xs"
+        >Career Path</span
+      >
+      <h2 class="text-5xl font-extrabold text-[#423731] mt-4 mb-6">
+        {trackData.title}
+      </h2>
+      <p class="text-[#745e4d] max-w-2xl mx-auto text-lg leading-relaxed">
+        {trackData.subtitle}
+      </p>
+    </div>
+
+    <div class="relative">
+      <div
+        class="absolute left-1/2 -translate-x-1/2 h-full w-1 bg-gradient-to-b from-[#dcc1a6] via-[#745e4d] to-transparent hidden md:block"
+      >
+      </div>
+
+      <div class="space-y-16 md:space-y-24">
+        {
+          trackData.steps.map((step, index) => (
+            <a
+              href={step.href}
+              class={`relative flex flex-col md:flex-row items-center ${index % 2 !== 0 ? "md:flex-row-reverse" : ""}`}
+            >
+              <div class="w-full md:w-5/12" data-aos={step.aos}>
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-[#dcc1a6]/30 hover:shadow-xl transition-shadow duration-500 group">
+                  <div class="flex items-center gap-4 mb-4">
+                    <span class="text-4xl font-black text-[#dcc1a6] group-hover:text-[#745e4d] transition-colors">
+                      {step.id}
+                    </span>
+                    <h3 class="text-xl font-bold text-[#423731]">
+                      {step.name}
+                    </h3>
+                  </div>
+                  <p class="text-[#745e4d] text-sm leading-relaxed mb-6">
+                    {step.description}
+                  </p>
+                  <div class="flex justify-between items-center pt-4 border-t border-gray-50">
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-[#5d4d40]">
+                      Duration: {step.duration}
+                    </span>
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-[#745e4d] bg-[#dcc1a6]/20 px-2 py-1 rounded">
+                      {step.milestone}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="absolute left-1/2 -translate-x-1/2 w-10 h-10 bg-white border-4 border-[#745e4d] rounded-full z-10 hidden md:flex items-center justify-center">
+                <div class="w-2 h-2 bg-[#745e4d] rounded-full" />
+              </div>
+
+              <div class="hidden md:block md:w-5/12" />
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="mt-24" data-aos="zoom-in">
+      <div
+        class="bg-[#423731] rounded-[3rem] p-10 md:p-16 text-center text-white relative overflow-hidden"
+      >
+        <div
+          class="absolute -top-24 -right-24 w-64 h-64 bg-white/5 rounded-full"
+        >
+        </div>
+
+        <h3 class="text-3xl font-bold mb-6 relative z-10">
+          {trackData.proTip.title}
+        </h3>
+        <p
+          class="text-[#dcc1a6] text-lg max-w-3xl mx-auto leading-relaxed relative z-10 mb-8"
+        >
+          "{trackData.proTip.content}"
+        </p>
+        <a
+          href="/contact/"
+          class="bg-[#dcc1a6] text-[#423731] px-10 py-4 rounded-full font-black uppercase tracking-widest text-sm hover:bg-white transition-colors relative z-10"
+        >
+          Speak with a Career Advisor
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

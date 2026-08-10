@@ -1,0 +1,466 @@
+---
+import ImageComp from "../utils/ImageComp.astro";
+const example = {
+  overview: {
+    image: {
+      src: "/src/assets/aircrew-member-using-control-panel-command-dashboard-navigation-fly-ariplane-cockpit-female-airliner-flying-plane-cabin-with-power-engine-switch-lever-close-up.jpg",
+      alt: "Aircrew member using control panel in airplane cockpit",
+    },
+    upperHeader: "EXAMPLE UPPER HEADER",
+    title: "Example Title for Content Right Component",
+    description:
+      "This is an example description for the Content Right component. It provides information about the content displayed on the right side of the layout.",
+    descriptions: [
+      "First example description point.",
+      "Second example description point.",
+      "Third example description point.",
+    ],
+    bullets: [
+      {
+        icon: "M3 18h18v2H3zm18.509-9.473a1.61 1.61 0 0 0-2.036-1.019L15 9L7 6L5 7l6 4l-4 2l-4-2l-1 1l4 4l14.547-5.455a1.61 1.61 0 0 0 .962-2.018",
+        title: "Career Growth & Opportunity",
+        description:
+          "Commercial aviation, charter operations, and corporate flying all need skilled pilots. Training now positions you for a career that’s in high demand and globally respected.",
+      },
+      {
+        icon: "M12 2a1 1 0 0 1 .932.638l7 18a1 1 0 0 1-1.326 1.281L13 19.517V13a1 1 0 1 0-2 0v6.517l-5.606 2.402a1 1 0 0 1-1.326-1.281l7-18A1 1 0 0 1 12 2",
+        title: "Freedom & Adventure",
+        description:
+          "Enjoy the unmatched perspective of seeing the world from above. Flying offers a lifestyle of independence, excitement, and exploration few other careers can match.",
+      },
+      {
+        icon: "",
+        title: "Challenge & Achievement",
+        description:
+          "Learning to fly is one of life’s most rewarding accomplishments, an achievement that builds confidence, discipline, and problem-solving skills that last a lifetime.",
+      },
+    ],
+    button: {
+      text: "Learn More",
+      href: "/new-to-flying/",
+    },
+  },
+  advantages: {
+    upperHeader: "EXAMPLE UPPER HEADER",
+    title: "Example Title for Content Right Component",
+    description:
+      "This is an example description for the Content Right component. It provides information about the content displayed on the right side of the layout.",
+    bullets: [
+      {
+        icon: "M3 18h18v2H3zm18.509-9.473a1.61 1.61 0 0 0-2.036-1.019L15 9L7 6L5 7l6 4l-4 2l-4-2l-1 1l4 4l14.547-5.455a1.61 1.61 0 0 0 .962-2.018",
+        title: "Career Growth & Opportunity",
+        description:
+          "Commercial aviation, charter operations, and corporate flying all need skilled pilots. Training now positions you for a career that’s in high demand and globally respected.",
+      },
+      {
+        icon: "M12 2a1 1 0 0 1 .932.638l7 18a1 1 0 0 1-1.326 1.281L13 19.517V13a1 1 0 1 0-2 0v6.517l-5.606 2.402a1 1 0 0 1-1.326-1.281l7-18A1 1 0 0 1 12 2",
+        title: "Freedom & Adventure",
+        description:
+          "Enjoy the unmatched perspective of seeing the world from above. Flying offers a lifestyle of independence, excitement, and exploration few other careers can match.",
+      },
+      {
+        icon: "",
+        title: "Challenge & Achievement",
+        description:
+          "Learning to fly is one of life’s most rewarding accomplishments, an achievement that builds confidence, discipline, and problem-solving skills that last a lifetime.",
+      },
+    ],
+  },
+  price: {
+    image: {
+      src: "/src/assets/aircrew-member-using-control-panel-command-dashboard-navigation-fly-ariplane-cockpit-female-airliner-flying-plane-cabin-with-power-engine-switch-lever-close-up.jpg",
+      alt: "Aircrew member using control panel in airplane cockpit",
+    },
+    upperHeader: "EXAMPLE UPPER HEADER",
+    title: "Example Title for Content Right Component",
+    description:
+      "This is an example description for the Content Right component. It provides information about the content displayed on the right side of the layout.",
+    descriptions: [
+      "First example description point.",
+      "Second example description point.",
+      "Third example description point.",
+    ],
+    bullets: [
+      {
+        icon: "M3 18h18v2H3zm18.509-9.473a1.61 1.61 0 0 0-2.036-1.019L15 9L7 6L5 7l6 4l-4 2l-4-2l-1 1l4 4l14.547-5.455a1.61 1.61 0 0 0 .962-2.018",
+        title: "Career Growth & Opportunity",
+        description:
+          "Commercial aviation, charter operations, and corporate flying all need skilled pilots. Training now positions you for a career that’s in high demand and globally respected.",
+      },
+      {
+        icon: "M12 2a1 1 0 0 1 .932.638l7 18a1 1 0 0 1-1.326 1.281L13 19.517V13a1 1 0 1 0-2 0v6.517l-5.606 2.402a1 1 0 0 1-1.326-1.281l7-18A1 1 0 0 1 12 2",
+        title: "Freedom & Adventure",
+        description:
+          "Enjoy the unmatched perspective of seeing the world from above. Flying offers a lifestyle of independence, excitement, and exploration few other careers can match.",
+      },
+      {
+        icon: "",
+        title: "Challenge & Achievement",
+        description:
+          "Learning to fly is one of life’s most rewarding accomplishments, an achievement that builds confidence, discipline, and problem-solving skills that last a lifetime.",
+      },
+    ],
+    button: {
+      text: "Learn More",
+      href: "/flight-training/",
+    },
+  },
+};
+
+const { content = example } = Astro.props;
+---
+
+<section class="py-12 bg-primary-300 relative overflow-hidden">
+  <!-- Top -->
+  <div
+    class="mx-auto max-w-7xl mt-12 flex flex-col lg:flex-row justify-center items-center gap-8 px-4 py-12"
+  >
+    <!-- Text -->
+    <div class="text-white">
+      <div
+        class="flex flex-col px-8 py-12 sm:px-12"
+        data-aos="zoom-in"
+        data-aos-duration="1500"
+      >
+        <span data-aos="fade-right" data-aos-duration="1500">
+          {content.overview.upperHeader}
+        </span>
+        <h2
+          class="text-4xl font-semibold tracking-tight text-pretty sm:text-5xl"
+          data-aos="fade-left"
+          data-aos-duration="1500"
+        >
+          {content.overview.title}
+        </h2>
+        <!-- Overview Summary  -->
+        <ul
+          class="flex flex-col lg:flex-row items-center justify-center lg:justify-around gap-12 py-12 border-t border-white/30 mt-6"
+        >
+          {
+            content.overview.summary.map((bullet: any) => (
+              <li class="group flex flex-row items-center gap-6 max-w-44 p-2 rounded-sm hover:scale-110 transition-all duration-300 ease-in-out">
+                <span class="text-3xl font-bold group-hover:scale-200 transition-all duration-300 ease-in-out">
+                  ⟨
+                </span>
+                <div class="flex flex-col mb-4 text-white">
+                  <h3 class="text-center my-4">{bullet.title}</h3>
+                  <p class="font-semibold text-center text-3xl my-4 uppercase">
+                    {bullet.value}
+                  </p>
+                </div>
+                <span class="text-3xl font-bold group-hover:scale-200 transition-all duration-300 ease-in-out">
+                  ⟩
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+
+        <p
+          class="text-lg/8 text-pretty text-gray-300 py-2 mt-6 border-b border-t border-white/30"
+          data-aos="zoom-in"
+          data-aos-duration="1500"
+        >
+          {content.overview.description}
+        </p>
+
+        <ul
+          class="flex flex-col lg:flex-row items-center justify-center lg:justify-around gap-12 py-12"
+        >
+          {
+            content.overview.bullets.map((bullet: any) => (
+              <div class="group flex flex-row items-center gap-6 max-w-44 p-2 rounded-sm hover:scale-110 transition-all duration-500 ease-in-out">
+                <span class="text-3xl font-bold group-hover:scale-200 transition-all duration-300 ease-in-out">
+                  ⟨
+                </span>
+                <div class="flex flex-col mb-4 text-white">
+                  <svg
+                    class="w-8 h-8 mx-auto"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d={bullet.icon || "M5 13l4 4L19 7"}
+                    />
+                  </svg>
+                  <h3 class="font-semibold text-center my-4 uppercase">
+                    {bullet.title}
+                  </h3>
+                </div>
+                <span class="text-3xl font-bold group-hover:scale-200 transition-all duration-300 ease-in-out">
+                  ⟩
+                </span>
+              </div>
+            ))
+          }
+        </ul>
+        <div class="w-full border-y border-white/30 py-2 my-2">
+          {
+            content.overview.descriptions.map((description: any) => (
+              <p
+                class="text-lg/8 text-pretty text-gray-300  text-center"
+                data-aos="zoom-in"
+                data-aos-duration="1500"
+              >
+                {description}
+              </p>
+            ))
+          }
+          <div class="flex flex-col lg:flex-row justify-around">
+            <ul class="w-full py-2 my-2 list-disc">
+              <h3
+                class="py-2 text-xl"
+                data-aos="fade-right"
+                data-aos-delay="100"
+                data-aos-duration="1500"
+              >
+                Included:
+              </h3>
+              {
+                content.overview.included.map((description: any) => (
+                  <li
+                    class="text-lg/8 text-pretty text-gray-300 ml-6"
+                    data-aos="fade-right"
+                    data-aos-delay="500"
+                    data-aos-duration="1500"
+                  >
+                    {description}
+                  </li>
+                ))
+              }
+            </ul>
+            <ul class="w-full py-2 my-2 list-disc">
+              <h3
+                class="py-2 text-xl"
+                data-aos="fade-left"
+                data-aos-delay="100"
+                data-aos-duration="1500"
+              >
+                Requirements:
+              </h3>
+              {
+                content.overview.requirements.map((description: any) => (
+                  <li
+                    class="text-lg/8 text-pretty text-gray-300 ml-6 "
+                    data-aos="fade-left"
+                    data-aos-delay="500"
+                    data-aos-duration="1500"
+                  >
+                    {description}
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-10 flex">
+          <!-- <a href={content.overview.button.href} class="btn-accent btn-middle">
+                        {content.overview.button.text}</a> -->
+        </div>
+      </div>
+    </div>
+    <!-- Image -->
+    <div
+      class="rounded-4xl shadow-2xl shadow-black/80 h-[60vh] border-2 border-white"
+      data-aos="fade-left"
+    >
+      <ImageComp
+        src={content.overview.image.src}
+        alt={content.overview.image.alt}
+        classes="object-cover w-full h-full rounded-4xl shadow-2xl shadow-black/80"
+      />
+    </div>
+  </div>
+  <!-- Middle -->
+  <div class="bg-logo">
+    <div class="max-w-7xl mx-auto text-primary-300">
+      <div
+        class="flex flex-col px-8 py-12 sm:px-12 text-center justify-center"
+        data-aos="zoom-in"
+        data-aos-delay="300"
+      >
+        <span data-aos="fade-right" data-aos-duration="1500">
+          {content.advantages.upperHeader}
+        </span>
+        <h2
+          class="text-4xl font-semibold tracking-tight text-pretty sm:text-5xl"
+          data-aos="fade-left"
+          data-aos-duration="1500"
+        >
+          {content.advantages.title}
+        </h2>
+        <p
+          class="text-lg/8 text-pretty py-2 mt-6 border-b border-t border-white/30"
+          data-aos="zoom-right"
+          data-aos-duration="1500"
+        >
+          {content.advantages.description}
+        </p>
+        <ul
+          class="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-2 py-6"
+        >
+          {
+            content.advantages.bullets.map((bullet: any) => (
+              <div
+                class=" flex flex-col justify-center lg:w-1/4"
+                data-aos="fade-down"
+                data-aos-delay="300"
+                data-aos-duration="1500"
+              >
+                <div class="mb-4 ">
+                  <svg
+                    class="w-8 h-8 mx-auto"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d={bullet.icon || "M5 13l4 4L19 7"}
+                    />
+                  </svg>
+                </div>
+                <h3 class="font-semibold text-center mb-2 uppercase">
+                  {bullet.title}
+                </h3>
+                <p class="text-white/90 text-sm text-center">
+                  {bullet.description}
+                </p>
+              </div>
+            ))
+          }
+        </ul>
+        <!-- <div class="mt-10 flex mx-auto">
+                        <a href={content.advantages.button.href} class="btn-accent btn-middle">
+                            {content.advantages.button.text}
+                        </a>
+                    </div> -->
+      </div>
+    </div>
+  </div>
+  <!-- Bottom -->
+  <div
+    class="mx-auto max-w-7xl mt-12 flex flex-col lg:flex-row justify-center items-center gap-8 px-4 py-12"
+  >
+    <!-- Image -->
+    <div
+      class="rounded-4xl shadow-2xl shadow-black/80 h-[60vh] border-2 border-white"
+      data-aos="fade-right"
+    >
+      <ImageComp
+        src={content.price.image.src}
+        alt={content.price.image.alt}
+        classes="object-cover w-full h-full rounded-4xl shadow-2xl shadow-black/80"
+      />
+    </div>
+    <!-- Text -->
+    <div class="text-white">
+      <div class="flex flex-col px-4 py-12">
+        <span data-aos="fade-right" data-aos-duration="1500">
+          {content.price.upperHeader}
+        </span>
+        <h2
+          class="text-4xl font-semibold tracking-tight text-pretty sm:text-5xl"
+          data-aos="fade-left"
+          data-aos-duration="1500"
+        >
+          {content.price.title}
+        </h2>
+
+        <div
+          class="group flex flex-row items-center justify-center py-6 gap-2 border-y-2 border-white/30 mt-6 hover:scale-110 transition-all! duration-500 ease-in-out"
+          data-aos="fade-right"
+          data-aos-duration="1500"
+        >
+          <span class="text-5xl">$</span>
+          <div class="flex flex-col text-white">
+            <span class="text-4xl font-semibold text-center my-4 uppercase">
+              {content.price.price}
+            </span>
+          </div>
+          <span class="text-3xl font-extralight">/ estimated</span>
+        </div>
+
+        <ul
+          class="flex flex-col justify-stretch lg:justify-around items-center gap-2 py-12"
+        >
+          {
+            content.price.prices.map((price: any) => (
+              <li
+                class="w-full flex gap-2 flex-row items-center justify-between border-t-2 border-white/30 py-2 first:border-none lg:w-3/4"
+                data-aos="fade-right"
+                data-aos-delay="300"
+                data-aos-duration="1500"
+              >
+                <div class="group flex items-center gap-2 pr-2 py-2 rounded-sm hover:scale-110 transition-all duration-500 ease-in-out">
+                  <span class="text-3xl lg:text-5xl">$</span>
+                  <span class="text-xl lg:text-3xl font-semibold text-center uppercase text-white leading-none">
+                    {price.value}
+                  </span>
+                  {price.rate && (
+                    <>
+                      <svg
+                        class="size-8 shrink-0"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M5 12h14m-6 6l6-6m-6-6l6 6"
+                        />
+                      </svg>
+                      <span class="text-xl lg:text-3xl font-extralight">
+                        {price.rate}
+                      </span>
+                    </>
+                  )}
+                </div>
+                <div class="w-full text-right">
+                  <p class="text-xl text-pretty text-gray-300  ">
+                    {price.title}
+                  </p>
+                  <p class="text-2xl">{price.duration}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+
+        <div
+          class="w-full border-y border-white/30 py-2 my-2 mt-6"
+          data-aos="zoom-in"
+          data-aos-duration="1500"
+        >
+          {
+            content.price.descriptions.map((description: any) => (
+              <p class="text-lg/8 text-pretty text-gray-300 ">{description}</p>
+            ))
+          }
+        </div>
+        <div class="mt-10 flex justify-self-end self-end">
+          <a
+            href="#enroll"
+            class="btn-accent btn-right"
+            data-aos="fade-left"
+            data-aos-duration="1500"
+          >
+            Enroll now
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

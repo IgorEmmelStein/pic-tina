@@ -1,0 +1,97 @@
+---
+import { PHONE_NUMBER } from "../../data/consts";
+import ImageComp from "../utils/ImageComp.astro";
+
+const headerContent = {
+  title: "Launch Your Aviation Career with Pilot Instructional Center",
+  description:
+    "Train with experienced jet-rated instructors who prioritize safety, integrity, and personalized instruction. Whether you're starting your private pilot journey or advancing toward commercial ratings, PIC will help you take off with confidence.",
+  buttons: [
+    {
+      title: "Get started",
+      href: "#",
+      style: "",
+    },
+    {
+      title: "Learn more",
+      href: "#",
+      style: "",
+    },
+  ],
+  image: {
+    src: "/src/assets/brendan-sapp-sRSDoc3SCyU-unsplash.jpg",
+    alt: "",
+  },
+};
+
+const { content = headerContent } = Astro.props;
+---
+
+<div class="bg-primary-500 text-left">
+  <div
+    class="relative isolate px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 lg:pt-28 min-h-[60vh] lg:min-h-screen xl:min-h-[720px] overflow-hidden py-12 lg:py-24"
+  >
+    <!-- Background image -->
+    <div aria-hidden="true" class="absolute inset-0 -z-10">
+      <ImageComp
+        src={content.image.src}
+        alt={content.image.alt}
+        classes="object-cover w-full h-full"
+        loading="eager"
+        priorityFetch="high"
+      />
+      <div class="absolute inset-0 bg-primary-300/60"></div>
+    </div>
+    <div class="max-w-7xl mx-auto">
+      <!-- Content -->
+      <div
+        class="relative flex flex-col items-start md:mt-22 max-w-4xl px-6 py-12 sm:py-16 lg:py-20 bg-stone-100/10 backdrop-blur-sm rounded-3xl sm:rounded-r-full shadow-lg"
+      >
+        <!-- UpperHeader  -->
+        <a
+          class="flex justify-left mb-6 sm:mb-10 max-w-44 lg:max-w-none"
+          href={`tel:${PHONE_NUMBER.replace(/[^+\d]/g, "")}`}
+          data-aos="fade-up"
+          data-aos-delay="500"
+          data-aos-duration="1500"
+        >
+          <div
+            class="relative rounded-full px-4 py-1.5 text-sm sm:text-base bg-stone-100 text-primary-800 ring-1 ring-amber-800/70 hover:ring-amber-900/80 transition"
+          >
+            <!-- {content.upperHeader || PHONE_NUMBER}  -->
+            {PHONE_NUMBER}
+          </div>
+        </a>
+
+        <!-- Main text -->
+        <div class="text-left">
+          <h1
+            class="text-3xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-white leading-tight"
+            set:html={content.title}
+          />
+          <p
+            class="mt-6 text-base sm:text-lg lg:text-xl font-medium text-white/90 max-w-2xl"
+            data-aos="fade-down"
+            data-aos-delay="500"
+            data-aos-duration="1500"
+          >
+            {content.description}
+          </p>
+        </div>
+
+        <!-- CTA -->
+
+        <div
+          class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6"
+        >
+          <a href="#" class="btn-accent btn-left">Get started</a>
+          <a
+            href="#"
+            class="text-sm font-semibold text-white hover:text-amber-200 transition"
+            >Learn more →</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

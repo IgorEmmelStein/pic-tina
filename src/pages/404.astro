@@ -1,0 +1,74 @@
+---
+import CTALeft from "../components/ctas/CTALeft.astro";
+import CTARight from "../components/ctas/CTARight.astro";
+import Enroll from "../components/forms/Enroll.astro";
+import HeaderMain from "../components/headers/HeaderMainAlternative.astro";
+import FAQ from "../components/sections/FAQ.astro";
+import TextIcons from "../components/sections/TextIcons.astro";
+import Why from "../components/sections/Why.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../data/consts";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProgramsComponent from "../components/sections/ProgramsComponent.astro";
+import Error from "../components/base/Error.astro";
+
+import "aos/dist/aos.css";
+
+const data = {
+  siteTitle: "404 – Page Not Found | Pilot Instructional Center | Kansas",
+  siteDescription:
+    "The page you’re looking for doesn’t exist. Return to Pilot Instructional Center to explore flight training programs and resources.",
+  siteKeywords: "404 error, page not found, Pilot Instructional Center",
+
+  header: {
+    upperHeader: "FAQs",
+    title: `Frequently Asked Questions`,
+    description:
+      "Find quick answers about simulator training, enrollment, pricing, scheduling, FAA requirements, and more. If you still have questions, our team is here to help.",
+    buttons: [
+      { text: "Contact Support", href: "/contact/", style: "btn-secondary" },
+      { text: "Enroll Now", href: "#faq-general", style: "btn-transparent" },
+    ],
+    image: {
+      src: "/src/assets/stock-man-airplanes-museum.jpg",
+      alt: "",
+    },
+  },
+
+  cta: {
+    title: "Still Have Questions?",
+    description:
+      "Our team is happy to guide you through enrollment, scheduling, or training requirements. Reach out anytime, we’re here to help future pilots succeed.",
+    button: { text: "Get in Touch", href: "/contact/" },
+    image: {
+      src: "/src/assets/cta-flight-solid-ground-aviation.webp",
+      alt: "Flight simulator cockpit view",
+    },
+  },
+
+  ctas: {
+    ctaFloating: {
+      upperHeading: "Flight Training Support",
+      title: "We’re Here to Make Your Training Clear and Simple",
+      description:
+        "Our FAQ center covers everything from simulator training to pricing and student requirements. Explore below or reach out for personalized assistance.",
+      images: [
+        {
+          src: "/src/assets/student using simulator 2.jpg",
+          alt: "Student using FAA Compliant flight simulator",
+        },
+      ],
+    },
+  },
+};
+---
+
+<BaseLayout
+  siteTitle={data.siteTitle}
+  siteDescription={data.siteDescription}
+  siteKeywords={data.siteKeywords}
+>
+  <!-- <HeaderMain content={data.header} /> -->
+  <Error />
+  <!-- <CTALeft />
+	<Enroll /> -->
+</BaseLayout>

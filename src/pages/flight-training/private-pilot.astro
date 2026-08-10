@@ -1,0 +1,390 @@
+---
+import CTALeft from "../../components/ctas/CTALeft.astro";
+import CTARight from "../../components/ctas/CTARight.astro";
+import Enroll from "../../components/forms/Enroll.astro";
+import HeaderMain from "../../components/headers/HeaderMainAlternative.astro";
+import FAQ from "../../components/sections/FAQ.astro";
+import TextIcons from "../../components/sections/TextIcons.astro";
+import Why from "../../components/sections/Why.astro";
+import { SITE_DESCRIPTION, SITE_TITLE, website_links } from "../../data/consts";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProgramsComponent from "../../components/sections/ProgramsComponent.astro";
+
+import "aos/dist/aos.css";
+import ContentLeft from "../../components/content/ContentLeft.astro";
+import ContentMiddle from "../../components/content/ContentMiddle.astro";
+import ContentRight from "../../components/content/ContentRight.astro";
+import CardProgram from "../../components/cards/CardProgram.astro";
+import ImageComp from "../../components/utils/ImageComp.astro";
+import ProgramsComponentDesign from "../../components/sections/ProgramsComponentDesign.astro";
+import FleetGallery from "../../components/fleet/FleetGallery.astro";
+import { fleet } from "../about/our-fleet.astro";
+import OffersStripCTA from "../../components/offers/OffersStripCTA.astro";
+import OffersSection from "../../components/offers/OffersSection.astro";
+import SimulatorImageSection from "../../components/offers/SimulatorImageSection.astro";
+
+const data = {
+  siteTitle:
+    "Private Pilot License Training | Pilot Instructional Center | Near Kansas City",
+  siteDescription:
+    "Start flying with PIC’s Private Pilot program. Train with senior instructors in a safety-first environment.",
+  siteKeywords: "private pilot license, PPL training Kansas City, learn to fly",
+
+  header: {
+    image: {
+      src: "/src/assets/facebook/student-passing-checkride_student-cfi-shaking-hands_PIC_Pilot-instructional-center_Flight-school_cropped.jpg",
+      alt: "Airplane flying by Mathias Reding",
+    },
+    upperHeader: "Now Enrolling New Private Pilot Students",
+    title: `Private Pilot License in Kansas City`,
+    description:
+      "Start your aviation journey with expert instructors, modern aircraft, and a proven safety-first culture. Train at Kansas City’s most student-focused flight school.",
+    buttons: [
+      { text: "Start Training", href: "#enroll", style: "btn-secondary" },
+      { text: "Learn More", href: "/contact/", style: "btn-transparent" },
+    ],
+  },
+
+  // program: {
+  //   overview: {
+  //     image: {
+  //       src: "/src/assets/stock/stock_Cockpit_plane-ground_jose-lebron-hJijNmuwh7g-unsplash.jpg",
+  //       alt: "Aircraft cockpit on the ground by Jose Lebron",
+  //     },
+  //     upperHeader: "YOUR FIRST STEP INTO AVIATION",
+  //     title: "Become a Confident & Safe Private Pilot",
+  //     description:
+  //       "The Private Pilot License (PPL) is where every pilot’s story begins. At PIC, you’ll build a strong foundation in aviation knowledge, aircraft control, and safe decision-making, all guided by senior CFIs who bring decades of experience to every lesson. You’ll need a private pilot certificate to continue on to other ratings. The price is based on FAA minimums and can vary based on student proficiency. Please refer to the aircraft and instructor cost if additional time is needed. Price includes online ground school, instructor, and fuel surcharge, but does not include tax, equipment (headset), FAA written, and FAA exam fees.",
+  //     descriptions: [
+  //       "Learn to take off, navigate, communicate, and land with precision. Master the fundamentals of aerodynamics, systems, weather, and regulations. Train in a supportive, family-oriented environment built on integrity and safety.",
+  //     ],
+  //     bullets: [
+  //       {
+  //         icon: "M3 18h18v2H3zm18.509-9.473a1.61 1.61 0 0 0-2.036-1.019L15 9L7 6L5 7l6 4l-4 2l-4-2l-1 1l4 4l14.547-5.455a1.61 1.61 0 0 0 .962-2.018",
+  //         title: "Experienced, Senior Instructors",
+  //         description:
+  //           "At PIC, you’re not learning from time-builders. Our instructors have real-world commercial and jet experience, ensuring you get the highest quality mentorship from day one.",
+  //       },
+  //       {
+  //         icon: "M12 2a1 1 0 0 1 .932.638l7 18a1 1 0 0 1-1.326 1.281L13 19.517V13a1 1 0 1 0-2 0v6.517l-5.606 2.402a1 1 0 0 1-1.326-1.281l7-18A1 1 0 0 1 12 2",
+  //         title: "Flexible Scheduling",
+  //         description:
+  //           "Train seven days a week from 7am to 7pm. No long waitlists, no hidden delays, just consistent progress at your pace.",
+  //       },
+  //       {
+  //         icon: "",
+  //         title: "Flight Skills You Can Trust",
+  //         description:
+  //           "We emphasize excellent decision-making and real-world airmanship, preparing you not just to pass a checkride but to fly confidently in the Kansas City airspace and beyond.",
+  //       },
+  //     ],
+  //     button: {
+  //       text: "Get Started",
+  //       href: "/contact/",
+  //     },
+  //     requirements: [
+  //       "At least 16yrs of age to solo and 17yrs for certification",
+  //       "Read, speak, write, and understand English",
+  //       "Hold a current medical certificate (at least Third Class)",
+  //       "Pass a knowledge and practical test",
+  //     ],
+  //     included: [
+  //       "30 hours training flight time",
+  //       "10 hours solo flight time",
+  //       "20 hours of personal ground lessons",
+  //       "Online ground school",
+  //     ],
+  //     summary: [
+  //       {
+  //         title: "Minimum Cost",
+  //         value: "$12,440",
+  //       },
+  //       {
+  //         title: "Flight Time",
+  //         value: "40 hours",
+  //       },
+  //       {
+  //         title: "Duration",
+  //         value: "3-6 months",
+  //       },
+  //     ],
+  //   },
+
+  //   advantages: {
+  //     upperHeader: "WHY TRAIN WITH PIC?",
+  //     title: "A Better Way to Learn to Fly",
+  //     description:
+  //       "Our Private Pilot Program was built for safety, clarity, and student success, combining high-quality instruction, modern training tools, and a commitment to doing things the right way.",
+  //     bullets: [
+  //       {
+  //         icon: "M3 18h18v2H3zm18.509-9.473a1.61 1.61 0 0 0-2.036-1.019L15 9L7 6L5 7l6 4l-4 2l-4-2l-1 1l4 4l14.547-5.455a1.61 1.61 0 0 0 .962-2.018",
+  //         title: "Safety-First Culture",
+  //         description:
+  //           "PIC was founded to offer a healthier, more integrity-driven alternative to local training programs. Safety and professionalism guide everything we do.",
+  //       },
+  //       {
+  //         icon: "M12 2a1 1 0 0 1 .932.638l7 18a1 1 0 0 1-1.326 1.281L13 19.517V13a1 1 0 1 0-2 0v6.517l-5.606 2.402a1 1 0 0 1-1.326-1.281l7-18A1 1 0 0 1 12 2",
+  //         title: "Supportive Environment",
+  //         description:
+  //           "We welcome students of all backgrounds, beginners, career-bound pilots, returning aviators, and hobbyists alike.",
+  //       },
+  //       {
+  //         icon: "",
+  //         title: "Modern Aircraft & Detailed Instruction",
+  //         description:
+  //           "Train in well-maintained aircraft with advanced avionics, while also gaining professional habits that set you apart from day one.",
+  //       },
+  //     ],
+  //   },
+
+  //   price: {
+  //     image: {
+  //       src: "/src/assets/stock/stock_pilot-window_pasqualino-capobianco-3_zFKZGxWzs-unsplash.jpg",
+  //       alt: "Pilot looking out aircraft window by Pasqualino Capobianco",
+  //     },
+  //     upperHeader: "AFFORDABLE TRAINING OPTIONS",
+  //     title: "Transparent Pricing You Can Trust",
+  //     description:
+  //       "We believe in honest, upfront pricing with no hidden fees. Train as your schedule and budget allow, with experienced instructors who help you progress efficiently.",
+  //     descriptions: [
+  //       "The price is based on FAA minimums and can vary based on student proficiency. Please refer to the aircraft and instructor cost if additional time is needed. Price includes online ground school, instructor, and fuel surcharge, but does not include tax, equipment (headset), FAA written, and FAA exam fees. ",
+  //     ],
+  //     bullets: [
+  //       {
+  //         icon: "M3 18h18v2H3zm18.509-9.473a1.61 1.61 0 0 0-2.036-1.019L15 9L7 6L5 7l6 4l-4 2l-4-2l-1 1l4 4l14.547-5.455a1.61 1.61 0 0 0 .962-2.018",
+  //         title: "Fair, Transparent Rates",
+  //         description:
+  //           "No surprise fees or unnecessary upsells, just clear, honest pricing from day one.",
+  //       },
+  //       {
+  //         icon: "M12 2a1 1 0 0 1 .932.638l7 18a1 1 0 0 1-1.326 1.281L13 19.517V13a1 1 0 1 0-2 0v6.517l-5.606 2.402a1 1 0 0 1-1.326-1.281l7-18A1 1 0 0 1 12 2",
+  //         title: "Maximize Every Hour",
+  //         description:
+  //           "With skilled instructors and proactive planning, each lesson is meaningful and goal-oriented.",
+  //       },
+  //       {
+  //         icon: "",
+  //         title: "Optional Simulator Time",
+  //         description:
+  //           "Reduce costs and sharpen skills using our FAA-approved simulator for procedures, emergencies, and foundational maneuvers.",
+  //       },
+  //     ],
+  //     button: {
+  //       text: "Request Pricing",
+  //       href: "/contact/",
+  //     },
+  //     prices: [
+  //       {
+  //         value: "7,950",
+  //         title: "Dual Flight Time with Instructor",
+  //         duration: "30hrs",
+  //         rate: "$265/hr",
+  //       },
+  //       {
+  //         value: "1,850",
+  //         title: "Solo Flight Time",
+  //         duration: "10hrs",
+  //         rate: "$185/hr",
+  //       },
+  //       {
+  //         value: "1,600",
+  //         title: "Ground Instruction",
+  //         duration: "20hrs",
+  //         rate: "$80/hr",
+  //       },
+  //       {
+  //         value: "540",
+  //         title: "Online Ground School",
+  //       },
+  //       {
+  //         value: "500",
+  //         title: "Private Pilot Enrollment Fee",
+  //       },
+  //     ],
+  //     price: "12,440",
+  //   },
+  // },
+
+  program: {
+    overview: {
+      image: {
+        src: "/src/assets/stock/stock_Cockpit_plane-ground_jose-lebron-hJijNmuwh7g-unsplash.jpg",
+        alt: "Aircraft cockpit on the ground by Jose Lebron",
+      },
+      upperHeader: "YOUR FIRST STEP INTO AVIATION",
+      title: "Become a Confident & Safe Private Pilot",
+      description:
+        "The Private Pilot License (PPL) is where every pilot’s story begins. At PIC, you’ll build a strong foundation in aviation knowledge, aircraft control, and safe decision-making, all guided by senior CFIs who bring decades of experience to every lesson.",
+      targetAudience: {
+        title: "Who is this for?",
+        points: [
+          "Aspiring career pilots starting their journey",
+          "Aviation enthusiasts and hobbyists",
+          "Returning aviators looking for a solid refresh",
+        ],
+      },
+      requirements: [
+        "At least 16yrs of age to solo and 17yrs for certification",
+        "Read, speak, write, and understand English",
+        "Hold a current medical certificate (at least Third Class)",
+        "Pass a knowledge and practical test",
+      ],
+      included: [
+        "30 hours training flight time",
+        "10 hours solo flight time",
+        "20 hours of personal ground lessons",
+        "Online ground school enrollment",
+      ],
+      summary: [
+        {
+          title: "Minimum Cost",
+          value: "$12,440",
+        },
+        {
+          title: "Flight Time",
+          value: "40 hours",
+        },
+        {
+          title: "Duration",
+          value: "3-6 months",
+        },
+      ],
+    },
+
+    advantages: {
+      upperHeader: "WHY TRAIN WITH PIC?",
+      title: "A Better Way to Learn to Fly",
+      description:
+        "Our Private Pilot Program was built for safety, clarity, and student success, combining high-quality instruction with a commitment to integrity.",
+      bullets: [
+        {
+          title: "Safety-First Culture",
+          description:
+            "PIC was founded to offer a healthier, more integrity-driven alternative to local training programs. Safety and professionalism guide everything we do.",
+        },
+        {
+          title: "Senior Mentorship",
+          description:
+            "Our instructors have real-world commercial and jet experience, ensuring you get the highest quality mentorship from day one.",
+        },
+        {
+          title: "Kansas City Excellence",
+          description:
+            "We emphasize real-world airmanship, preparing you to fly confidently in the busy Kansas City airspace and beyond.",
+        },
+      ],
+    },
+
+    price: {
+      upperHeader: "AFFORDABLE TRAINING OPTIONS",
+      title: "Transparent Pricing Breakdown",
+      description:
+        "Price is based on FAA minimums. It includes online ground school, instructor, and fuel surcharge, but does not include tax, equipment, or FAA exam fees.",
+      priceTotal: "12,440",
+      breakdown: [
+        {
+          title: "Dual Flight Time with Instructor",
+          duration: "30hrs",
+          rate: "$265/hr",
+          value: "7,950",
+        },
+        {
+          title: "Solo Flight Time",
+          duration: "10hrs",
+          rate: "$185/hr",
+          value: "1,850",
+        },
+        {
+          title: "Ground Instruction",
+          duration: "20hrs",
+          rate: "$80/hr",
+          value: "1,600",
+        },
+        {
+          title: "Online Ground School",
+          value: "540",
+        },
+        {
+          title: "PPL Enrollment Fee",
+          value: "500",
+        },
+      ],
+    },
+  },
+  cta: {
+    title: "Ready to Begin Your Pilot Journey?",
+    description:
+      "Take the first step toward your Private Pilot Certificate with experienced instructors and a supportive, family-focused school committed to your success.",
+    button: { text: "Book a Discovery Flight", href: "/discovery-flight" },
+    image: {
+      src: "/src/assets/cta-flight-solid-ground-aviation.webp",
+      alt: "View of the sky from an airplane window",
+    },
+  },
+
+  ctas: {
+    ctaPrivatePilot: {
+      image: {
+        src: "/src/assets/stock/stock_Planes-ground_aidan-tottori-phvVorGReGE-unsplash.jpg",
+        alt: "Multiple airplanes on ground by Aidan Tottori",
+      },
+      title: "Welcome to Pilot Instructional Center",
+      description:
+        "Discover the freedom of flight with personalized, professional instruction from Kansas City's premier flight school.",
+      descriptions: [
+        "Train with senior instructors who bring airline and corporate aviation experience.",
+        "Learn in a positive, safety-first environment built for students of all levels.",
+        "Fly with confidence using modern aircraft and up-to-date training resources.",
+      ],
+      button: {
+        text: "Explore Programs",
+        href: "/flight-training/",
+      },
+    },
+
+    ctaDiscoveryFlight: {
+      image: {
+        src: "/src/assets/stock/stock_Pilots-cockpit_pasqualino-capobianco-he1PuIA6-UY-unsplash.jpg",
+        alt: "Pilots in cockpit by Pasqualino Capobianco",
+      },
+      title: "Ready to Take the First Step?",
+      description:
+        "Book a Discovery Flight and experience what it’s like to fly with an experienced PIC instructor by your side.",
+      button: {
+        text: "Discovery Flight",
+        href: "/discovery-flight/",
+      },
+    },
+  },
+};
+---
+
+<BaseLayout
+  siteTitle={data.siteTitle}
+  siteDescription={data.siteDescription}
+  siteKeywords={data.siteKeywords}
+>
+  <HeaderMain
+    content={data.header}
+    mainSize={false}
+    showButton={false}
+    images={[data.header.image]}
+  />
+
+  <ProgramsComponentDesign program={data.program} />
+  <OffersStripCTA />
+  <!-- <ProgramsComponent content={data.program} /> -->
+  <FleetGallery
+    fleet={fleet}
+    selfLink={false}
+    button={{
+      title: "Start Your Journey",
+      path: `#${website_links.enroll.id}`,
+    }}
+  />
+  <SimulatorImageSection />
+  <Enroll />
+  <CTALeft content={data.ctas.ctaDiscoveryFlight} />
+  <OffersSection />
+  <CTARight content={data.ctas.ctaPrivatePilot} />
+</BaseLayout>

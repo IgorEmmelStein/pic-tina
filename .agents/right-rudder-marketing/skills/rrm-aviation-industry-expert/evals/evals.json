@@ -1,0 +1,70 @@
+{
+  "skill_name": "rrm-aviation-industry-expert",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Use $rrm-aviation-industry-expert to review this claim: Part 141 schools always let students finish commercial training in fewer hours than Part 61 schools.",
+      "expected_output": "A fact-check report that flags the claim as risky or needs source, explains that exact reduced-hour claims require certificate-specific FAA support, and suggests a qualified rewrite.",
+      "files": [],
+      "expectations": [
+        "Preserves the reviewed prompt or topic in Topic Context",
+        "Does not overstate Part 141 benefits",
+        "Requests or cites a source",
+        "Provides safer wording",
+        "Classifies the claim clearly"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Review a blog brief that says the school guarantees students will reach the airlines in 24 months.",
+      "expected_output": "A report classifying the guarantee as do not use or risky, with safer language separating training progress from airline hiring outcomes.",
+      "files": [],
+      "expectations": [
+        "Preserves the blog brief or topic in Topic Context",
+        "Rejects guaranteed career outcome language",
+        "Explains why the claim is risky",
+        "Suggests qualified wording",
+        "Identifies any source needed"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Check claims about in-house DPEs, aircraft fleet, and housing in a client brief.",
+      "expected_output": "A report that treats these as client-specific claims and requires client repo or supplied source evidence.",
+      "files": [],
+      "expectations": [
+        "Preserves the client brief topic in Topic Context",
+        "Distinguishes client-specific claims from aviation-general claims",
+        "Does not verify without sources",
+        "Creates useful client confirmation questions"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Use $rrm-aviation-industry-expert to fact-check a blog topic about training at a busy towered airport, simulator emergency practice, and career-path claims.",
+      "expected_output": "A fact-check report that classifies the claims, rejects overreach, and gives the writer approved language, safe vivid framing, precise qualifier placement, and do-not-over-qualify notes for verified facts.",
+      "files": [],
+      "expectations": [
+        "Preserves the raw topic in Topic Context",
+        "Separates verified mechanisms from unsupported outcomes",
+        "Provides safe vivid language for verified training-environment and simulator claims",
+        "Places qualifiers near risky career or outcome claims",
+        "Tells the writer when verified claims should not be weakened by unnecessary hedging",
+        "Does not turn every caution into a blanket disclaimer"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Use $rrm-aviation-industry-expert to fact-check a blog topic where repo sources show a current fleet page, a simulator page, and video notes from a school visit, but exact aircraft count may change.",
+      "expected_output": "A fact-check report that gives safe company-voice language for verified facts, marks source-audit wording as internal only, and tells the writer how to handle the uncertain aircraft count without publishing awkward confirmation caveats.",
+      "files": [],
+      "expectations": [
+        "Keeps repo, page, and video-note labels in the internal source context",
+        "Provides final-copy language that does not say listed in the repo or the current page shows",
+        "Tells the writer to omit, generalize, or use a natural contact-us sentence for changing exact details",
+        "Preserves safe vivid framing for the fleet, simulator, and visit details",
+        "Does not weaken verified facts with blanket disclaimers"
+      ]
+    }
+  ]
+}

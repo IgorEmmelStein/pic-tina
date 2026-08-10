@@ -1,0 +1,31 @@
+---
+import { PHONE_NUMBER } from "../../data/consts";
+const iconStyle =
+  "w-6 h-6 text-white lg:w-10 lg:h-10 hover:text-accent-400 hover:brightness-125 hover:-translate-y-1 hover:scale-110 transition-all duration-300";
+---
+
+<a href={`tel:${PHONE_NUMBER.replace(/[^+\d]/g, "")}`} title="Call Us">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    class={iconStyle}
+  >
+    <path
+      fill="none"
+      stroke="currentColor"
+      stroke-dasharray="62"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M8 3c0.5 0 2.5 4.5 2.5 5c0 1 -1.5 2 -2 3c-0.5 1 0.5 2 1.5 3c0.39 0.39 2 2 3 1.5c1 -0.5 2 -2 3 -2c0.5 0 5 2 5 2.5c0 2 -1.5 3.5 -3 4c-1.5 0.5 -2.5 0.5 -4.5 0c-2 -0.5 -3.5 -1 -6 -3.5c-2.5 -2.5 -3 -4 -3.5 -6c-0.5 -2 -0.5 -3 0 -4.5c0.5 -1.5 2 -3 4 -3Z"
+    >
+      <animate
+        fill="freeze"
+        attributeName="stroke-dashoffset"
+        dur="0.6s"
+        values="62;0"></animate>
+    </path>
+  </svg>
+</a>

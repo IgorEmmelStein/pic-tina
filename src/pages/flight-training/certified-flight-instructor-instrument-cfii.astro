@@ -1,0 +1,374 @@
+---
+import CTALeft from "../../components/ctas/CTALeft.astro";
+import CTARight from "../../components/ctas/CTARight.astro";
+import Enroll from "../../components/forms/Enroll.astro";
+import HeaderMain from "../../components/headers/HeaderMainAlternative.astro";
+import FAQ from "../../components/sections/FAQ.astro";
+import TextIcons from "../../components/sections/TextIcons.astro";
+import Why from "../../components/sections/Why.astro";
+import { SITE_DESCRIPTION, SITE_TITLE, website_links } from "../../data/consts";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProgramsComponent from "../../components/sections/ProgramsComponent.astro";
+
+import "aos/dist/aos.css";
+import ContentLeft from "../../components/content/ContentLeft.astro";
+import ContentMiddle from "../../components/content/ContentMiddle.astro";
+import ContentRight from "../../components/content/ContentRight.astro";
+import CardProgram from "../../components/cards/CardProgram.astro";
+import ImageComp from "../../components/utils/ImageComp.astro";
+import ProgramsComponentDesign from "../../components/sections/ProgramsComponentDesign.astro";
+import FleetGallery from "../../components/fleet/FleetGallery.astro";
+import { fleet } from "../about/our-fleet.astro";
+import OffersStripCTA from "../../components/offers/OffersStripCTA.astro";
+import OffersSection from "../../components/offers/OffersSection.astro";
+import SimulatorImageSection from "../../components/offers/SimulatorImageSection.astro";
+
+const data = {
+  siteTitle:
+    "Certified Flight Instructor - Instrument (CFII) Training | PIC | Near Kansas City",
+  siteDescription:
+    "Become a professional flight instructor with structured CFII training from senior mentors at PIC.",
+  siteKeywords: "CFII training, flight instructor program Kansas City",
+  header: {
+    image: {
+      src: "/src/assets/rrm-visit/pilot-instructional-center_new-century-KS_plane-cockpit-cessna_flight-school_pilo-training.png",
+      alt: "Aircraft cockpit on the ground by Jose Lebron",
+    },
+    upperHeader: "Now Enrolling New Students in Kansas City",
+    title: `Certified Flight Instructor,  Instrument (CFII)`,
+    description:
+      "Advance your teaching career and help pilots master IFR flight with PIC’s senior-instructor-led CFII program.",
+    buttons: [
+      { text: "Start Training", href: "#enroll", style: "btn-secondary" },
+      { text: "Learn More", href: "/contact/", style: "btn-transparent" },
+    ],
+  },
+
+  // program: {
+  //   overview: {
+  //     image: {
+  //       src: "/src/assets/stock/stock_Plane-ground-sunset_roland-denes-MsZEJYU8alE-unsplash.jpg",
+  //       alt: "Airplane on ground at sunset by Roland Denes",
+  //     },
+  //     upperHeader: "BECOME AN INSTRUMENT INSTRUCTOR",
+  //     title: "CFII at PIC",
+  //     description:
+  //       "The CFII is one of the most valuable and respected instructor certificates. At PIC, you’ll train with experienced CFIs who have decades of IFR, commercial, and real-world teaching experience. Learn to teach instrument procedures, advanced decision-making, system management, and the precision needed for safe IFR flying. Add an instrument rating to your CFI certificate.",
+  //     descriptions: [
+  //       "Learn to teach instrument flying using proven lesson structures and real-world IFR scenarios. Train with senior instructors who have deep IFR backgrounds, not time-building pilots. Master instrument teaching techniques that build safer, more confident IFR students.",
+  //     ],
+  //     bullets: [
+  //       {
+  //         icon: "M3 18h18v2H3zm18.509-9.473a1.61 1.61 0 0 0-2.036-1.019L15 9L7 6L5 7l6 4l-4 2l-4-2l-1 1l4 4l14.547-5.455a1.61 1.61 0 0 0 .962-2.018",
+  //         title: "Teach IFR With Confidence",
+  //         description:
+  //           "Learn to break down complex instrument procedures into clear, teachable concepts.",
+  //       },
+  //       {
+  //         icon: "M12 2a1 1 0 0 1 .932.638l7 18a1 1 0 0 1-1.326 1.281L13 19.517V13a1 1 0 1 0-2 0v6.517l-5.606 2.402a1 1 0 0 1-1.326-1.281l7-18A1 1 0 0 1 12 2",
+  //         title: "Master IFR Procedures",
+  //         description:
+  //           "Hold procedures, approaches, missed approaches, navigation systems, and IFR decision-making.",
+  //       },
+  //       {
+  //         icon: "",
+  //         title: "Become a True IFR Mentor",
+  //         description:
+  //           "Guide instrument students toward safe, precise, real-world IFR flying.",
+  //       },
+  //     ],
+  //     button: {
+  //       text: "Learn More",
+  //       href: "/new-to-flying/",
+  //     },
+  //     requirements: [
+  //       "At least 18 years of age",
+  //       "Read, speak, write, and understand English",
+  //       "Hold a current medical certificate (at least Third Class)",
+  //       "Pass a knowledge and practical test",
+  //       "Hold CFI airplane certificate",
+  //     ],
+  //     included: [
+  //       "10 hours training flight time",
+  //       "5 hours of AATD simulator time",
+  //       "20 hours of personal ground lessons",
+  //     ],
+  //     summary: [
+  //       {
+  //         title: "Minimum Cost",
+  //         value: "$5,050",
+  //       },
+  //       {
+  //         title: "Flight Time",
+  //         value: "10 hours",
+  //       },
+  //       {
+  //         title: "Duration",
+  //         value: "1 month",
+  //       },
+  //     ],
+  //   },
+
+  //   advantages: {
+  //     upperHeader: "WHY BECOME A CFII?",
+  //     title: "Teach Instrument Skills That Save Lives",
+  //     description:
+  //       "The CFII rating elevates your teaching skillset and prepares you to train pilots in the most safety-critical areas of aviation. CFII instructors are always in demand and play a crucial role in creating competent, safe IFR pilots.",
+  //     bullets: [
+  //       {
+  //         icon: "M3 18h18v2H3zm18.509-9.473a1.61 1.61 0 0 0-2.036-1.019L15 9L7 6L5 7l6 4l-4 2l-4-2l-1 1l4 4l14.547-5.455a1.61 1.61 0 0 0 .962-2.018",
+  //         title: "Increase Your Earning Potential",
+  //         description:
+  //           "CFII instructors are in high demand and often secure more consistent, higher-level flight training opportunities.",
+  //       },
+  //       {
+  //         icon: "M12 2a1 1 0 0 1 .932.638l7 18a1 1 0 0 1-1.326 1.281L13 19.517V13a1 1 0 1 0-2 0v6.517l-5.606 2.402a1 1 0 0 1-1.326-1.281l7-18A1 1 0 0 1 12 2",
+  //         title: "Sharpen Your Own IFR Mastery",
+  //         description:
+  //           "Teaching instrument flight deepens your precision, situational awareness, and system understanding.",
+  //       },
+  //       {
+  //         icon: "",
+  //         title: "Train the Safest Pilots",
+  //         description:
+  //           "Instrument skills dramatically increase pilot safety, be part of that transformation.",
+  //       },
+  //     ],
+  //   },
+
+  //   price: {
+  //     image: {
+  //       src: "/src/assets/stock/stock_Cockpit-pilot-student_tamas-tuzes-katai-UKhE7wQpe-c-unsplash.jpg",
+  //       alt: "Aircrew member using control panel in airplane cockpit",
+  //     },
+  //     upperHeader: "AFFORDABLE & TRANSPARENT TRAINING",
+  //     title: "Professional CFII Training,  Clear, Honest Pricing",
+  //     description:
+  //       "PIC delivers high-quality, efficient CFII training designed by instructors with decades of IFR experience. Every lesson is structured to maximize teaching skill and reduce unnecessary cost.",
+  //     descriptions: [
+  //       "PIC delivers high-quality, efficient CFII training designed by instructors with decades of IFR experience. Every lesson is structured to maximize teaching skill and reduce unnecessary cost. The price is based on FAA minimums and can vary based on student proficiency. Please refer to the aircraft and instructor cost if additional time is needed. Price includes instructor, aircraft rental, and fuel surcharge, but does not include tax, equipment (headset), FAA written, and FAA exam fees.",
+  //       "Train with experienced IFR instructors, not entry-level time builders. Scenario-based CFII curriculum that mirrors real IFR instruction. Use simulator training to reduce costs and speed learning.",
+  //       "Price does not include $1,200 enrollment fee to enroll in both CFI & CFII (This can be split and paid upon starting each course)",
+  //     ],
+  //     bullets: [
+  //       {
+  //         icon: "M3 18h18v2H3zm18.509-9.473a1.61 1.61 0 0 0-2.036-1.019L15 9L7 6L5 7l6 4l-4 2l-4-2l-1 1l4 4l14.547-5.455a1.61 1.61 0 0 0 .962-2.018",
+  //         title: "Efficient Training Structure",
+  //         description:
+  //           "Well-defined lesson plans ensure steady progress without wasted hours.",
+  //       },
+  //       {
+  //         icon: "M12 2a1 1 0 0 1 .932.638l7 18a1 1 0 0 1-1.326 1.281L13 19.517V13a1 1 0 1 0-2 0v6.517l-5.606 2.402a1 1 0 0 1-1.326-1.281l7-18A1 1 0 0 1 12 2",
+  //         title: "Simulator-Based IFR Instruction",
+  //         description:
+  //           "Use the BATD simulator for real IFR teaching scenarios at a fraction of the cost.",
+  //       },
+  //       {
+  //         icon: "",
+  //         title: "Pay As You Go",
+  //         description:
+  //           "Train with full flexibility and transparent pricing from start to finish.",
+  //       },
+  //     ],
+  //     button: {
+  //       text: "Learn More",
+  //       href: "/new-to-flying/",
+  //     },
+  //     prices: [
+  //       {
+  //         value: "2,650",
+  //         title: "Flight Time with Instructor",
+  //         duration: "10hrs",
+  //         rate: "$265/hr",
+  //       },
+  //       {
+  //         value: "800",
+  //         title: "AATD Simulator",
+  //         duration: "5hrs",
+  //         rate: "$160/hr",
+  //       },
+  //       {
+  //         value: "1,600",
+  //         title: "Ground Instruction",
+  //         duration: "20hrs",
+  //         rate: "$80/hr",
+  //       },
+  //     ],
+  //     price: "5,050",
+  //   },
+  // },
+  program: {
+    overview: {
+      image: {
+        src: "/src/assets/stock/stock_Plane-ground-sunset_roland-denes-MsZEJYU8alE-unsplash.jpg",
+        alt: "Airplane on ground at sunset by Roland Denes",
+      },
+      upperHeader: "BECOME AN INSTRUMENT INSTRUCTOR",
+      title: "CFII Training at PIC",
+      description:
+        "The CFII is one of the most valuable and respected instructor certificates in aviation. At PIC, you’ll learn to teach advanced instrument procedures, system management, and the precision required for safe IFR flying under the guidance of senior mentors.",
+      targetAudience: {
+        title: "Who is this for?",
+        points: [
+          "Current CFIs looking to add IFR teaching privileges",
+          "Instructors aiming for higher earning potential",
+          "Professional pilots wanting to sharpen their IFR mastery",
+        ],
+      },
+      requirements: [
+        "At least 18 years of age",
+        "Hold a CFII Airplane certificate",
+        "Current medical certificate (at least Third Class)",
+        "Read, speak, write, and understand English",
+        "Pass FAA knowledge and practical tests",
+      ],
+      included: [
+        "10 hours training flight time",
+        "5 hours of AATD simulator time",
+        "20 hours of personal ground lessons",
+        "Scenario-based IFR curriculum",
+      ],
+      summary: [
+        {
+          title: "Minimum Cost",
+          value: "$5,050",
+        },
+        {
+          title: "Flight Time",
+          value: "10 hours",
+        },
+        {
+          title: "Duration",
+          value: "1 month",
+        },
+      ],
+    },
+
+    advantages: {
+      upperHeader: "WHY BECOME A CFII?",
+      title: "Teach Skills That Save Lives",
+      description:
+        "The CFII rating elevates your skillset, preparing you to train pilots in the most safety-critical areas of aviation while increasing your value in the flight training market.",
+      bullets: [
+        {
+          title: "Increase Your Earning Potential",
+          description:
+            "CFII instructors are in high demand and often secure more consistent, higher-level training opportunities with professional students.",
+        },
+        {
+          title: "Sharpen Your Own Mastery",
+          description:
+            "Teaching instrument flight deepens your own precision, situational awareness, and understanding of complex avionics and procedures.",
+        },
+        {
+          title: "Train the Safest Pilots",
+          description:
+            "Instrument proficiency is the greatest factor in pilot safety; you’ll play a crucial role in creating competent, confident IFR aviators.",
+        },
+      ],
+    },
+
+    price: {
+      upperHeader: "AFFORDABLE & TRANSPARENT TRAINING",
+      title: "CFII Cost Breakdown",
+      description:
+        "Pricing based on FAA minimums. Note: There is a separate $1,200 enrollment fee if enrolling in both CFI & CFII, which can be split between the courses.",
+      priceTotal: "5,050",
+      breakdown: [
+        {
+          title: "Dual Flight Time with Instructor",
+          duration: "10 hrs",
+          rate: "$265/hr",
+          value: "2,650",
+        },
+        {
+          title: "AATD Simulator Time",
+          duration: "5 hrs",
+          rate: "$160/hr",
+          value: "800",
+        },
+        {
+          title: "Ground Instruction",
+          duration: "20 hrs",
+          rate: "$80/hr",
+          value: "1,600",
+        },
+      ],
+    },
+  },
+
+  cta: {
+    title: "Ready to Become an Instrument Instructor?",
+    description:
+      "Teach the skills that make pilots safer and more capable. Begin your CFII training with PIC’s senior-instructor team today.",
+    button: { text: "Book a Discovery Session", href: "/discovery-session" },
+    image: {
+      src: "/src/assets/cta-flight-solid-ground-aviation.webp",
+      alt: "View of the sky from an airplane window",
+    },
+  },
+
+  ctas: {
+    ctaPrivatePilot: {
+      image: {
+        src: "/src/assets/mathias-reding-qYcDyPilTn0-unsplash.jpg",
+        alt: "Jet engine close-up by Mathias Reding",
+      },
+      title: "Welcome to Pilot Instructional Center",
+      description:
+        "Train with a school built on integrity, safety, and real mentorship. PIC’s CFII program prepares you to teach the most critical skills in aviation.",
+      descriptions: [
+        "Train with a school built on integrity, safety, and real mentorship. PIC’s CFII program prepares you to teach the most critical skills in aviation.",
+        "Learn from senior instructors dedicated to teaching, not time building. Train in a family-oriented and supportive environment. Develop advanced instructional skills with proven IFR teaching techniques.",
+      ],
+      button: {
+        text: "Explore Programs",
+        href: "/flight-training/",
+      },
+    },
+
+    ctaDiscoveryFlight: {
+      image: {
+        src: "/src/assets/eliezer-fernandes-y7E8qfllcY0-unsplash.jpg",
+        alt: "Aircraft exterior by Eliezer Fernandes",
+      },
+      title: "Ready to Get Started?",
+      description:
+        "Contact us to learn more about the CFII Program and begin your path toward becoming a professional IFR instructor.",
+      button: {
+        text: "Contact Us",
+        href: "/contact/",
+      },
+    },
+  },
+};
+---
+
+<BaseLayout
+  siteTitle={data.siteTitle}
+  siteDescription={data.siteDescription}
+  siteKeywords={data.siteKeywords}
+>
+  <HeaderMain
+    content={data.header}
+    mainSize={false}
+    showButton={false}
+    images={[data.header.image]}
+  />
+  <!-- <ProgramsComponent content={data.program} /> -->
+  <ProgramsComponentDesign program={data.program} />
+  <OffersStripCTA />
+  <FleetGallery
+    fleet={fleet}
+    selfLink={false}
+    button={{
+      title: "Start Your Journey",
+      path: `#${website_links.enroll.id}`,
+    }}
+  />
+  <SimulatorImageSection />
+  <Enroll />
+  <CTALeft content={data.ctas.ctaDiscoveryFlight} />
+  <OffersSection />
+  <CTARight content={data.ctas.ctaPrivatePilot} />
+</BaseLayout>

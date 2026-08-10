@@ -1,0 +1,63 @@
+---
+const mentorData = {
+  title: "Learn from the Pros",
+  description:
+    "Our instructors are senior pilots committed to passing on the gift of aviation to the next generation.",
+  mentors: [
+    {
+      name: "Logan Fahy",
+      role: "Chief Safety Officer / Advanced Flight Instructor",
+      certs: "CFI, CFII, CE-525 SIC",
+      bio: "Logan is a contract pilot with Kansas University Athletics, flying the Cessna Citation CJ4. With over 1,000 hours of instruction, he brings real-world jet experience to every lesson.",
+      aos: "fade-up",
+    },
+    {
+      name: "Ryan Tindall",
+      role: "Advanced Flight Instructor",
+      certs: "CFI, CFII, MEI",
+      bio: "A Gold Seal instructor with over 1,500 hours of dual instruction given. Ryan specializes in helping students achieve those 'light bulb' moments through his deep experience in the Midwest.",
+      aos: "fade-up",
+    },
+  ],
+};
+---
+
+<section class="bg-white py-24 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16" data-aos="fade-up">
+      <h2 class="text-4xl font-extrabold text-[#423731] mb-6">
+        {mentorData.title}
+      </h2>
+      <p class="text-lg text-[#745e4d] max-w-3xl mx-auto">
+        {mentorData.description}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+      {
+        mentorData.mentors.map((mentor) => (
+          <div
+            class="group bg-[#fcfaf8] p-10 rounded-[2.5rem] border border-[#dcc1a6]/30 transition-all hover:shadow-2xl hover:bg-white"
+            data-aos={mentor.aos}
+          >
+            <div class="mb-6">
+              <span class="text-[10px] font-black uppercase tracking-widest text-[#745e4d] bg-[#dcc1a6]/30 px-3 py-1 rounded-full">
+                {mentor.certs}
+              </span>
+            </div>
+            <h3 class="text-2xl font-bold text-[#423731] mb-2">
+              {mentor.name}
+            </h3>
+            <p class="text-[#5d4d40] font-semibold mb-6 text-sm">
+              {mentor.role}
+            </p>
+            <div class="w-12 h-1 bg-[#dcc1a6] mb-6 transition-all group-hover:w-24" />
+            <p class="text-[#745e4d] leading-relaxed italic text-sm">
+              "{mentor.bio}"
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

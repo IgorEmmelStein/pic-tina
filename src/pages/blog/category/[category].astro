@@ -1,0 +1,104 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+// import BlogPostCard from "../../../components/BlogPostCard.astro";
+// import Hero75 from "../../../components/Hero75.astro";
+import BlogSidebar from "../../../components/blog/BlogSidebar.astro";
+import { slugify } from "../../../components/blog/utils";
+import { COMPANY_NICKNAME, ADDRESS_STATE } from "../../../data/consts";
+import CardBlog from "../../../components/blog/CardBlog.astro";
+import HeaderMain from "../../../components/headers/HeaderMain.astro";
+import HeaderMainAlternative from "../../../components/headers/HeaderMainAlternative.astro";
+import BlogSearchMobile from "../../../components/blog/BlogSearchMobile.astro";
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection("blog");
+
+  // 1. Get all categories actually used in files
+  const usedCategories = [
+    ...new Set(allPosts.map((post) => post.data.categories || []).flat()),
+  ];
+
+  // 2. Ensure "Uncategorized" is always in the list if any post lacks a category
+  if (
+    allPosts.some(
+      (post) => !post.data.categories || post.data.categories.length === 0,
+    )
+  ) {
+    if (!usedCategories.includes("Uncategorized")) {
+      usedCategories.push("Uncategorized");
+    }
+  }
+
+  return usedCategories.map((cat) => {
+    const catSlug = slugify(cat);
+
+    // 3. Special filtering for Uncategorized
+    const filteredPosts = allPosts.filter((post) => {
+      if (cat === "Uncategorized") {
+        return (
+          !post.data.categories ||
+          post.data.categories.length === 0 ||
+          post.data.categories.includes("Uncategorized")
+        );
+      }
+      return post.data.categories?.includes(cat);
+    });
+
+    return {
+      params: { category: catSlug },
+      props: { categoryName: cat, posts: filteredPosts },
+    };
+  });
+}
+
+const { categoryName, posts } = Astro.props;
+
+const heroData = {
+  image: {
+    src: "/src/assets/stock/stock_Plane-ground-sunset_roland-denes-MsZEJYU8alE-unsplash.jpg",
+    alt: "Category",
+  },
+  upperHeader: "Category Archive",
+  title: `${categoryName} | ${COMPANY_NICKNAME} in ${ADDRESS_STATE}, USA`,
+  subTitle: `Expert articles and training guides within the ${categoryName} category.`,
+  cta: [{ url: "/blog", text: "All Articles" }],
+};
+const headerButton = { href: "#blog-main", text: "Read More" };
+---
+
+<BaseLayout
+  siteTitle={`${categoryName}'s blog posts | ${COMPANY_NICKNAME} in ${ADDRESS_STATE}, USA`}
+  siteDescription={`Expert articles and training guides within the ${categoryName} category.`}
+>
+  <!-- <Hero75 data={heroData} /> -->
+
+  <HeaderMainAlternative
+    content={heroData}
+    mainSize={false}
+    showButton={false}
+    images={[heroData.image]}
+    button={headerButton}
+  />
+  <section class="py-16 px-4 bg-muted-50" id="blog-main">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <BlogSearchMobile />
+      <div class="lg:col-span-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {
+            posts.map(
+              (post, index) => <CardBlog blogEntry={post} index={index} />,
+              // <BlogPostCard post={post} />
+            )
+          }
+        </div>
+      </div>
+
+      <aside class="lg:col-span-4">
+        <div class="top-24">
+          <BlogSidebar />
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>

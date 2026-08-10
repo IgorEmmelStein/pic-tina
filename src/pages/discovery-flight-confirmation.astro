@@ -1,0 +1,75 @@
+---
+import { COMPANY_NAME, SITE_DESCRIPTION, SITE_TITLE } from "../data/consts";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "aos/dist/aos.css";
+import FormConfirmation from "../components/forms/FormConfirmation.astro";
+
+const data = {
+  siteTitle:
+    "Discovery Flight Booked | Pilot Instructional Center | New Century KS",
+  siteDescription:
+    "Your discovery flight is confirmed. Get ready for an unforgettable introduction to aviation at Pilot Instructional Center.",
+  siteKeywords: "discovery flight confirmation, intro flight Kansas City",
+
+  header: {
+    upperHeader: "FAQs",
+    title: `Frequently Asked Questions`,
+    description:
+      "Find quick answers about simulator training, enrollment, pricing, scheduling, FAA requirements, and more. If you still have questions, our team is here to help.",
+    buttons: [
+      { text: "Contact Support", href: "/contact/", style: "btn-secondary" },
+      { text: "Enroll Now", href: "#faq-general", style: "btn-transparent" },
+    ],
+    image: {
+      src: "/src/assets/stock-man-airplanes-museum.jpg",
+      alt: "",
+    },
+  },
+
+  confirmation: {
+    title: "Your Discovery Flight Booking is Now Confirmed at PIC",
+    description: `Thank you for booking your discovery flight with ${COMPANY_NAME}! We look forward to welcoming you aboard and providing you with an unforgettable flying experience. This is just a request confirmation. Our team will contact you shortly to finalize the details and confirm your flight schedule. You will receive an email confirming your booking along with any additional information you may need, if you don't see it please check your spam folder.`,
+    suggestion: {
+      title: " Have questions or need assistance?",
+      link: {
+        title: "Contact Us",
+        href: "/contact/",
+      },
+    },
+  },
+
+  cta: {
+    title: "Still Have Questions?",
+    description:
+      "Our team is happy to guide you through enrollment, scheduling, or training requirements. Reach out anytime, we’re here to help future pilots succeed.",
+    button: { text: "Get in Touch", href: "/contact/" },
+    image: {
+      src: "/src/assets/cta-flight-solid-ground-aviation.webp",
+      alt: "Flight simulator cockpit view",
+    },
+  },
+
+  ctas: {
+    ctaFloating: {
+      upperHeading: "Flight Training Support",
+      title: "We’re Here to Make Your Training Clear and Simple",
+      description:
+        "Our FAQ center covers everything from simulator training to pricing and student requirements. Explore below or reach out for personalized assistance.",
+      images: [
+        {
+          src: "/src/assets/student using simulator 2.jpg",
+          alt: "Student using FAA Compliant flight simulator",
+        },
+      ],
+    },
+  },
+};
+---
+
+<BaseLayout
+  siteTitle={data.siteTitle}
+  siteDescription={data.siteDescription}
+  siteKeywords={data.siteKeywords}
+>
+  <FormConfirmation content={data.confirmation} />
+</BaseLayout>

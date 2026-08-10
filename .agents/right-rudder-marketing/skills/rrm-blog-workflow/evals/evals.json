@@ -1,0 +1,88 @@
+{
+  "skill_name": "rrm-blog-workflow",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Use $rrm-blog-workflow to create a blog post. brandGuideMode: auto. Blog idea: how simulator training helps private pilot students build confidence before emergency practice in the airplane. Relevant keywords: flight simulator training, private pilot training.",
+      "expected_output": "One final repo-ready blog post created after the workflow creates or reviews the brand guide, saves a topic fact-check report, writes the blog post, runs image/link validation, and runs human voice lint.",
+      "files": [],
+      "expectations": [
+        "Defaults to the existing brand guide when current, or creates it if missing",
+        "Runs the aviation fact-check layer before writing",
+        "Saves a fact-check report with Topic Context and safe vivid framing",
+        "Runs the blog copywriter with human voice guardrails",
+        "Creates exactly one final .md blog post",
+        "Runs both validator scripts before delivery",
+        "Reports the brand guide path, fact-check path, final post path, and excluded claims"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Use $rrm-blog-workflow to create a blog post. brandGuideMode: reuse-existing. Blog idea: private pilot training timeline. Relevant keywords: private pilot license timeline.",
+      "expected_output": "A workflow that uses the existing brand-guide.md without updating it, then fact-checks the topic and creates the final blog post. If brand-guide.md is missing, it stops and explains that auto or force-update is required.",
+      "files": [],
+      "expectations": [
+        "Does not update the brand guide in reuse-existing mode",
+        "Fails fast if the guide is missing",
+        "Still creates a topic-specific fact-check report before writing when the guide exists",
+        "Still runs blog validators before delivery"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Use $rrm-blog-workflow to create a blog post. brandGuideMode: force-update. Blog idea: a new financing partner and how students should think about funding flight training. Relevant keywords: flight training financing, pilot training loans.",
+      "expected_output": "A workflow that updates the brand guide first because force-update was selected, fact-checks cost and financing claims, writes one final blog post, and runs validators.",
+      "files": [],
+      "expectations": [
+        "Runs the brand strategy skill before fact-checking",
+        "Updates durable offer, CTA, proof, and voice context when sources support it",
+        "Treats financing and cost claims as risk-sensitive",
+        "Does not imply loan approval or affordability outcomes",
+        "Runs image/link validation and human voice lint"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Use $rrm-blog-workflow to create a blog post. brandGuideMode: auto. Blog idea: recap a video visit from an aviation media channel and turn it into a decision-support post for students comparing schools. Relevant keywords: flight school visit, flight training community. informationDump: The video shows the host walking through the hangar, talking with the founder about starting with one airplane, showing a simulator emergency scenario, and interviewing a student who leased an aircraft back to the school.",
+      "expected_output": "A workflow that uses the information dump as user-provided source context for video contents, labels non-public facts appropriately in the fact-check report, and writes one final blog post after validation.",
+      "files": [],
+      "expectations": [
+        "Does not ask for a separate data summary, audience, CTA, or special instructions",
+        "Uses informationDump as source context for facts not discoverable through research",
+        "Labels non-public facts as user-provided context in the fact-check report",
+        "Does not treat user-provided observations as independently verified public facts",
+        "Still fact-checks aviation, pricing, safety, outcome, and career claims",
+        "Runs image/link validation and human voice lint"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Use $rrm-blog-workflow to create a blog post. brandGuideMode: auto. Blog idea: a media channel visited the school and the draft should mention the fleet, simulator, founder story, and student story. Relevant keywords: best flight schools, flight school visit. informationDump: The video shows the founder explaining the school grew from one aircraft, a simulator emergency-practice segment, and a student discussing aircraft leaseback.",
+      "expected_output": "A final blog post that uses the video details as internal evidence but does not expose source-audit language, outside-reviewer phrasing, or ask-the-company wording.",
+      "files": [],
+      "expectations": [
+        "Uses informationDump facts without publishing phrases like the episode notes describe",
+        "Writes company-specific facts from the company's seat with we, our, or us",
+        "Does not publish phrases like the current page shows, listed in the repo, or exact count should be confirmed",
+        "Does not tell the reader to ask the named client what the client does",
+        "Handles uncertain current details by omission, supported generalization, or one natural contact-us sentence",
+        "Runs image/link validation and human voice lint before delivery"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Use $rrm-blog-workflow to create a blog post. brandGuideMode: auto. Blog idea: how aircraft rentals work after training. Relevant keywords: flight school aircraft rentals, rent a training aircraft. authorContext: Author: Jordan Smith, former airline pilot. informationDump: Existing repo posts are often credited to the school team, but this post should use Jordan Smith as the author if the repo supports named authors.",
+      "expected_output": "A workflow that carries authorContext through brand strategy, aviation fact-checking, and blog writing, uses Jordan Smith in frontmatter when the schema supports it, applies only light sourced airline-pilot voice cues, and rejects page-as-source wording such as 'our rentals page lists'.",
+      "files": [],
+      "expectations": [
+        "Includes author context in the blog job packet",
+        "Treats author/byline changes as a material voice update in brandGuideMode auto",
+        "Fact-checks any aviation credibility claims implied by the author background",
+        "Uses named-author frontmatter according to repo schema conventions",
+        "Falls back to team voice if the author background cannot be sourced",
+        "Does not publish our-page, website-source, repo, or ask-the-school phrasing",
+        "Runs image/link validation and human voice lint before delivery"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,232 @@
+---
+import { menuLeft } from "../base/Navbar.astro";
+
+const FORM_WEBHOOK_URL = import.meta.env.ENROLL_FORM_WEBHOOK_URL;
+const PORTAL_API_KEY = import.meta.env.PORTAL_API_KEY;
+const inputClass =
+  "block w-full rounded-2xl border-0 bg-white/5 px-6 py-4 text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-[#dcc1a6]/50 focus:ring-2 focus:ring-inset focus:ring-[#dcc1a6] focus:bg-white/10 transition-all duration-300 sm:text-sm outline-none";
+---
+
+<form
+  class="relative z-10 grid grid-cols-1 gap-y-5 sm:grid-cols-2 gap-x-6"
+  id="enroll-form"
+>
+  <p class="hidden"><input name="confirm-email" /></p>
+
+  <div>
+    <input
+      type="text"
+      name="first-name"
+      placeholder="First Name"
+      required
+      class={inputClass}
+    />
+  </div>
+
+  <div>
+    <input
+      type="text"
+      name="last-name"
+      placeholder="Last Name"
+      required
+      class={inputClass}
+    />
+  </div>
+
+  <div class="sm:col-span-2">
+    <input
+      type="email"
+      name="email"
+      placeholder="Email Address"
+      required
+      class={inputClass}
+    />
+  </div>
+  <div class="sm:col-span-2">
+    <input
+      type="tel"
+      name="phone"
+      placeholder="Phone Number"
+      required
+      class={inputClass}
+    />
+  </div>
+  <div class="sm:col-span-2">
+    <select
+      required
+      name="interest-program"
+      class={`${inputClass} appearance-none cursor-pointer`}
+    >
+      <option value="" disabled selected>Select Program</option>
+      {
+        menuLeft[1].children.map((item) => (
+          <option value={item.label} class="bg-[#1a1a1a]">
+            {item.label}
+          </option>
+        ))
+      }
+    </select>
+  </div>
+
+  <div class="sm:col-span-2">
+    <textarea
+      name="message"
+      rows="3"
+      placeholder="Additional Information"
+      class={inputClass}></textarea>
+  </div>
+
+  {/* Custom Toggle & Terms - Using the #dcc1a6 accent */}
+  <div class="sm:col-span-2 flex gap-x-4 mt-4 items-start">
+    <button
+      type="button"
+      id="terms-toggle"
+      class="flex w-12 flex-none cursor-pointer rounded-full p-1 ring-1 ring-inset ring-white/20 transition-all duration-300 bg-black/20 hover:bg-black/40"
+      role="switch"
+      aria-checked="false"
+    >
+      <span
+        id="terms-thumb"
+        class="h-5 w-5 rounded-full bg-[#dcc1a6] shadow-sm transition-transform duration-300 translate-x-0 group-aria-checked:translate-x-6"
+      ></span>
+    </button>
+    <input type="hidden" id="agree-terms" name="agree-terms" value="no" />
+    <label class="text-xs leading-relaxed text-white/60">
+      I agree to the <a
+        href="/privacy-policy/"
+        class="text-[#dcc1a6] font-semibold hover:text-white transition-colors"
+        >Privacy Policy</a
+      > and <a
+        href="/terms-of-service/"
+        class="text-[#dcc1a6] font-semibold hover:text-white transition-colors"
+        >Terms of Service</a
+      >.
+    </label>
+  </div>
+
+  <div class="sm:col-span-2 mt-6">
+    <button
+      type="submit"
+      id="submit-btn"
+      disabled
+      class="group relative flex w-full items-center justify-center gap-3 rounded-full bg-[#4b7992] px-8 py-4 text-white font-bold tracking-wide shadow-lg transition-all duration-300 overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#3a5f73] hover:scale-[1.02]"
+    >
+      <span class="relative z-10 uppercase tracking-widest text-sm"
+        >Secure Enrollment</span
+      >
+      <svg
+        class="w-4 h-4 relative z-10 transform transition-transform duration-300 group-hover:translate-x-1"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+      </svg>
+    </button>
+  </div>
+</form>
+
+<script define:vars={{ FORM_WEBHOOK_URL, PORTAL_API_KEY }}>
+  const toggle = document.getElementById("terms-toggle");
+  const thumb = document.getElementById("terms-thumb");
+  const hiddenInput = document.getElementById("agree-terms");
+  const submitBtn = document.getElementById("submit-btn");
+
+  let isChecked = false;
+
+  toggle.addEventListener("click", () => {
+    isChecked = !isChecked;
+    hiddenInput.value = isChecked ? "yes" : "no";
+    toggle.setAttribute("aria-checked", isChecked);
+    toggle.classList.toggle("bg-primary-800", isChecked);
+    toggle.classList.toggle("bg-gray-200", !isChecked);
+    thumb.classList.toggle("translate-x-3.5", isChecked);
+    thumb.classList.toggle("translate-x-0", !isChecked);
+
+    submitBtn.disabled = !isChecked;
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("enroll-form");
+    if (!form) {
+      console.error("Form element not found.");
+      return;
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(form);
+      const confirmEmail = formData.get("confirm-email")?.trim();
+      if (confirmEmail) return;
+
+      const webhookURL = FORM_WEBHOOK_URL;
+      const apiKey = PORTAL_API_KEY;
+
+      const urlEncodedBody = new URLSearchParams(formData).toString();
+
+      const excludedFields = [
+        "first-name",
+        "last-name",
+        "email",
+        "phone",
+        "confirm-email",
+        "agree-terms",
+      ];
+
+      const metadata = {};
+
+      for (const [key, value] of formData.entries()) {
+        if (!excludedFields.includes(key)) {
+          metadata[key] = value?.trim?.() ?? value;
+        }
+      }
+
+      const jsonBody = {
+        first_name: formData.get("first-name")?.trim() || "",
+        last_name: formData.get("last-name")?.trim() || "",
+        email: formData.get("email")?.trim() || "",
+        phone: formData.get("phone")?.trim() || "",
+        campaign: "enrollment",
+        account_random_id: "ac_cpxc2poi",
+        metadata: metadata,
+      };
+
+      try {
+        const [ghlRes, portalRes] = await Promise.all([
+          fetch(webhookURL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: urlEncodedBody,
+          }),
+          fetch("https://portal.rightruddermarketing.com/api/leads", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              "x-api-key": apiKey,
+            },
+            body: JSON.stringify(jsonBody),
+          }),
+        ]);
+
+        if (ghlRes.ok && portalRes.ok) {
+          window.location.href = "/enroll-confirmation";
+        } else {
+          console.error("Submission failed", {
+            ghlStatus: ghlRes.status,
+            portalStatus: portalRes.status,
+          });
+        }
+      } catch (err) {
+        console.error("Submission error:", err);
+      }
+    });
+  });
+</script>

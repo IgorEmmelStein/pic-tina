@@ -1,0 +1,122 @@
+---
+import { FACEBOOK_URL, INSTAGRAM_URL, PHONE_NUMBER } from "../../data/consts";
+const iconStyle =
+  "w-6 h-6 text-white lg:w-10 lg:h-10 hover:text-accent-400 hover:brightness-125 hover:-translate-y-1 hover:scale-110 transition-all duration-300";
+---
+
+<div
+  class="flex flex mt-6 lg:mt-0 lg:flex-col gap-6 py-2 px-4 items-center lg:px-2 lg:py-4 rounded-full bg-white/10 backdrop-blur-sm shadow-lg border border-white/10"
+>
+  <a href={FACEBOOK_URL} title="PIC's Facebook profile link" target={"_blank"}>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      class={iconStyle}
+    >
+      <g
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="4"
+      >
+        <path stroke-dasharray="24" d="M17 4l-2 0c-2.5 0 -4 1.5 -4 4v12">
+          <animate
+            fill="freeze"
+            attributeName="stroke-dashoffset"
+            dur="0.5s"
+            values="24;0"></animate>
+        </path>
+        <path stroke-dasharray="10" stroke-dashoffset="10" d="M8 12h7">
+          <animate
+            fill="freeze"
+            attributeName="stroke-dashoffset"
+            begin="0.6s"
+            dur="0.2s"
+            to="0"></animate>
+        </path>
+      </g>
+    </svg>
+  </a>
+
+  <a
+    href={INSTAGRAM_URL}
+    title="PIC's Instagram profile link"
+    target={"_blank"}
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      class={iconStyle}
+    >
+      <g
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+      >
+        <path
+          stroke-dasharray="66"
+          d="M16 3c2.76 0 5 2.24 5 5v8c0 2.76 -2.24 5 -5 5h-8c-2.76 0 -5 -2.24 -5 -5v-8c0 -2.76 2.24 -5 5 -5h4Z"
+        >
+          <animate
+            fill="freeze"
+            attributeName="stroke-dashoffset"
+            dur="0.6s"
+            values="66;0"></animate>
+        </path>
+        <path
+          stroke-dasharray="28"
+          stroke-dashoffset="28"
+          d="M12 8c2.21 0 4 1.79 4 4c0 2.21 -1.79 4 -4 4c-2.21 0 -4 -1.79 -4 -4c0 -2.21 1.79 -4 4 -4"
+        >
+          <animate
+            fill="freeze"
+            attributeName="stroke-dashoffset"
+            begin="0.7s"
+            dur="0.6s"
+            to="0"></animate>
+        </path>
+      </g>
+      <circle cx="17" cy="7" r="1.5" fill="currentColor" opacity="0">
+        <animate
+          fill="freeze"
+          attributeName="opacity"
+          begin="1.3s"
+          dur="0.2s"
+          to="1"></animate>
+      </circle>
+    </svg>
+  </a>
+
+  <a href={`tel:${PHONE_NUMBER.replace(/[^+\d]/g, "")}`} title="Call Us">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      class={iconStyle}
+    >
+      <path
+        fill="none"
+        stroke="currentColor"
+        stroke-dasharray="62"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M8 3c0.5 0 2.5 4.5 2.5 5c0 1 -1.5 2 -2 3c-0.5 1 0.5 2 1.5 3c0.39 0.39 2 2 3 1.5c1 -0.5 2 -2 3 -2c0.5 0 5 2 5 2.5c0 2 -1.5 3.5 -3 4c-1.5 0.5 -2.5 0.5 -4.5 0c-2 -0.5 -3.5 -1 -6 -3.5c-2.5 -2.5 -3 -4 -3.5 -6c-0.5 -2 -0.5 -3 0 -4.5c0.5 -1.5 2 -3 4 -3Z"
+      >
+        <animate
+          fill="freeze"
+          attributeName="stroke-dashoffset"
+          dur="0.6s"
+          values="62;0"></animate>
+      </path>
+    </svg>
+  </a>
+</div>

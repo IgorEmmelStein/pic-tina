@@ -1,0 +1,404 @@
+---
+import CTALeft from "../../components/ctas/CTALeft.astro";
+import CTARight from "../../components/ctas/CTARight.astro";
+import Enroll from "../../components/forms/Enroll.astro";
+import HeaderMain from "../../components/headers/HeaderMainAlternative.astro";
+import FAQ from "../../components/sections/FAQ.astro";
+import TextIcons from "../../components/sections/TextIcons.astro";
+import Why from "../../components/sections/Why.astro";
+import { SITE_DESCRIPTION, SITE_TITLE, website_links } from "../../data/consts";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProgramsComponent from "../../components/sections/ProgramsComponent.astro";
+
+import "aos/dist/aos.css";
+import ContentLeft from "../../components/content/ContentLeft.astro";
+import ContentMiddle from "../../components/content/ContentMiddle.astro";
+import ContentRight from "../../components/content/ContentRight.astro";
+import CardProgram from "../../components/cards/CardProgram.astro";
+import ImageComp from "../../components/utils/ImageComp.astro";
+import ProgramsComponentDesign from "../../components/sections/ProgramsComponentDesign.astro";
+import FleetGallery from "../../components/fleet/FleetGallery.astro";
+import { fleet } from "../about/our-fleet.astro";
+import OffersStripCTA from "../../components/offers/OffersStripCTA.astro";
+import OffersSection from "../../components/offers/OffersSection.astro";
+import SimulatorImageSection from "../../components/offers/SimulatorImageSection.astro";
+
+const data = {
+  siteTitle:
+    "Commercial Pilot Training | Pilot Instructional Center | Near Kansas City",
+  siteDescription:
+    "Advance toward a professional aviation career with PIC’s Commercial Pilot training program.",
+  siteKeywords: "commercial pilot training, professional pilot Kansas City",
+
+  header: {
+    image: {
+      src: "/src/assets/stock/stock_Plane-commercial-airport_ern-low-QMAhB9P0RXg-unsplash.jpg",
+      alt: "Commercial airplane at airport by Ern Low",
+    },
+    upperHeader: "Now Enrolling New Students in Kansas City",
+    title: `Commercial Pilot License in Kansas City`,
+    description:
+      "Advance from private pilot to professional aviator with structured, mentored training led by PIC’s senior flight instructors.",
+    buttons: [
+      { text: "Start Training", href: "#enroll", style: "btn-secondary" },
+      { text: "Learn More", href: "/contact/", style: "btn-transparent" },
+    ],
+  },
+
+  // program: {
+  //   overview: {
+  //     image: {
+  //       src: "/src/assets/aircrew-member-using-control-panel-command-dashboard-navigation-fly-ariplane-cockpit-female-airliner-flying-plane-cabin-with-power-engine-switch-lever-close-up.jpg",
+  //       alt: "Aircrew member using control panel in airplane cockpit",
+  //     },
+  //     upperHeader: "BECOME A PROFESSIONAL PILOT",
+  //     title: "Commercial Pilot at PIC",
+  //     description:
+  //       "Whether you want to fly for the airlines, corporate aviation, charter operations, or instruction, the Commercial Pilot License (CPL) is your gateway to a professional career. PIC’s veteran instructors guide you through every step with precision, discipline, and real-world skills built from decades of experience. Further your career by obtaining your commercial pilot license. This will allow you to start receiving compensation for your piloting skills. *Cost, flight time, and duration all vary depending on the pilot’s current flight hours and progression. Please contact us for a personalized part 61 quote.",
+  //     descriptions: [
+  //       "Train with senior CFIs who bring 30+ years of commercial and corporate aviation experience. Master the aerodynamics, safety practices, and advanced maneuvers essential for commercial-level flying. Build confidence and professionalism in a supportive, safety-first learning environment.",
+  //     ],
+  //     bullets: [
+  //       {
+  //         icon: "M3 18h18v2H3zm18.509-9.473a1.61 1.61 0 0 0-2.036-1.019L15 9L7 6L5 7l6 4l-4 2l-4-2l-1 1l4 4l14.547-5.455a1.61 1.61 0 0 0 .962-2.018",
+  //         title: "Train With Purpose",
+  //         description:
+  //           "Develop the precision, skill, and decision-making required of every commercial pilot.",
+  //       },
+  //       {
+  //         icon: "M12 2a1 1 0 0 1 .932.638l7 18a1 1 0 0 1-1.326 1.281L13 19.517V13a1 1 0 1 0-2 0v6.517l-5.606 2.402a1 1 0 0 1-1.326-1.281l7-18A1 1 0 0 1 12 2",
+  //         title: "Build Real Experience",
+  //         description:
+  //           "Gain experience in towered and non-towered environments, long cross-countries, complex airspace, and advanced commercial maneuvers.",
+  //       },
+  //       {
+  //         icon: "",
+  //         title: "Prepare for a Career",
+  //         description:
+  //           "Commercial aviation, corporate operations, and freight flying all require a CPL, this is the foundation of your professional journey.",
+  //       },
+  //     ],
+  //     button: {
+  //       text: "Learn More",
+  //       href: "/new-to-flying/",
+  //     },
+  //     requirements: [
+  //       "Hold at least a Private Pilot Certificate with an Instrument Rating",
+  //       "Read, speak, write, and understand English",
+  //       "Hold a current medical certificate (at least Third Class)",
+  //       "Pass a knowledge and practical test",
+  //     ],
+  //     included: [
+  //       "20 hours training flight time",
+  //       "85 hours time-building flight time (if needed)",
+  //       "50 hours Dual AATD simulator time",
+  //       "15 hours of personal ground lessons",
+  //       "Online ground school",
+  //     ],
+  //     summary: [
+  //       {
+  //         title: "Minimum Cost",
+  //         value: "$31,225",
+  //       },
+  //       {
+  //         title: "Flight Time",
+  //         value: "105 Hours",
+  //       },
+  //       {
+  //         title: "Duration",
+  //         value: "4 months",
+  //       },
+  //     ],
+  //   },
+
+  //   advantages: {
+  //     upperHeader: "WHY EARN YOUR COMMERCIAL LICENSE?",
+  //     title: "Your Professional Aviation Path Starts Here",
+  //     description:
+  //       "A Commercial Pilot License opens the door to paid flying opportunities. PIC’s program focuses on producing knowledgeable, skilled, and safe aviators ready for real-world flying.",
+  //     bullets: [
+  //       {
+  //         icon: "M3 18h18v2H3zm18.509-9.473a1.61 1.61 0 0 0-2.036-1.019L15 9L7 6L5 7l6 4l-4 2l-4-2l-1 1l4 4l14.547-5.455a1.61 1.61 0 0 0 .962-2.018",
+  //         title: "Earn While You Fly",
+  //         description:
+  //           "A CPL allows you to get paid to fly, from aerial surveying to pipeline patrol to instruction and more.",
+  //       },
+  //       {
+  //         icon: "M12 2a1 1 0 0 1 .932.638l7 18a1 1 0 0 1-1.326 1.281L13 19.517V13a1 1 0 1 0-2 0v6.517l-5.606 2.402a1 1 0 0 1-1.326-1.281l7-18A1 1 0 0 1 12 2",
+  //         title: "Sharpen Your Skills",
+  //         description:
+  //           "Refine your precision through chandelles, lazy eights, eights-on-pylons, and other commercial maneuvers.",
+  //       },
+  //       {
+  //         icon: "",
+  //         title: "Stand Out From Other Pilots",
+  //         description:
+  //           "Commercial training builds discipline, professionalism, and advanced aeronautical decision-making.",
+  //       },
+  //     ],
+  //   },
+
+  //   price: {
+  //     image: {
+  //       src: "/src/assets/stock/stock_Cockpit-commercial-pilot_portrait-male-captain-sitting-cabin-ready-fly-airplane-with-dashboard-command.jpg",
+  //       alt: "Aircrew member using control panel in airplane cockpit",
+  //     },
+  //     upperHeader: "AFFORDABLE & TRANSPARENT TRAINING",
+  //     title: "Quality Instruction,  Honest Pricing",
+  //     description:
+  //       "PIC was founded to do aviation training the right way: safety-first, no shortcuts, and no surprise fees. Our commercial training is structured to maximize skill development without unnecessary hours.",
+  //     descriptions: [
+  //       "PIC was founded to do aviation training the right way: safety-first, no shortcuts, and no surprise fees. Our commercial training is structured to maximize skill development without unnecessary hours.",
+  //       "The price is based on FAA minimums and can vary based on student proficiency. Please refer to the aircraft and instructor cost if additional time is needed. Price includes online ground school, instructor and fuel surcharge, but does not include tax, equipment (headset), FAA written, and FAA exam fees.",
+  //       "Train with senior instructors, not low-experience time builders. Scenario-based commercial training that prepares you for real jobs. Efficient, transparent programs designed for long-term career development.",
+  //     ],
+  //     bullets: [
+  //       {
+  //         icon: "M3 18h18v2H3zm18.509-9.473a1.61 1.61 0 0 0-2.036-1.019L15 9L7 6L5 7l6 4l-4 2l-4-2l-1 1l4 4l14.547-5.455a1.61 1.61 0 0 0 .962-2.018",
+  //         title: "Competitive Rates",
+  //         description:
+  //           "Professional-level training at accessible pricing, with no hidden fees or inflated packages.",
+  //       },
+  //       {
+  //         icon: "M12 2a1 1 0 0 1 .932.638l7 18a1 1 0 0 1-1.326 1.281L13 19.517V13a1 1 0 1 0-2 0v6.517l-5.606 2.402a1 1 0 0 1-1.326-1.281l7-18A1 1 0 0 1 12 2",
+  //         title: "Simulator Training Included",
+  //         description:
+  //           "Use our certified BATD simulator to improve efficiency, reduce costs, and strengthen skills.",
+  //       },
+  //       {
+  //         icon: "",
+  //         title: "Pay As You Go",
+  //         description:
+  //           "Move through your commercial training at your own pace with full scheduling flexibility.",
+  //       },
+  //     ],
+  //     button: {
+  //       text: "Learn More",
+  //       href: "/new-to-flying/",
+  //     },
+  //     prices: [
+  //       {
+  //         value: "$5,300",
+  //         title: "Flight Time with Instructor",
+  //         duration: "20hrs",
+  //         rate: "$265/hr",
+  //       },
+  //       {
+  //         value: "15,725",
+  //         title: "Time-building flight time",
+  //         duration: "85hrs",
+  //         rate: "$185/hr",
+  //       },
+  //       {
+  //         value: "1,200",
+  //         title: "Ground Instruction",
+  //         duration: "15hrs",
+  //         rate: "$80/hr",
+  //       },
+  //       {
+  //         value: "8,000",
+  //         title: "AATD Simulator",
+  //         duration: "50hrs",
+  //         rate: "$168/hr",
+  //       },
+  //       {
+  //         value: "500",
+  //         title: "Online Ground School",
+  //       },
+  //       {
+  //         value: "500",
+  //         title: "Commercial Enrollment Fee",
+  //       },
+  //     ],
+  //     price: "31,225",
+  //   },
+  // },
+  program: {
+    overview: {
+      image: {
+        src: "/src/assets/aircrew-member-using-control-panel-command-dashboard-navigation-fly-ariplane-cockpit-female-airliner-flying-plane-cabin-with-power-engine-switch-lever-close-up.jpg",
+        alt: "Aircrew member using control panel in airplane cockpit",
+      },
+      upperHeader: "BECOME A PROFESSIONAL PILOT",
+      title: "Commercial Pilot Training at PIC",
+      description:
+        "The Commercial Pilot License (CPL) is your gateway to a professional career in the skies. Whether you aim for the airlines, corporate aviation, or flight instruction, our veteran instructors provide the discipline and real-world precision required for commercial operations.",
+      targetAudience: {
+        title: "Your Professional Path",
+        points: [
+          "Future airline, corporate, and charter pilots",
+          "Pilots looking to be compensated for their skills",
+          "Aviators seeking advanced precision and discipline",
+        ],
+      },
+      requirements: [
+        "Private Pilot Certificate with Instrument Rating",
+        "Read, speak, write, and understand English",
+        "Current medical certificate (at least Third Class)",
+        "Pass FAA knowledge and practical tests",
+      ],
+      included: [
+        "20 hours dual training flight time",
+        "85 hours time-building flight time",
+        "50 hours Dual AATD simulator time",
+        "15 hours personal ground lessons",
+        "Online ground school",
+      ],
+      summary: [
+        {
+          title: "Minimum Cost",
+          value: "$31,225",
+        },
+        {
+          title: "Flight Time",
+          value: "105 Hours",
+        },
+        {
+          title: "Duration",
+          value: "4 months",
+        },
+      ],
+    },
+
+    advantages: {
+      upperHeader: "WHY EARN YOUR CPL AT PIC?",
+      title: "The Foundation of Your Career",
+      description:
+        "A CPL allows you to fly for compensation. At PIC, we focus on producing knowledgeable, skilled, and safe aviators ready for the demands of the aviation industry.",
+      bullets: [
+        {
+          title: "Earn While You Fly",
+          description:
+            "Open the door to professional opportunities, from aerial surveying and pipeline patrol to flight instruction.",
+        },
+        {
+          title: "Advanced Maneuver Mastery",
+          description:
+            "Refine your precision through chandelles, lazy eights, and eights-on-pylons, building elite-level aircraft control.",
+        },
+        {
+          title: "Professional Mentorship",
+          description:
+            "Train with senior CFIs who bring 30+ years of commercial and corporate experience to your cockpit.",
+        },
+      ],
+    },
+
+    price: {
+      upperHeader: "QUALITY INSTRUCTION, HONEST PRICING",
+      title: "Commercial Cost Breakdown",
+      description:
+        "Price is based on FAA minimums and varies by pilot proficiency. Includes instructor and fuel surcharge. Tax, headset, and FAA exam fees are not included.",
+      priceTotal: "31,225",
+      breakdown: [
+        {
+          title: "Dual Flight Time (Training)",
+          duration: "20 hrs",
+          rate: "$265/hr",
+          value: "5,300",
+        },
+        {
+          title: "Time-Building Flight Time",
+          duration: "85 hrs",
+          rate: "$185/hr",
+          value: "15,725",
+        },
+        {
+          title: "AATD Simulator Training",
+          duration: "50 hrs",
+          rate: "$160/hr", // Adjusted for $8,000 total / 50 hrs
+          value: "8,000",
+        },
+        {
+          title: "Ground Instruction",
+          duration: "15 hrs",
+          rate: "$80/hr",
+          value: "1,200",
+        },
+        {
+          title: "Online Ground School",
+          value: "500",
+        },
+        {
+          title: "Enrollment Fee",
+          value: "500",
+        },
+      ],
+    },
+  },
+  cta: {
+    title: "Ready to Start Your Professional Pilot Journey?",
+    description:
+      "Become a confident, skilled, and market-ready commercial pilot with PIC’s senior-instructor-led commercial training program.",
+    button: { text: "Book a Discovery Session", href: "/discovery-session" },
+    image: {
+      src: "/src/assets/cta-flight-solid-ground-aviation.webp",
+      alt: "View of the sky from an airplane window",
+    },
+  },
+
+  ctas: {
+    ctaPrivatePilot: {
+      image: {
+        src: "/src/assets/stock/stock_Plane-commercial-flying_meghan-gordon-MVW9JBTY7_M-unsplash.jpg",
+        alt: "Commercial airplane flying by Meghan Gordon",
+      },
+      title: "Welcome to Pilot Instructional Center",
+      description:
+        "Train with a flight school built on safety, integrity, and decades of real aviation experience. PIC’s commercial training prepares you for the professional world with strong fundamentals and real mentoring.",
+      descriptions: [
+        "Learn from CFIs who are here to teach, not build hours.",
+        "Train in a family-oriented, supportive learning environment.",
+        "Develop commercial-level skills with modern aircraft and proven instructors.",
+      ],
+      button: {
+        text: "Explore Programs",
+        href: "/flight-training/",
+      },
+    },
+
+    ctaDiscoveryFlight: {
+      image: {
+        src: "/src/assets/stock/stock_Plane-commercial-flying_rama-krushna-behera-8Likay_xccc-unsplash.jpg",
+        alt: "Airplane flying by Rama Krushna Behera",
+      },
+      title: "Ready to Get Started?",
+      description:
+        "Contact us to learn more about the Commercial Pilot Program and begin mapping out your aviation career.",
+      button: {
+        text: "Contact Us",
+        href: "/contact/",
+      },
+    },
+  },
+};
+---
+
+<BaseLayout
+  siteTitle={data.siteTitle}
+  siteDescription={data.siteDescription}
+  siteKeywords={data.siteKeywords}
+>
+  <HeaderMain
+    content={data.header}
+    mainSize={false}
+    showButton={false}
+    images={[data.header.image]}
+  />
+  <!-- <ProgramsComponent content={data.program} /> -->
+  <ProgramsComponentDesign program={data.program} />
+  <OffersStripCTA />
+  <FleetGallery
+    fleet={fleet}
+    selfLink={false}
+    button={{
+      title: "Start Your Journey",
+      path: `#${website_links.enroll.id}`,
+    }}
+  />
+  <SimulatorImageSection />
+  <Enroll />
+  <CTALeft content={data.ctas.ctaDiscoveryFlight} />
+  <OffersSection />
+  <CTARight content={data.ctas.ctaPrivatePilot} />
+</BaseLayout>

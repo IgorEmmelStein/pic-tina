@@ -1,0 +1,398 @@
+---
+import { COMPANY_NAME, PHONE_NUMBER, EMAIL_ADDRESS } from "../../data/consts";
+import ImageComp from "../utils/ImageComp.astro";
+
+const FORM_WEBHOOK_URL = import.meta.env.CFICANDIDATE_FORM_WEBHOOK_URL;
+const PORTAL_API_KEY = import.meta.env.PORTAL_API_KEY;
+const inputClass =
+  "block w-full rounded-2xl border-0 bg-white/5 px-6 py-4 text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-[#dcc1a6]/50 focus:ring-2 focus:ring-inset focus:ring-[#dcc1a6] focus:bg-white/10 transition-all duration-300 sm:text-sm outline-none";
+---
+
+<div
+  id="form"
+  class="bg-logo-darker py-24 sm:py-32 relative overflow-hidden font-sans"
+>
+  {/* Ambient Background Glows */}
+  <div
+    class="absolute top-0 right-0 -translate-y-12 translate-x-1/3 h-[500px] w-[500px] rounded-full bg-[#4b7992] opacity-20 blur-[100px] pointer-events-none"
+  >
+  </div>
+  <div
+    class="absolute bottom-0 left-0 translate-y-1/3 -translate-x-1/3 h-[400px] w-[400px] rounded-full bg-[#dcc1a6] opacity-10 blur-[80px] pointer-events-none"
+  >
+  </div>
+
+  <div class="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
+    <div class="grid lg:grid-cols-2 gap-16 lg:gap-8 items-center">
+      {/* Left Column: Copy, Image & Animation */}
+      <div
+        class="flex flex-col justify-center"
+        data-aos="fade-right"
+        data-aos-duration="1000"
+      >
+        <div class="flex items-center gap-4 mb-6">
+          <span
+            class="text-[#dcc1a6] font-bold tracking-widest uppercase text-sm"
+            >Let's Connect</span
+          >
+          <div class="h-px w-12 bg-[#dcc1a6]/50"></div>
+        </div>
+
+        <h2
+          class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight font-title text-white uppercase leading-tight"
+        >
+          Join Our Team of Instructors
+        </h2>
+
+        {/* Animated Graphic & Image Arrangement */}
+        <div class="mt-12 relative max-w-sm">
+          {/* Main Image (Replace src with your actual image) */}
+          <div
+            class="relative rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl aspect-[4/3] group"
+          >
+            <div
+              class="absolute inset-0 bg-[#4b7992]/20 group-hover:bg-transparent transition-colors duration-500 z-10"
+            >
+            </div>
+            <ImageComp
+              src="/src/assets/stock/stock_Plane-ground-sunset_roland-denes-MsZEJYU8alE-unsplash.jpg"
+              alt="Pilot looking at the sunset"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
+        </div>
+
+        {/* Hiring Status Notice */}
+        <div
+          class="mt-8 p-6 bg-[#dcc1a6]/10 border border-[#dcc1a6]/20 rounded-2xl flex items-start gap-4"
+        >
+          <span class="text-[#dcc1a6] text-2xl flex-shrink-0">ⓘ</span>
+          <p class="text-white/90 leading-relaxed font-medium">
+            Our school is not currently hiring, but we are accepting and
+            allowing instructors to leave their contact information for future
+            opportunities.
+          </p>
+        </div>
+      </div>
+
+      {/* Right Column: Glassmorphism Form */}
+      <div
+        class="relative"
+        data-aos="fade-left"
+        data-aos-duration="1000"
+        data-aos-delay="200"
+      >
+        <form
+          class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-8 sm:p-12 shadow-2xl relative overflow-hidden"
+          name="cfi-application-form"
+          id="cfi-application-form"
+        >
+          {/* Internal Form Glow */}
+          <div
+            class="absolute top-0 right-0 w-32 h-32 bg-[#4b7992]/20 blur-3xl rounded-full"
+          >
+          </div>
+
+          <div
+            class="relative z-10 grid grid-cols-1 gap-y-6 sm:grid-cols-2 gap-x-6"
+          >
+            <p class="hidden"><input name="confirm-email" /></p>
+
+            <div>
+              <input
+                type="text"
+                name="first-name"
+                id="df-first-name"
+                required
+                placeholder="First Name"
+                class={inputClass}
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                name="last-name"
+                id="df-last-name"
+                required
+                placeholder="Last Name"
+                class={inputClass}
+              />
+            </div>
+
+            <div class="sm:col-span-2">
+              <input
+                type="email"
+                name="email"
+                id="df-email"
+                required
+                placeholder="Email Address"
+                class={inputClass}
+              />
+            </div>
+
+            <div class="sm:col-span-2">
+              <input
+                type="tel"
+                name="phone"
+                id="df-phone"
+                required
+                placeholder="Phone Number"
+                class={inputClass}
+              />
+            </div>
+
+            <div class="sm:col-span-2">
+              <input
+                type="url"
+                name="cv-link"
+                id="df-cv-link"
+                required
+                placeholder="CV Link"
+                class={inputClass}
+              />
+            </div>
+
+            <div class="sm:col-span-2">
+              <textarea
+                name="list-of-instrictor-certifications"
+                id="df-list-of-instrictor-certifications"
+                rows="4"
+                placeholder="List of Instructor Certifications"
+                class={inputClass}></textarea>
+            </div>
+
+            <div>
+              <input
+                type="number"
+                name="flight-hours"
+                id="df-flight-hours"
+                required
+                placeholder="Total Flight Hours"
+                class={inputClass}
+              />
+            </div>
+
+            <div>
+              <input
+                type="number"
+                name="hours-dual-given"
+                id="df-hours-dual-given"
+                required
+                placeholder="Total Hours Dual Given"
+                class={inputClass}
+              />
+            </div>
+
+            <div class="sm:col-span-2">
+              <input
+                type="text"
+                name="primary-training"
+                id="df-primary-training"
+                required
+                placeholder="Where did you conduct your primary training?"
+                class={inputClass}
+              />
+            </div>
+
+            <div class="sm:col-span-2">
+              <input
+                type="text"
+                name="instructor-training"
+                id="df-instructor-training"
+                required
+                placeholder="Where did you conduct your instructor training?"
+                class={inputClass}
+              />
+            </div>
+
+            <div class="sm:col-span-2">
+              <textarea
+                name="about-you"
+                id="df-about-you"
+                rows="4"
+                placeholder="Tell us more about yourself (Experience, Skills, etc.)"
+                class={inputClass}></textarea>
+            </div>
+          </div>
+
+          {/* Custom Toggle & Terms */}
+          <div
+            class="relative z-10 flex gap-x-4 mt-8 items-start sm:items-center"
+          >
+            <button
+              type="button"
+              id="terms-toggle"
+              class="flex w-12 flex-none cursor-pointer rounded-full p-1 ring-1 ring-inset ring-white/20 transition-all duration-300 bg-black/20 hover:bg-black/40 mt-1 sm:mt-0"
+              role="switch"
+              aria-checked="false"
+            >
+              <span
+                id="terms-thumb"
+                class="h-5 w-5 rounded-full bg-[#dcc1a6] shadow-sm transition-transform duration-300 translate-x-0"
+              ></span>
+            </button>
+            <label class="text-sm leading-relaxed text-white/70">
+              I agree to the <a
+                href="/privacy-policy/"
+                target="_blank"
+                class="text-[#dcc1a6] font-semibold hover:text-white transition-colors"
+                >Privacy Policy</a
+              > and <a
+                href="/terms-of-service/"
+                target="_blank"
+                class="text-[#dcc1a6] font-semibold hover:text-white transition-colors"
+                >Terms of Service</a
+              >.
+            </label>
+          </div>
+
+          <div class="relative z-10 mt-10">
+            <button
+              type="submit"
+              id="submit-btn"
+              disabled
+              class="group relative flex w-full items-center justify-center gap-3 rounded-full bg-[#4b7992] px-8 py-4 text-white font-bold tracking-wide shadow-lg transition-all duration-300 overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 hover:bg-[#3a5f73] hover:shadow-[#4b7992]/40 hover:scale-[1.02]"
+            >
+              <span class="relative z-10">Send Message</span>
+              {/* Button Hover Arrow Animation */}
+              <svg
+                class="w-5 h-5 relative z-10 transform transition-transform duration-300 group-hover:translate-x-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg
+              >
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+</style>
+
+<script define:vars={{ FORM_WEBHOOK_URL, PORTAL_API_KEY }}>
+  const toggle = document.getElementById("terms-toggle");
+  const thumb = document.getElementById("terms-thumb");
+  const hiddenInput =
+    document.getElementById("agree-terms") || document.createElement("input"); // Added fallback
+  const submitBtn = document.getElementById("submit-btn");
+
+  let isChecked = false;
+  toggle.addEventListener("click", () => {
+    isChecked = !isChecked;
+    toggle.setAttribute("aria-checked", isChecked);
+    toggle.classList.toggle("bg-[#4b7992]", isChecked);
+    thumb.classList.toggle("translate-x-6", isChecked);
+    thumb.classList.toggle("translate-x-0", !isChecked);
+    submitBtn.disabled = !isChecked;
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("cfi-application-form");
+    if (!form) {
+      console.error("Form element not found.");
+      return;
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(form);
+      const confirmEmail = formData.get("confirm-email")?.trim();
+      if (confirmEmail) return;
+
+      const webhookURL = FORM_WEBHOOK_URL;
+      const apiKey = PORTAL_API_KEY;
+
+      const urlEncodedBody = new URLSearchParams(formData).toString();
+
+      const excludedFields = [
+        "first-name",
+        "last-name",
+        "email",
+        "phone",
+        "confirm-email",
+        "cv-link",
+        "flight-hours",
+        "hours-dual-given",
+        "primary-training",
+        "instructor-training",
+        "agree-data-collection",
+      ];
+
+      const metadata = {};
+
+      for (const [key, value] of formData.entries()) {
+        if (!excludedFields.includes(key)) {
+          metadata[key] = value?.trim?.() ?? value;
+        }
+      }
+
+      const jsonBody = {
+        first_name: formData.get("first-name")?.trim() || "",
+        last_name: formData.get("last-name")?.trim() || "",
+        email: formData.get("email")?.trim() || "",
+        phone: formData.get("phone")?.trim() || "",
+        cv_link: formData.get("cv-link")?.trim() || "",
+        flight_hours: formData.get("flight-hours")?.trim() || "",
+        hours_dual_given: formData.get("hours-dual-given")?.trim() || "",
+        primary_training: formData.get("primary-training")?.trim() || "",
+        instructor_training: formData.get("instructor-training")?.trim() || "",
+        campaign: "cfi-candidate-application",
+        account_random_id: "ac_cpxc2poi",
+        metadata: metadata,
+      };
+
+      try {
+        const [ghlRes, portalRes] = await Promise.all([
+          fetch(webhookURL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: urlEncodedBody,
+          }),
+          fetch("https://portal.rightruddermarketing.com/api/leads", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              "x-api-key": apiKey,
+            },
+            body: JSON.stringify(jsonBody),
+          }),
+        ]);
+
+        if (ghlRes.ok && portalRes.ok) {
+          window.location.href = "/cfi-candidate-confirmation/";
+        } else {
+          console.error("Submission failed", {
+            ghlStatus: ghlRes.status,
+            portalStatus: portalRes.status,
+          });
+        }
+      } catch (err) {
+        console.error("Submission error:", err);
+      }
+    });
+  });
+</script>

@@ -1,0 +1,220 @@
+---
+const faqExample = {
+  upperHeading: "Frequently Asked Questions",
+  title: "Your Questions, Answered",
+  items: [
+    {
+      question: "Why choose Pilot Instructional Center for flight training in Kansas City?",
+      answer: "Pilot Instructional Center (PIC) stands out for its team of senior instructors with real-world jet experience and a passion for helping students succeed. Our training programs emphasize safety, integrity, and personalized instruction, offering a higher level of mentorship than large, fast-paced schools. Located in New Century, near Kansas City, PIC provides an ideal balance of professional standards, accessible airspace, and a supportive learning environment.",
+    },
+    {
+      question: "What certificates can I earn at Pilot Instructional Center?",
+      answer: "PIC offers Private Pilot, Instrument Rating, Commercial Pilot, CFI, CFII, Multi-Engine add-ons, and recurrent training programs. We offer structured pathways whether you are flying for fun or aiming for a career at the airlines.",
+    },
+    {
+      question: "How long does it take to earn a pilot license at PIC?",
+      answer: "Training time varies depending on your schedule, weather, and how frequently you fly. Dedicated students can complete their Private Pilot License in as little as 2–3 months, while others may take 6–12 months on a part-time basis. Our experienced instructors help you stay on track with a structured plan designed around your availability and goals.",
+    },
+  ],
+  ctas: [
+    {
+      upperHeading: "Ready to Fly?",
+      title: "Start Your Discovery Flight at KIXD",
+      description: "The best way to understand the PIC difference is to sit in the left seat. Book your discovery flight today and take the first step toward earning your wings.",
+      button: {
+        href: "/discovery-flight/",
+        text: "Book a Discovery Flight",
+        style: "primary",
+      },
+    }
+  ],
+};
+
+const { content = faqExample } = Astro.props;
+---
+
+<div class="bg-primary-800" id="faq">
+  <div class="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+    <p
+      class="mx-auto mt-12 uppercase text-lg lg:text-xl font-title font-bold tracking-widest text-white/80"
+    >
+      {content.upperHeading}
+    </p>
+
+    <h2
+      class="mx-auto mb-3 capitalize text-3xl lg:text-5xl font-title font-bold tracking-tight text-white"
+    >
+      {content.title}
+    </h2>
+
+    <div class="mt-20 divide-y divide-white/35">
+      {
+        content.items && content.items.map((item: any) => (
+          <div class="py-8 first:pt-0 last:pb-0 lg:grid lg:grid-cols-12 lg:gap-8">
+            <details class="group col-span-full w-full">
+              <summary class="cursor-pointer text-base/7 font-semibold text-gray-200 flex justify-between items-center">
+                <span set:html={item.question} />
+
+                <span
+                  aria-hidden="true"
+                  class="text-white text-2xl px-4 inline-block transition-transform duration-300 ease-out"
+                >
+                  ⟩
+                </span>
+              </summary>
+
+              <div class="overflow-hidden">
+                <div class="lg:col-span-7 mt-4 lg:mt-0 px-0">
+                  <p class="text-base/7 text-gray-400" set:html={item.answer} />
+                </div>
+              </div>
+            </details>
+          </div>
+        ))
+      }
+    </div>
+
+    {
+      content.ctas && (
+        <div class="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+          <div class="mt-6 lg:mt-20 flex flex-wrap justify-start align-middle items-center gap-6 z-10 animate-slow-fade">
+            {content.ctas.map((cta: any) => (
+              <a
+                href={cta.button.href}
+                class={`${cta.button.style === "primary" ? "btn-accent btn-left" : "btn-white"} w-full md:w-auto`}
+              >
+                <span class="drop-shadow-sm text-white">{cta.button.text}</span>
+              </a>
+            
+            ))}
+          </div>
+        </div>
+      )
+    }
+  </div>
+</div>
+
+<script>
+  class Accordion {
+    el;
+    summary;
+    content;
+    arrow;
+    animation;
+    isClosing;
+    isExpanding;
+
+    constructor(el) {
+      this.el = el;
+      this.summary = el.querySelector("summary");
+      this.content = el.querySelector("div");
+      // Explicitly target the arrow span using aria-hidden
+      this.arrow = this.summary.querySelector("span[aria-hidden='true']");
+
+      this.animation = new Animation();
+      this.isClosing = false;
+      this.isExpanding = false;
+      this.summary?.addEventListener("click", (e) => this.onClick(e));
+
+      this.el.accordionObj = this;
+    }
+
+    onClick(e) {
+      e.preventDefault();
+
+      this.el.style.overflow = "hidden";
+
+      if (this.isClosing || !this.el.open) {
+        this.open();
+      } else if (this.isExpanding || this.el.open) {
+        this.shrink();
+      }
+    }
+
+    shrink() {
+      this.isClosing = true;
+      this.summary.style.outlineStyle = "none";
+
+      const startHeight = `${this.el.offsetHeight}px`;
+      const endHeight = `${this.summary?.offsetHeight}px`;
+
+      if (this.animation) {
+        this.animation.cancel();
+      }
+
+      this.animation = this.el.animate(
+        { height: [startHeight, endHeight] },
+        { duration: 300, easing: "ease-out" },
+      );
+
+      this.arrow.classList.remove("rotate-90");
+
+      this.animation.onfinish = () => this.onAnimationFinish(false);
+      this.animation.oncancel = () => (this.isClosing = false);
+    }
+
+    open() {
+      this.el.style.height = `${this.el.offsetHeight}px`;
+      this.el.open = true;
+
+      window.requestAnimationFrame(() => this.expand());
+    }
+
+    expand() {
+      this.el.style.height = `${this.el.offsetHeight}px`;
+
+      this.summary.style.outlineStyle = "none";
+      this.el.open = true;
+      this.content.style.display = "block";
+
+      const startHeight = `${this.el.offsetHeight}px`;
+      const summaryHeight = this.summary?.offsetHeight || 0;
+      const contentHeight = this.content?.offsetHeight || 0;
+      const endHeight = `${summaryHeight + contentHeight}px`;
+
+      if (this.animation) this.animation.cancel();
+
+      this.animation = this.el.animate(
+        { height: [startHeight, endHeight] },
+        { duration: 300, easing: "ease-out" },
+      );
+
+      this.arrow.classList.add("rotate-90");
+
+      this.isExpanding = true;
+
+      this.animation.onfinish = () => this.onAnimationFinish(true);
+      this.animation.oncancel = () => (this.isExpanding = false);
+    }
+
+    onAnimationFinish(open) {
+      this.el.open = open;
+      this.animation = new Animation();
+      this.isClosing = false;
+      this.isExpanding = false;
+
+      this.el.style.height = "";
+      this.el.style.overflow = "";
+      this.summary.style.outlineStyle = "";
+    }
+  }
+
+  document.querySelectorAll("details").forEach((el) => {
+    new Accordion(el);
+  });
+</script>
+
+<style>
+  details > summary {
+    height: 100%;
+    position: relative;
+  }
+
+  details[open] > summary {
+    height: auto;
+  }
+
+  details summary::-webkit-details-marker {
+    display: none;
+  }
+</style>

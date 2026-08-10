@@ -1,0 +1,94 @@
+---
+import ImageComp from "../utils/ImageComp.astro";
+
+const example = {
+  title: "Private Pilot License",
+  description:
+    "Start your aviation journey by learning to fly for recreation or as the first step toward a flying career.",
+  image: {
+    src: "/src/assets/stock/stock-joao-lopes-S2ftkdYZGM0-unsplash.jpg",
+    alt: "Plane Taking off",
+  },
+  tags: ["Part 61", "PPL", "PPC"],
+  button: { title: "Explore", href: "/flight-training/private-pilot/" },
+};
+
+const { content = example } = Astro.props;
+---
+
+<a
+  href={content.button.href}
+  target="_self"
+  class="flex flex-col justify-around rounded-4xl h-[50vh] min-w-[10vw] lg:max-w-[20vw] group overflow-hidden relative text-white shadow-lg hover:shadow-2xl duration-300 ease-out border-2 border-white"
+>
+  <!-- IMAGE -->
+  <div class="absolute inset-0 top-0 w-full h-full overflow-hidden">
+    <!-- TAGS -->
+    {
+      content.tags && (
+        <div
+          class={`flex flex-wrap z-20 gap-1 py-2 px-4 absolute top-2 ${content.tags.length > 1 ? "left-0 w-full justify-center lg:justify-around" : "right-2"} lg:opacity-0 group-hover:opacity-90 duration-200`}
+        >
+          {content.tags.map((tag: any) => (
+            <div
+              class={`flex duration-200 ease-in items-center justify-center ${
+                tag.includes("Part") || tag.includes("MILITARY")
+                  ? "bg-primary-300"
+                  : "bg-primary-800"
+              } rounded-full px-3 py-1 text-sm font-semibold text-muted-100`}
+            >
+              <p>{tag}</p>
+            </div>
+          ))}
+        </div>
+      )
+    }
+
+    <!-- Background Image -->
+    <ImageComp
+      src={content.image.src}
+      alt={content.image.alt}
+      classes="h-full w-full object-cover group-hover:blur-sm group-hover:-translate-y-3 group-hover:scale-110 duration-150 ease-out"
+      quality={60}
+    />
+
+    <!-- OVERLAY -->
+    <div
+      class="absolute inset-0 bg-primary-900/70 lg:bg-primary-600/45 group-hover:bg-primary-900/70 duration-500"
+    >
+    </div>
+  </div>
+
+  <!-- TEXT  -->
+  <div
+    class="flex flex-col z-10 items-center p-12 max-w-2xl text-center"
+    data-aos="zoom-in"
+  >
+    <p
+      class="text-2xl font-semibold drop-shadow-md leading-7 group-hover:-translate-y-1 duration-300 uppercase"
+      set:html={content.title}
+    />
+
+    {
+      content.description && (
+        <p
+          class=" text-white font-semibold text-lg py-4 leading-tight duration-300 pb-16 max-w-2xl px-2"
+          set:html={content.description}
+        />
+      )
+    }
+
+    <!-- BUTTON -->
+    <div
+      class="absolute rounded-full opacity-0 btn-animate -bottom-[15%] lg:-bottom-[30%] px-14 py-4 bg-primary-800 hover:bg-primary-900 group-hover:opacity-100 group-hover:lg:mb-18 duration-300 text-muted-100 hover:text-primary-50"
+    >
+      <div class="flex h-full w-full justify-center items-center">
+        <p
+          class="relative block text-center text-lg tracking-wide font-bold leading-loose uppercase drop-shadow-sm"
+        >
+          {content.button.title}
+        </p>
+      </div>
+    </div>
+  </div>
+</a>

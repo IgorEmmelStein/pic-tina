@@ -1,0 +1,73 @@
+---
+import {
+  COMPANY_NAME,
+  AIRPORT,
+  AIRPORT_CODE,
+  LOCATIONS,
+  ADDRESS_CITY,
+  PRIMARY_AREA,
+} from "../../data/consts";
+---
+
+<section class="bg-primary-600">
+  <div
+    class="max-w-7xl mx-auto flex flex-col items-center px-6 py-12 lg:flex-row text-white"
+  >
+    <div
+      class="lg:w-1/2 flex flex-col items-center h-44 lg:h-96 max-w-3xl w-full rounded-tr-full rounded-br-full overflow-hidden shadow-black/60 shadow-2xl"
+    >
+      <iframe
+        title="Pilot Instructional Center Google Maps Location"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3108.013760306947!2d-94.8947529!3d38.8321457!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87c0a3f3a91c83af%3A0x755fe631cf134c56!2sPilot%20Instructional%20Center!5e0!3m2!1sen!2sus!4v1776181723255!5m2!1sen!2s"
+        width="600"
+        height="450"
+        class="w-full h-full max-w-2xl"
+        style={{ border: 0 }}
+        allowFullScreen
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <div
+      class="w-10/12 lg:w-1/2 flex flex-col gap-5 items-center py-10 lg:py-20"
+    >
+      <div class="max-w-2xl lg:px-10 flex flex-col items-left">
+        <h2
+          class="text-lg font-bold uppercase tracking-wide text-white/70"
+          data-aos="zoom-out"
+          data-aos-delay="300"
+          data-aos-duration="1500"
+        >
+          Our Location
+        </h2>
+        <h3 class="text-2xl md:text-3xl font-semibold leading-tight py-4">
+          Located at {AIRPORT}
+          {AIRPORT_CODE} in {LOCATIONS[0].city}, {LOCATIONS[0].state}
+        </h3>
+        <div
+          class="tracking-wider"
+          data-aos="fade-left"
+          data-aos-delay="400"
+          data-aos-duration="1500"
+        >
+          <p class="md:text-lg leading-relaxed">
+            {COMPANY_NAME} operates from {AIRPORT} - {AIRPORT_CODE}, just
+            minutes from downtown {PRIMARY_AREA}. Our strategic location
+            provides an excellent training environment with open airspace,
+            minimal traffic congestion, and direct access to both controlled and
+            uncontrolled airspace for real-world navigation and radio
+            experience. We offer a focused, safe, and efficient setting for
+            aspiring pilots year-round.
+          </p>
+        </div>
+        <a
+          href="/contact/"
+          data-aos="fade-left"
+          data-aos-delay="800"
+          data-aos-duration="1500"
+        >
+          <div class="btn-accent btn-right mt-10">Visit Us Today</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

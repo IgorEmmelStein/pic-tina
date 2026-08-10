@@ -1,0 +1,505 @@
+---
+import CTALeft from "../../components/ctas/CTALeft.astro";
+import CTARight from "../../components/ctas/CTARight.astro";
+import Enroll from "../../components/forms/Enroll.astro";
+import HeaderMain from "../../components/headers/HeaderMainAlternative.astro";
+import FAQ from "../../components/sections/FAQ.astro";
+import TextIcons from "../../components/sections/TextIcons.astro";
+import Why from "../../components/sections/Why.astro";
+import { SITE_DESCRIPTION, SITE_TITLE, website_links } from "../../data/consts";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProgramsComponent from "../../components/sections/ProgramsComponent.astro";
+
+import "aos/dist/aos.css";
+import ContentLeft from "../../components/content/ContentLeft.astro";
+import ContentMiddle from "../../components/content/ContentMiddle.astro";
+import ContentRight from "../../components/content/ContentRight.astro";
+import CardProgram from "../../components/cards/CardProgram.astro";
+import ImageComp from "../../components/utils/ImageComp.astro";
+import ProgramsComponentDesign from "../../components/sections/ProgramsComponentDesign.astro";
+import FleetGallery from "../../components/fleet/FleetGallery.astro";
+import { fleet } from "../about/our-fleet.astro";
+import OffersStripCTA from "../../components/offers/OffersStripCTA.astro";
+import OffersSection from "../../components/offers/OffersSection.astro";
+import SimulatorImageSection from "../../components/offers/SimulatorImageSection.astro";
+
+const data = {
+  siteTitle:
+    "Instrument Rating (IFR) Training | Pilot Instructional Center | Near Kansas City",
+  siteDescription:
+    "Build real-world IFR proficiency with experienced CFII instructors at Pilot Instructional Center.",
+  siteKeywords: "instrument rating, IFR training Kansas City, CFII",
+
+  header: {
+    images: [
+      {
+        src: "/src/assets/rrm-visit/pilot-instructional-center_new-century-KS_plane-cockpit-cessna_flight-school_pilo-training.png",
+        alt: "Aircraft cockpit on the ground by Jose Lebron",
+      },
+    ],
+    image: {
+      src: "/src/assets/stock/stock_Cockpit_plane-ground_jose-lebron-hJijNmuwh7g-unsplash.jpg",
+      alt: "Aircraft cockpit on the ground by Jose Lebron",
+    },
+    upperHeader: "Now Enrolling New Students in Kansas City",
+    title: `Instrument Rating (IFR) in Kansas City`,
+    description:
+      "Take your flying skills to the next level by learning to operate safely and confidently in clouds, low visibility, and busy airspace.",
+    buttons: [
+      { text: "Start Training", href: "#enroll", style: "btn-secondary" },
+      { text: "Learn More", href: "/contact/", style: "btn-transparent" },
+    ],
+  },
+
+  // program: {
+  //   overview: {
+  //     image: {
+  //       src: "/src/assets/stock/stock-Cockpit-pilots-ipad_tamas-tuzes-katai-14Jz3dlGzpE-unsplash.jpg",
+  //       alt: "Aircrew member using control panel in airplane cockpit",
+  //     },
+  //     upperHeader: "MASTER PRECISION FLYING",
+  //     title: "Earn Your Instrument Rating at Pilot Instructional Center",
+  //     description:
+  //       "The Instrument Rating (IR) is one of the most valuable and safety-enhancing certificates a pilot can earn. At PIC, our experienced instructors and structured curriculum help you build confidence in IMC, strengthen your decision-making skills, and unlock new flying opportunities. The instrument rating will allow you to fly safely into low-visibility weather. Adding this rating is a good idea for all pilots to improve safety, and it’s required for airline jobs.",
+  //     descriptions: [
+  //       "Fly confidently in low visibility, clouds, and controlled airspace.",
+  //       "Develop superior situational awareness and precision flying skills.",
+  //       "Train with senior CFIs who bring 30+ years of real-world IFR experience.",
+  //     ],
+  //     bullets: [
+  //       {
+  //         icon: "",
+  //         title: "Fly in More Conditions",
+  //         description:
+  //           "The Instrument Rating lets you fly safely in weather that would otherwise ground VFR pilots, expanding your range and reliability.",
+  //       },
+  //       {
+  //         icon: "",
+  //         title: "Essential for a Professional Career",
+  //         description:
+  //           "Whether your goal is airlines, corporate flying, or instructing, an Instrument Rating is required for any professional pilot career.",
+  //       },
+  //       {
+  //         icon: "",
+  //         title: "Stronger Skills, Safer Pilot",
+  //         description:
+  //           "IFR training sharpens your accuracy, planning, radio communication, and cockpit management, skills that improve all of your flying.",
+  //       },
+  //     ],
+  //     button: {
+  //       text: "Learn More",
+  //       href: "/new-to-flying/",
+  //     },
+  //     requirements: [
+  //       "Hold at least a private pilot certificate",
+  //       "Read, speak, write, and understand English",
+  //       "Hold a current medical certificate (at least Third Class)",
+  //       "Pass a knowledge and practical test",
+  //     ],
+  //     included: [
+  //       "20 hours training flight time",
+  //       "25 hours of time-building flight time (if needed)",
+  //       "10 hours of Dual AATD simulator time",
+  //       "20 hours of personal ground lessons",
+  //       "Online ground school",
+  //     ],
+  //     summary: [
+  //       {
+  //         title: "Minimum Cost",
+  //         value: "$14,125",
+  //       },
+  //       {
+  //         title: "Flight Time",
+  //         value: "45 hours",
+  //       },
+  //       {
+  //         title: "Duration",
+  //         value: "4 months",
+  //       },
+  //     ],
+  //   },
+
+  //   advantages: {
+  //     upperHeader: "WHY EARN YOUR INSTRUMENT RATING?",
+  //     title: "More Capability. More Confidence. More Opportunities.",
+  //     description:
+  //       "Flying on instruments is one of the greatest milestones in aviation. Our program helps you build the skills and discipline needed for safe, precise IFR operations.",
+  //     bullets: [
+  //       {
+  //         icon: "",
+  //         title: "Fly Through Weather",
+  //         description:
+  //           "No more being grounded by clouds or hazy days, your IFR rating allows you to continue flights safely and legally.",
+  //       },
+  //       {
+  //         icon: "",
+  //         title: "Become a Precision Aviator",
+  //         description:
+  //           "Experience real-world IFR procedures, from ILS approaches to holding patterns and ATC clearances.",
+  //       },
+  //       {
+  //         icon: "",
+  //         title: "Stand Out in the Job Market",
+  //         description:
+  //           "Instrument-rated pilots are more capable, more confident, and more employable, especially in today’s pilot shortage.",
+  //       },
+  //     ],
+  //   },
+
+  //   price: {
+  //     image: {
+  //       src: "/src/assets/stock/stock_Plane-departing-field_giuliano-gastaldi-xOREB60lgYw-unsplash.jpg",
+  //       alt: "Airplane departing from field by Giuliano Gastaldi",
+  //     },
+  //     upperHeader: "AFFORDABLE, PROFESSIONAL TRAINING",
+  //     title: "Transparent Pricing, No Corners Cut",
+  //     description:
+  //       "PIC was founded to offer honest, safety-driven training without shortcuts. Our IFR program is structured, efficient, and built around real-world flying skills. The price is based on FAA minimums and can vary based on student proficiency. Please refer to the aircraft and instructor cost if additional time is needed. Price includes online ground school, instructor, and fuel surcharge, but does not include tax, equipment (headset), FAA written, and FAA exam fees.",
+  //     descriptions: [
+  //       "PIC was founded to offer honest, safety-driven training without shortcuts. Our IFR program is structured, efficient, and built around real-world flying skills. The price is based on FAA minimums and can vary based on student proficiency. Please refer to the aircraft and instructor cost if additional time is needed. Price includes online ground school, instructor, and fuel surcharge, but does not include tax, equipment (headset), FAA written, and FAA exam fees.",
+  //       "Train with senior CFIs, not time-building instructors. Learn IFR the right way with scenario-based training. A curriculum built from 30+ years of Kansas City IFR experience.",
+  //     ],
+  //     bullets: [
+  //       {
+  //         icon: "",
+  //         title: "Competitive Rates",
+  //         description:
+  //           "Quality instruction at fair pricing, no hidden fees, no overpriced packages.",
+  //       },
+  //       {
+  //         icon: "",
+  //         title: "Save by Training in the Simulator",
+  //         description:
+  //           "PIC uses a certified BATD simulator to reduce costs while improving IFR proficiency.",
+  //       },
+  //       {
+  //         icon: "",
+  //         title: "Pay As You Go",
+  //         description:
+  //           "No long-term commitments. Progress at your own pace with full scheduling flexibility.",
+  //       },
+  //     ],
+  //     button: {
+  //       text: "Learn More",
+  //       href: "/new-to-flying/",
+  //     },
+  //     prices: [
+  //       {
+  //         value: "5,300",
+  //         title: "Flight Time with Instructor",
+  //         duration: "20hrs",
+  //         rate: "$265/hr",
+  //       },
+  //       {
+  //         value: "1,600",
+  //         title: "AATD Simulator",
+  //         duration: "10hrs",
+  //         rate: "$160/hr",
+  //       },
+  //       {
+  //         value: "4,625",
+  //         title: "Time building flight time",
+  //         duration: "25hrs",
+  //         rate: "$185/hr",
+  //       },
+  //       {
+  //         value: "1,600",
+  //         title: "Ground Instruction",
+  //         duration: "20hrs",
+  //         rate: "$80/hr",
+  //       },
+  //       {
+  //         value: "500",
+  //         title: "Online Ground School",
+  //       },
+  //       {
+  //         value: "500",
+  //         title: "Instrument Enrollment Fee",
+  //       },
+  //     ],
+  //     price: "14,125",
+  //   },
+  // },
+
+  program: {
+    overview: {
+      upperHeader: "MASTER PRECISION FLYING",
+
+      title: "Earn Your Instrument Rating at Pilot Instructional Center",
+
+      description:
+        "The Instrument Rating (IR) is one of the most valuable and safety-enhancing certificates a pilot can earn. At PIC, our experienced instructors and structured curriculum help you build confidence in IMC, strengthen your decision-making skills, and unlock new flying opportunities.",
+
+      image: {
+        src: "/src/assets/stock/stock-Cockpit-pilots-ipad_tamas-tuzes-katai-14Jz3dlGzpE-unsplash.jpg",
+
+        alt: "Aircrew member using control panel in airplane cockpit",
+      },
+
+      targetAudience: {
+        title: "Who is this for?",
+
+        points: [
+          "Private Pilots looking to fly in marginal weather",
+
+          "Aspiring Commercial Pilots (Required for most jobs)",
+
+          "Pilots wanting to improve their precision and safety",
+        ],
+      },
+
+      bullets: [
+        {
+          title: "Fly in More Conditions",
+
+          description:
+            "The IR lets you fly safely in weather that would ground VFR pilots, expanding your range.",
+        },
+
+        {
+          title: "Essential for Professionals",
+
+          description:
+            "Whether airlines or corporate, an Instrument Rating is required for any professional career.",
+        },
+
+        {
+          title: "Stronger Skills",
+
+          description:
+            "IFR training sharpens accuracy, radio comms, and cockpit management.",
+        },
+      ],
+
+      requirements: [
+        "Hold at least a private pilot certificate",
+
+        "Read, speak, write, and understand English",
+
+        "Hold a current medical certificate (at least Third Class)",
+
+        "Pass a knowledge and practical test",
+      ],
+
+      included: [
+        "20 hours training flight time",
+
+        "25 hours of time-building flight time (if needed)",
+
+        "10 hours of Dual AATD simulator time",
+
+        "20 hours of personal ground lessons",
+
+        "Online ground school",
+      ],
+
+      summary: [
+        {
+          title: "Est. Total Cost",
+
+          value: "$14,125",
+        },
+
+        {
+          title: "Flight Time",
+
+          value: "45 hours",
+        },
+
+        {
+          title: "Avg. Duration",
+
+          value: "4 months",
+        },
+      ],
+    },
+
+    advantages: {
+      upperHeader: "WHY EARN YOUR INSTRUMENT RATING?",
+
+      title: "More Capability. More Confidence. More Opportunities.",
+
+      description:
+        "Flying on instruments is one of the greatest milestones in aviation. Our program helps you build the skills and discipline needed for safe, precise IFR operations.",
+
+      bullets: [
+        {
+          title: "Fly Through Weather",
+
+          description:
+            "No more being grounded by clouds; continue flights safely and legally.",
+        },
+
+        {
+          title: "Become a Precision Aviator",
+
+          description:
+            "Experience real-world IFR procedures, from ILS approaches to ATC clearances.",
+        },
+
+        {
+          title: "Stand Out",
+
+          description:
+            "Instrument-rated pilots are more employable in today’s pilot shortage.",
+        },
+      ],
+    },
+
+    price: {
+      upperHeader: "AFFORDABLE, PROFESSIONAL TRAINING",
+
+      title: "Transparent Pricing, No Corners Cut",
+
+      description:
+        "Our IFR program is structured and efficient. Price includes online ground school, instructor, and fuel surcharge, but excludes tax and FAA exam fees.",
+
+      priceTotal: "14,125",
+
+      breakdown: [
+        {
+          title: "Flight Time with Instructor",
+
+          duration: "20hrs",
+
+          rate: "$265/hr",
+
+          value: "5,300",
+        },
+
+        {
+          title: "AATD Simulator",
+
+          duration: "10hrs",
+
+          rate: "$160/hr",
+
+          value: "1,600",
+        },
+
+        {
+          title: "Time Building (if needed)",
+
+          duration: "25hrs",
+
+          rate: "$185/hr",
+
+          value: "4,625",
+        },
+
+        {
+          title: "Ground Instruction",
+
+          duration: "20hrs",
+
+          rate: "$80/hr",
+
+          value: "1,600",
+        },
+
+        {
+          title: "Online Ground School",
+
+          value: "500",
+        },
+
+        {
+          title: "Enrollment Fee",
+
+          value: "500",
+        },
+      ],
+
+      faqs: [
+        {
+          question: "Can I use my own airplane?",
+
+          answer:
+            "Yes, provided it meets IFR instrumentation requirements. Contact us for adjusted rates.",
+        },
+
+        {
+          question: "How often should I fly?",
+
+          answer: "For maximum retention, we recommend 2-3 sessions per week.",
+        },
+      ],
+    },
+  },
+
+  cta: {
+    title: "Ready to Become an Instrument-Rated Pilot?",
+    description:
+      "Take the next step toward safer, more capable flying with PIC’s professional, senior-instructor-led IFR training program.",
+    button: { text: "Book a Discovery Session", href: "/discovery-session" },
+    image: {
+      src: "/src/assets/cta-flight-solid-ground-aviation.webp",
+      alt: "View of the sky from an airplane window",
+    },
+  },
+
+  ctas: {
+    ctaPrivatePilot: {
+      image: {
+        src: "/src/assets/stock/stock_Plane-pilot-helice_luciano-faiolo-W68nUftntf4-unsplash.jpg",
+        alt: "Pilot near aircraft propeller by Luciano Faiolo",
+      },
+      title: "Welcome to Pilot Instructional Center",
+      description:
+        "Train with one of Kansas City’s most experienced flight instruction teams. Our senior CFIs bring decades of real-world IFR and VFR experience to every lesson.",
+      descriptions: [
+        "Learn from instructors who are here to teach, not time-build.",
+        "Train in a supportive, family-oriented, safety-first environment.",
+        "Benefit from modern facilities and aircraft equipped for IFR training.",
+      ],
+      button: {
+        text: "Explore Programs",
+        href: "/flight-training/",
+      },
+    },
+
+    ctaDiscoveryFlight: {
+      image: {
+        src: "/src/assets/stock/stock_planes-ground-private-airplanes-field.jpg",
+        alt: "Private airplanes parked on field",
+      },
+      title: "Ready to Get Started?",
+      description:
+        "Reach out today to learn more about the Instrument Rating program and get personalized guidance from our experienced instructors.",
+      button: {
+        text: "Contact Us",
+        href: "/contact/",
+      },
+    },
+  },
+};
+---
+
+<BaseLayout
+  siteTitle={data.siteTitle}
+  siteDescription={data.siteDescription}
+  siteKeywords={data.siteKeywords}
+>
+  <HeaderMain
+    content={data.header}
+    mainSize={false}
+    showButton={false}
+    images={data.header.images}
+  />
+  <!-- <ProgramsComponent content={data.program} /> -->
+  <ProgramsComponentDesign program={data.program} />
+  <OffersStripCTA />
+  <FleetGallery
+    fleet={fleet}
+    selfLink={false}
+    button={{
+      title: "Start Your Journey",
+      path: `#${website_links.enroll.id}`,
+    }}
+  />
+  <SimulatorImageSection />
+  <Enroll />
+  <CTALeft content={data.ctas.ctaDiscoveryFlight} />
+  <OffersSection />
+  <CTARight content={data.ctas.ctaPrivatePilot} />
+</BaseLayout>

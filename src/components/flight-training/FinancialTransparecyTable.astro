@@ -1,0 +1,96 @@
+---
+const financialData = {
+  title: "Track Investment Breakdown",
+  subtitle:
+    "We believe in transparency. No hidden fees, just a clear look at the investment required for your professional ratings.",
+  investments: [
+    {
+      rating: "Private Pilot License",
+      cost: "$12,440",
+      inclusion: "40 Hours Flight Time",
+      aos: "fade-right",
+      href: "/flight-training/private-pilot/",
+    },
+    {
+      rating: "Instrument Rating",
+      cost: "$14,125",
+      inclusion: "45 Hours Flight Time",
+      aos: "fade-right",
+      href: "/flight-training/instrument-rating/",
+    },
+    {
+      rating: "Commercial Pilot Certificate",
+      cost: "$31,225",
+      inclusion: "105 Hours Flight Time",
+      aos: "fade-right",
+      href: "/flight-training/commercial-pilot/",
+    },
+    {
+      rating: "CFI Academy",
+      cost: "$5,975",
+      inclusion: "15 Hours Flight Time",
+      aos: "fade-right",
+      href: "/flight-training/certified-flight-instructor-cfi/",
+    },
+    {
+      rating: "CFI Instrument (CFII)",
+      cost: "$5,050",
+      inclusion: "10 Hours Flight Time",
+      aos: "fade-right",
+      href: "/flight-training/certified-flight-instructor-instrument-cfii/",
+    },
+  ],
+  totalEstimate: "$68,815 + Time Building",
+};
+---
+
+<section class="bg-[#423731] py-24 px-6 text-white rounded-t-[4rem]">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-16" data-aos="fade-up">
+      <h2 class="text-4xl font-bold mb-6 text-[#dcc1a6]">
+        {financialData.title}
+      </h2>
+      <p class="text-[#dcc1a6]/80 max-w-xl mx-auto leading-relaxed">
+        {financialData.subtitle}
+      </p>
+    </div>
+
+    <div class="space-y-4">
+      {
+        financialData.investments.map((item) => (
+          <a
+            class="flex flex-col md:flex-row justify-between items-center p-6 border-b border-[#dcc1a6]/20 group hover:bg-white/5 transition-colors rounded-xl"
+            data-aos={item.aos}
+            href={item.href}
+          >
+            <div class="text-center md:text-left mb-4 md:mb-0">
+              <h3 class="text-xl font-bold">{item.rating}</h3>
+              <p class="text-xs uppercase tracking-widest text-[#dcc1a6] mt-1">
+                {item.inclusion}
+              </p>
+            </div>
+            <div class="text-2xl font-black text-[#dcc1a6] group-hover:scale-110 transition-transform">
+              {item.cost}
+            </div>
+          </a>
+        ))
+      }
+    </div>
+
+    <div
+      class="mt-16 p-10 bg-[#5d4d40] rounded-3xl border border-[#dcc1a6]/20 text-center"
+      data-aos="zoom-in"
+    >
+      <p
+        class="text-sm uppercase tracking-[0.3em] text-[#dcc1a6] mb-2 font-bold"
+      >
+        Estimated Full Track Investment
+      </p>
+      <div class="text-6xl font-black mb-4">{financialData.totalEstimate}</div>
+      <p class="text-xs text-[#dcc1a6]/60 italic max-w-md mx-auto">
+        Includes ground school materials, personal lessons, and aircraft rental.
+        Final costs vary based on student proficiency and FAA testing fees.
+      </p>
+    </div>
+  </div>
+</section>

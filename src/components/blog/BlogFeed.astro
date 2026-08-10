@@ -1,0 +1,41 @@
+---
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import CardRelated from "./CardRelated.astro";
+
+const example = {
+  title: "The Latest From Our Blog",
+  description: "Stay up-to-date with the latest news, tips, and stories.",
+};
+
+const { content = example } = Astro.props;
+
+const englishBlogEntries = await getCollection("blog");
+
+const blogPosts: CollectionEntry<"blog">[] = englishBlogEntries.sort(
+  (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
+    b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<section class="mx-auto px-4 py-10 sm:px-6 lg:px-8 lg:py-14 bg-logo">
+  <div class="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
+    <h2
+      class="text-primary-600 text-2xl font-bold md:text-4xl md:leading-tight"
+    >
+      {content.title}
+    </h2>
+    <p class="mt-1 text-pretty text-primary-600/90">
+      {content.description}
+    </p>
+  </div>
+  <div class="grid gap-6 lg:grid-cols-3 mx-auto">
+    {
+      blogPosts
+        .slice(0, 3)
+        .map((blogEntry, index) => (
+          <CardRelated blogEntry={blogEntry} index={index} />
+        ))
+    }
+  </div>
+</section>

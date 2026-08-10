@@ -1,0 +1,136 @@
+---
+import { website_links } from "../../data/consts";
+import ImageComp from "../utils/ImageComp.astro";
+
+const {
+  fleet,
+  selfLink = true,
+  button = {
+    title: "Book a Discovery Flight",
+    path: website_links.discoveryFlight.path,
+  },
+} = Astro.props;
+---
+
+<section class="bg-[#fcfaf8] py-12 lg:py-24 font-sans">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2
+        class="text-3xl font-bold tracking-tight text-[#423731] sm:text-4xl uppercase"
+      >
+        Explore Our <span class="text-[#4b7992]">Fleet</span>
+      </h2>
+      <p class="mt-4 text-[#5d4d40]/70">
+        Select an aircraft to view full specifications and training
+        capabilities.
+      </p>
+    </div>
+
+    {/* Scrollable Container - Scales automatically */}
+    <div class="flex flex-wrap justify-center gap-6 lg:gap-4">
+      {
+        fleet.map((aircraft: any) => (
+          <a
+            href={`${selfLink ? `#${aircraft.title.replace(/\s+/g, "-").toLowerCase()}` : `/about/our-fleet/#${aircraft.title.replace(/\s+/g, "-").toLowerCase()}`}`}
+            class="group relative w-full lg:max-w-2xs aspect-4/5 rounded-3xl overflow-hidden bg-[#423731] shadow-2xl shadow-neutral-950 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:inset-shadow-sm hover:inset-shadow-white hover:shadow-accent-800"
+          >
+            {/* The Animated Border SVG */}
+            <svg
+              class="absolute inset-0 w-full h-full z-50 pointer-events-none "
+              fill="none"
+            >
+              <rect
+                x="1"
+                y="1"
+                rx="31"
+                width="100%"
+                height="100%"
+                class="stroke-accent-400 rounded-4xl  stroke-12 opacity-0 transition-all duration-700 group-hover:opacity-100"
+                style="stroke-dasharray: 3000;stroke-dashoffset: 3000;"
+              />
+            </svg>
+
+            {/* Main Image */}
+            <div class="absolute inset-0 z-0">
+              <ImageComp
+                src={aircraft.image.src}
+                alt={aircraft.image.alt}
+                classes="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-60"
+              />
+            </div>
+
+            {/* Gradient Overlay */}
+            <div class="absolute inset-0 z-10 bg-gradient-to-t from-[#423731] via-transparent to-black/20" />
+
+            {/* Content Container */}
+            <div class="absolute inset-0 z-20 p-8 flex flex-col justify-end">
+              <span class="text-[#dcc1a6] text-xs font-bold uppercase tracking-[0.2em] mb-2 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                Ready for Training
+              </span>
+              <h3 class="text-2xl font-bold text-white mb-2 leading-tight">
+                {aircraft.title}
+              </h3>
+
+              {/* Hover-only Info */}
+              <div class="max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-40">
+                <p class="text-white/80 text-sm line-clamp-2 mb-4">
+                  {aircraft.description}
+                </p>
+                <div class="flex gap-3">
+                  <span class="px-3 py-1 rounded-full bg-white/10 border border-white/20 text-[10px] text-white uppercase font-semibold">
+                    {aircraft.bullets[0].title.split(" ")[0]}
+                  </span>
+                  <span class="px-3 py-1 rounded-full bg-white/10 border border-white/20 text-[10px] text-white uppercase font-semibold">
+                    {aircraft.bullets[1].description.includes("HP")
+                      ? aircraft.bullets[1].description.match(/\d+ HP/)[0]
+                      : "IFR Ready"}
+                  </span>
+                </div>
+              </div>
+
+              {/* Visual Indicator */}
+              <div class="mt-4 h-1 w-12 bg-[#4b7992] transition-all duration-500 group-hover:w-full" />
+            </div>
+
+            {/* Coming Soon Badge */}
+            {aircraft.coming && (
+              <div class="absolute top-6 right-6 z-30 bg-[#dcc1a6] text-[#423731] text-[10px] font-bold px-3 py-1 rounded-full shadow-lg uppercase tracking-wider">
+                Coming Soon
+              </div>
+            )}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+  <div class="flex justify-center pt-12">
+    <a
+      href={button.path}
+      class="group relative inline-flex items-center justify-center px-10 py-5 bg-[#423731] text-white font-bold rounded-full overflow-hidden transition-all hover:bg-[#4b7992] shadow-xl"
+    >
+      <span class="relative z-10 uppercase tracking-[0.2em] text-sm"
+        >{button.title}</span
+      >
+      <div
+        class="absolute bottom-0 left-0 h-1 bg-[#dcc1a6] w-0 transition-all duration-500 group-hover:w-full"
+      >
+      </div>
+    </a>
+  </div>
+</section>
+
+<style>
+  /* Added the dot (.) before group so it targets your Tailwind class! */
+  .group:hover rect {
+    animation: drawBorder 1.2s ease-in-out forwards;
+  }
+
+  @keyframes drawBorder {
+    from {
+      stroke-dashoffset: 2000;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+</style>

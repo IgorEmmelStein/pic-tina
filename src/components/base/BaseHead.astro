@@ -1,0 +1,366 @@
+---
+// Import the global.css file here so that it is included on
+// all pages through the use of the <BaseHead /> component.
+import "../../styles/global.css";
+import {
+  SITE_TITLE,
+  KEYWORDS,
+  INSTAGRAM_URL,
+  PHONE_NUMBER,
+  OG_IMAGE,
+  FAVICON,
+  LOGO,
+} from "../../data/consts";
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  keywords?: string;
+}
+
+const site = Astro.site || "https://pilotinstructionalcenter.com";
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const {
+  title,
+  description,
+  image = OG_IMAGE,
+  keywords = KEYWORDS,
+} = Astro.props;
+
+const ogImageUrl = new URL(image, site).toString();
+---
+
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+
+<!-- Site Created By:    
+       _____  _       _     _     _____           _     _           
+      |  __ \(_)     | |   | |   |  __ \         | |   | |          
+      | |__) |_  __ _| |__ | |_  | |__) |   _  __| | __| | ___ _ __ 
+      |  _  /| |/ _` | '_ \| __| |  _  / | | |/ _` |/ _` |/ _ \ '__|
+      | | \ \| | (_| | | | | |_  | | \ \ |_| | (_| | (_| |  __/ |   
+      |_|  \_\_|\__, |_| |_|\__| |_|  \_\__,_|\__,_|\__,_|\___|_|   
+      |  \/  |   __/ |  | |      | | (_)                            
+      | \  / | _|___/ __| | _____| |_ _ _ __   __ _                 
+      | |\/| |/ _` | '__| |/ / _ \ __| | '_ \ / _` |                
+      | |  | | (_| | |  |   <  __/ |_| | | | | (_| |                
+      |_|  |_|\__,_|_|  |_|\_\___|\__|_|_| |_|\__, |                
+                                               __/ |                
+                                              |___/                 
+
+    Nice to see you here.  Find new student pilots with Right Rudder Marketing.  https://rightruddermarketing.com/contact-us -->
+
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" type="image/png" href={FAVICON} />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalURL} />
+
+<!-- SiteMap -->
+<link rel="sitemap" href="/sitemap-index.xml" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title={SITE_TITLE}
+  href={new URL("rss.xml", Astro.site)}
+/>
+
+<meta name="generator" content={Astro.generator} />
+
+<!-- Google Tag Manager -->
+<script>
+  (function (w, d, s, l, i) {
+    w[l] = w[l] || [];
+    w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+    var f = d.getElementsByTagName(s)[0],
+      j = d.createElement(s),
+      dl = l != "dataLayer" ? "&l=" + l : "";
+    j.async = true;
+    j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+    f.parentNode.insertBefore(j, f);
+  })(window, document, "script", "dataLayer", "GTM-N5ZTCQ6X");
+</script>
+<!-- End Google Tag Manager -->
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://pilotinstructionalcenter.com/#organization",
+    "additionalType": ["EducationalOrganization", "School", "Flight School"],
+    "name": "Pilot Instructional Center",
+    "alternateName": ["Pilot Instructional Center", "PIC"],
+    "description": "Professional flight training and pilot training at New Century AirCenter (KIXD) serving Kansas City, Olathe, Overland Park, Lenexa, Gardner, and the surrounding Kansas City metro with FAA Part 61 aviation training and experienced flight instructors.",
+    "url": "https://pilotinstructionalcenter.com",
+    "logo": "https://pilotinstructionalcenter.com/Logo-round.png",
+    "image": "https://pilotinstructionalcenter.com/OG-Pilot-Instructional-Center_Flight-school_New-Century-KS_Kansas_Pilot-training.png",
+    "telephone": "+1-913-600-8188",
+    "foundingDate": "2025",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Gardner Dr",
+      "addressLocality": "New Century",
+      "addressRegion": "KS",
+      "postalCode": "66031",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 38.8324884,
+      "longitude": -94.8950533
+    },
+    "hasMap": "https://maps.app.goo.gl/zFiZjkNhTuFbzSsT8",
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "07:00",
+        "closes": "19:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Saturday", "Sunday"],
+        "opens": "09:00",
+        "closes": "17:00"
+      }
+    ],
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "telephone": "+1-913-600-8188",
+        "contactType": "customer service",
+        "areaServed": "US",
+        "availableLanguage": ["en", "English"],
+        "hoursAvailable": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "opens": "07:00",
+            "closes": "19:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Saturday", "Sunday"],
+            "opens": "09:00",
+            "closes": "17:00"
+          }
+        ]
+      }
+    ],
+    "sameAs": [
+      "https://www.facebook.com/profile.php?id=61584374815330",
+      "https://www.instagram.com/pilotinstructionalcenter/"
+    ],
+    "priceRange": "$$-$$$",
+    "paymentAccepted": "Cash, Credit Card, Check, Financing",
+    "currenciesAccepted": "USD",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "reviewCount": "10",
+      "bestRating": "5",
+      "worstRating": "5"
+    },
+    "areaServed": [
+      {
+        "@type": "GeoCircle",
+        "geoMidpoint": {
+          "@type": "GeoCoordinates",
+          "latitude": 38.8324884,
+          "longitude": -94.8950533
+        },
+        "geoRadius": 50000
+      },
+      {
+        "@type": "State",
+        "name": "Kansas"
+      },
+      {
+        "@type": "State",
+        "name": "Missouri"
+      },
+      {
+        "@type": "AdministrativeArea",
+        "name": "Johnson County"
+      },
+      {
+        "@type": "City",
+        "name": "Kansas City"
+      },
+      {
+        "@type": "City",
+        "name": "Overland Park"
+      },
+      {
+        "@type": "City",
+        "name": "Olathe"
+      },
+      {
+        "@type": "City",
+        "name": "Lenexa"
+      },
+      {
+        "@type": "City",
+        "name": "Gardner"
+      },
+      {
+        "@type": "City",
+        "name": "Leawood"
+      },
+      {
+        "@type": "City",
+        "name": "Shawnee"
+      },
+      {
+        "@type": "City",
+        "name": "Lawrence"
+      },
+      {
+        "@type": "City",
+        "name": "Spring Hill"
+      },
+      {
+        "@type": "City",
+        "name": "Ottawa"
+      },
+      {
+        "@type": "City",
+        "name": "Lake Quivira"
+      },
+      {
+        "@type": "City",
+        "name": "New Century"
+      },
+      {
+        "@type": "City",
+        "name": "Edwardsville"
+      },
+      {
+        "@type": "City",
+        "name": "Grandview"
+      },
+      {
+        "@type": "City",
+        "name": "Belton"
+      },
+      {
+        "@type": "City",
+        "name": "Lee's Summit"
+      },
+      {
+        "@type": "City",
+        "name": "North Kansas City"
+      }
+    ],
+    "identifier": [
+      {
+        "@type": "PropertyValue",
+        "name": "Airport ICAO",
+        "value": "KIXD"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Airport IATA",
+        "value": "IXD"
+      }
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Flight Training Programs",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Course",
+            "name": "Sport Pilot License Training",
+            "description": "Sport Pilot License training at New Century AirCenter (KIXD) serving the Kansas City and Overland Park area. FAA Part 61 flight training focused on safe, structured pilot instruction for recreational flying.",
+            "provider": "Pilot Instructional Center"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Course",
+            "name": "Private Pilot License Training",
+            "description": "Private Pilot License flight training at New Century AirCenter (KIXD) serving Kansas City, Olathe, Overland Park, and surrounding areas. FAA-aligned Part 61 pilot training with experienced flight instructors.",
+            "provider": "Pilot Instructional Center"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Course",
+            "name": "Commercial Pilot Training",
+            "description": "Commercial Pilot License training for Kansas City and Overland Park area pilots at New Century AirCenter. Professional Part 61 flight training focused on advanced maneuvers, time building, and career pilot preparation.",
+            "provider": "Pilot Instructional Center"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Course",
+            "name": "Instrument Rating",
+            "description": "Instrument Rating flight training at New Century AirCenter (KIXD) serving the Kansas City and Overland Park area. IFR pilot training focused on real-world weather, cross-country operations, and FAA instrument proficiency.",
+            "provider": "Pilot Instructional Center"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Course",
+            "name": "Certified Flight Instructor",
+            "description": "Certified Flight Instructor (CFI) training at New Century AirCenter serving Kansas City and Johnson County. Professional flight instructor preparation focused on FAA standards, teaching techniques, and checkride readiness.",
+            "provider": "Pilot Instructional Center"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Course",
+            "name": "Certified Flight Instructor Instrument",
+            "description": "CFII training at New Century AirCenter (KIXD) for Kansas City and Overland Park area pilots. Advanced instrument instructor training focused on IFR teaching skills, safety, and FAA instrument instruction standards.",
+            "provider": "Pilot Instructional Center"
+          }
+        }
+      ]
+    }
+  }
+</script>
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<meta name="keywords" content={keywords} />
+<meta name="author" content="Pilot Instructional Center" />
+<meta name="geo.region" content="US-KS" />
+<meta name="geo.placename" content="New Century" />
+<meta name="geo.position" content="38.8306;-94.8903" />
+<meta name="ICBM" content="38.8306, -94.8903" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={Astro.url} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:locale" content="en_US" />
+<meta property="og:site_name" content="Pilot Instructional Center" />
+
+<!-- Twitter -->
+<meta property="twitter:card" content={ogImageUrl} />
+<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={ogImageUrl} />

@@ -1,0 +1,98 @@
+---
+import CTARight from "../components/ctas/CTARight.astro";
+import Enroll from "../components/forms/Enroll.astro";
+import HeaderMain from "../components/headers/HeaderMainAlternative.astro";
+import FAQ from "../components/sections/FAQ.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+import "aos/dist/aos.css";
+import MapLocation from "../components/external/MapLocation.astro";
+import ContactForm from "../components/forms/ContactForm.astro";
+
+const data = {
+  siteTitle: "Contact Us | Pilot Instructional Center | New Century KS",
+  siteDescription:
+    "Get in touch with the Pilot Instructional Center team. Whether you have questions about training, pricing, or scheduling, our experts are here to help you.",
+  siteKeywords:
+    "contact flight school, contact PIC, aviation questions, pilot training information, Kansas City flight school, flight training support",
+
+  header: {
+    image: {
+      src: "/src/assets/facebook/student-first-solo-ride-_PIC_Pilot-instructional-center_Pilot-training_cropped.jpg",
+      alt: "PIC's Student first solo ride Kansas city",
+    },
+    upperHeader: "We’re Here to Help",
+    title: "Contact Pilot Instructional Center",
+    description:
+      "Have questions about flight training, pricing, scheduling, or enrollment? Our team is ready to assist you and guide you through your next steps.",
+    button: {
+      href: "#contact",
+      text: "Get In Touch",
+    },
+    descriptions: [
+      "Reach out to us anytime, whether you're exploring aviation for the first time or preparing to continue your training.",
+      "Our experienced staff responds quickly and can help you determine the best path forward based on your goals.",
+      "We’re committed to clear communication, transparency, and student success.",
+    ],
+    bullets: [
+      {
+        title: "Fast Response",
+        description: "Our team typically replies within one business day.",
+        icon: "Mail",
+      },
+      {
+        title: "Talk to Experienced Instructors",
+        description:
+          "Get real answers from aviation professionals, not sales reps.",
+        icon: "Headphones",
+      },
+    ],
+  },
+
+  cta: {
+    title: "Send Us a Message",
+    description:
+      "Whether you're curious about costs, training timelines, or next steps, we’re here to make everything simple. Reach out today and let’s start the conversation.",
+    button: { text: "Open Contact Form", href: "/contact-form" },
+    image: {
+      src: "/src/assets/cta-flight-solid-ground-aviation.webp",
+      alt: "View of the sky from an airplane window",
+    },
+  },
+
+  ctas: {
+    ctaFloating: {
+      upperHeading: "Visit or Call Us",
+      title: "We’re Ready to Support Your Aviation Journey",
+      description:
+        "You can reach us by phone, email, or by visiting our training center. Whether you're a prospective student or already enrolled, we’re here to provide guidance and support.",
+      images: [
+        {
+          src: "/src/assets/student using simulator 2.jpg",
+          alt: "Student using FAA compliant flight simulator at PIC",
+        },
+      ],
+    },
+  },
+};
+---
+
+<BaseLayout
+  siteTitle={data.siteTitle}
+  siteDescription={data.siteDescription}
+  siteKeywords={data.siteKeywords}
+>
+  <HeaderMain
+    content={data.header}
+    mainSize={false}
+    showButton={false}
+    images={[data.header.image]}
+    button={data.header.button}
+  />
+  <ContactForm />
+  <CTARight />
+  <!-- <Enroll /> -->
+  <MapLocation />
+  <!-- <Enroll /> -->
+  <FAQ />
+</BaseLayout>

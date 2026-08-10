@@ -1,0 +1,57 @@
+---
+const featuresData = {
+  header: "The Pilot Instructional Center Difference",
+  description:
+    "Founded on the belief that aviation training should prioritize integrity, safety, and the student experience over high-volume 'pilot mill' mentalities.",
+  features: [
+    {
+      title: "Senior-Level Mentorship",
+      description:
+        "Our CFIs aren't just here to build time for the airlines. They are veteran pilots, including jet-rated instructors, dedicated to the gift of aviation.",
+      icon: "graduation-cap",
+    },
+    {
+      title: "Safety-First Culture",
+      description:
+        "We moved away from environments that cut corners. At PIC, we follow rigorous maintenance SOPs and FAA requirements without compromise.",
+      icon: "shield-check",
+    },
+    {
+      title: "Family-Oriented Atmosphere",
+      description:
+        "Expect a loose, casual, and comfortable environment where every student is treated like family and encouraged to succeed at every level.",
+      icon: "users",
+    },
+  ],
+};
+---
+
+<section class="bg-[#dcc1a6]/20 py-20 px-4">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <div class="lg:col-span-1">
+        <h2 class="text-3xl font-bold text-[#423731] leading-tight mb-6">
+          {featuresData.header}
+        </h2>
+        <p class="text-[#745e4d]">
+          {featuresData.description}
+        </p>
+      </div>
+
+      <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
+        {
+          featuresData.features.map((feature) => (
+            <div class="bg-white p-6 rounded-xl border border-[#dcc1a6] shadow-sm">
+              <h3 class="text-xl font-bold text-[#5d4d40] mb-3">
+                {feature.title}
+              </h3>
+              <p class="text-sm text-[#423731] leading-relaxed">
+                {feature.description}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

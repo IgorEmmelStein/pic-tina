@@ -1,0 +1,58 @@
+---
+const integrityData = {
+  heading: "Born from a Commitment to Integrity",
+  text1:
+    "The aviation industry is full of flight schools that cut corners to maximize profit. We saw it firsthand, and we decided to do better.",
+  text2:
+    "Pilot Instructional Center was founded by Stephanie after years in environments that lacked safety, transparency, and proper maintenance SOPs. We realized that students from " +
+    "Kansas City" +
+    " deserved more than just a certificate, they deserved a mentor-driven education built on trust.",
+  usp: "No shortcuts. No 'Time Builders.' Just Excellence.",
+};
+---
+
+<section class="bg-[#423731] py-32 px-6">
+  <div class="max-w-4xl mx-auto text-center">
+    <div class="mb-12 inline-block" data-aos="zoom-in">
+      <svg
+        class="w-16 h-16 text-[#dcc1a6]"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1"
+          d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04a11.357 11.357 0 00-1.026 5.405c0 5.992 4.137 11.03 9.644 12.315a12.164 12.164 0 001.618.064c1.618 0 3.14-.314 4.542-.882M15 13a3 3 0 11-6 0 3 3 0 016 0z"
+        ></path>
+      </svg>
+    </div>
+
+    <h2
+      class="text-4xl md:text-5xl font-bold text-white mb-10 leading-tight"
+      data-aos="fade-up"
+    >
+      {integrityData.heading}
+    </h2>
+
+    <div
+      class="space-y-8 text-xl text-[#dcc1a6]/80 leading-relaxed font-light"
+      data-aos="fade-up"
+      data-aos-delay="100"
+    >
+      <p>{integrityData.text1}</p>
+      <p>{integrityData.text2}</p>
+    </div>
+
+    <div
+      class="mt-16 pt-10 border-t border-white/10"
+      data-aos="fade-up"
+      data-aos-delay="200"
+    >
+      <p class="text-[#dcc1a6] font-black uppercase tracking-[0.4em] text-sm">
+        {integrityData.usp}
+      </p>
+    </div>
+  </div>
+</section>

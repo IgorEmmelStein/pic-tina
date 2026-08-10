@@ -1,0 +1,149 @@
+---
+import { ADDRESS_CITY, ADDRESS_STATE, PHONE_NUMBER } from "../../data/consts";
+import ImageComp from "../utils/ImageComp.astro";
+import SocialIcons from "./SocialIcons.astro";
+
+const slides = [
+  {
+    src: "/src/assets/rrm-visit/pilot-instructional-center_new-century-KS_cfis-preparing-plane-cessna-airport-near-Kansas-city-MO.png",
+    alt: "Pilot Instructional Center New Century KS - CFIs preparing Cessna plane at airport near Kansas City MO",
+  },
+  {
+    src: "/src/assets/rrm-visit/pilot-instructional-center_new-century-KS_ground-school-cfi-teaching.png",
+    alt: "Pilot Instructional Center New Century KS - Ground school CFI teaching students",
+  },
+  // {
+  //   src: "/src/assets/rrm-visit/pilot-instructional-center_new-century-KS_logan-fahy-cfi_cesnna-background.jpg",
+  //   alt: "Pilot Instructional Center New Century KS - Logan Fahy CFI with Cessna in background"
+  // },
+  {
+    src: "/src/assets/rrm-visit/pilot-instructional-center_new-century-KS_pilot-training_student.png",
+    alt: "Pilot Instructional Center New Century KS - Pilot training student",
+  },
+  {
+    src: "/src/assets/rrm-visit/pilot-instructional-center_new-century-KS_plane-cockpit-cessna_flight-school_pilo-training.png",
+    alt: "Pilot Instructional Center New Century KS - Cessna plane cockpit view during flight school pilot training",
+  },
+  // {
+  //   src: "/src/assets/rrm-visit/pilot-instructional-center_new-century-KS_ryan-tindall-cfi_cesnna-background.jpg",
+  //   alt: "Pilot Instructional Center New Century KS - Ryan Tindall CFI with Cessna in background"
+  // },
+  // {
+  //   src: "/src/assets/rrm-visit/pilot-instructional-center_new-century-KS_stephanie-fahy-at-desk.png",
+  //   alt: "Pilot Instructional Center New Century KS - Stephanie Fahy at desk"
+  // },
+  {
+    src: "/src/assets/rrm-visit/pilot-instructional-center_pilot-checking-wing-plane_flight-school_pilot-training.png",
+    alt: "Pilot Instructional Center - Pilot checking wing of plane during flight school pilot training",
+  },
+  {
+    src: "/src/assets/rrm-visit/pilot-instructional-center_pilot-cockpit-checking-plane_pilot-training.png",
+    alt: "Pilot Instructional Center - Pilot checking cockpit instruments during pilot training",
+  },
+  {
+    src: "/src/assets/rrm-visit/pilot-instructional-center_pilot-preparing-plane_flight-school_pilot-training.png",
+    alt: "Pilot Instructional Center - Pilot preparing plane for flight school pilot training",
+  },
+  {
+    src: "/src/assets/facebook/student-passing-checkride_student-cfi-shaking-hands_PIC_Pilot-instructional-center_Flight-school_cropped.jpg",
+    alt: "Student passing checkride - Student and CFI shaking hands at Pilot Instructional Center flight school",
+  },
+];
+
+const headerContent = {
+  upperHeader: `${ADDRESS_CITY}, ${ADDRESS_STATE} `,
+  title: "Launch Your Aviation Career with PIC near Kansas City",
+  description:
+    "Train with experienced jet-rated instructors who prioritize safety, integrity, and personalized instruction. Whether you're starting your private pilot journey or advancing toward commercial ratings, PIC will help you take off with confidence.",
+};
+
+const {
+  content = headerContent,
+  button = { href: "#enroll", text: "Get Started" },
+  showButton = true,
+} = Astro.props;
+---
+
+<div class="bg-primary-500 text-left relative">
+  <div
+    class="relative isolate px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 lg:pt-28 min-h-[60vh] lg:min-h-screen xl:min-h-[720px] overflow-hidden py-12 lg:py-24"
+  >
+    <!-- Image slider-->
+    <div
+      id="hero-slider"
+      class="absolute inset-0 -z-10"
+      data-images={JSON.stringify(slides)}
+    >
+      {
+        slides.map((img, index) => (
+          <div
+            class={`absolute inset-0 transition-opacity duration-1000 ${index === 0 ? "opacity-100" : "opacity-0"}`}
+          >
+            <ImageComp
+              src={img.src}
+              alt={img.alt}
+              classes="object-cover w-full h-full"
+            />
+          </div>
+        ))
+      }
+      <div class="absolute inset-0 bg-primary-300/60"></div>
+    </div>
+    <!-- Text -->
+    <div
+      class="max-w-7xl mx-auto flex flex-col-reverse gap-6 lg:flex-row items-center justify-between h-full"
+    >
+      <div
+        class="relative flex flex-col items-start md:mt-22 max-w-3xl px-6 py-12 bg-stone-100/10 backdrop-blur-sm rounded-3xl sm:rounded-r-full shadow-lg"
+      >
+        <div class="flex justify-left mb-6 sm:mb-10 max-w-44 lg:max-w-none">
+          <div
+            class="relative rounded-full px-4 py-1.5 text-sm sm:text-base bg-stone-100 text-primary-800 ring-1 ring-amber-800/70 hover:ring-amber-900/80 transition"
+          >
+            {content.upperHeader}
+          </div>
+        </div>
+
+        <div class="text-left max-w-2xl">
+          <h1
+            class="text-2xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-white leading-tight"
+            set:html={content.title}
+          />
+          <p
+            class="mt-6 text-sm sm:text-base lg:text-xl font-medium text-white/90 max-w-xl"
+          >
+            {content.description}
+          </p>
+        </div>
+
+        {
+          button && showButton && (
+            <div class="mt-10 flex flex-col sm:flex-row lg:items-center lg:justify-center gap-4 sm:gap-6">
+              <a
+                href={button.href}
+                class="btn-accent camelcase text-left! lg:text-center btn-left"
+              >
+                {button.text} <span class="hidden lg:inline">→</span>
+              </a>
+            </div>
+          )
+        }
+      </div>
+
+      <SocialIcons />
+    </div>
+  </div>
+</div>
+
+<script>
+  const slider = document.getElementById("hero-slider");
+  if (slider) {
+    const slides = slider.querySelectorAll('div[class*="opacity-"]');
+    let current = 0;
+    setInterval(() => {
+      slides[current].classList.replace("opacity-100", "opacity-0");
+      current = (current + 1) % slides.length;
+      slides[current].classList.replace("opacity-0", "opacity-100");
+    }, 5000);
+  }
+</script>

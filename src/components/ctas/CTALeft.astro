@@ -1,0 +1,85 @@
+---
+import ImageComp from "../utils/ImageComp.astro";
+
+const example = {
+  image: {
+    src: "/src/assets/eliezer-fernandes-y7E8qfllcY0-unsplash.jpg",
+    alt: "Aircraft exterior by Eliezer Fernandes",
+  },
+  title: "Ready to get started?",
+  description:
+    "Contact us today to discuss your project and discover how we can help you achieve your goals.",
+  button: {
+    text: "Contact Us",
+    href: "/contact/",
+  },
+};
+
+const { content = example } = Astro.props;
+---
+
+<div class="relative py-12 bg-stone-100 text-primary-600 overflow-hidden">
+  <!-- Top floating button -->
+  <a
+    href={content.button.href}
+    class="bg-primary-300 text-white rounded-r-full text-2xl px-4 py-2 pl-[20%] lg:pl-[30%] absolute top-6 left-0 sm:left-0 sm:top-16"
+    data-aos="fade-right"
+  >
+    {content.button.text}
+  </a>
+
+  <!-- Image container on the right -->
+  <div
+    class="lg:absolute inset-y-0 right-0 top-12 z-10 md:w-full lg:w-1/3 xl:w-1/3 mt-12 max-h-3/4 flex justify-end items-end pt-6"
+    data-aos="fade-left"
+    data-duration="2000"
+    data-aos-delay="300"
+  >
+    <ImageComp
+      src={content.image.src}
+      alt={content.image.alt}
+      classes="object-cover h-full rounded-tl-full rounded-bl-full w-full"
+    />
+  </div>
+
+  <!-- Text content -->
+  <div
+    class="mx-auto flex max-w-4xl flex-col overflow-hidden lg:flex-row justify-end"
+  >
+    <div
+      class="flex flex-col px-6 py-10 sm:px-10 lg:py-16 text-left items-start w-full pb-20"
+      data-aos="zoom-in"
+      data-aos-delay="300"
+    >
+      <h2
+        class="text-3xl sm:text-4xl lg:text-6xl font-semibold tracking-tight text-pretty my-6 max-w-2xl"
+      >
+        {content.title}
+      </h2>
+
+      {
+        !content.descriptions && (
+          <p class="mt-4 sm:mt-6 text-base sm:text-lg lg:text-xl text-pretty  lg:w-2/3">
+            {content.description}
+          </p>
+        )
+      }
+
+      <div class="max-w-xl pr-12 flex flex-col justify-end items-start">
+        {
+          content.descriptions &&
+            content.descriptions.map((description: any) => (
+              <p class="text-sm lg:text-lg ">{description}</p>
+            ))
+        }
+      </div>
+
+      <a
+        href={content.button.href}
+        class="btn-accent btn-middle mt-6 bottom-6 left-6 sm:left-0 sm:bottom-8"
+      >
+        {content.button.text}
+      </a>
+    </div>
+  </div>
+</div>

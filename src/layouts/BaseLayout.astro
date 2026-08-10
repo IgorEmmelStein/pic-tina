@@ -1,0 +1,211 @@
+---
+import BaseHead from "../components/base/BaseHead.astro";
+import "../styles/global.css";
+import Footer from "../components/base/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION, KEYWORDS, OG_IMAGE } from "../data/consts";
+import Navbar from "../components/base/Navbar.astro";
+// Supports weights 400-900
+import '@fontsource-variable/playfair-display';
+// Supports weights 200-900
+import '@fontsource-variable/crimson-pro';
+
+import "aos/dist/aos.css";
+
+// 1. IMPORT GETIMAGE AND TYPING
+import { getImage } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+const { pathname } = Astro.url;
+
+// 2. ADD preloadImageSrc TO YOUR PROPS
+const { siteTitle, siteDescription, siteImage, siteKeywords, customBreadcrumbs, preloadImageSrc } = Astro.props;
+
+// 3. DYNAMIC PRELOAD LOGIC
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/**/*.{jpeg,jpg,png,gif,webp,avif}"
+);
+
+let preloadedUrl = null;
+
+if (preloadImageSrc && images[preloadImageSrc]) {
+  const image = await images[preloadImageSrc]();
+  const optimizedImage = await getImage({ src: image.default, format: "webp" });
+  preloadedUrl = optimizedImage.src;
+}
+
+// Generate breadcrumbs based on URL path
+function generateBreadcrumbs(pathname: string, customBreadcrumbs?: Array<{name: string, url: string}>) {
+  // Use custom breadcrumbs if provided
+  if (customBreadcrumbs) {
+    return customBreadcrumbs;
+  }
+
+  // Check for predefined breadcrumb configurations
+//   const predefinedBreadcrumbs = getBreadcrumbsForPath(pathname);
+//   if (predefinedBreadcrumbs) {
+//     return predefinedBreadcrumbs;
+//   }
+
+  // Fallback to automatic generation
+  const breadcrumbs = [{ name: "Home", url: "/" }];
+  
+  if (pathname === "/") {
+    return breadcrumbs;
+  }
+
+  const pathSegments = pathname.split("/").filter(segment => segment);
+  let currentPath = "";
+
+  for (let i = 0; i < pathSegments.length; i++) {
+    currentPath += `/${pathSegments[i]}`;
+    const segment = pathSegments[i];
+    
+    // Create human-readable names for breadcrumbs
+    let breadcrumbName = segment
+      .split("-")
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+
+    // Special cases for better breadcrumb names
+    const specialCases: Record<string, string> = {
+    };
+
+    if (specialCases[segment]) {
+      breadcrumbName = specialCases[segment];
+    }
+
+    // For city names, format them properly
+    if (segment.endsWith("-ut")) {
+      const cityName = segment.replace("-ut", "")
+        .split("-")
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+      breadcrumbName = `${cityName}, UT`;
+    }
+
+    breadcrumbs.push({
+      name: breadcrumbName,
+      url: currentPath
+    });
+  }
+
+  return breadcrumbs;
+}
+
+const breadcrumbs = generateBreadcrumbs(pathname, customBreadcrumbs);
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <BaseHead
+      title={siteTitle || SITE_TITLE}
+      description={siteDescription || SITE_DESCRIPTION}
+      image={siteImage || OG_IMAGE}
+      keywords={siteKeywords || KEYWORDS}
+    />
+
+    {preloadedUrl && (
+      <link 
+        rel="preload" 
+        as="image" 
+        href={preloadedUrl} 
+        type="image/webp" 
+        fetchpriority="high" 
+      />
+    )}
+    
+    <!-- Breadcrumb Schema Markup -->
+    {breadcrumbs.length > 1 && (
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": breadcrumbs.map((crumb, index) => ({
+          "@type": "ListItem",
+          "position": index + 1,
+          "name": crumb.name,
+          "item": new URL(crumb.url, Astro.site).toString()
+        }))
+      })}>
+      </script>
+    )}
+    
+    <!-- Preconnect to external domains to improve performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://widgets.leadconnectorhq.com" />
+
+    <!-- Additional mobile-friendly meta tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="theme-color" content="#1e40af" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <!-- <script
+      src="https://widgets.leadconnectorhq.com/loader.js"
+      data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+      data-widget-id=""></script> -->
+    <script 
+      is:inline 
+      src="https://widgets.leadconnectorhq.com/loader.js" 
+      data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" 
+      data-widget-id="6a21f9609372a70f7d9315fa"
+    ></script>
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N5ZTCQ6X"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <header>
+      <Navbar pathname={pathname}>
+      </Navbar>
+    </header>
+    
+    
+    <main class="overflow-hidden">
+      <slot name="hero" />
+    <!-- Breadcrumb Navigation -->
+      <!-- {breadcrumbs.length > 1 && (
+        <nav aria-label="Breadcrumb" class="bg-gray-50 border-b border-gray-200" >
+          <div class="max-w-7xl mx-auto px-5 md:px-10 lg:px-20 py-3">
+            <ol class="flex items-center space-x-2 text-sm">
+              {breadcrumbs.map((crumb, index) => (
+                <li class="flex items-center">
+                  {index > 0 && (
+                    <svg class="w-4 h-4 text-gray-400 mx-2" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                    </svg>
+                  )}
+                  {index === breadcrumbs.length - 1 ? (
+                    <span class="text-gray-500 font-medium" aria-current="page">
+                      {crumb.name}
+                    </span>
+                  ) : (
+                    <a
+                      href={crumb.url}
+                      class="text-main-blue-700 hover:text-main-blue-800 transition-colors duration-200 font-medium"
+                    >
+                      {crumb.name}
+                    </a>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </div>
+        </nav>
+      )} -->
+      <slot />
+      <!-- <ContactUs /> -->
+    </main>
+    <Footer />
+    <script >
+      import AOS from "aos";
+      AOS.init({
+        once: true,
+      });
+    </script>
+    <!-- Old one <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="697cab64b5a36637a30ca61a"></script> -->
+  </body>
+</html>

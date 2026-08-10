@@ -1,0 +1,89 @@
+---
+const example = {
+  title: "404 - Page Not Found - Explore Our Flight Training Programs",
+  description:
+    "Sorry, we couldn't find the page you're looking for. The page may have been moved, deleted, or the URL might be incorrect.",
+  options: [
+    {
+      title: "Flight Training Programs",
+      link: "/flight-training/",
+    },
+    {
+      title: "About us",
+      link: "/about/",
+    },
+    {
+      title: "Blog",
+      link: "/blog/",
+    },
+    {
+      title: "Discovery Flight",
+      link: "/discovery-flight/",
+    },
+  ],
+};
+
+const { content = example } = Astro.props;
+---
+
+<div
+  class="min-h-[80vh] pt-32 lg:p-44 flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-logo"
+>
+  <div class="max-w-md mx-auto text-center">
+    <div class="text-primary-600 mb-4">
+      <svg
+        class="w-24 h-24 mx-auto"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.5"
+          d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
+        ></path>
+      </svg>
+    </div>
+
+    <h1 class="text-4xl font-bold text-primary-600 py-4 pb-8">
+      {content.title}
+    </h1>
+
+    <p class="text-lg text-gray-600 py-8 border-y border-primary-800">
+      {content.description}
+    </p>
+
+    <div class="py-4 flex justify-center items-center">
+      <a href="/" class="btn-accent btn-middle py-4 my-4"> Return Home </a>
+    </div>
+
+    <div class="py-4">
+      {
+        content.options && (
+          <div class=" text-gray-500 text-center">
+            <h2 class="py-4 text-lg">Or try one of these popular pages:</h2>
+            <ul class="space-y-2 text-left list-disc">
+              {content.options.map((option: any) => (
+                <a
+                  href={option.link}
+                  class="block text-primary-600 hover:text-primary-800 hover:scale-110 transition-all duration-300 "
+                >
+                  <li>{option.title} → </li>
+                </a>
+              ))}
+            </ul>
+          </div>
+        )
+      }
+    </div>
+
+    <!-- Search suggestion -->
+    <div class="rounded-lg text-center flex flex-col">
+      <h3 class="text-lg text-gray-600 mb-2 py-4">
+        Looking for something specific, or need assistance?
+      </h3>
+      <a href="/contact/" class="btn-left btn-accent mr-[50%]"> Contact us </a>
+    </div>
+  </div>
+</div>

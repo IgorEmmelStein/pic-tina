@@ -1,0 +1,311 @@
+---
+import { website_links } from "../../data/consts";
+import ImageComp from "../utils/ImageComp.astro";
+import SliderImageSimulator from "./SliderImageSimulator.astro";
+
+const {
+  simInventory = [
+    {
+      model: "Redbird FMX",
+      spec: "Full Motion AATD",
+      useCase: "Instrument & Commercial Hours",
+      description:
+        "The gold standard for multi-engine and IFR training. Log significant FAA-certified hours in a 3-axis motion platform.",
+    },
+  ],
+  content = {
+    upperHeader: "Precision Flight Technology",
+    title: `The Simulator <span class="italic font-light text-accent-500">Advantage</span`,
+    descriptions: ` Forge confidence, optimize your hour-building, and master complex flight
+        procedures within a controlled, high-fidelity environment.`,
+    cards: [
+      {
+        path: website_links.ourSimulator.path,
+        title: "Uncompromised Weather",
+        description:
+          "If the weather turns, your training schedule doesn't. Maintain complete consistency on PIC’s advanced motion platforms regardless of local atmospheric patterns.",
+      },
+      {
+        path: website_links.ourSimulator.path,
+        title: "FAA-Certified Logbook",
+        description:
+          "Maximize your training efficiency. Secure officially recognized, FAA-approved credit hours toward your ratings under the supervision of expert instructors.",
+      },
+      {
+        path: website_links.ourSimulator.path,
+        title: "Precision Maneuvers",
+        description:
+          "Perfect your multi-engine and procedural mastery on the ground. Build deep muscle memory and complete confidence before consuming real-world aircraft fuel.",
+      },
+    ],
+  },
+  offerSection = {
+    image: {
+      src: "/src/assets/drive/student-simulator-Flight-Pilot-instructional-center_flight-school_PIC-Kansas-city-Missouri.jpeg",
+      alt: "Redbird Full Motion Flight Simulator at Pilot Instructional Center",
+    },
+    path: website_links.contact.path,
+    quote:
+      '"True proficiency is built when muscle memory outpaces conditions, translating simulated precision into real-world command."',
+    title: "Limited Availability Promotions",
+    offers: [
+      {
+        path: website_links.ourSimulator.path,
+        title: "Special Fleet Rate",
+        description:
+          "Purchase 10+ hours and lock in a preferred $60 / hour block rate.",
+      },
+      {
+        path: website_links.ourSimulator.path,
+        title: "Complimentary Onboarding",
+        description:
+          "Receive a FREE simulator checkout authorization alongside any block time purchase.",
+      },
+    ],
+    advantages: {
+      costReduction:
+        "Average 40% reduction in flight hour expenses for active IFR candidates.",
+      label: "Secure Block Rate",
+    },
+  },
+  cta = {
+    title: "Explore our full simulator suite",
+    path: website_links.ourSimulator.path,
+  },
+} = Astro.props;
+---
+
+<section
+  class="py-24 px-6 bg-accent-50 relative overflow-hidden font-sans border-t border-accent-100"
+>
+  {/* Cinematic Ambient Glow Elements */}
+  <div
+    class="absolute top-0 left-1/4 w-96 h-96 bg-accent-200/30 rounded-full blur-3xl pointer-events-none"
+  >
+  </div>
+  <div
+    class="absolute bottom-0 right-1/4 w-96 h-96 bg-primary-400/20 rounded-full blur-3xl pointer-events-none"
+  >
+  </div>
+
+  <div class="max-w-7xl mx-auto relative z-10">
+    {/* Header Section */}
+    <div
+      class="flex flex-col lg:flex-row items-start gap-12 mb-16 justify-between"
+    >
+      <div class="max-w-3xl mb-12" data-aos="fade-up">
+        <p
+          class="text-xs font-semibold tracking-widest text-accent-500 uppercase mb-3"
+          set:html={content.upperHeader}
+        />
+        <h2
+          class="text-5xl md:text-7xl font-title font-normal text-primary-800 tracking-tight leading-tight"
+          set:html={content.title}
+        />
+        <p
+          class="mt-4 text-primary-600 text-lg font-sans tracking-wide leading-relaxed max-w-xl"
+          set:html={content.descriptions}
+        />
+      </div>
+      {/* SliderImageSimulator  */}
+      <div
+        class="w-full lg:w-auto lg:max-w-2xl aos-init aos-animate"
+        data-aos="fade-up"
+        data-aos-delay="100"
+      >
+        <SliderImageSimulator />
+      </div>
+    </div>
+
+    {/* Metric Cards - Stats Lead Everything */}
+    <div
+      class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20"
+      data-aos="fade-up"
+      data-aos-delay="100"
+    >
+      {
+        content.cards.map(
+          (
+            card: { title: string; description: string; path: string },
+            index: number,
+          ) => (
+            <a
+              href={card.path}
+              target={card.path.includes("http") ? "_blank" : "_self"}
+              class="group bg-white/40 backdrop-blur-md border border-white/60 rounded-3xl p-8 shadow-sm transition-all duration-500  hover:shadow-md hover:-translate-y-1.5 hover:bg-accent-500"
+            >
+              <span class="block font-title text-5xl font-light text-accent-500 mb-4 group-hover:text-primary-400 transition-colors ">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <h3 class="text-xl font-title text-primary-800 mb-2 group-hover:text-white transition-colors">
+                {card.title}
+              </h3>
+              <p class="text-xs text-primary-600  font-sans tracking-wide leading-relaxed group-hover:text-white transition-colors">
+                {card.description}
+              </p>
+            </a>
+          ),
+        )
+      }
+    </div>
+
+    {/* Lower Content Grid */}
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+      {/* Editorial Content / Left Column */}
+      <a
+        href={cta.path}
+        class="group lg:col-span-5 flex flex-col space-y-8"
+        data-aos="fade-up"
+        data-aos-delay="200"
+        target={cta.path.includes("http") ? "_blank" : "_self"}
+        rel={cta.path.includes("http") ? "noopener noreferrer" : undefined}
+      >
+        {/* Editorial Pull Quote */}
+        <div class="border-l border-primary-400 pl-6 py-2">
+          <p
+            class="font-title italic text-xl text-primary-800 leading-relaxed"
+            set:html={offerSection.quote}
+          />
+        </div>
+
+        {/* Dynamic Sim Grid Mapping */}
+        <div
+          class="space-y-6 group-hover:bg-accent-100 group-hover:-translate-y-1.5 p-6 rounded-3xl transition-all duration-500"
+        >
+          {
+            simInventory.map((sim) => (
+              <div class="flex items-start gap-4">
+                <div class="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary-400 shrink-0" />
+                <div>
+                  <h4 class="font-title text-lg text-primary-800">
+                    {sim.model}{" "}
+                    <span class="text-xs font-sans tracking-wide leading-relaxed text-accent-500 ml-2 font-medium">
+                      ({sim.spec})
+                    </span>
+                  </h4>
+                  <p class="text-xs text-primary-300 font-light tracking-wide mt-0.5">
+                    {sim.useCase}
+                  </p>
+                  <p class="text-sm text-primary-600 font-light mt-2 leading-relaxed">
+                    {sim.description}
+                  </p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+
+        {/* Anchor Link / Global CTA */}
+        <div>
+          <p
+            class="inline-flex items-center gap-4 text-xs font-medium uppercase tracking-widest text-primary-800 group-hover:text-accent-500 transition-colors"
+          >
+            <span>{cta.title}</span>
+            <svg
+              class="w-4 h-4 transform transition-transform group-hover:translate-x-1"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </p>
+        </div>
+      </a>
+
+      {/* Media & Dark Promo Box / Right Column */}
+      <div
+        class="lg:col-span-7 relative group"
+        data-aos="fade-up"
+        data-aos-delay="300"
+      >
+        {/* Main Cinematic Image Frame */}
+        <div
+          class="relative rounded-[2.5rem] overflow-hidden aspect-16/10 border border-white/40 shadow-[0_32px_64px_-16px_rgba(66,55,49,0.08)] bg-white/20 backdrop-blur-sm p-3"
+        >
+          <div class="w-full h-full rounded-4xl overflow-hidden relative">
+            <ImageComp
+              src={offerSection.image.src ||
+                "/src/assets/drive/student-simulator-Flight-Pilot-instructional-center_flight-school_PIC-Kansas-city-Missouri.jpeg"}
+              alt={offerSection.image.alt ||
+                "Redbird Full Motion Flight Simulator at Pilot Instructional Center"}
+              classes="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-102"
+            />
+            {/* Soft Cinematic Overlays */}
+            <div
+              class="absolute inset-0 bg-linear-to-t from-primary-800/30 via-transparent to-transparent"
+            >
+            </div>
+            <div
+              class="absolute inset-0 bg-linear-to-tr from-white/10 to-transparent"
+            >
+            </div>
+          </div>
+        </div>
+
+        {/* Dark Offer Strip / Anchor Block */}
+        <a
+          href={offerSection.path}
+          target={offerSection.path.includes("http") ? "_blank" : "_self"}
+          rel={offerSection.path.includes("http")
+            ? "noopener noreferrer"
+            : undefined}
+          class="group hover:-translate-y-1.5 transition-all duration-500 flex flex-col items-center justify-center lg:absolute -bottom-10 right-6 left-6 lg:-right-6 lg:left-auto p-8 bg-accent-500 rounded-4xl shadow-2xl border border-primary-400/20 max-w-md text-accent-50"
+        >
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-1.5 h-1.5 rounded-full bg-primary-400 animate-pulse">
+            </div>
+            <span
+              class="text-[10px] font-medium tracking-widest uppercase text-accent-200"
+              set:html={offerSection.title}
+            />
+          </div>
+
+          <div class="space-y-4 border-b border-white/10 pb-6 mb-6">
+            {
+              offerSection.offers.map(
+                (offer: { title: string; description: string }) => (
+                  <div>
+                    <p class="text-xs text-primary-400 tracking-wide font-medium uppercase">
+                      {offer.title}
+                    </p>
+                    <p class="text-base font-serif font-light mt-1">
+                      {offer.description}
+                    </p>
+                  </div>
+                ),
+              )
+            }
+          </div>
+
+          <div
+            class="flex flex-col lg:flex-row items-center justify-between gap-4"
+          >
+            <p
+              class="text-xs text-accent-200 font-light leading-snug max-w-[180px]"
+            >
+              {offerSection.advantages.costReduction}
+            </p>
+            <div
+              class="flex items-center justify-center gap-2 px-6 py-3.5 bg-accent-50 text-primary-800 rounded-xl text-xs font-medium tracking-wider uppercase shadow-md hover:bg-accent-100 transition-colors whitespace-nowrap"
+            >
+              {offerSection.advantages.label}
+              <svg
+                class="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

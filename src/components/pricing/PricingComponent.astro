@@ -1,0 +1,217 @@
+---
+const pricingData = {
+  title: "Investment in Your Future",
+  subtitle:
+    "Transparent pricing for world-class flight training at New Century AirCenter. No hidden fees, just high-integrity instruction.",
+  programs: [
+    {
+      name: "Sport Pilot",
+      price: "$7,140",
+      type: "Certificate",
+      includes: [
+        "Entry-level certification",
+        "Perfect for recreational flying",
+        "Training at New Century AirCenter",
+      ],
+      featured: false,
+      delay: "0",
+    },
+    {
+      name: "Private Pilot",
+      price: "$12,440",
+      type: "Certificate",
+      duration: "3-6 months",
+      includes: [
+        "30 hours training flight time",
+        "10 hours solo flight time",
+        "20 hours ground lessons",
+        "Online ground school",
+      ],
+      featured: true,
+      delay: "100",
+    },
+    {
+      name: "Instrument Rating",
+      price: "$14,125",
+      type: "Rating",
+      duration: "4 months",
+      includes: [
+        "20 hours training flight",
+        "25 hours time building",
+        "10 hours Dual AATD sim",
+        "20 hours ground lessons",
+      ],
+      featured: false,
+      delay: "200",
+    },
+    {
+      name: "Commercial Pilot",
+      price: "$31,225",
+      type: "Certificate",
+      duration: "4 months",
+      includes: [
+        "20 hours training flight",
+        "85 hours time building",
+        "50 hours Dual AATD sim",
+        "15 hours ground lessons",
+      ],
+      featured: false,
+      delay: "0",
+    },
+    {
+      name: "CFI",
+      price: "$5,975",
+      type: "Instructor",
+      duration: "1 month",
+      includes: [
+        "15 hours training flight",
+        "25 hours ground lessons",
+        "Priority hiring goal",
+        "Advanced spin training",
+      ],
+      featured: false,
+      delay: "100",
+    },
+    {
+      name: "CFI Instrument",
+      price: "$5,050",
+      type: "Instructor",
+      duration: "1 month",
+      includes: [
+        "10 hours training flight",
+        "5 hours AATD sim time",
+        "20 hours ground lessons",
+        "Instructional mastery",
+      ],
+      featured: false,
+      delay: "200",
+    },
+  ],
+};
+---
+
+<section class="relative bg-white py-24 px-6 overflow-hidden">
+  <div
+    class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#dcc1a6] to-transparent opacity-50"
+  >
+  </div>
+
+  <div class="max-w-7xl mx-auto relative z-10">
+    <div class="text-center mb-20" data-aos="fade-up">
+      <h2 class="text-5xl font-extrabold text-[#423731] mb-6 tracking-tight">
+        {pricingData.title}
+      </h2>
+      <div class="w-24 h-1 bg-[#dcc1a6] mx-auto mb-6 rounded-full"></div>
+      <p class="text-xl text-[#745e4d] max-w-2xl mx-auto leading-relaxed">
+        {pricingData.subtitle}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      {
+        pricingData.programs.map((program) => (
+          <div
+            data-aos="fade-up"
+            data-aos-delay={program.delay}
+            class={`group flex flex-col p-10 rounded-[2rem] border-2 transition-all duration-500 ease-out hover:-translate-y-3 hover:shadow-[0_20px_50px_rgba(116,94,77,0.15)] 
+            ${program.featured ? "border-[#745e4d] bg-[#dcc1a6]/10 shadow-lg relative" : "border-gray-100 bg-white"}`}
+          >
+            {program.featured && (
+              <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-[#745e4d] text-white text-[10px] uppercase font-black px-4 py-1.5 rounded-full shadow-md z-20">
+                Recommended Track
+              </div>
+            )}
+
+            <div class="mb-8">
+              <span class="inline-block text-[10px] uppercase tracking-[0.2em] font-black text-[#745e4d] bg-[#dcc1a6]/40 px-3 py-1 rounded-md mb-4 transition-colors group-hover:bg-[#dcc1a6]">
+                {program.type}
+              </span>
+              <h3 class="text-3xl font-bold text-[#423731] group-hover:text-[#5d4d40] transition-colors">
+                {program.name}
+              </h3>
+              <div class="flex items-baseline gap-2 mt-4">
+                <span class="text-5xl font-black text-[#5d4d40]">
+                  {program.price}
+                </span>
+                <span class="text-[#745e4d] text-sm font-medium italic opacity-80">
+                  est. total
+                </span>
+              </div>
+              {program.duration && (
+                <div class="flex items-center gap-2 mt-4 text-[#745e4d]">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  <p class="text-xs font-semibold uppercase tracking-wider">
+                    {program.duration}
+                  </p>
+                </div>
+              )}
+            </div>
+
+            <div class="h-px w-full bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-8" />
+
+            <ul class="space-y-5 mb-12 flex-1">
+              {program.includes.map((item) => (
+                <li class="flex items-start gap-4 text-[#423731] group/item">
+                  <div class="p-1 rounded-full bg-[#dcc1a6]/20 group-hover/item:bg-[#dcc1a6]/50 transition-colors">
+                    <svg
+                      class="w-4 h-4 text-[#5d4d40]"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="3"
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                  </div>
+                  <span class="text-sm font-medium leading-tight opacity-90">
+                    {item}
+                  </span>
+                </li>
+              ))}
+            </ul>
+
+            <button
+              class={`group/btn relative overflow-hidden w-full py-4 px-6 rounded-xl font-black text-sm uppercase tracking-widest transition-all duration-300 transform active:scale-95
+              ${program.featured ? "bg-[#5d4d40] text-white shadow-md hover:shadow-xl" : "bg-[#f8f5f2] text-[#423731] hover:bg-[#dcc1a6] hover:text-[#423731]"}`}
+            >
+              <span class="relative z-10">View Requirements</span>
+              <div class="absolute inset-0 bg-white/10 translate-y-full transition-transform duration-300 group-hover/btn:translate-y-0" />
+            </button>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="mt-20 text-center" data-aos="fade-up">
+      <p
+        class="text-[#745e4d] text-xs italic font-medium max-w-lg mx-auto leading-relaxed"
+      >
+        Prices are based on estimated minimum flight times. Personal progress
+        and FAA checkride readiness may affect total investment.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  [data-aos] {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+</style>

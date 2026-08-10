@@ -1,0 +1,89 @@
+---
+// src/components/about/AreasServed.astro
+const areas = [
+  { name: "Kansas City", slug: "kansas-city-ks" },
+  { name: "Overland Park", slug: "overland-park-ks" },
+  { name: "Olathe", slug: "olathe-ks" },
+  { name: "Lenexa", slug: "lenexa-ks" },
+  { name: "Gardner", slug: "gardner-ks" },
+  { name: "Leawood", slug: "leawood-ks" },
+  { name: "Shawnee", slug: "shawnee-ks" },
+  { name: "Lawrence", slug: "lawrence-ks" },
+  { name: "New Century", slug: "new-century-ks" },
+  { name: "Lee's Summit", slug: null },
+  { name: "Spring Hill", slug: null },
+  { name: "Ottawa", slug: null },
+];
+
+const getPath = (slug: string | null) =>
+  slug ? `/pilot-training/${slug}/` : "/pilot-training/";
+---
+
+<section class="bg-[#fcfaf8] py-24 px-4 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-7xl lg:grid lg:grid-cols-2 lg:gap-12">
+    {/* Sales-Driven Introduction */}
+    <div class="mb-20 text-center flex flex-col py-12" data-aos="fade-up">
+      <h2
+        class="text-4xl md:text-5xl font-bold text-[#423731] tracking-widest font-title uppercase"
+      >
+        Your Journey <br /> Starts Here
+      </h2>
+      <div class="mt-4 h-1 w-20 bg-[#4b7992] mx-auto rounded-full"></div>
+      <p
+        class="mt-8 text-xl text-[#5d4d40]/80 max-w-3xl mx-auto leading-relaxed"
+      >
+        At Pilot Instructional Center, we have bridged the gap between <span
+          class="font-bold text-[#423731]">academic rigor</span
+        > and <span class="font-bold text-[#423731]">real-world airmanship</span
+        >. Whether you are aiming for a career in commercial aviation or
+        pursuing your private pilot certificate for the joy of flight, our
+        FAA-compliant curriculum is designed to get you in the air with
+        confidence, safety, and efficiency.
+      </p>
+      <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="#enroll"
+          class="bg-[#4b7992] text-white px-8 py-4 rounded-full font-bold hover:bg-[#3a5f73] transition-all shadow-lg hover:shadow-[#4b7992]/20"
+        >
+          Start Your Discovery Flight
+        </a>
+        <a
+          href="/contact/"
+          class="border-2 border-[#4b7992] text-[#4b7992] px-8 py-4 rounded-full font-bold hover:bg-[#4b7992] hover:text-white transition-all"
+        >
+          Speak With An Instructor
+        </a>
+      </div>
+    </div>
+
+    {/* Location Directory */}
+    <div class="mb-10" data-aos="fade-up" data-aos-delay="200">
+      <h3 class="text-2xl font-bold text-[#423731] mb-8 text-center">
+        Serving the Greater Kansas City Metro Region
+      </h3>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {
+          areas.map((area, index) => (
+            <a
+              href={getPath(area.slug)}
+              data-aos="fade-up"
+              data-aos-delay={index * 50}
+              class="group relative overflow-hidden rounded-3xl border border-[#dcc1a6]/30 bg-white p-6 transition-all duration-500 hover:border-[#4b7992] hover:shadow-xl"
+            >
+              <div class="relative z-10">
+                <span class="block text-xs font-bold uppercase tracking-widest text-[#4b7992]/60 mb-1">
+                  Area Service
+                </span>
+                <span class="text-lg font-bold text-[#423731]">
+                  {area.name}
+                </span>
+              </div>
+              {/* Subtle Hover Morph */}
+              <div class="absolute -bottom-4 -right-4 h-20 w-20 rounded-full bg-[#dcc1a6]/10 transition-transform duration-500 group-hover:scale-150" />
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

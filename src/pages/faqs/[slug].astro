@@ -1,0 +1,72 @@
+---
+import { getCollection } from "astro:content";
+import CTALeft from "../../components/ctas/CTALeft.astro";
+import Enroll from "../../components/forms/Enroll.astro";
+import HeaderMain from "../../components/headers/HeaderMainAlternative.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SearchableFAQs from "../../components/sections/SearchableFAQs.jsx";
+
+import "aos/dist/aos.css";
+
+export async function getStaticPaths() {
+  const faqEntries = await getCollection("faqs");
+  return faqEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+
+const siteTitle = `${data.title} | Pilot Instructional Center | New Century KS`;
+const siteDescription = "Find answers about flight training, costs, aircraft, scheduling, requirements, and PIC’s senior-instructor training model.";
+const siteKeywords = "flight school FAQ, pilot training questions, aviation costs, start flying Kansas City";
+
+const headerData = {
+  upperHeader: data.upperHeading || "FAQs",
+  title: data.title,
+  description: "Find quick answers about simulator training, enrollment, pricing, scheduling, FAA requirements, and more. If you still have questions, our team is here to help.",
+  buttons: [
+    {
+      text: "Contact Support",
+      href: "/contact/",
+      style: "btn-secondary",
+    },
+    {
+      text: "Enroll Now",
+      href: "#faq-general",
+      style: "btn-transparent",
+    },
+  ],
+  image: {
+    src: "/src/assets/stock-man-airplanes-museum.jpg",
+    alt: "Student pilot looking at airplanes",
+  },
+};
+---
+
+<BaseLayout
+  siteTitle={siteTitle}
+  siteDescription={siteDescription}
+  siteKeywords={siteKeywords}
+>
+  <HeaderMain
+    content={headerData}
+    mainSize={false}
+    showButton={false}
+    images={[headerData.image]}
+  />
+
+  <SearchableFAQs
+    client:load
+    title={data.title}
+    paragraphs={data.paragraphs}
+    faqs={data.faqs}
+    ctaUrl={data.ctaUrl}
+    ctaTitle={data.ctaTitle}
+  />
+
+  <CTALeft />
+  <Enroll />
+</BaseLayout>

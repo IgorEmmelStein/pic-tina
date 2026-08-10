@@ -1,0 +1,613 @@
+---
+import CTALeft from "../components/ctas/CTALeft.astro";
+import CTARight from "../components/ctas/CTARight.astro";
+import Enroll from "../components/forms/Enroll.astro";
+import HeaderMain from "../components/headers/HeaderMainAlternative.astro";
+import FAQ from "../components/sections/FAQ.astro";
+import TextIcons from "../components/sections/TextIcons.astro";
+import Why from "../components/sections/Why.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../data/consts";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProgramsComponent from "../components/sections/ProgramsComponent.astro";
+
+import "aos/dist/aos.css";
+import ImageComp from "../components/utils/ImageComp.astro";
+import { link } from "fs";
+import SimulatorImageSection from "../components/offers/SimulatorImageSection.astro";
+
+const data = {
+  siteTitle:
+    "New to Flying? Start Here | Pilot Instructional Center  | New Century KS",
+  siteDescription:
+    "No experience required to start. Learn how to become a pilot with clear guidance, senior instructors, and a safety-first approach at New Century AirCenter.",
+  siteKeywords:
+    "learn to fly Kansas City, become a pilot, flight training beginner, discovery flight, learn to fly near Kansas City, pilot programs, senior flight instructors",
+
+  header: {
+    image: {
+      src: "/src/assets/stock/stock_Plane-pilot-helice_luciano-faiolo-W68nUftntf4-unsplash.jpg",
+      alt: "Pilot near aircraft propeller by Luciano Faiolo",
+    },
+    upperHeader: "Start Your Aviation Journey",
+    title: "Start Your Aviation Journey with PIC, no experience needed",
+    description:
+      "Flying is more than a skill. It’s a lifestyle, a career, and a lifelong passion. At PIC, you’ll learn from experienced instructors who make your first steps simple, safe, and exciting.",
+    descriptions: [
+      "Whether you dream of flying for fun or starting a professional aviation career, the journey begins with your first flight.",
+      "Our senior instructors are passionate aviators who care about your success, not time builders rushing to the airlines.",
+      "Explore the skies, discover new possibilities, and reshape your future through the world of aviation.",
+    ],
+    bullets: [
+      {
+        title: "Fly With Confidence",
+        description:
+          "Train with safety-focused, highly experienced instructors from day one.",
+        icon: "ShieldCheck",
+      },
+      {
+        title: "Learn at Your Own Pace",
+        description:
+          "Flexible scheduling, beginner-friendly environment, and personalized guidance.",
+        icon: "Clock",
+      },
+    ],
+  },
+
+  newToFlying: {
+    // ============================
+    // WHY BECOME A PILOT
+    // ============================
+    whyBecomePilot: {
+      image: {
+        src: "/src/assets/stock/stock_Plane-pilot-ground-standing_maria-teneva-m2MIMI7VS4Y-unsplash.jpg",
+        alt: "Pilot standing near airplane by Maria Teneva",
+      },
+      upperHeader: "Why Become a Pilot?",
+      title: "A Life-Changing Skill, Experience, and Career",
+      description:
+        "Most people dream of flying, but only a few decide to take the first step. Becoming a pilot opens a world of adventure, community, and opportunity.",
+      descriptions: [
+        "Flying gives you a sense of freedom and confidence unlike anything else. The aviation community is welcoming, passionate, and driven by purpose. With a global pilot shortage, now is one of the best times in history to begin training.",
+        " Airlines, charter services, and corporate aviation all need skilled pilots. Whether you want to fly for fun or pursue a full aviation career, learning to fly is a rewarding journey that transforms your life.",
+      ],
+      bullets: [
+        {
+          title: "The Pilot Lifestyle",
+          description:
+            "Experience breathtaking views, weekend adventures, and the confidence that comes with mastering a complex skill.",
+          icon: "Plane",
+        },
+        {
+          title: "Strong Career Opportunities",
+          description:
+            "Airlines, corporate aviation, cargo, charter, medical flights,  pilots are in demand everywhere.",
+          icon: "TrendingUp",
+        },
+        {
+          title: "A Global Community",
+          description:
+            "Join a supportive community of aviators who share your passion and celebrate your progress.",
+          icon: "Users",
+        },
+      ],
+    },
+
+    // ============================
+    // ROADMAP (TRAINING PATH)
+    // ============================
+    roadMap: {
+      image: {
+        src: "/src/assets/stock/stock_Plane-ground-road_oleksandr-brovko-52duyrkyEls-unsplash.jpg",
+        alt: "Airplane on ground near road by Oleksandr Brovko",
+      },
+      upperHeading: "Your Training Roadmap",
+      title: "From First Flight to Professional Pilot",
+      description:
+        "We make the path to becoming a pilot simple and easy to understand. Here’s a clear overview of each step toward achieving your goals.",
+      descriptions: [
+        "You can begin your journey with zero experience.",
+        "Each milestone builds your confidence and skills.",
+        "Whether you want to fly recreationally or pursue a full aviation career, this roadmap guides you from start to finish.",
+      ],
+      bullets: [
+        {
+          title: "Private Pilot License (PPL)",
+          description:
+            "Your foundation. Learn the basics, fly solo, and gain the freedom to explore the skies.",
+          icon: "Flag",
+          image: {
+            src: "/src/assets/stock/ppl-license.jpg",
+            alt: "Private Pilot License certificate",
+          },
+          link: {
+            title: "Check our program",
+            href: "/flight-training/private-pilot/",
+          },
+        },
+        {
+          title: "Instrument Rating (IR)",
+          description:
+            "Fly confidently in clouds and low visibility, expanding your capabilities.",
+          icon: "Cloud",
+          image: {
+            src: "/src/assets/stock/ppl-license.jpg",
+            alt: "Private Pilot License certificate",
+          },
+          link: {
+            title: "Check our program",
+            href: "/flight-training/instrument-rating/",
+          },
+        },
+        {
+          title: "Commercial Pilot License (CPL)",
+          description:
+            "Turn your passion into a profession and qualify for paid flying.",
+          icon: "Briefcase",
+          image: {
+            src: "/src/assets/stock/ppl-license.jpg",
+            alt: "Private Pilot License certificate",
+          },
+          link: {
+            title: "Check our program",
+            href: "/flight-training/commercial-pilot/",
+          },
+        },
+        {
+          title: "Flight Instructor (CFI)",
+          description:
+            "Teach, earn flight time, and help train the next generation of aviators.",
+          icon: "BookOpen",
+          image: {
+            src: "/src/assets/stock/ppl-license.jpg",
+            alt: "Private Pilot License certificate",
+          },
+          link: {
+            title: "Check our program",
+            href: "/flight-training/certified-flight-instructor-cfi/",
+          },
+        },
+      ],
+    },
+
+    // ============================
+    // WHY PIC
+    // ============================
+    whyPIC: {
+      upperHeading: "Why Train at PIC?",
+      title: "Experienced Instructors. Supportive Environment. Safety First.",
+      description:
+        "PIC was created to provide a better experience than large corporate flight schools ,  one built on integrity, safety, and truly caring instructors.",
+      descriptions: [
+        "Our CFIs are experienced career aviators, not time-builders.",
+        "Your training is personal, enjoyable, and adapted to your goals.",
+        "PIC has deep aviation roots and decades of flight training experience in Kansas.",
+      ],
+      bullets: [
+        {
+          title: "Senior, Career CFIs",
+          description:
+            "Learn from instructors who are passionate about teaching and committed to your success.",
+          icon: "Award",
+        },
+        {
+          title: "Safety & Integrity First",
+          description:
+            "PIC was founded in response to unsafe shortcuts elsewhere. We train the right way ,  always.",
+          icon: "Shield",
+        },
+        {
+          title: "Family-Oriented, Supportive Culture",
+          description:
+            "No pressure, no ego, no shortcuts. Just honest, high-quality flight training.",
+          icon: "Heart",
+        },
+        {
+          title: "Strong Local Roots",
+          description:
+            "Generations of flying experience in Kansas City ,  aviation is in our DNA.",
+          icon: "Map",
+        },
+      ],
+      image: {
+        src: "/src/assets/stock/stock_Plane-ground_john-waco-jr-BL_X4W-oQLc-unsplash.jpg",
+        alt: "Airplane on ground by John Waco Jr",
+      },
+    },
+
+    // ============================
+    // FIRST STEPS
+    // ============================
+    firstSteps: {
+      upperHeading: "Your First Steps",
+      title: "Getting Started is Easier Than You Think",
+      description:
+        "You don’t need experience, connections, or special skills ,  just curiosity and the willingness to take your first flight.",
+      descriptions: [
+        "We guide you through every step of the process.",
+        "Your discovery flight will show you exactly what aviation feels like.",
+        "You’ll walk away excited, confident, and ready for the next phase.",
+      ],
+      bullets: [
+        {
+          title: "1. Book a Discovery Flight",
+          description:
+            "Take the controls, meet your instructor, and see what flying is like.",
+          icon: "Sparkles",
+          link: {
+            title: "Book now",
+            href: "/discovery-flight/",
+          },
+        },
+        {
+          title: "2. Meet Your Instructor",
+          description:
+            "Discuss your goals and build a plan that fits your schedule and budget.",
+          icon: "UserCheck",
+          link: {
+            title: "Contact us",
+            href: "/contact/",
+          },
+        },
+        {
+          title: "3. Start Your Training",
+          description:
+            "Begin flying right away with clear guidance, safe processes, and instructors who care.",
+          icon: "Takeoff",
+          link: {
+            title: "Explore programs",
+            href: "/flight-training/private-pilot/",
+          },
+        },
+      ],
+      image: {
+        src: "/src/assets/stock/stock_Plane-wing-flying-commercial-airport_miguel-angel-sanz-yXE0zybDr-I-unsplash.jpg",
+        alt: "Commercial airplane wing view by Miguel Angel Sanz",
+      },
+    },
+  },
+
+  cta: {
+    title: "Ready to Begin Your Pilot Journey?",
+    description:
+      "Take the first step toward your Private Pilot Certificate or Instrument Rating withPIC. Safe, affordable, and FAA-compliant training, designed to get you flying sooner.",
+    button: { text: "Book a Discovery Session", href: "/discovery-session" },
+    image: {
+      src: "/src/assets/cta-flight-solid-ground-aviation.webp",
+      alt: "View of the sky from an airplane window",
+    },
+  },
+
+  ctas: {
+    ctaFloating: {
+      upperHeading: "Join Maryland’s Premier Simulator Flight School",
+      title: "Experience the Future of Pilot Training",
+      description:
+        "Solid Ground Aviation combines FAA-certified simulators, expert instructors, and a cost-effective model to make flight training more accessible than ever. Start today and join a growing community of pilots in Maryland and D.C.",
+      images: [
+        {
+          src: "/src/assets/student using simulator 2.jpg",
+          alt: "Student using FAA Compliant flight simulator atPIC",
+        },
+      ],
+    },
+  },
+};
+---
+
+<BaseLayout
+  siteTitle={data.siteTitle}
+  siteDescription={data.siteDescription}
+  siteKeywords={data.siteKeywords}
+>
+  <HeaderMain
+    content={data.header}
+    mainSize={false}
+    images={[data.header.image]}
+  />
+  <!-- Why Become a Pilot -->
+  <section>
+    <div class="bg-stone-100 bg-logo">
+      <div class="flex-1 text-primary-600 pt-12">
+        <div
+          class="flex flex-col px-8 py-12 sm:px-12 lg:py-20 text-center items-center"
+          data-aos="zoom-in"
+          data-aos-delay="300"
+          data-aos-duration="1500"
+        >
+          <span class="">
+            {data.newToFlying.whyBecomePilot.upperHeader}
+          </span>
+          <h2
+            class="text-4xl font-semibold tracking-tight text-pretty sm:text-5xl"
+          >
+            {data.newToFlying.whyBecomePilot.title}
+          </h2>
+          <p
+            class="mt-6 text-lg text-pretty font-extralight max-w-2xl"
+            data-aos="fade-left"
+          >
+            {data.newToFlying.whyBecomePilot.description}
+          </p>
+
+          <ul
+            class="flex flex-col lg:flex-row justify-center items-baseline lg:justify-between gap-6 py-2 mt-6 max-w-3xl border-y border-primary-800"
+            data-aos="zoom-in"
+            data-aos-delay="300"
+            data-aos-duration="1500"
+          >
+            {
+              data.newToFlying.whyBecomePilot.bullets.map((bullet: any) => (
+                <div class="flex flex-col items-center">
+                  <h3 class="font-semibold text-lg mb-2 uppercase w-44 text-center">
+                    {bullet.title}
+                  </h3>
+                  <p class="text-gray-500 max-w-sm">{bullet.description}</p>
+                </div>
+              ))
+            }
+          </ul>
+          <ImageComp
+            src={data.newToFlying.whyBecomePilot.image.src}
+            alt={data.newToFlying.whyBecomePilot.image.alt}
+            classes="rounded-xl object-cover max-w-lg mt-10 shadow-lg shadow-black/30"
+          />
+          {
+            (
+              <div class="grid gap-6 mt-6 lg:grid-cols-2 text-justify py-2 border-y border-primary-800  ">
+                {data.newToFlying.whyBecomePilot.descriptions.map(
+                  (description: string) => (
+                    <p
+                      class="mt-4 text-pretty text-lg font-light max-w-xs"
+                      data-aos="fade-left"
+                    >
+                      {description}
+                    </p>
+                  ),
+                )}
+              </div>
+            )
+          }
+          <!-- <div class="mt-10 flex">
+						<a href={content.button.href} class="btn-accent btn-middle ">
+							{content.button.text}
+						</a>
+					</div> -->
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- RoadMap -->
+  <section class="relative py-12 bg-stone-100 text-primary-600">
+    <div
+      class="bg-primary-300 text-white rounded-l-full text-2xl px-4 py-2 pr-[20%] lg:pr-[30%] absolute top-6 right-0 sm:right-0 sm:top-16"
+      data-aos="fade-left"
+    >
+      {data.newToFlying.roadMap.upperHeading}
+    </div>
+    <div
+      class="lg:absolute inset-0 left-0 top-12 z-10 md:w-3/4 lg:w-1/3 xl:1/3 max-h-3/4 mt-12 flex justify-end"
+      data-aos="fade-right"
+    >
+      <ImageComp
+        src={data.newToFlying.roadMap.image.src}
+        alt={data.newToFlying.roadMap.image.alt}
+        classes="object-cover h-full rounded-tr-full rounded-br-full w-full"
+      />
+    </div>
+    <div class="mx-auto flex max-w-4xl flex-col overflow-hidden md:flex-row">
+      <div
+        class="flex flex-col px-6 py-10 sm:px-10 lg:py-16 text-right items-end text-primary-600 w-full pb-20"
+        data-aos="zoom-in"
+        data-aos-delay="300"
+      >
+        <h2
+          class="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-pretty my-6 max-w-3xl"
+        >
+          {data.newToFlying.roadMap.title}
+        </h2>
+
+        {
+          !data.newToFlying.roadMap.descriptions && (
+            <p class="mt-4 sm:mt-6 text-base sm:text-lg lg:text-xl text-pretty lg:w-2/3">
+              {data.newToFlying.roadMap.description}
+            </p>
+          )
+        }
+        <div class="max-w-xl pl-12 flex flex-col justify-end items-end">
+          {
+            (
+              <p>
+                {data.newToFlying.roadMap.descriptions &&
+                  data.newToFlying.roadMap.descriptions.map(
+                    (description: any) => `${description} `,
+                  )}
+              </p>
+            )
+          }
+        </div>
+
+        {
+          (
+            <div class="">
+              {data.newToFlying.roadMap.bullets.map((step: any) => (
+                <div
+                  class="mt-10 flex flex-col items-end max-w-sm"
+                  data-aos="fade-up"
+                >
+                  <a href={step.link.href} class="btn-accent btn-right ">
+                    {step.title}
+                  </a>
+                  {/* <h3 class="font-semibold text-2xl mb-2 uppercase">
+									{step.title}
+								</h3> */}
+                  <p class="text-gray-500 max-w-2xl text-xl mt-2 py-2 ">
+                    {step.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )
+        }
+        <!-- <a
+			href={content.button.href}
+			class="btn-accent btn-middle mt-6  bottom-6 right-6 sm:right-0 sm:bottom-8"
+			>
+			{content.button.text}
+			</a> -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Us -->
+  <section class="relative py-12 bg-stone-100 text-primary-600 overflow-hidden">
+    <!-- Top floating button -->
+    <div
+      class="bg-primary-300 text-white rounded-r-full text-2xl px-4 py-2 pl-[20%] lg:pl-[30%] absolute top-6 left-0 sm:left-0 sm:top-16"
+      data-aos="fade-right"
+    >
+      {data.newToFlying.whyPIC.upperHeading}
+    </div>
+
+    <!-- Image container on the right -->
+    <div
+      class="lg:absolute inset-y-0 right-0 top-12 z-10 md:w-3/4 lg:w-1/3 xl:w-1/3 mt-12 max-h-3/4 flex justify-end"
+      data-aos="fade-left"
+      data-duration="2000"
+      data-aos-delay="300"
+    >
+      <ImageComp
+        src={data.newToFlying.whyPIC.image.src}
+        alt={data.newToFlying.whyPIC.image.alt}
+        classes="object-cover h-full rounded-tl-full rounded-bl-full w-full"
+      />
+    </div>
+
+    <!-- Text content -->
+    <div
+      class="mx-auto flex max-w-4xl flex-col overflow-hidden md:flex-row justify-end"
+    >
+      <div
+        class="flex flex-col px-6 py-10 sm:px-10 lg:py-16 text-left items-start w-full pb-20"
+        data-aos="zoom-in"
+        data-aos-delay="300"
+      >
+        <h2
+          class="text-3xl sm:text-4xl lg:text-6xl font-semibold tracking-tight text-pretty my-6 max-w-2xl"
+        >
+          {data.newToFlying.whyPIC.title}
+        </h2>
+
+        {
+          !data.newToFlying.whyPIC.descriptions && (
+            <p class="mt-4 sm:mt-6 text-base sm:text-lg lg:text-xl text-pretty  lg:w-2/3">
+              {data.newToFlying.whyPIC.description}
+            </p>
+          )
+        }
+
+        <div class="max-w-xl pr-12 flex flex-col justify-end items-start">
+          {
+            data.newToFlying.whyPIC.descriptions &&
+              data.newToFlying.whyPIC.descriptions.map((description: any) => (
+                <p class="text-sm lg:text-lg ">{description}</p>
+              ))
+          }
+        </div>
+
+        <!-- <a
+			href={content.button.href}
+			class="btn-accent btn-middle mt-6 bottom-6 left-6 sm:left-0 sm:bottom-8"
+		>
+			{content.button.text}
+		</a> -->
+      </div>
+    </div>
+  </section>
+
+  <!-- First Steps -->
+  <!-- RoadMap -->
+  <section class="relative py-12 bg-stone-100 text-primary-600">
+    <div
+      class="bg-primary-300 text-white rounded-l-full text-2xl px-4 py-2 pr-[20%] lg:pr-[30%] absolute top-6 right-0 sm:right-0 sm:top-16"
+      data-aos="fade-left"
+    >
+      {data.newToFlying.firstSteps.upperHeading}
+    </div>
+    <div
+      class="lg:absolute inset-0 left-0 top-12 z-10 md:w-3/4 lg:w-1/3 xl:1/3 max-h-3/4 mt-12 flex justify-end"
+      data-aos="fade-right"
+    >
+      <ImageComp
+        src={data.newToFlying.firstSteps.image.src}
+        alt={data.newToFlying.firstSteps.image.alt}
+        classes="object-cover h-full rounded-tr-full rounded-br-full w-full"
+      />
+    </div>
+    <div class="mx-auto flex max-w-4xl flex-col overflow-hidden md:flex-row">
+      <div
+        class="flex flex-col px-6 py-10 sm:px-10 lg:py-16 text-right items-end text-primary-600 w-full pb-20"
+        data-aos="zoom-in"
+        data-aos-delay="300"
+      >
+        <h2
+          class="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-pretty my-6 max-w-3xl"
+        >
+          {data.newToFlying.firstSteps.title}
+        </h2>
+
+        {
+          !data.newToFlying.firstSteps.descriptions && (
+            <p class="mt-4 sm:mt-6 text-base sm:text-lg lg:text-xl text-pretty lg:w-2/3">
+              {data.newToFlying.firstSteps.description}
+            </p>
+          )
+        }
+        <div class="max-w-xl pl-12 flex flex-col justify-end items-end">
+          {
+            (
+              <p>
+                {data.newToFlying.firstSteps.descriptions &&
+                  data.newToFlying.firstSteps.descriptions.map(
+                    (description: any) => `${description} `,
+                  )}
+              </p>
+            )
+          }
+        </div>
+
+        {
+          (
+            <div class="">
+              {data.newToFlying.firstSteps.bullets.map((step: any) => (
+                <div
+                  class="mt-10 flex flex-col items-end max-w-sm"
+                  data-aos="fade-up"
+                >
+                  <a href={step.link.href} class="btn-accent btn-right ">
+                    {step.title}
+                  </a>
+                  {/* <h3 class="font-semibold text-2xl mb-2 uppercase">
+									{step.title}
+								</h3> */}
+                  <p class="text-gray-500 max-w-2xl text-xl mt-2 py-2 ">
+                    {step.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )
+        }
+        <!-- <a
+			href={content.button.href}
+			class="btn-accent btn-middle mt-6  bottom-6 right-6 sm:right-0 sm:bottom-8"
+			>
+			{content.button.text}
+			</a> -->
+      </div>
+    </div>
+  </section>
+  <!-- <Why /> -->
+  <Enroll />
+  <FAQ />
+  <SimulatorImageSection />
+</BaseLayout>

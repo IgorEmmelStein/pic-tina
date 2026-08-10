@@ -1,0 +1,154 @@
+---
+import ImageComp from "../utils/ImageComp.astro";
+const {
+  sliderId = "sliderImages",
+  sliderImages = [
+    {
+      src: "/src/assets/fleet/red-bird-fmx_pilot-instructional-center.webp",
+      alt: "Redbird FMX Full Motion Flight Simulator at Pilot Instructional Center",
+    },
+    {
+      src: "/src/assets/fleet/red-bird-fx-simulator_motion-movement_pilot-instructional-center-1.png",
+      alt: "Redbird FX Flight Simulator motion movement at Pilot Instructional Center",
+    },
+    {
+      src: "/src/assets/fleet/red-bird-fx-simulator_motion-movement_pilot-instructional-center-2.png",
+      alt: "Redbird FX Flight Simulator motion movement at Pilot Instructional Center",
+    },
+    {
+      src: "/src/assets/fleet/red-bird-fx-simulator_motion-movement_pilot-instructional-center-3.png",
+      alt: "Redbird FX Flight Simulator motion movement at Pilot Instructional Center",
+    },
+  ],
+} = Astro.props;
+---
+
+<!-- Image Slider -->
+<div
+  id={sliderId}
+  class="relative overflow-hidden w-full lg:aspect-video rounded-2xl"
+>
+  <!-- Slides track -->
+  <div
+    class="slider-track flex transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] h-full"
+    style={`width: ${sliderImages.length * 100}%`}
+  >
+    {
+      sliderImages.map((img: { src: string; alt: string }) => (
+        <div
+          class="relative w-full h-full"
+          style={`min-width: ${100 / sliderImages.length}%; width: ${100 / sliderImages.length}%`}
+        >
+          <ImageComp
+            src={img.src}
+            alt={img.alt}
+            classes="w-full h-full object-contain"
+          />
+        </div>
+      ))
+    }
+  </div>
+
+  <!-- Prev button -->
+  <button
+    class="slider-prev absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white border border-[#c2d5df] flex items-center justify-center text-[#423731] hover:bg-[#423731] hover:text-[#e0eaef] transition-colors z-10"
+    aria-label="Previous image"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg
+    >
+  </button>
+
+  <!-- Next button -->
+  <button
+    class="slider-next absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white border border-[#c2d5df] flex items-center justify-center text-[#423731] hover:bg-[#423731] hover:text-[#e0eaef] transition-colors z-10"
+    aria-label="Next image"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg
+    >
+  </button>
+
+  <!-- Dots -->
+  <div
+    class="slider-dots absolute bottom-12 left-0 right-0 flex justify-center gap-1.5 z-10"
+  >
+    {
+      sliderImages.map((_: unknown, i: number) => (
+        <button
+          class="dot w-1.5 h-1.5 rounded-full bg-white/45 transition-all duration-200 border-0 p-0 cursor-pointer"
+          data-index={i}
+          aria-label={`Go to image ${i + 1}`}
+        />
+      ))
+    }
+  </div>
+
+  <!-- Caption -->
+  <!-- <div
+    class="absolute bottom-0 left-0 right-0 bg-[#423731] text-[#e0eaef] text-[10px] tracking-[0.2em] uppercase px-4 py-2.5 rounded-b-[28px]"
+  >
+    <span class="slider-caption">{sliderImages[0]?.alt}</span>
+  </div> -->
+</div>
+
+<script define:vars={{ sliderId: sliderId, images: sliderImages }}>
+  const root = document.getElementById("sliderImages");
+  if (root) {
+    const track = root.querySelector(".slider-track");
+    const dots = root.querySelectorAll(".dot");
+    const caption = root.querySelector(".slider-caption");
+    const total = images.length;
+    let current = 0;
+    let timer;
+
+    function go(n) {
+      current = ((n % total) + total) % total;
+      track.style.transform = `translateX(-${current * (100 / total)}%)`;
+      dots.forEach((d, i) => {
+        d.style.background = i === current ? "white" : "rgba(255,255,255,0.45)";
+        d.style.transform = i === current ? "scale(1.3)" : "scale(1)";
+      });
+      if (caption) caption.textContent = images[current]?.alt ?? "";
+    }
+
+    function resetTimer() {
+      clearInterval(timer);
+      timer = setInterval(() => go(current + 1), 4000);
+    }
+
+    root.querySelector(".slider-prev")?.addEventListener("click", () => {
+      go(current - 1);
+      resetTimer();
+    });
+    root.querySelector(".slider-next")?.addEventListener("click", () => {
+      go(current + 1);
+      resetTimer();
+    });
+    dots.forEach((d) => {
+      d.addEventListener("click", () => {
+        go(Number(d.dataset.index));
+        resetTimer();
+      });
+    });
+
+    go(0);
+    resetTimer();
+  }
+</script>

@@ -1,0 +1,4 @@
+interface:
+  display_name: "RRM Aviation Industry Expert"
+  short_description: "Checks aviation claims with usable wording"
+  default_prompt: "Use $rrm-aviation-industry-expert to verify aviation claims and provide safe vivid company-voice wording for this brief."

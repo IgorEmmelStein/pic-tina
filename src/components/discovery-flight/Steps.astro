@@ -1,0 +1,91 @@
+---
+const { content } = Astro.props;
+---
+
+<section class="bg-[#fcfaf8] py-24 font-sans overflow-hidden">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="max-w-3xl mb-20">
+      <h2
+        class="text-4xl font-bold tracking-tight text-[#423731] sm:text-5xl uppercase leading-[1.1]"
+        set:html={content.title}
+      />
+      <div class="mt-6 h-1.5 w-24 bg-[#4b7992] rounded-full"></div>
+      <p class="mt-8 text-lg leading-8 text-[#5d4d40]/80">
+        {content.description}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 relative">
+      <div
+        class="hidden lg:block absolute top-1/2 left-0 w-full h-px bg-dashed border-t-2 border-dashed border-[#4b7992]/20 -z-10"
+      >
+      </div>
+
+      {
+        content.steps.map((step, index) => (
+          <div class="group relative bg-white p-8 md:p-10 rounded-3xl shadow-sm border border-neutral-100 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2">
+            <div class="flex items-center justify-between mb-8">
+              <div class="flex items-center gap-4">
+                <div class="w-14 h-14 rounded-2xl bg-[#4b7992] text-white flex items-center justify-center p-3 shadow-lg shadow-[#4b7992]/20 transition-transform duration-500 group-hover:rotate-12">
+                  <Fragment set:html={step.icon} />
+                </div>
+                <span class="text-[10px] font-title uppercase tracking-[0.3em] text-[#4b7992]">
+                  Mission Phase 0{index + 1}
+                </span>
+              </div>
+
+              <span class="text-4xl font-title text-[#423731]/5 group-hover:text-[#4b7992]/10 transition-colors">
+                0{index + 1}
+              </span>
+            </div>
+
+            <div class="absolute top-0 left-0 w-full h-1 bg-[#4b7992]/10 overflow-hidden rounded-t-3xl">
+              <div class="h-full bg-[#4b7992] transition-all duration-700 ease-out w-0 group-hover:w-full" />
+            </div>
+
+            <h3 class="text-xl font-bold text-[#423731] uppercase tracking-tight mb-4">
+              {step.title}
+            </h3>
+
+            <p class="text-[#5d4d40]/70 leading-relaxed">{step.description}</p>
+
+            <div class="mt-8 flex items-center gap-2">
+              <div class="h-1 w-8 bg-[#dcc1a6] rounded-full transition-all duration-500 group-hover:w-16" />
+            </div>
+          </div>
+        ))
+      }
+    </div>
+    <div class="mt-16 text-center">
+      <div class="py-6">
+        <a
+          href={content.cta.href}
+          class="group relative inline-flex items-center justify-center px-8 py-4 bg-[#4b7992] hover:text-[#4b7992] text-white font-bold rounded-full overflow-hidden transition-all hover:bg-[#dcc1a6]"
+        >
+          <span class="relative z-10 uppercase tracking-widest text-sm"
+            >{content.cta.text}</span
+          >
+          <div
+            class="absolute bottom-0 left-0 h-1 bg-[#4b7992] w-0 transition-all duration-500 group-hover:w-full"
+          >
+          </div>
+        </a>
+      </div>
+      <p class="text-[#423731]/60 text-xs font-bold uppercase tracking-widest">
+        Total estimated time: 1 Hour
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Customizing the SVG stroke colors inside the icon container */
+  .group svg {
+    @apply w-full h-full;
+  }
+
+  /* Smooth entry for the top progress bar */
+  .group:hover .progress-fill {
+    width: 100%;
+  }
+</style>

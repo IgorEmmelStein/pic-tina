@@ -1,0 +1,323 @@
+---
+import CTALeft from "../../components/ctas/CTALeft.astro";
+import CTARight from "../../components/ctas/CTARight.astro";
+import Enroll from "../../components/forms/Enroll.astro";
+import HeaderMain from "../../components/headers/HeaderMainAlternative.astro";
+import FAQ from "../../components/sections/FAQ.astro";
+import TextIcons from "../../components/sections/TextIcons.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../../data/consts";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+import "aos/dist/aos.css";
+import ContentMiddle from "../../components/content/ContentMiddle.astro";
+import CardProgram from "../../components/cards/CardProgram.astro";
+import CTAAirlineTrack from "../../components/ctas/CTAAirlineTrack.astro";
+import FleetGallery from "../../components/fleet/FleetGallery.astro";
+import { fleet } from "../about/our-fleet.astro";
+
+const data = {
+  siteTitle:
+    "Flight Training Programs | Pilot Instructional Center | Near Kansas City",
+  siteDescription:
+    "Explore structured pilot training programs at Pilot Instructional Center. From Private Pilot to CFI, our curriculum is built on safety and deep experience.",
+  siteKeywords:
+    "flight training programs, pilot licenses, aviation training Kansas City",
+
+  header: {
+    image: {
+      src: "/src/assets/stock/stock_Plane-pilot-helice_luciano-faiolo-W68nUftntf4-unsplash.jpg",
+      alt: "Pilot near aircraft propeller by Luciano Faiolo",
+    },
+    upperHeader: "Now Enrolling New Students in Kansas City",
+    title: "Professional Flight Training You Can Trust",
+    description:
+      "PIC offers high-quality, aircraft-based flight instruction led by senior, experienced CFIs. Train with integrity, safety, and personalized guidance at New Century, Kansas.",
+    buttons: [
+      { text: "Start Training", href: "#enroll", style: "btn-secondary" },
+      { text: "Learn More", href: "/contact/", style: "btn-transparent" },
+    ],
+  },
+
+  overview: {
+    image: {
+      src: "/src/assets/stock-man-airplanes-museum.jpg",
+      alt: "Student pilots preparing for flight at Pilot Instructional Center",
+    },
+    upperHeader: "YOUR PATH TO THE FLIGHT DECK",
+    title: "Start Your Pilot Journey with Confidence",
+    description:
+      "Whether you're training for a career or flying for personal enjoyment, Pilot Instructional Center provides structured, safety-focused training built on decades of real-world experience. With senior instructors, not time-builders, you’ll gain skills, confidence, and good aeronautical judgment from day one.",
+    descriptions: [
+      "Experience the excitement and discipline of aviation.",
+      "Build strong fundamentals and progress with clarity.",
+      "Train with a community of passionate, veteran aviators.",
+    ],
+    bullets: [
+      {
+        icon: "M3 18h18v2H3zm18.509-9.473a1.61 1.61 0 0 0-2.036-1.019L15 9L7 6L5 7l6 4l-4 2l-4-2l-1 1l4 4l14.547-5.455a1.61 1.61 0 0 0 .962-2.018",
+        title: "Career Growth & Opportunity",
+        description:
+          "Aviation continues to expand, creating consistent demand for well-trained pilots in commercial, charter, and corporate sectors.",
+      },
+      {
+        icon: "M12 2a1 1 0 0 1 .932.638l7 18a1 1 0 0 1-1.326 1.281L13 19.517V13a1 1 0 1 0-2 0v6.517l-5.606 2.402a1 1 0 0 1-1.326-1.281l7-18A1 1 0 0 1 12 2",
+        title: "Freedom & Adventure",
+        description:
+          "Flying unlocks independence, exploration, and a level of personal achievement few activities can match.",
+      },
+      {
+        icon: "",
+        title: "Challenge & Achievement",
+        description:
+          "Becoming a pilot builds confidence, discipline, and problem-solving skills that last a lifetime.",
+      },
+    ],
+    button: {
+      text: "Start Your Pilot Journey",
+      href: "/contact/",
+    },
+  },
+
+  programs: {
+    upperHeader: "FLIGHT TRAINING CATALOG",
+    title: "Our Flight Training Programs",
+    description:
+      "Choose the program that fits your goals. PIC delivers structured, aircraft-based flight instruction taught by experienced, Kansas City–based senior CFIs dedicated to your long-term success.",
+    descriptions: [
+      "Professional instruction grounded in safety and integrity.",
+      "Consistent lesson quality with experienced instructors, not time builders.",
+      "Training designed to help you advance with confidence and clarity.",
+    ],
+    bullets: [
+      {
+        icon: "",
+        title: "Experienced Instructors",
+        description:
+          "Train with senior CFIs who prioritize your success, not building hours.",
+      },
+      {
+        icon: "",
+        title: "Safety-Focused Training",
+        description:
+          "Every lesson emphasizes procedures, judgment, and real-world preparedness.",
+      },
+      {
+        icon: "",
+        title: "Progress With Confidence",
+        description:
+          "Structured, transparent training paths that take you from day one to the flight deck.",
+      },
+    ],
+    button: {
+      text: "Enroll today",
+      href: "#enroll",
+    },
+
+    programs: [
+      {
+        title: "Private Pilot License (PPL)",
+        description:
+          "Your foundation in aviation. Learn fundamental aircraft control, navigation, communications, and safe decision-making.",
+        image: {
+          src: "/src/assets/stock/stock_plane-ground-pilot_steward-masweneng-n9By7oBszM0-unsplash.jpg",
+          alt: "Pilot standing by aircraft on ground by Steward Masweneng",
+        },
+        tags: ["Part 61", "PPL", "Beginner"],
+        button: { title: "Explore", href: "/flight-training/private-pilot/" },
+      },
+      {
+        title: "Instrument Rating (IR)",
+        description:
+          "Gain the skills to fly safely in low visibility, clouds, and controlled airspace using IFR procedures and precision flying.",
+        image: {
+          src: "/src/assets/stock/stock_Cockpit-stick_leonardo-rubbiani-ZqxCPDg3GZY-unsplash.jpg",
+          alt: "Cockpit control stick by Leonardo Rubbiani",
+        },
+        tags: ["IFR", "Safety", "Advanced"],
+        button: {
+          title: "Explore",
+          href: "/flight-training/instrument-rating/",
+        },
+      },
+      {
+        title: "Commercial Pilot License (CPL)",
+        description:
+          "Advance your career with commercial-level proficiency, professionalism, and expanded flight skills.",
+        image: {
+          src: "/src/assets/stock/stock_Plane-commercial-airport_ern-low-QMAhB9P0RXg-unsplash.jpg",
+          alt: "Commercial airplane at airport by Ern Low",
+        },
+        tags: ["Career", "CPL", "Professional"],
+        button: {
+          title: "Explore",
+          href: "/flight-training/commercial-pilot/",
+        },
+      },
+      {
+        title: "CFI – Certified Flight Instructor",
+        description:
+          "Learn to teach, demonstrate maneuvers, and guide the next generation of aviators with clarity and professionalism.",
+        image: {
+          src: "/src/assets/stock/stock_Cockpit-pilot-student_tamas-tuzes-katai-UKhE7wQpe-c-unsplash.jpg",
+          alt: "Plane taking off",
+        },
+        tags: ["CFI", "Teaching", "Professional"],
+        button: {
+          title: "Explore",
+          href: "/flight-training/certified-flight-instructor-cfi/",
+        },
+      },
+      {
+        title: "CFII – Instrument Instructor",
+        description:
+          "Expand your credentials and teach the full spectrum of IFR operations with advanced instructional techniques.",
+        image: {
+          src: "/src/assets/stock/stock_Plane-flying_mathias-reding-qYcDyPilTn0-unsplash.jpg",
+          alt: "Airplane flying by Mathias Reding",
+        },
+        tags: ["CFII", "IFR", "Instructor"],
+        button: {
+          title: "Explore",
+          href: "/flight-training/certified-flight-instructor-instrument-cfii/",
+        },
+      },
+      {
+        title: "Sport Pilot Certificate",
+        description:
+          "A streamlined path to the cockpit. Learn essential aircraft control, basic navigation, and safe flying skills with fewer requirements and lower time commitment.",
+        image: {
+          src: "/src/assets/stock/stock-joao-lopes-S2ftkdYZGM0-unsplash-cutted.png",
+          alt: "Light sport aircraft on the runway ready for flight",
+        },
+        tags: ["Part 61", "Sport Pilot", "Beginner"],
+        button: { title: "Explore", href: "/flight-training/sport-pilot/" },
+      },
+    ],
+  },
+
+  cta: {
+    image: {
+      src: "/src/assets/eliezer-fernandes-y7E8qfllcY0-unsplash.jpg",
+      alt: "Aircraft exterior by Eliezer Fernandes",
+    },
+    title: "Ready to Get Started?",
+    description:
+      "Contact us today to enroll or speak with one of our senior instructors. We’ll guide you through every step toward earning your wings.",
+    button: {
+      text: "Contact Us",
+      href: "/contact/",
+    },
+  },
+
+  ctas: {
+    ctaFloating: {
+      upperHeading: "Train With Confidence",
+      title: "High-Quality Instruction From Experienced CFIs",
+      description:
+        "Pilot Instructional Center offers aircraft-based training with a strong focus on safety, integrity, and real-world aviation excellence. Join a flight school committed to helping every student succeed.",
+      images: [
+        {
+          src: "/src/assets/student using simulator 2.jpg",
+          alt: "Student receiving flight instruction",
+        },
+      ],
+    },
+  },
+};
+---
+
+<BaseLayout
+  siteTitle={data.siteTitle}
+  siteDescription={data.siteDescription}
+  siteKeywords={data.siteKeywords}
+>
+  <HeaderMain content={data.header} />
+  <TextIcons content={data.overview} />
+
+  <section class="py-12 bg-primary-300 relative overflow-hidden">
+    <div class="mx-auto bg-logo-dark">
+      <div class="text-white max-w-7xl mx-auto py-12">
+        <div
+          class="flex flex-col px-8 py-12 sm:px-12 text-center justify-center"
+        >
+          <span
+            data-aos="zoom-in"
+            data-aos-delay="300"
+            data-aos-duration="1500"
+          >
+            {data.programs.upperHeader}
+          </span>
+          <h2
+            class="text-4xl font-semibold tracking-tight text-pretty sm:text-5xl"
+            data-aos="zoom-in"
+            data-aos-duration="1500"
+          >
+            {data.programs.title}
+          </h2>
+          <p
+            class="text-lg/8 text-pretty py-2 mt-6 border-b border-t text-white"
+            data-aos="zoom-in"
+            data-aos-delay="700"
+            data-aos-duration="1500"
+          >
+            {data.programs.description}
+          </p>
+          <ul
+            class="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-2 py-6"
+            data-aos="zoom-in"
+            data-aos-delay="700"
+            data-aos-duration="1500"
+          >
+            {
+              data.programs.bullets.map((bullet: any) => (
+                <div class=" flex flex-col justify-center lg:w-1/4 ">
+                  <div class="mb-4 text-white">
+                    <svg
+                      class="w-8 h-8 mx-auto"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d={bullet.icon || "M5 13l4 4L19 7"}
+                      />
+                    </svg>
+                  </div>
+                  <h3 class="font-semibold text-center mb-2 uppercase">
+                    {bullet.title}
+                  </h3>
+                  <p class="text-white text-sm text-center">
+                    {bullet.description}
+                  </p>
+                </div>
+              ))
+            }
+          </ul>
+          <div class="mt-10 flex mx-auto pointer-events-auto">
+            <a href={data.programs.button.href} class="btn-accent btn-middle">
+              {data.programs.button.text}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <section
+      class="flex flex-col flex-wrap md:flex-row justify-center items-center gap-8 px-6 lg:px-0 py-12 max-w-7xl mx-auto"
+    >
+      {
+        data.programs.programs.map((program) => (
+          <CardProgram content={program} />
+        ))
+      }
+    </section>
+  </section>
+
+  <CTAAirlineTrack />
+  <!-- <CTALeft content={data.cta} /> -->
+  <!-- <CTARight /> -->
+  <Enroll />
+  <FleetGallery fleet={fleet} selfLink={false} />
+</BaseLayout>

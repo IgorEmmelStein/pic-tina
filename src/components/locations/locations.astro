@@ -1,0 +1,139 @@
+---
+const locationData = {
+  // Example: "Olathe", "Overland Park", "Gardner"
+  targetCity: "Kansas City",
+  title: "The Premier Flight School Serving",
+  subtitle: "Escape the 'pilot mill' environment. Just a short drive from",
+  summary:
+    "Pilot Instructional Center (PIC) offers a boutique, family-oriented training experience at New Century AirCenter (KIXD), focused on safety, integrity, and senior-level mentorship.",
+  highlights: [
+    {
+      title: "Senior Mentorship",
+      text: "Learn from jet-rated instructors who are here to teach, not just build hours.",
+      icon: "graduation-cap",
+    },
+    {
+      title: "Landmark Discovery",
+      text: "Our discovery flights offer breathtaking views of GEHA Field at Arrowhead and Kauffman Stadium.",
+      icon: "map",
+    },
+    {
+      title: "Safety First",
+      text: "We follow rigorous maintenance SOPs and FAA requirements, no cut corners.",
+      icon: "shield-check",
+    },
+  ],
+  logistics: {
+    address: "280 Gardner Dr, New Century, KS 66031",
+    hours: "7 days a week ,  7am - 7pm",
+    airport: "New Century AirCenter (IXD)",
+  },
+};
+---
+
+<section class="bg-[#fcfaf8] py-24 px-6 overflow-hidden">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div data-aos="fade-right">
+        <span
+          class="text-[#745e4d] font-bold uppercase tracking-widest text-xs bg-[#dcc1a6]/30 px-3 py-1 rounded-md"
+        >
+          Aviation Training in {locationData.targetCity}
+        </span>
+        <h2
+          class="text-5xl font-extrabold text-[#423731] mt-6 mb-6 leading-tight"
+        >
+          {locationData.title}
+          <span class="text-[#745e4d]">{locationData.targetCity}</span>
+        </h2>
+        <p class="text-lg text-[#745e4d] mb-8 leading-relaxed">
+          {locationData.subtitle}
+          {locationData.targetCity}, {locationData.summary}
+        </p>
+
+        <div class="space-y-6">
+          {
+            locationData.highlights.map((item) => (
+              <div class="flex items-start gap-4 group">
+                <div class="mt-1 bg-[#dcc1a6] p-2 rounded-xl text-[#423731] group-hover:bg-[#745e4d] group-hover:text-white transition-colors shadow-sm">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-bold text-[#423731]">{item.title}</h4>
+                  <p class="text-sm text-[#745e4d] opacity-90">{item.text}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+
+        <div class="mt-10 flex flex-wrap gap-4">
+          <a
+            href="/contact/"
+            class="bg-[#5d4d40] text-white px-8 py-4 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-[#423731] transition-all transform hover:scale-105 shadow-lg"
+          >
+            Book Discovery Flight
+          </a>
+          <a
+            href="/airline-track/"
+            class="bg-white text-[#423731] border-2 border-[#dcc1a6] px-8 py-4 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-[#fcfaf8] transition-all"
+          >
+            View Career Track
+          </a>
+        </div>
+      </div>
+
+      <div class="relative" data-aos="fade-left">
+        <div
+          class="bg-white p-2 rounded-[2.5rem] shadow-2xl border border-[#dcc1a6]/20"
+        >
+          <div
+            class="aspect-video bg-[#dcc1a6]/20 rounded-[2rem] flex items-center justify-center border-2 border-dashed border-[#dcc1a6]"
+          >
+            <span class="text-[#745e4d] font-bold"
+              >New Century AirCenter Facility Image</span
+            >
+          </div>
+
+          <div class="p-8">
+            <h3 class="text-2xl font-bold text-[#423731] mb-4">
+              Visit Our Hangar
+            </h3>
+            <ul class="space-y-4 text-sm">
+              <li class="flex items-center gap-3 text-[#745e4d]">
+                <strong class="text-[#423731]">Address:</strong>
+                {locationData.logistics.address}
+              </li>
+              <li class="flex items-center gap-3 text-[#745e4d]">
+                <strong class="text-[#423731]">Hours:</strong>
+                {locationData.logistics.hours}
+              </li>
+              <li class="flex items-center gap-3 text-[#745e4d]">
+                <strong class="text-[#423731]">Airport:</strong>
+                {locationData.logistics.airport}
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div
+          class="absolute -bottom-10 -right-10 w-64 h-64 bg-[#dcc1a6]/10 rounded-full -z-10"
+        >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

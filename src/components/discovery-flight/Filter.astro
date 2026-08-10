@@ -1,0 +1,121 @@
+---
+const { content } = Astro.props;
+---
+
+<section class="bg-[#4b7992] text-white py-24 font-sans overflow-hidden">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2
+        class="text-3xl font-bold tracking-tight sm:text-5xl uppercase leading-tight"
+      >
+        {content.title}
+      </h2>
+      <p class="mt-4 max-w-2xl mx-auto italic">
+        {content.description}
+      </p>
+      <div class="mt-6 h-1.5 w-24 bg-[#4b7992] mx-auto rounded-full"></div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 items-stretch">
+      <div
+        class="group relative bg-white p-8 md:p-12 rounded-3xl shadow-xl shadow-neutral-200/50 border border-neutral-100 transition-all duration-500 hover:-translate-y-2"
+      >
+        <div class="flex items-center gap-4 mb-8">
+          <div
+            class="flex-none w-12 h-12 rounded-xl bg-[#4b7992]/10 flex items-center justify-center"
+          >
+            <svg
+              class="w-6 h-6 text-[#4b7992]"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="3"
+                d="M5 13l4 4L19 7"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-[#423731] uppercase tracking-tight">
+            {content.leftColumn.title}
+          </h3>
+        </div>
+
+        <ul class="space-y-5">
+          {
+            content.leftColumn.items.map((item) => (
+              <li class="flex items-start gap-4 text-[#5d4d40] group/item">
+                <span class="mt-1.5 h-2 w-2 rounded-full bg-[#4b7992] transition-all group-hover/item:scale-150" />
+                <span class="text-lg leading-snug">{item}</span>
+              </li>
+            ))
+          }
+        </ul>
+
+        <div
+          class="mt-10 h-1 w-12 bg-[#4b7992] transition-all duration-500 group-hover:w-full rounded-full"
+        >
+        </div>
+      </div>
+
+      <div
+        class="group relative bg-white/5 p-8 md:p-12 rounded-3xl border border-dashed border-[#423731]/20 transition-all duration-500 hover:bg-white hover:shadow-xl hover:border-solid hover:-translate-y-2"
+      >
+        <div class="flex items-center gap-4 mb-8">
+          <div
+            class="flex-none w-12 h-12 rounded-xl bg-[#423731]/10 flex items-center justify-center"
+          >
+            <svg
+              class="w-6 h-6 text-[#423731]/60"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="3"
+                d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </div>
+          <h3
+            class="text-xl font-bold text-[#423731]/80 uppercase tracking-tight"
+          >
+            {content.rightColumn.title}
+          </h3>
+        </div>
+
+        <ul class="space-y-5 text-white group-hover:text-[#423731]/80">
+          {
+            content.rightColumn.items.map((item) => (
+              <li class="flex items-start gap-4 ">
+                <span class="mt-2.5 h-px w-3 bg-[#423731]/30" />
+                <span class="text-lg leading-snug italic">{item}</span>
+              </li>
+            ))
+          }
+        </ul>
+
+        <div
+          class="mt-10 h-1 w-12 bg-[#423731]/20 transition-all duration-500 group-hover:w-24 rounded-full"
+        >
+        </div>
+      </div>
+    </div>
+    <div class="mt-20 flex justify-center text-center">
+      <a
+        href={content.cta.href}
+        class="group shadow-2xl shadow-primary-800 relative inline-flex items-center justify-center px-10 py-5 bg-[#423731] text-white font-bold rounded-full overflow-hidden transition-all hover:bg-[#4b7992]"
+      >
+        <span class="relative z-10 uppercase tracking-[0.2em] text-sm"
+          >{content.cta.text}</span
+        >
+        <div
+          class="absolute bottom-0 left-0 h-1 bg-[#dcc1a6] w-0 transition-all duration-500 group-hover:w-full"
+        >
+        </div>
+      </a>
+    </div>
+  </div>
+</section>

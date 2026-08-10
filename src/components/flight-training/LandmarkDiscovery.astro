@@ -1,0 +1,120 @@
+---
+// Discovery Flight Landmark Data
+const discoveryData = {
+  heading: "Your First Flight: An Iconic Experience",
+  subheading: "See Kansas City from a New Perspective",
+  description:
+    "At Pilot Instructional Center, your journey begins with more than just a lesson, it begins with an unforgettable view. Our discovery flights give you the controls while soaring over the most iconic landmarks in the region.",
+  landmarks: [
+    {
+      name: "GEHA Field at Arrowhead Stadium",
+      feature: "Home of the Chiefs",
+      size: "large", // spans 2 rows
+      aos: "fade-right",
+    },
+    {
+      name: "Kauffman Stadium",
+      feature: "Home of the Royals",
+      size: "small",
+      aos: "fade-down",
+    },
+    {
+      name: "Kansas City Skyline",
+      feature: "Urban Navigation",
+      size: "small",
+      aos: "fade-up",
+    },
+    {
+      name: "New Century AirCenter",
+      feature: "Your Future Base",
+      size: "wide", // spans 2 columns
+      aos: "fade-left",
+    },
+  ],
+};
+---
+
+<section class="bg-white py-32 px-6 overflow-hidden">
+  <div class="max-w-7xl mx-auto">
+    <div
+      class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-20"
+    >
+      <div class="max-w-2xl" data-aos="fade-up">
+        <span
+          class="text-[#745e4d] font-black uppercase tracking-[0.4em] text-xs mb-4 block"
+          >The Experience</span
+        >
+        <h2
+          class="text-5xl md:text-7xl font-black text-[#423731] leading-none mb-6"
+        >
+          {discoveryData.heading}
+        </h2>
+        <p class="text-xl text-[#745e4d] leading-relaxed">
+          {discoveryData.description}
+        </p>
+      </div>
+      <div class="lg:mb-4" data-aos="fade-left">
+        <a
+          href="#book"
+          class="inline-flex items-center gap-4 bg-[#5d4d40] text-white px-10 py-5 rounded-full font-bold uppercase tracking-widest text-sm hover:bg-[#423731] transition-all transform hover:scale-105 shadow-2xl"
+        >
+          Book Your Flight
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+              clip-rule="evenodd"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div
+      class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-6 h-[1000px] md:h-[700px]"
+    >
+      {
+        discoveryData.landmarks.map((item, index) => (
+          <div
+            data-aos={item.aos}
+            class={`relative group overflow-hidden rounded-[2.5rem] bg-[#dcc1a6]/20 border border-[#dcc1a6]/30 transition-all duration-700
+            ${item.size === "large" ? "md:col-span-2 md:row-span-2" : ""}
+            ${item.size === "wide" ? "md:col-span-2" : ""}
+            ${item.size === "small" ? "md:col-span-1" : ""}
+          `}
+          >
+            <div class="absolute inset-0 bg-gradient-to-t from-[#423731]/80 via-transparent to-transparent z-10 opacity-60 group-hover:opacity-80 transition-opacity" />
+
+            <div class="absolute inset-0 flex items-center justify-center italic text-[#745e4d] font-serif text-lg group-hover:scale-110 transition-transform duration-1000">
+              [Aerial view of {item.name}]
+            </div>
+
+            <div class="absolute bottom-0 left-0 p-10 z-20 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+              <p class="text-[#dcc1a6] text-xs font-black uppercase tracking-[0.2em] mb-2">
+                {item.feature}
+              </p>
+              <h3 class="text-white text-2xl font-bold leading-tight">
+                {item.name}
+              </h3>
+            </div>
+
+            <div class="absolute inset-4 border border-white/20 rounded-[2rem] z-30 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="mt-12 flex justify-end" data-aos="fade-up">
+      <p
+        class="text-[#745e4d] text-sm italic border-r-4 border-[#dcc1a6] pr-4 text-right max-w-sm"
+      >
+        "There's nothing like seeing the red seats of Arrowhead or the blue of
+        the K from 2,000 feet to realize your aviation dreams are within reach."
+      </p>
+    </div>
+  </div>
+</section>

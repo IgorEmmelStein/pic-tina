@@ -1,0 +1,73 @@
+---
+const { tags } = Astro.props;
+---
+
+<div class={`flex flex-col gap-8 col-span-1 lg:hidden py-4 my-2`}>
+  <div>
+    <h3
+      class="text-lg font-bold text-madison-950 mb-3 uppercase tracking-wider text-sm"
+    >
+      Search Articles
+    </h3>
+    <input
+      type="text"
+      id="blog-search"
+      placeholder="Type keywords..."
+      class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-monza-700 outline-none bg-white"
+    />
+  </div>
+</div>
+
+<script>
+  const initSearch = () => {
+    const searchInput = document.getElementById(
+      "blog-search",
+    ) as HTMLInputElement;
+    const postContainers = document.querySelectorAll("[data-post-card]");
+
+    // Create a "No Results" message element once
+    const noResults = document.createElement("div");
+    noResults.id = "no-results-msg";
+    noResults.className =
+      "hidden col-span-full py-10 text-center text-gray-500 italic";
+    noResults.innerText = "No articles found matching your search.";
+
+    // Find the grid to append the message to
+    const grid = document.querySelector(".grid.grid-cols-1.md\\:grid-cols-2");
+    if (grid && !document.getElementById("no-results-msg")) {
+      grid.appendChild(noResults);
+    }
+
+    searchInput?.addEventListener("input", (e) => {
+      const searchTerm = (e.target as HTMLInputElement).value
+        .toLowerCase()
+        .trim();
+      let visibleCount = 0;
+
+      postContainers.forEach((container) => {
+        const title = container.getAttribute("data-title")?.toLowerCase() || "";
+        const description =
+          container.getAttribute("data-description")?.toLowerCase() || "";
+
+        if (title.includes(searchTerm) || description.includes(searchTerm)) {
+          (container as HTMLElement).style.display = "block";
+          visibleCount++;
+        } else {
+          (container as HTMLElement).style.display = "none";
+        }
+      });
+
+      // Show/Hide No Results message
+      if (visibleCount === 0 && searchTerm !== "") {
+        noResults.classList.remove("hidden");
+      } else {
+        noResults.classList.add("hidden");
+      }
+    });
+  };
+
+  // Run on initial load
+  initSearch();
+  // Run on Astro View Transitions
+  document.addEventListener("astro:after-swap", initSearch);
+</script>

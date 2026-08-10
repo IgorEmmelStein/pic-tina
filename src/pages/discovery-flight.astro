@@ -1,0 +1,372 @@
+---
+import CTALeft from "../components/ctas/CTALeft.astro";
+import CTARight from "../components/ctas/CTARight.astro";
+import Enroll from "../components/forms/Enroll.astro";
+import HeaderMain from "../components/headers/HeaderMainAlternative.astro";
+import FAQ from "../components/sections/FAQ.astro";
+import TextIcons from "../components/sections/TextIcons.astro";
+import Why from "../components/sections/Why.astro";
+import {
+  ADDRESS_CITY,
+  AIRPORT,
+  AIRPORT_CODE,
+  SITE_DESCRIPTION,
+  SITE_TITLE,
+} from "../data/consts";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProgramsComponent from "../components/sections/ProgramsComponent.astro";
+
+import "aos/dist/aos.css";
+import ImageComp from "../components/utils/ImageComp.astro";
+import { link } from "fs";
+import DiscoveryFlightForm from "../components/forms/DiscoveryFlightForm.astro";
+import MapLocation from "../components/external/MapLocation.astro";
+import WhatIs from "../components/discovery-flight/WhatIs.astro";
+import Advantages from "../components/discovery-flight/Advantages.astro";
+import Filter from "../components/discovery-flight/Filter.astro";
+import Steps from "../components/discovery-flight/Steps.astro";
+import Difference from "../components/discovery-flight/Difference.astro";
+import NextSteps from "../components/discovery-flight/NextSteps.astro";
+import FinalCTA from "../components/discovery-flight/FinalCTA.astro";
+import OffersStripCTA from "../components/offers/OffersStripCTA.astro";
+
+const data = {
+  siteTitle:
+    "Book a Discovery Flight	Experience Aviation in Kansas City | Pilot Instructional Center",
+  siteDescription:
+    "Take your first flight at Pilot Instructional Center. Sit at the controls and experience flying with an experienced instructor.",
+  siteKeywords:
+    "discovery flight Kansas City, intro flight, first flight lesson",
+
+  header: {
+    image: {
+      src: "/src/assets/facebook/plane-ramp-sunset_PIC_Pilot-instructional-center_Flight-school-cropped.jpg",
+      alt: "Airplane flying by Mathias Reding",
+    },
+    upperHeader: "Your First Step Into Aviation",
+    title: "Book Your First Discovery Flight at Pilot Instructional Center",
+    description:
+      "A Discovery Flight is your chance to sit in the pilot's seat, take the controls, and experience the thrill of flight, no experience required.",
+    descriptions: [
+      "During your Discovery Flight, you’ll fly with a certified instructor who guides you through the basics of flight and gives you the opportunity to handle the controls.",
+      "This is the perfect way to see if aviation is right for you, fun, safe, and unforgettable.",
+      "Many pilots say their Discovery Flight was the moment they knew flying was their calling.",
+    ],
+    bullets: [
+      {
+        title: "Hands-On Flying",
+        description:
+          "You’ll actually fly the aircraft alongside a professional instructor.",
+        icon: "Plane",
+      },
+      {
+        title: "No Experience Needed",
+        description:
+          "Come as you are, your instructor will walk you through everything.",
+        icon: "Smile",
+      },
+    ],
+    button: {
+      href: "#discovery-flight",
+      text: "Get Started",
+    },
+  },
+
+  cta: {
+    title: "Ready to Take the Controls?",
+    description:
+      "Your Discovery Flight includes preflight instruction, hands-on flying time, and a full post-flight briefing. The perfect way to begin your pilot journey.",
+    button: { text: "Book Your Discovery Flight", href: "/discovery-flight" },
+    image: {
+      src: "/src/assets/cta-flight-solid-ground-aviation.webp",
+      alt: "View of the sky from an airplane window",
+    },
+  },
+
+  ctas: {
+    ctaFloating: {
+      upperHeading: "See What It Feels Like to Fly",
+      title: "Experience Flight Before Committing to Training",
+      description:
+        "A Discovery Flight lets you experience the PIC difference firsthand, experienced instructors, a safety-first approach, and a welcoming environment built for new students.",
+      images: [
+        {
+          src: "/src/assets/student using simulator 2.jpg",
+          alt: "Student using FAA compliant flight simulator at PIC",
+        },
+      ],
+    },
+  },
+};
+
+const heroData = {
+  image: {
+    src: "/src/assets/rrm-visit/pilot-instructional-center_new-century-KS_plane-cockpit-cessna_flight-school_pilo-training.png",
+    alt: "Student and instructor in Cessna cockpit at Pilot Instructional Center",
+  },
+  title: "TAKE CONTROL: YOUR FIRST FLIGHT LESSON",
+  subTitle: `Experience the thrill of aviation from the pilot's seat. At Pilot Instructional Center, this isn't just a sightseeing ride, it's your first official step toward earning your wings with personalized mentorship.`,
+  cta: [
+    {
+      url: "#discovery-flight-form",
+      text: `Schedule Your Discovery Flight <svg xmlns='http://www.w3.org/2000/svg' class='size-6 group-hover:translate-x-1 transition-all duration-500' viewBox='0 0 24 24'><g fill='currentColor'><path d='m12.052 14.829l1.414 1.414L17.71 12l-4.243-4.243l-1.414 1.415L13.88 11H6.343v2h7.537z'/><path fill-rule='evenodd' d='M19.778 19.778c4.296-4.296 4.296-11.26 0-15.556s-11.26-4.296-15.556 0s-4.296 11.26 0 15.556s11.26 4.296 15.556 0m-1.414-1.414A9 9 0 1 0 5.636 5.636a9 9 0 0 0 12.728 12.728' clip-rule='evenodd'/></g></svg>`,
+      variant: "primary",
+    },
+  ],
+  secondaryText: `Loggable flight time &nbsp;·&nbsp; Certified Flight Instructors &nbsp;·&nbsp; Hands-on experience`,
+};
+
+const whatIsDiscovery = {
+  title: "A Real Introduction to the Flight Deck",
+  paragraphs: [
+    "A discovery flight is your very first official flight lesson. Unlike a passive passenger tour, you will be in the pilot's seat, handling the controls, and learning the fundamentals of flight.",
+    "Under the direct guidance of a PIC Certified Flight Instructor, every minute you spend in the air counts as official flight time toward your <strong>Private Pilot Certificate</strong>. It’s the perfect way to test your passion for aviation.",
+  ],
+  bgImage: {
+    src: "/src/assets/facebook/student-passing-checkride_student-cfi-shaking-hands_PIC_Pilot-instructional-center_Flight-school_cropped.jpg",
+    alt: "CFI and student pilot shaking hands",
+  },
+  image: {
+    src: "/src/assets/rrm-visit/pilot-instructional-center_pilot-cockpit-checking-plane_pilot-training.png",
+    alt: "Pilot checking instruments during flight training",
+  },
+  note: {
+    title: "No Hidden Fees",
+    text: "Your discovery flight comes at a flat, competitive rate for a <span class='font-title'>fully immersive introductory experience</span>.",
+  },
+  cta: {
+    text: "Book Your Discovery Flight",
+    href: "#discovery-flight-form",
+  },
+  imageRight: false,
+};
+
+const picAdvantage = {
+  title: "Why Start Your Journey With PIC?",
+  description:
+    "Choosing where to train is a massive decision. A discovery flight is the best way to experience our safety standards, aircraft quality, and the personalized mentorship that larger schools simply can't offer.",
+  cta: {
+    text: "Take the Controls Today",
+    href: "#discovery-flight-form",
+  },
+  cards: [
+    {
+      title: "Test the Waters",
+      bullets: [
+        "Experience a genuine flight training environment.",
+        "Inspect our well-maintained training fleet firsthand.",
+        "See if aviation is the right path for your goals.",
+      ],
+      images: [
+        {
+          src: "/src/assets/rrm-visit/pilot-instructional-center_pilot-preparing-plane_flight-school_pilot-training.png",
+          alt: "Student pilot preparing plane",
+        },
+      ],
+    },
+    {
+      title: "Meet Your Mentors",
+      bullets: [
+        "Fly one-on-one with a dedicated, professional CFI.",
+        "Experience our focus on safety and integrity.",
+        "Get straight answers to all your training questions.",
+      ],
+      images: [
+        {
+          src: "/src/assets/facebook/student-passing-checkride_student-cfi-shaking-hands_PIC_Pilot-instructional-center_Flight-school_cropped.jpg",
+          alt: "CFI instruction and mentorship",
+        },
+      ],
+    },
+    {
+      title: "Log Your First Hour",
+      bullets: [
+        "This is official training, not a joyride.",
+        "Your flight time goes straight into your pilot logbook.",
+        "Feel the aircraft respond to your real-time inputs.",
+      ],
+      images: [
+        {
+          src: "/src/assets/rrm-visit/pilot-instructional-center_new-century-KS_plane-cockpit-cessna_flight-school_pilo-training.png",
+          alt: "Student pilot navigating with instructor",
+        },
+      ],
+    },
+  ],
+};
+
+const filterDataX = {
+  title: "Is a Discovery Flight Right for You?",
+  description:
+    "Here is who gets the absolute most out of an introductory flight at Pilot Instructional Center.",
+  leftColumn: {
+    icon: "check",
+    title: "Book a flight if you are...",
+    items: [
+      "Seriously considering earning your Private Pilot License (PPL)",
+      "Looking for a school with strong personalized mentorship",
+      "Wanting to verify our aircraft maintenance and safety standards",
+      "Unsure about flying and want to safely test the waters",
+      "Ready to take hands-on control of an airplane",
+    ],
+  },
+  rightColumn: {
+    icon: "x",
+    title: "Skip the flight if you are...",
+    items: [
+      "Just looking for a generic, hands-off sightseeing tour",
+      "Not interested in actually flying or learning about the aircraft",
+      "Unwilling to participate in a pre-flight safety briefing",
+      "Looking for a fast, extreme thrill ride",
+    ],
+  },
+  cta: {
+    text: "Book Your Discovery Flight",
+    href: "#discovery-flight-form",
+  },
+};
+
+const flightSteps = {
+  title: "What Happens During Your First Flight",
+  description:
+    "You aren't a passenger today; you are a student pilot. Here are the four phases of your first mission with PIC.",
+  steps: [
+    {
+      title: "Phase 1: Ground Briefing.",
+      description:
+        "Your CFI will walk you through the flight plan, explain the basic aerodynamics of lift, and show you how the flight controls operate inside the cockpit.",
+      icon: `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>`,
+    },
+    {
+      title: "Phase 2: Aircraft Walkaround.",
+      description:
+        "Safety and integrity start on the ground. You will perform a thorough pre-flight inspection, checking control surfaces, fuel, and engine components before boarding.",
+      icon: `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>`,
+    },
+    {
+      title: "Phase 3: You Have the Flight Controls.",
+      description:
+        "Once safely airborne, your instructor will hand over the controls. You will execute basic maneuvers like straight-and-level flight, climbs, and turns.",
+      icon: `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>`,
+    },
+    {
+      title: "Phase 4: Assisted Landing.",
+      description:
+        "Your CFI takes over for the highest workload phase of flight. You will follow along on the controls, experiencing the precision required to safely land the aircraft.",
+      icon: `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>`,
+    },
+  ],
+  cta: {
+    text: "Book Your Discovery Flight",
+    href: "#discovery-flight-form",
+  },
+};
+
+const picDifference = {
+  title: "The PIC Training Standard",
+  frameworkText:
+    "We don't operate like a pilot mill. At Pilot Instructional Center, our curriculum is built on real-world experience and uncompromising safety. When you fly with us, you aren't just an account number; you receive the dedicated mentorship required to become a confident, skilled aviator.",
+  proofText:
+    "From your first solo flight to your advanced ratings, our instructors ensure you master the fundamentals. You will learn in an environment that prioritizes aeronautical decision-making and precise aircraft control, giving you a competitive edge whether you are flying for fun or pursuing an airline career.",
+  image: "/src/assets/cody-f-OdHh60XP7EI-unsplash.jpg", // Using one of the stock assets from earlier as a placeholder
+  cta: {
+    text: "Start Flying Today",
+    href: "#discovery-flight-form",
+  },
+};
+
+const nextStepsData = {
+  title: "Ready for Takeoff? Here is How to Book.",
+  description:
+    "Getting into the cockpit is simple. Here is the exact process to schedule your discovery flight.",
+  cards: [
+    {
+      number: 1,
+      title: "Step 1: Submit Your Info.",
+      description:
+        "Fill out the brief form below so we know you are ready to fly.",
+      cta: {
+        text: "Submit Form",
+        href: "#discovery-flight-form",
+      },
+    },
+    {
+      number: 2,
+      title: "Step 2: We Contact You.",
+      description:
+        "Our team will reach out promptly to answer any questions and lock in a date on the schedule.",
+      cta: {
+        text: "Schedule Call",
+        href: "#discovery-flight-form",
+      },
+    },
+    {
+      number: 3,
+      title: "Step 3: You Fly.",
+      description:
+        "Arrive at ${AIRPORT}, meet your instructor, do your pre-flight, and take to the skies.",
+      cta: {
+        text: "Take Flight",
+        href: "#discovery-flight-form",
+      },
+    },
+  ],
+  cta: {
+    text: "Start now",
+    href: "#discovery-flight-form",
+  },
+};
+
+const finalCtaData = {
+  title: "Still Wondering if Flight Training is for You?",
+  description:
+    "Reach out to our team at Pilot Instructional Center. We'll give you straight answers about pilot certification, training costs, and what it takes to succeed in the cockpit. No pressure, just real advice from real pilots.",
+  primaryCTA: { text: "Contact Our Team", href: "/contact/" },
+  secondaryCTA: { text: "View Our Programs", href: "/flight-training/" },
+  cta: {
+    text: "Book Your Discovery Flight",
+    href: "#discovery-flight-form",
+  },
+};
+
+const metaProps = {
+  siteTitle: `Discovery Flight in ${ADDRESS_CITY} | First Pilot Lesson | Pilot Instructional Center`,
+  siteDescription: `Take control of an airplane with a discovery flight at Pilot Instructional Center in ${ADDRESS_CITY}. Hands-on flight lessons with professional CFIs at ${AIRPORT} (${AIRPORT_CODE}).`,
+  siteKeywords: [
+    `discovery flight ${ADDRESS_CITY}`,
+    `flight lesson ${ADDRESS_CITY}`,
+    `flight school near me`,
+    `pilot training ${ADDRESS_CITY}`,
+    `introductory flight lesson`,
+    `first flight lesson`,
+    `learn to fly`,
+    `become a pilot`,
+    `Pilot Instructional Center`,
+  ].join(", "),
+};
+---
+
+<BaseLayout
+  siteTitle={data.siteTitle}
+  siteDescription={data.siteDescription}
+  siteKeywords={data.siteKeywords}
+>
+  <HeaderMain
+    content={data.header}
+    mainSize={false}
+    showButton={false}
+    images={[data.header.image]}
+    button={data.header.button}
+  />
+  <OffersStripCTA />
+  <WhatIs content={whatIsDiscovery} />
+  <Advantages content={picAdvantage} />
+  <Filter content={filterDataX} />
+  <Steps content={flightSteps} />
+  <Difference content={picDifference} />
+  <NextSteps content={nextStepsData} />
+  <DiscoveryFlightForm />
+  <FinalCTA content={finalCtaData} />
+  <MapLocation />
+  <FAQ />
+</BaseLayout>

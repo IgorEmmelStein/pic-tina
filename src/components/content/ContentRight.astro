@@ -1,0 +1,137 @@
+---
+import ImageComp from "../utils/ImageComp.astro";
+const example = {
+  image: {
+    src: "/src/assets/female-pilot-assisting-captain-takeoff-fly-airplane-using-buttons-dashboard-command-pilot-cockpit-airliners-flying-plane-jet-with-navigation-windscreen-control-panel.jpg",
+    alt: "Female pilot assisting captain during takeoff",
+  },
+  upperHeader: "EXAMPLE UPPER HEADER",
+  title: "Example Title for Content Right Component",
+  description:
+    "This is an example description for the Content Right component. It provides information about the content displayed on the right side of the layout.",
+  descriptions: [
+    "First example description point.",
+    "Second example description point.",
+    "Third example description point.",
+  ],
+  button: {
+    text: "Learn More",
+    href: "/new-to-flying/",
+  },
+  bullets: [
+    {
+      icon: "M3 18h18v2H3zm18.509-9.473a1.61 1.61 0 0 0-2.036-1.019L15 9L7 6L5 7l6 4l-4 2l-4-2l-1 1l4 4l14.547-5.455a1.61 1.61 0 0 0 .962-2.018",
+      title: "Career Growth & Opportunity",
+      description:
+        "Commercial aviation, charter operations, and corporate flying all need skilled pilots. Training now positions you for a career that’s in high demand and globally respected.",
+    },
+    {
+      icon: "M12 2a1 1 0 0 1 .932.638l7 18a1 1 0 0 1-1.326 1.281L13 19.517V13a1 1 0 1 0-2 0v6.517l-5.606 2.402a1 1 0 0 1-1.326-1.281l7-18A1 1 0 0 1 12 2",
+      title: "Freedom & Adventure",
+      description:
+        "Enjoy the unmatched perspective of seeing the world from above. Flying offers a lifestyle of independence, excitement, and exploration few other careers can match.",
+    },
+    {
+      icon: "",
+      title: "Challenge & Achievement",
+      description:
+        "Learning to fly is one of life’s most rewarding accomplishments, an achievement that builds confidence, discipline, and problem-solving skills that last a lifetime.",
+    },
+  ],
+};
+
+const { content = example } = Astro.props;
+---
+
+<section class="relative py-24 bg-primary-600 overflow-hidden">
+  <!-- Image -->
+  <div
+    class="lg:absolute lg:left-0 lg:top-0 lg:bottom-0 lg:w-[35%] w-full h-[500px] lg:h-auto z-10 py-12"
+    data-aos="fade-right"
+    data-aos-duration="1500"
+  >
+    <div
+      class="relative w-full h-full overflow-hidden rounded-r-full border-r-4 border-accent-500/30"
+    >
+      <ImageComp
+        src={content.image.src}
+        alt={content.image.alt}
+        classes="object-cover rounded-r-full w-full h-full grayscale-[20%] hover:grayscale-0 transition-all duration-1000"
+      />
+      <div
+        class="absolute inset-0 bg-gradient-to-l from-primary-900 to-transparent"
+      >
+      </div>
+    </div>
+  </div>
+  <!-- Text -->
+  <div
+    class="relative mx-auto flex max-w-7xl flex-col-reverse lg:flex-row-reverse items-center z-10"
+  >
+    <!-- Text -->
+    <div class="flex-1 text-white lg:w-2/3 z-20 px-8 py-12 lg:py-24">
+      <div class="flex flex-col items-end text-right">
+        <span
+          class="text-accent-400 font-bold tracking-[0.2em] uppercase text-xs mb-6"
+          data-aos="fade-left"
+        >
+          {content.upperHeader}
+        </span>
+
+        <h2
+          class="text-4xl sm:text-5xl max-w-2xl font-bold tracking-tight text-white mb-8"
+          data-aos="fade-left"
+          data-aos-delay="200"
+        >
+          {content.title}
+        </h2>
+
+        <p
+          class="text-lg text-stone-300 py-6 border-y border-white/10 max-w-2xl leading-relaxed"
+          data-aos="fade-left"
+          data-aos-delay="400"
+        >
+          {content.description}
+        </p>
+
+        <div class="flex flex-col items-end gap-4 py-8">
+          {
+            content.descriptions.map((desc: string) => (
+              <p
+                class="flex items-center gap-3 text-white font-medium"
+                data-aos="fade-left"
+                data-aos-delay="600"
+              >
+                {desc}
+                <span class="w-8 h-8 flex items-center justify-center rounded-full bg-accent-500/20 text-accent-400">
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                </span>
+              </p>
+            ))
+          }
+        </div>
+
+        <div class="mt-8" data-aos="fade-up" data-aos-delay="800">
+          <a
+            href={content.button.href}
+            class="btn-accent btn-right hover:-translate-y-1"
+          >
+            {content.button.text}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

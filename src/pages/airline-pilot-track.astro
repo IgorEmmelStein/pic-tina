@@ -1,0 +1,65 @@
+---
+import Enroll from "../components/forms/Enroll.astro";
+import HeaderMain from "../components/headers/HeaderMainAlternative.astro";
+import FAQ from "../components/sections/FAQ.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+import "aos/dist/aos.css";
+import MapLocation from "../components/external/MapLocation.astro";
+import PricingComponent from "../components/pricing/PricingComponent.astro";
+import AirlineTrack from "../components/flight-training/Airline-track.astro";
+import FinancialTransparecyTable from "../components/flight-training/FinancialTransparecyTable.astro";
+import SeniorMentor from "../components/flight-training/SeniorMentor.astro";
+import FAQAirlineTrack from "../components/flight-training/FAQAirlineTrack.astro";
+
+const data = {
+  siteTitle: "Airline Pilot Career Track | Pilot Instructional Center",
+  siteDescription:
+    "Train for an airline career at Pilot Instructional Center. We offer structured progression from your Private Pilot license through your CFI ratings.",
+  siteKeywords:
+    "airline pilot training Kansas City, airline pilot career path, professional pilot track",
+
+  header: {
+    image: {
+      src: "/src/assets/aircrew-member-using-control-panel-command-dashboard-navigation-fly-ariplane-cockpit-female-airliner-flying-plane-cabin-with-power-engine-switch-lever-close-up.jpg",
+      alt: "Airline-style cockpit representing professional pilot training",
+    },
+    upperHeader: "Start Your Airline Pilot Career",
+    title: `Airline Pilot Career Track in Kansas City`,
+    description:
+      "PIC’s Airline Pilot Track guides you from your first flight through professional certifications, helping you build the experience and confidence needed for regional and major airline careers.",
+    buttons: [
+      {
+        text: "Start Your Career Path",
+        href: "/contact/",
+        style: "btn-secondary",
+      },
+      {
+        text: "View Training Programs",
+        href: "/flight-training/",
+        style: "btn-transparent",
+      },
+    ],
+  },
+};
+---
+
+<BaseLayout
+  siteTitle={data.siteTitle}
+  siteDescription={data.siteDescription}
+  siteKeywords={data.siteKeywords}
+>
+  <HeaderMain
+    content={data.header}
+    mainSize={false}
+    showButton={false}
+    images={[data.header.image]}
+  />
+  <AirlineTrack />
+  <SeniorMentor />
+  <FinancialTransparecyTable />
+  <!-- <PricingComponent /> -->
+  <FAQAirlineTrack />
+  <Enroll />
+  <MapLocation />
+</BaseLayout>

@@ -1,0 +1,363 @@
+---
+import CTALeft from "../../components/ctas/CTALeft.astro";
+import CTARight from "../../components/ctas/CTARight.astro";
+import Enroll from "../../components/forms/Enroll.astro";
+import HeaderMain from "../../components/headers/HeaderMainAlternative.astro";
+import FAQ from "../../components/sections/FAQ.astro";
+import TextIcons from "../../components/sections/TextIcons.astro";
+import Why from "../../components/sections/Why.astro";
+import { SITE_DESCRIPTION, SITE_TITLE, website_links } from "../../data/consts";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProgramsComponent from "../../components/sections/ProgramsComponent.astro";
+
+import "aos/dist/aos.css";
+import ContentLeft from "../../components/content/ContentLeft.astro";
+import ContentMiddle from "../../components/content/ContentMiddle.astro";
+import ContentRight from "../../components/content/ContentRight.astro";
+import CardProgram from "../../components/cards/CardProgram.astro";
+import ImageComp from "../../components/utils/ImageComp.astro";
+import ProgramsComponentDesign from "../../components/sections/ProgramsComponentDesign.astro";
+import FleetGallery from "../../components/fleet/FleetGallery.astro";
+import { fleet } from "../about/our-fleet.astro";
+import OffersStripCTA from "../../components/offers/OffersStripCTA.astro";
+import OffersSection from "../../components/offers/OffersSection.astro";
+import SimulatorImageSection from "../../components/offers/SimulatorImageSection.astro";
+
+const data = {
+  siteTitle: "CFI Training | Pilot Instructional Center | Near Kansas City",
+  siteDescription:
+    "Train to teach instrument flying with confidence through PIC’s CFI program led by experienced instructors.",
+  siteKeywords: "CFI training, instrument instructor Kansas City",
+
+  header: {
+    image: {
+      src: "/src/assets/rrm-visit/pilot-instructional-center_pilot-cockpit-checking-plane_pilot-training.png",
+      alt: "Aircrew member using control panel in airplane cockpit",
+    },
+    upperHeader: "Now Enrolling New Students in Kansas City",
+    title: `Certified Flight Instructor (CFI)`,
+    description:
+      "Turn your passion for aviation into a professional teaching career with PIC’s senior-instructor-led CFI program.",
+    buttons: [
+      { text: "Start Training", href: "#enroll", style: "btn-secondary" },
+      { text: "Learn More", href: "/contact/", style: "btn-transparent" },
+    ],
+  },
+
+  // program: {
+  //   overview: {
+  //     image: {
+  //       src: "/src/assets/stock/stock_student-cockpit_truman-talbot-uj4V299Eo5c-unsplash.jpg",
+  //       alt: "Student pilot in cockpit by Truman Talbot",
+  //     },
+  //     upperHeader: "BECOME A PROFESSIONAL INSTRUCTOR",
+  //     title: "CFI at PIC",
+  //     description:
+  //       "The Certified Flight Instructor certificate is where pilots become mentors, leaders, and experts. At PIC, you train with seasoned CFIs who have decades of real-world experience, not time-building instructors. You’ll learn how to teach effectively, explain complex topics with confidence, and pass the FAA CFI checkride with professionalism.",
+  //     descriptions: [
+  //       "Learn from senior instructors dedicated to teaching, not building airline hours.",
+  //       "Master the fundamentals of instruction, scenario-based teaching, and student leadership.",
+  //       "Build real teaching confidence with structured lessons and a proven training approach.",
+  //     ],
+  //     bullets: [
+  //       {
+  //         icon: "M3 18h18v2H3zm18.509-9.473a1.61 1.61 0 0 0-2.036-1.019L15 9L7 6L5 7l6 4l-4 2l-4-2l-1 1l4 4l14.547-5.455a1.61 1.61 0 0 0 .962-2.018",
+  //         title: "Learn to Teach, Not Just Fly",
+  //         description:
+  //           "Develop the communication, leadership, and analytical skills every instructor needs.",
+  //       },
+  //       {
+  //         icon: "M12 2a1 1 0 0 1 .932.638l7 18a1 1 0 0 1-1.326 1.281L13 19.517V13a1 1 0 1 0-2 0v6.517l-5.606 2.402a1 1 0 0 1-1.326-1.281l7-18A1 1 0 0 1 12 2",
+  //         title: "Master the Fundamentals of Instruction",
+  //         description:
+  //           "From lesson plans to performance-based training, you’ll learn to deliver high-quality instruction.",
+  //       },
+  //       {
+  //         icon: "",
+  //         title: "Become a Mentor in Aviation",
+  //         description:
+  //           "Guide the next generation of pilots through safety-focused, integrity-driven instruction.",
+  //       },
+  //     ],
+  //     button: {
+  //       text: "Learn More",
+  //       href: "/new-to-flying/",
+  //     },
+  //     requirements: [
+  //       "At least 18 years of age",
+  //       "Read, speak, write, and understand English",
+  //       "Hold a current medical certificate (at least Third Class)",
+  //       "Pass a knowledge and practical test",
+  //       "Commercial certificate or ATP certificate",
+  //     ],
+  //     included: [
+  //       "15 hours training flight time",
+  //       "25 hours of personal ground lessons",
+  //     ],
+  //     summary: [
+  //       {
+  //         title: "Minimum Cost",
+  //         value: "$5,975",
+  //       },
+  //       {
+  //         title: "Flight Time",
+  //         value: "15 hours",
+  //       },
+  //       {
+  //         title: "Duration",
+  //         value: "1 month",
+  //       },
+  //     ],
+  //   },
+
+  //   advantages: {
+  //     upperHeader: "WHY BECOME A CFI?",
+  //     title: "Teach, Inspire, and Build a Strong Aviation Career",
+  //     description:
+  //       "Being a flight instructor is one of the most rewarding paths in aviation. You sharpen your own skills, gain mastery of aeronautical knowledge, and shape future pilots while building valuable experience.",
+  //     bullets: [
+  //       {
+  //         icon: "M3 18h18v2H3zm18.509-9.473a1.61 1.61 0 0 0-2.036-1.019L15 9L7 6L5 7l6 4l-4 2l-4-2l-1 1l4 4l14.547-5.455a1.61 1.61 0 0 0 .962-2.018",
+  //         title: "Mastery Through Teaching",
+  //         description:
+  //           "Teaching forces deeper understanding, CFIs become aviation experts by explaining concepts daily.",
+  //       },
+  //       {
+  //         icon: "M12 2a1 1 0 0 1 .932.638l7 18a1 1 0 0 1-1.326 1.281L13 19.517V13a1 1 0 1 0-2 0v6.517l-5.606 2.402a1 1 0 0 1-1.326-1.281l7-18A1 1 0 0 1 12 2",
+  //         title: "Advance Your Aviation Career",
+  //         description:
+  //           "Instruction remains one of the fastest and most respected ways to gain high-quality flight experience.",
+  //       },
+  //       {
+  //         icon: "",
+  //         title: "Make an Impact",
+  //         description:
+  //           "Help new pilots build strong foundations in safety, confidence, and real-world decision-making.",
+  //       },
+  //     ],
+  //   },
+
+  //   price: {
+  //     image: {
+  //       src: "/src/assets/stock/stock_Cockpit-pilot-student_tamas-tuzes-katai-UKhE7wQpe-c-unsplash.jpg",
+  //       alt: "Aircrew member using control panel in airplane cockpit",
+  //     },
+  //     upperHeader: "AFFORDABLE & TRANSPARENT TRAINING",
+  //     title: "Professional CFI Training ,  Clear, Honest Rates",
+  //     description:
+  //       "PIC offers structured, senior-instructor-led CFI training designed to build your teaching ability efficiently, without unnecessary costs or inflated hour requirements.",
+  //     descriptions: [
+  //       "PIC offers structured, senior-instructor-led CFI training designed to build your teaching ability efficiently, without unnecessary costs or inflated hour requirements. The price is based on FAA minimums and can vary based on student proficiency. Please refer to the aircraft and instructor cost if additional time is needed. Price includes instructor, aircraft rental, and fuel surcharge, but does not include tax, equipment (headset), FAA written, and FAA exam fees.",
+  //       "Train directly with senior instructors who have decades of teaching experience. Scenario-based and performance-based CFI training designed for real student instruction. No padded hours, quality over quantity, every lesson with purpose.",
+  //       "Price does not include $1,200 enrollment fee to enroll in both CFI & CFII (This can be split and paid upon starting each course)",
+  //     ],
+  //     bullets: [
+  //       {
+  //         icon: "M3 18h18v2H3zm18.509-9.473a1.61 1.61 0 0 0-2.036-1.019L15 9L7 6L5 7l6 4l-4 2l-4-2l-1 1l4 4l14.547-5.455a1.61 1.61 0 0 0 .962-2.018",
+  //         title: "Efficient Training Plans",
+  //         description:
+  //           "Structured lessons that keep you progressing without wasted time or extra costs.",
+  //       },
+  //       {
+  //         icon: "M12 2a1 1 0 0 1 .932.638l7 18a1 1 0 0 1-1.326 1.281L13 19.517V13a1 1 0 1 0-2 0v6.517l-5.606 2.402a1 1 0 0 1-1.326-1.281l7-18A1 1 0 0 1 12 2",
+  //         title: "Simulator Training Included",
+  //         description:
+  //           "Use PIC’s BATD simulator to improve teaching technique and lower training expenses.",
+  //       },
+  //       {
+  //         icon: "",
+  //         title: "Pay As You Go",
+  //         description:
+  //           "Learn at your pace with flexible scheduling and transparent pricing.",
+  //       },
+  //     ],
+  //     button: {
+  //       text: "Learn More",
+  //       href: "/new-to-flying/",
+  //     },
+  //     prices: [
+  //       {
+  //         value: "3,975",
+  //         title: "Flight Time with Instructor",
+  //         duration: "15hrs",
+  //         rate: "$265/hr",
+  //       },
+  //       {
+  //         value: "2,000",
+  //         title: "Ground Instruction",
+  //         duration: "25hrs",
+  //         rate: "$80/hr",
+  //       },
+  //     ],
+  //     price: "5,975",
+  //   },
+  // },
+  program: {
+    overview: {
+      image: {
+        src: "/src/assets/stock/stock_student-cockpit_truman-talbot-uj4V299Eo5c-unsplash.jpg",
+        alt: "Student pilot in cockpit by Truman Talbot",
+      },
+      upperHeader: "BECOME A PROFESSIONAL INSTRUCTOR",
+      title: "CFI at PIC",
+      description:
+        "The Certified Flight Instructor certificate is where pilots become mentors, leaders, and experts. At PIC, you train with seasoned CFIs who have decades of real-world experience, ensuring you learn how to teach effectively and explain complex topics with total confidence.",
+      targetAudience: {
+        title: "Who is this for?",
+        points: [
+          "Commercial pilots transitioning into a mentorship role",
+          "Aviators looking to master the Fundamentals of Instruction",
+          "Career-bound pilots building high-quality flight experience",
+        ],
+      },
+      requirements: [
+        "At least 18 years of age",
+        "Commercial or ATP certificate",
+        "Current medical certificate (at least Third Class)",
+        "Read, speak, write, and understand English",
+        "Pass FAA knowledge and practical tests",
+      ],
+      included: [
+        "15 hours training flight time",
+        "25 hours of personal ground lessons",
+        "Fundamentals of Instruction (FOI) mastery",
+        "Scenario-based teaching techniques",
+      ],
+      summary: [
+        {
+          title: "Minimum Cost",
+          value: "$5,975",
+        },
+        {
+          title: "Flight Time",
+          value: "15 hours",
+        },
+        {
+          title: "Duration",
+          value: "1 month",
+        },
+      ],
+    },
+
+    advantages: {
+      upperHeader: "WHY BECOME A CFI?",
+      title: "Teach, Inspire, and Build a Career",
+      description:
+        "Being a flight instructor is one of the most rewarding paths in aviation. You sharpen your own skills and shape future pilots while building valuable professional experience.",
+      bullets: [
+        {
+          title: "Mastery Through Teaching",
+          description:
+            "Teaching forces deeper understanding. CFIs become true aviation experts by explaining complex concepts and maneuvers daily.",
+        },
+        {
+          title: "Advance Your Aviation Career",
+          description:
+            "Instruction remains one of the fastest and most respected ways to gain the high-quality flight experience required for corporate or airline roles.",
+        },
+        {
+          title: "Make a Real Impact",
+          description:
+            "Help new pilots build strong foundations in safety, confidence, and real-world decision-making as their primary mentor.",
+        },
+      ],
+    },
+
+    price: {
+      upperHeader: "AFFORDABLE & TRANSPARENT TRAINING",
+      title: "Professional CFI Cost Breakdown",
+      description:
+        "Pricing based on FAA minimums. Note: There is a separate $1,200 enrollment fee if enrolling in both CFI & CFII, which can be split between the courses.",
+      priceTotal: "5,975",
+      breakdown: [
+        {
+          title: "Dual Flight Time with Instructor",
+          duration: "15 hrs",
+          rate: "$265/hr",
+          value: "3,975",
+        },
+        {
+          title: "Ground Instruction",
+          duration: "25 hrs",
+          rate: "$80/hr",
+          value: "2,000",
+        },
+      ],
+    },
+  },
+  cta: {
+    title: "Ready to Become a Certified Flight Instructor?",
+    description:
+      "Train with experienced mentors and build the leadership, communication, and flying skills needed to teach the next generation of pilots.",
+    button: { text: "Book a Discovery Session", href: "/discovery-session" },
+    image: {
+      src: "/src/assets/cta-flight-solid-ground-aviation.webp",
+      alt: "View of the sky from an airplane window",
+    },
+  },
+
+  ctas: {
+    ctaPrivatePilot: {
+      image: {
+        src: "/src/assets/stock/stock_Plane-pilot-helice_luciano-faiolo-W68nUftntf4-unsplash.jpg",
+        alt: "Pilot near aircraft propeller by Luciano Faiolo",
+      },
+      title: "Welcome to Pilot Instructional Center",
+      description:
+        "Train with instructors who value integrity, safety, and real mentorship. PIC’s CFI program prepares you to teach with confidence and professionalism.",
+      descriptions: [
+        "Learn from CFIs dedicated to instruction, not time building.",
+        "Train in a supportive, family-oriented learning environment.",
+        "Build teaching confidence with structured and proven lessons.",
+      ],
+      button: {
+        text: "Explore Programs",
+        href: "/flight-training/",
+      },
+    },
+
+    ctaDiscoveryFlight: {
+      image: {
+        src: "/src/assets/eliezer-fernandes-y7E8qfllcY0-unsplash.jpg",
+        alt: "Aircraft exterior by Eliezer Fernandes",
+      },
+      title: "Ready to Get Started?",
+      description:
+        "Contact us to learn more about the CFI Program and take the first step toward becoming a professional instructor.",
+      button: {
+        text: "Contact Us",
+        href: "/contact/",
+      },
+    },
+  },
+};
+---
+
+<BaseLayout
+  siteTitle={data.siteTitle}
+  siteDescription={data.siteDescription}
+  siteKeywords={data.siteKeywords}
+>
+  <HeaderMain
+    content={data.header}
+    mainSize={false}
+    showButton={false}
+    images={[data.header.image]}
+  />
+  <!-- <ProgramsComponent content={data.program} /> -->
+  <ProgramsComponentDesign program={data.program} />
+  <OffersStripCTA />
+  <FleetGallery
+    fleet={fleet}
+    selfLink={false}
+    button={{
+      title: "Start Your Journey",
+      path: `#${website_links.enroll.id}`,
+    }}
+  />
+  <SimulatorImageSection />
+  <Enroll />
+  <CTALeft content={data.ctas.ctaDiscoveryFlight} />
+  <OffersSection />
+  <CTARight content={data.ctas.ctaPrivatePilot} />
+</BaseLayout>

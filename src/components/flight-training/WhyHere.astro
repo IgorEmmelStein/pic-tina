@@ -1,0 +1,122 @@
+---
+// Tactical advantages of the New Century AirCenter location
+const locationAdvantages = {
+  title: "Why Training at New Century (KIXD) Matters",
+  subtitle:
+    "The perfect training environment doesn't happen by accident. It's built on 7,000 feet of concrete and a strategic mix of airspace.",
+  points: [
+    {
+      title: "The Professional Mix",
+      description:
+        "KIXD features a towered environment. You'll learn to talk to Air Traffic Control like a pro from Day 1, a skill that pilot mills often skip at smaller uncontrolled strips.",
+      icon: "tower",
+    },
+    {
+      title: "Zero 'Taxi-Time' Waste",
+      description:
+        "Unlike MCI or Johnson County Executive, you aren't #10 in line for takeoff. At PIC, your engine start to takeoff time is minimal, saving you hundreds in rental fees.",
+      icon: "clock",
+    },
+    {
+      title: "Expansive Runways",
+      description:
+        "With a primary runway over 7,000 feet long, you have the safety margin to practice landings with the same space used by corporate jets.",
+      icon: "runway",
+    },
+  ],
+  proximity: [
+    { city: "Olathe", time: "12 min" },
+    { city: "Gardner", time: "5 min" },
+    { city: "Overland Park", time: "22 min" },
+    { city: "Kansas City", time: "35 min" },
+  ],
+};
+---
+
+<section class="relative bg-[#fcfaf8] py-32 px-6 overflow-hidden">
+  <div
+    class="absolute inset-0 opacity-[0.03] pointer-events-none"
+    style="background-image: radial-gradient(#423731 1px, transparent 1px); background-size: 40px 40px;"
+  >
+  </div>
+
+  <div class="max-w-7xl mx-auto relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+      <div class="lg:col-span-7" data-aos="fade-right">
+        <span
+          class="text-[#745e4d] font-black uppercase tracking-[0.4em] text-xs mb-6 block"
+          >Tactical Advantage</span
+        >
+        <h2
+          class="text-5xl md:text-6xl font-black text-[#423731] leading-tight mb-8"
+        >
+          The Tactical Choice for <span class="text-[#745e4d]"
+            >Serious Pilots.</span
+          >
+        </h2>
+        <p class="text-lg text-[#745e4d] mb-12 max-w-2xl leading-relaxed">
+          {locationAdvantages.subtitle}
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {
+            locationAdvantages.points.map((point) => (
+              <div class="group">
+                <div class="w-12 h-1 bg-[#dcc1a6] mb-4 group-hover:w-20 transition-all duration-500" />
+                <h4 class="text-xl font-bold text-[#423731] mb-3">
+                  {point.title}
+                </h4>
+                <p class="text-sm text-[#745e4d] leading-relaxed">
+                  {point.description}
+                </p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="lg:col-span-5" data-aos="fade-left">
+        <div
+          class="bg-[#423731] rounded-[3rem] p-10 md:p-14 shadow-[0_30px_60px_rgba(66,55,49,0.3)] relative overflow-hidden text-white"
+        >
+          <div class="absolute top-0 right-12 w-16 h-full bg-white/5 skew-x-12">
+          </div>
+
+          <h3 class="text-3xl font-bold mb-8 relative z-10">
+            Centralized Excellence
+          </h3>
+          <p class="text-[#dcc1a6] text-sm mb-10 relative z-10 font-medium">
+            Based at 280 Gardner Dr, we are the strategic hub for aviators
+            across the KC metro area.
+          </p>
+
+          <div class="space-y-6 relative z-10">
+            {
+              locationAdvantages.proximity.map((loc) => (
+                <div class="flex justify-between items-center border-b border-white/10 pb-4 group hover:border-[#dcc1a6] transition-colors">
+                  <span class="text-lg font-semibold">{loc.city}</span>
+                  <span class="text-[#dcc1a6] font-mono tracking-tighter">
+                    {loc.time}
+                  </span>
+                </div>
+              ))
+            }
+          </div>
+
+          <div
+            class="mt-12 p-6 bg-white/5 rounded-2xl border border-white/10 relative z-10"
+          >
+            <p
+              class="text-[10px] uppercase tracking-widest text-[#dcc1a6] mb-2 font-black"
+            >
+              Airport ID
+            </p>
+            <p class="text-3xl font-mono font-bold tracking-tighter italic">
+              KIXD / NEW CENTURY
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

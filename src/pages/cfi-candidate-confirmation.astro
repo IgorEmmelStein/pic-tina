@@ -1,0 +1,75 @@
+---
+import { SITE_DESCRIPTION, SITE_TITLE } from "../data/consts";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "aos/dist/aos.css";
+import FormConfirmation from "../components/forms/FormConfirmation.astro";
+
+const data = {
+  siteTitle:
+    "CFI Candidate Confirmation | Pilot Instructional Center | New Century KS",
+  siteDescription:
+    "Thank you for applying to become a CFI instructor. PIC will get back to you shortly.",
+  siteKeywords: "CFI candidate submitted, PIC confirmation",
+
+  header: {
+    upperHeader: "FAQs",
+    title: `Frequently Asked Questions`,
+    description:
+      "Find quick answers about simulator training, enrollment, pricing, scheduling, FAA requirements, and more. If you still have questions, our team is here to help.",
+    buttons: [
+      { text: "Contact Support", href: "/contact/", style: "btn-secondary" },
+      { text: "Enroll Now", href: "#faq-general", style: "btn-transparent" },
+    ],
+    image: {
+      src: "/src/assets/stock-man-airplanes-museum.jpg",
+      alt: "",
+    },
+  },
+
+  cta: {
+    title: "Still Have Questions?",
+    description:
+      "Our team is happy to guide you through enrollment, scheduling, or training requirements. Reach out anytime, we’re here to help future pilots succeed.",
+    button: { text: "Get in Touch", href: "/contact/" },
+    image: {
+      src: "/src/assets/cta-flight-solid-ground-aviation.webp",
+      alt: "Flight simulator cockpit view",
+    },
+  },
+
+  ctas: {
+    ctaFloating: {
+      upperHeading: "Flight Training Support",
+      title: "We’re Here to Make Your Training Clear and Simple",
+      description:
+        "Our FAQ center covers everything from simulator training to pricing and student requirements. Explore below or reach out for personalized assistance.",
+      images: [
+        {
+          src: "/src/assets/student using simulator 2.jpg",
+          alt: "Student using FAA Compliant flight simulator",
+        },
+      ],
+    },
+  },
+
+  CFICandidateConfirmation: {
+    title: "CFI Candidate Confirmation",
+    description: `Thank you for applying to become a CFI instructor! Your application has been received and we will get back to you shortly. You will receive an email confirming your application along with any additional information you may need, if you don't see it please check your spam folder.`,
+    suggestion: {
+      title: "Looking for a discovery flight?",
+      link: {
+        title: "Book a Discovery Flight",
+        href: "/discovery-flight/",
+      },
+    },
+  },
+};
+---
+
+<BaseLayout
+  siteTitle={data.siteTitle}
+  siteDescription={data.siteDescription}
+  siteKeywords={data.siteKeywords}
+>
+  <FormConfirmation content={data.CFICandidateConfirmation} />
+</BaseLayout>

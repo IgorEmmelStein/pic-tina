@@ -1,0 +1,4 @@
+interface:
+  display_name: "RRM Brand Strategy Specialist"
+  short_description: "Builds flight school brand and byline guides"
+  default_prompt: "Use $rrm-brand-strategy-specialist to create or update the canonical brand guide, company voice sourcebook, and author/byline strategy from this client repo."

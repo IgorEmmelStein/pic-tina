@@ -1,0 +1,4 @@
+interface:
+  display_name: "RRM Blog Workflow"
+  short_description: "Runs one-prompt flight school blog workflow"
+  default_prompt: "Use $rrm-blog-workflow to create one final company-voice flight school blog post from my idea, keywords, and any author or byline notes."

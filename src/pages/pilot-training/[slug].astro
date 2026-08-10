@@ -1,0 +1,146 @@
+---
+import CTALeft from "../../components/ctas/CTALeft.astro";
+import CTARight from "../../components/ctas/CTARight.astro";
+import Enroll from "../../components/forms/Enroll.astro";
+import HeaderMain from "../../components/headers/HeaderMainAlternative.astro";
+import FAQ from "../../components/sections/FAQ.astro";
+import TextIcons from "../../components/sections/TextIcons.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+import "aos/dist/aos.css";
+import MapLocation from "../../components/external/MapLocation.astro";
+import CardsContainter from "../../components/cards/CardsContainter.astro";
+import BlogFeed from "../../components/blog/BlogFeed.astro";
+import GoogleReviews from "../../components/external/GoogleReviews.astro";
+
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import Advantages from "../../components/locations/Advantages.astro";
+import Benefits from "../../components/locations/Benefits.astro";
+import WhyUs from "../../components/locations/WhyUs.astro";
+import { randomHeaderImages } from "../../components/utils/utils";
+import CTAAirlineTrack from "../../components/ctas/CTAAirlineTrack.astro";
+type PilotTrainingEntry = CollectionEntry<"pilot-training">;
+
+export async function getStaticPaths() {
+  const locations = await getCollection("pilot-training");
+  return locations.map((entry: PilotTrainingEntry) => {
+    const slug = entry.id.replace(/\.mdx?$/, "");
+    return {
+      params: { slug },
+      props: {
+        locationData: entry.data,
+      },
+    };
+  });
+}
+
+const { locationData } = Astro.props;
+const data = {
+  siteTitle: locationData.siteTitle,
+  siteDescription: locationData.siteDescription,
+  siteKeywords: locationData.siteKeywords,
+
+  header: {
+    // image: {
+    //   src: "/src/assets/aircrew-member-using-control-panel-command-dashboard-navigation-fly-ariplane-cockpit-female-airliner-flying-plane-cabin-with-power-engine-switch-lever-close-up.jpg",
+    //   alt: "Aircrew member using control panel in airplane cockpit",
+    // },
+    image: randomHeaderImages(),
+    upperHeader: locationData.header.upperHeader,
+    title: locationData.header.title,
+    description:
+      "FAA Compliant simulator and ground school training – cost-effective, safe, and weather-proof pilot education.",
+    buttons: [
+      { text: "Start Training", href: "#enroll", style: "btn-secondary" },
+      { text: "Learn More", href: "/contact/", style: "btn-transparent" },
+    ],
+  },
+
+  whyUs: {
+    upperHeading: locationData.whyUs.upperHeading,
+    title: locationData.whyUs.title,
+    description: locationData.whyUs.description,
+    bullets: locationData.whyUs.bullets,
+    button: locationData.whyUs.buttons[0],
+    image: randomHeaderImages(),
+  },
+  
+  faqs: locationData.faqs,
+
+  advantages: {
+    upperHeading: locationData.advantages.upperHeading,
+    title: locationData.advantages.title,
+    description: locationData.advantages.description,
+    descriptions: locationData.advantages.descriptions,
+    bullets: locationData.advantages.bullets,
+    image: {
+      src: "/src/assets/benjamin-chambon-l4CiqkvuIos-unsplash.jpg",
+      alt: "Student using FAA Compliant flight simulator at PIC",
+    },
+    buttons: locationData.advantages.buttons,
+    advantages: locationData.advantages.advantages,
+  },
+
+  benefits: {
+    upperHeading: locationData.benefits.upperHeading,
+    title: locationData.benefits.title,
+    description: locationData.benefits.description,
+    descriptions: locationData.benefits.descriptions,
+    image: {
+      src: "/src/assets/majid-akbari-Bo396zMrEH8-unsplash.jpg",
+      alt: "Student training at PIC",
+    },
+    benefits: locationData.benefits.benefits,
+  },
+
+  cta: {
+    title: "Ready to Begin Your Pilot Journey?",
+    description:
+      "Take the first step toward your Private Pilot Certificate or Instrument Rating with PIC. Safe, affordable, and FAA-compliant training, designed to get you flying sooner.",
+    button: { text: "Book a Discovery Session", href: "/discovery-session" },
+    image: {
+      src: "/src/assets/cta-flight-solid-ground-aviation.webp",
+      alt: "View of the sky from an airplane window",
+    },
+  },
+
+  ctas: {
+    ctaFloating: {
+      upperHeading: "Join Maryland’s Premier Simulator Flight School",
+      title: "Experience the Future of Pilot Training",
+      description:
+        "Solid Ground Aviation combines FAA-certified simulators, expert instructors, and a cost-effective model to make flight training more accessible than ever. Start today and join a growing community of pilots in Maryland and D.C.",
+      images: [
+        {
+          src: "/src/assets/student using simulator 2.jpg",
+          alt: "Student using FAA Compliant flight simulator at PIC",
+        },
+      ],
+    },
+  },
+};
+---
+
+<BaseLayout
+  siteTitle={data.siteTitle}
+  siteDescription={data.siteDescription}
+  siteKeywords={data.siteKeywords}
+>
+  <HeaderMain content={data.header} />
+  <WhyUs content={data.whyUs} />
+  <Advantages content={data.advantages} />
+  <GoogleReviews />
+  <CardsContainter />
+  <!-- <CTARight /> -->
+  <Benefits content={data.benefits} />
+  <TextIcons content={data.whyUs} />
+
+  <!-- <CTALeft /> -->
+  <CTAAirlineTrack />
+  <Enroll />
+  <BlogFeed />
+  <FAQ content={data.faqs} />
+  <!-- <CTALeft /> -->
+  <MapLocation />
+</BaseLayout>

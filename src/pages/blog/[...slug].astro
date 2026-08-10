@@ -1,0 +1,233 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import AvatarBlogLarge from "../../components/blog/AvatarBlogLarge.astro";
+import CardRelated from "../../components/blog/CardRelated.astro";
+import { capitalize, formatDate } from "../../components/utils/utils";
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import { COMPANY_NAME, SITE_DESCRIPTION, SITE_TITLE } from "../../data/consts";
+import ImageComp from "../../components/utils/ImageComp.astro";
+import CTALeft from "../../components/ctas/CTALeft.astro";
+import HeaderMainAlternative from "../../components/headers/HeaderMainAlternative.astro";
+import BlogPostSidebar from "../../components/blog/BlogPostSidebar.astro";
+
+export async function getStaticPaths() {
+  const blogPosts = await getCollection("blog");
+  return blogPosts.map((post) => {
+    return {
+      params: { slug: post.slug || undefined },
+      props: { post },
+    };
+  });
+}
+
+const { post } = Astro.props;
+
+const blogPosts: CollectionEntry<"blog">[] = await getCollection("blog");
+const relatedPosts: CollectionEntry<"blog">[] = blogPosts.filter(
+  (blogEntry) => blogEntry.id !== post.id,
+);
+
+const pageTitle: string = `${post.data.title}`;
+const metaDescription =
+  post.data.description || `Read ${post.data.title} on ${COMPANY_NAME}'s blog`;
+const ogTitle = `${post.data.title} | Blog | ${SITE_TITLE}`;
+
+// Article schema data
+const articleData = {
+  headline: post.data.title,
+  author: post.data.author || `${COMPANY_NAME}'s Team'`,
+  // Using a safe fallback string representation
+  datePublished: post.data.pubDate instanceof Date ? post.data.pubDate.toISOString() : new Date(post.data.pubDate).toISOString(),
+  dateModified: post.data.pubDate instanceof Date ? post.data.pubDate.toISOString() : new Date(post.data.pubDate).toISOString(),
+  image: post.data.cardImage,
+  wordCount:
+    post.data.contents?.reduce(
+      (acc, content) => acc + (content.paragraph?.length || 0),
+      0,
+    ) || 1000,
+  description: metaDescription,
+  url: `https://flytheblueskies.com/blog/${post.id.replace(/^en\//, "")}`,
+};
+
+// Breadcrumbs for blog post
+const breadcrumbs = [
+  { name: "Home", url: "/" },
+  { name: "Blog", url: "/blog" },
+  { name: post.data.title, url: `/blog/${post.id.replace(/^en\//, "")}` },
+];
+
+const header = {
+  upperHeader: post.data.readTime + " min read",
+  title: post.data.title,
+  description: post.data.description || "",
+  image: {
+    src: post.data.cardImage,
+    alt: post.data.cardImageAlt,
+  },
+};
+
+// const { Content, headings } = await post.render();
+
+const headings =
+  post.data.contents
+    ?.map((content, index) => ({
+      depth: 2,
+      slug: `section-${index + 1}`,
+      text: content.title,
+    }))
+    .filter((h) => h.text) || [];
+
+const headerButton = { href: "#blog-main", text: "Read More" };
+---
+
+<BaseLayout siteTitle={pageTitle} siteDescription={metaDescription}>
+  <HeaderMainAlternative
+    content={header}
+    mainSize={false}
+    showButton={false}
+    images={[header.image]}
+    button={headerButton}
+    textSizeBig={false}
+    showDescription={false}
+    showOffer={false}
+  />
+  <section
+    class="mx-auto max-w-7xl px-4 pt-6 pb-12 sm:px-6 lg:px-8 lg:pt-10"
+    id="blog-main"
+  >
+    <div class="grid grid-cols-1 gap-12 lg:grid-cols-12">
+      {/* Main Content Area */}
+      <div class="order-1 lg:col-span-8">
+        <header class="mb-8">
+          <div class="flex items-center gap-x-4 mb-6">
+            <AvatarBlogLarge blogEntry={post} />
+            <div class="grow">
+              <span class="block font-bold text-primary-800"
+                >{post.data.author}</span
+              >
+              <ul class="flex items-center gap-x-4 text-xs text-primary-800">
+                <li
+                  class="relative last:after:hidden after:absolute after:-right-2.5 after:top-1/2 after:h-1 after:w-1 after:-translate-y-1/2 after:rounded-full after:bg-neutral-300"
+                >
+                  {formatDate(post.data.pubDate)}
+                </li>
+                <li>{post.data.readTime} min read</li>
+              </ul>
+            </div>
+          </div>
+          <h2
+            class="text-3xl font-bold text-primary-800 md:text-4xl lg:text-5xl"
+          >
+            {post.data.title}
+          </h2>
+        </header>
+
+        {/* Article Body */}
+        <div class="space-y-8 mb-12">
+          {
+            post.data.contents.map((content, index) => (
+              <>
+                <div class="prose prose-lg max-w-none">
+                  {content.title && (
+                    <h3 class="mb-4 text-2xl font-bold text-primary-800">
+                      {content.title}
+                    </h3>
+                  )}
+                  <p
+                    class="text-pretty text-primary-800"
+                    set:html={content.paragraph}
+                  />
+                </div>
+
+                {index === 1 && (
+                  <ImageComp
+                    src={post.data.cardImage}
+                    alt={post.data.cardImageAlt}
+                    classes="w-full rounded-xl object-cover ring ring-primary-300 shadow-lg shadow-black/30 my-8"
+                  />
+                )}
+              </>
+            ))
+          }
+        </div>
+
+        {/* Footer / Tags */}
+        <div
+          class="border-t border-neutral-200 pt-8 flex flex-col gap-y-5 sm:flex-row sm:items-center sm:justify-between"
+        >
+          <div class="flex flex-wrap gap-2">
+            {
+              post.data.tags?.map((tag: string) => (
+                <span class="inline-flex items-center rounded-lg bg-neutral-100 px-3 py-1.5 text-xs font-medium text-primary-800">
+                  {capitalize(tag)}
+                </span>
+              ))
+            }
+          </div>
+        </div>
+        <div class="mt-12 p-6 bg-accent-100 rounded-lg">
+          <div class="flex flex-col lg:flex-row items-center space-x-4">
+            <img
+              src="/Logo-round.png"
+              alt={`${COMPANY_NAME} Logo `}
+              class="w-16 h-16 rounded-full"
+              itemprop="image"
+            />
+            <div>
+              <h3 class="text-lg font-semibold" itemprop="name">
+                {COMPANY_NAME}
+              </h3>
+              <p
+                class="text-gray-600 border-t mt-2 pt-2 border-primary-800"
+                itemprop="description"
+              >
+                {SITE_DESCRIPTION}
+              </p>
+              <div
+                class="flex flex-col lg:flex-row gap-4 text-center border-t mt-4 py-2 border-primary-800 space-x-4"
+              >
+                <a
+                  href="/contact/"
+                  class="text-accent-600 hover:text-accent-800 flex items-center gap-2"
+                  >Contact Us <span class="text-xl">&#8594;</span></a
+                >
+                <a
+                  href="/discovery-flight/"
+                  class="text-accent-600 hover:text-accent-800 flex items-center gap-2"
+                  >Book Discovery Flight <span class="text-xl">&#8594;</span></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Sidebar Area */}
+      <aside class="order-2 lg:col-span-4">
+        <div class="sticky top-24">
+          <BlogPostSidebar headings={headings} />
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  {/* Related Articles */}
+  <section class="bg-neutral-50 py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="mb-10 text-center text-3xl font-bold text-primary-800">
+        Related articles
+      </h2>
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+        {
+          relatedPosts
+            .sort(() => 0.5 - Math.random())
+            .slice(0, 2)
+            .map((entry) => <CardRelated blogEntry={entry} />)
+        }
+      </div>
+    </div>
+  </section>
+
+  <CTALeft />
+</BaseLayout>

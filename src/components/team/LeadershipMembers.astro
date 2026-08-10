@@ -1,0 +1,151 @@
+---
+import ImageComp from "../utils/ImageComp.astro";
+import CardLeadershipMember from "./CardLeadershipMember.astro";
+
+const example = {
+      upperHeading: "Meet our team",
+      title: "Leadership Members",
+      description:"Our leadership team is committed to fostering a culture of innovation, safety, and excellence in aviation education, ensuring that our students receive the best possible training and support.",
+      descriptions: [
+        "Over the years, Stephanie has worn many hats in the industry, serving as a Customer Service Manager, Line Service Manager, Charter Scheduler, and Flight School Operations Manager. ",
+        "While she enjoyed each role, she found the greatest fulfillment in her work with the Flight School. Being part of the students’ journeys, helping them turn their dreams of flying into reality, has always been especially meaningful to her.",
+        "Watching students grow is what Stephanie finds most rewarding. From their very first flight, to becoming flight instructors, and eventually moving on to charter companies or the airlines, she takes great pride in seeing their progress and celebrating their achievements.",
+      ],
+      team: [
+        {
+          name: "Stephanie Fahy",
+          description: "Stephanie has been in the aviation industry for over 30 years, with more than 15 of those spent in the Johnson County area. She began her aviation career working alongside her father, helping him operate his FBO in Hays, Kansas.",
+          descriptions: [
+            "Over the years, Stephanie has worn many hats in the industry, serving as a Customer Service Manager, Line Service Manager, Charter Scheduler, and Flight School Operations Manager. While she enjoyed each role, she found the greatest fulfillment in her work with the Flight School. Being part of the students’ journeys, helping them turn their dreams of flying into reality, has always been especially meaningful to her. ",
+            "Watching students grow is what Stephanie finds most rewarding. From their very first flight, to becoming flight instructors, and eventually moving on to charter companies or the airlines, she takes great pride in seeing their progress and celebrating their achievements.",
+        ],
+          roles: "Founder & CEO",
+          image: {
+            src: "/src/assets/team/team-PIC_Stephanie Fahy_Flight-School_Pilot-Training_Pilot-Instructional-Center.png",
+            alt: "",
+          },
+          socials: [
+            {
+              icon: "M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z",
+              href: "https://facebook.com/johnjoe",
+            },
+            {
+              icon: "M16 8a6 6 0 01-11.95 1H2v3h3v9h4v-9h3l1-3h-4V7a2 2 0 012-2h3z",
+              href: "https://twitter.com/johnjoe",
+            },
+          ],
+        },
+      ],
+};
+
+const {content = example } = Astro.props;
+---
+
+
+<div class="bg-logo-dark py-24 md:py-32 relative">
+  <div class="mx-auto flex flex-col max-w-7xl px-6 lg:px-8 ">
+    <span class="text-2xl text-white uppercase"  data-aos="fade-right" data-aos-duration="1500">{content.upperHeading}</span>
+    <h2 class="flex text-4xl font-semibold tracking-tight text-pretty pb-12 pt-6  sm:text-5xl lg:text-7xl text-white" data-aos="fade-right" data-aos-duration="1500">{content.title}</h2>
+    
+    <p class="text-white text-xl text-left lg:max-w-1/2 border-t border-white/90 pt-6"  data-aos="fade-right" data-aos-duration="1000">{content.descriptions[0]}</p>
+
+    <ul role="list" class="group ">
+        {
+            content.team.map((member:any, index:number) => (
+                index % 2 === 0 ?
+                (
+                <div class="flex flex-col-reverse lg:flex-row justify-end items-center text-left gap-12 ">
+                    <div class="flex flex-col justify-center items-center max-w-xl xl:col-span-2 py-12 text-white lg:w-1/3">
+                        {
+                            content.descriptions.slice(1,3).map((description:any, index:number) => ( 
+                            <p class="mt-6 lg:mt-0 text-2xl lg:text-lg py-6" data-aos="fade-right" data-aos-duration="1000">{description}</p>
+                            ))
+                        }
+                        
+                    </div>
+                    <li class="flex flex-col py-24 mt-6 px-12 items-center gap-4 bg-primary-300 rounded-[8em] ring ring-white/90 sm:py-32 sm:px-24 md:flex-row md:rounded-[12em] lg:mt-0 lg:pl-44 lg:w-2/3 lg:py-12 lg:rounded-tl-full lg:rounded-bl-full lg:rounded-tr-none lg:rounded-br-none">
+                        <ImageComp 
+                            src={member.image.src}
+                            alt={member.image.alt}
+                            classes="size-44 lg:size-52 rounded-full object-cover ring-2 ring-white"
+                        />
+                        <div class="max-w-xl flex-auto lg:py-12 lg:text-right">
+                            <p class="text-lg text-white " data-aos="fade-right" data-aos-duration="1500"  data-aos-delay="300">{member.roles}</p>
+                            <h3 class="text-3xl uppercase font-semibold tracking-tight text-white" data-aos="fade-left" data-aos-duration="1500">{member.name}</h3>
+                            <p class="mt-6 text-base/7 text-white border-y border-white py-2 " data-aos="fade-right" data-aos-duration="1500">{member.description}</p>
+                            {/* Socials */}
+                            {/* <ul role="list" class="mt-6 flex gap-x-6 justify-self-end">
+                                <li>
+                                <a href="#" class="text-white  hover:text-white -500">
+                                    <span class="sr-only">X</span>
+                                    <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-5">
+                                    <path d="M11.4678 8.77491L17.2961 2H15.915L10.8543 7.88256L6.81232 2H2.15039L8.26263 10.8955L2.15039 18H3.53159L8.87581 11.7878L13.1444 18H17.8063L11.4675 8.77491H11.4678ZM9.57608 10.9738L8.95678 10.0881L4.02925 3.03974H6.15068L10.1273 8.72795L10.7466 9.61374L15.9156 17.0075H13.7942L9.57608 10.9742V10.9738Z" />
+                                    </svg>
+                                </a>
+                                </li>
+                                <li>
+                                <a href="#" class="text-white  hover:text-white -500">
+                                    <span class="sr-only">LinkedIn</span>
+                                    <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-5">
+                                    <path d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z" clip-rule="evenodd" fill-rule="evenodd" />
+                                    </svg>
+                                </a>
+                                </li>
+                            </ul> */}
+                        </div>
+                    </li>
+                </div>
+                ):(
+                    <div class="flex flex-col lg:flex-row justify-start items-start text-left text-white gap-12">
+                        <li class="flex flex-col justify-self-start w-1/2items-center gap-10 py-12  sm:flex-row bg-primary-300 px-12 rounded-tr-full rounded-br-full ring ring-white/90">
+                            <div class="max-w-xl flex-auto py-12">
+                                <h3 class="text-lg/8 font-semibold tracking-tight text-white">{member.name}</h3>
+                                <p class="text-base/7 text-white ">{member.roles}</p>
+                                <p class="mt-6 text-base/7 text-white ">{member.description}</p>
+                                <ul role="list" class="mt-6 flex gap-x-6">
+                                    <li>
+                                    <a href="#" class="text-white -400 hover:text-white -500">
+                                        <span class="sr-only">X</span>
+                                        <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-5">
+                                        <path d="M11.4678 8.77491L17.2961 2H15.915L10.8543 7.88256L6.81232 2H2.15039L8.26263 10.8955L2.15039 18H3.53159L8.87581 11.7878L13.1444 18H17.8063L11.4675 8.77491H11.4678ZM9.57608 10.9738L8.95678 10.0881L4.02925 3.03974H6.15068L10.1273 8.72795L10.7466 9.61374L15.9156 17.0075H13.7942L9.57608 10.9742V10.9738Z" />
+                                        </svg>
+                                    </a>
+                                    </li>
+                                    <li>
+                                    <a href="#" class="text-white -400 hover:text-white -500">
+                                        <span class="sr-only">LinkedIn</span>
+                                        <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-5">
+                                        <path d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z" clip-rule="evenodd" fill-rule="evenodd" />
+                                        </svg>
+                                    </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <ImageComp 
+                                src={member.image.src}
+                                alt={member.image.alt}
+                                classes=" w-52 h-52  rounded-full object-cover outline-1 -outline-offset-1 outline-black/5"
+                            />
+                        </li>
+                        <div class="max-w-xl xl:col-span-2 py-12 text-right">
+                                <p class="mt-6 text-2xl ">{content.descriptions[index]}</p>
+                        </div>
+                    </div>
+                
+                )
+            ))
+        }
+    </ul>
+    <p class="text-white text-xl text-left lg:max-w-1/2  border-b border-white/90 pb-6"  data-aos="fade-right" data-aos-duration="1000">{content.description}</p>
+    <!-- <ul role="list" class="divide-y divide-gray-200 xl:col-span-3">
+        {
+            content.team.map((member:any, index:number) => (
+                index % 2 === 0 ?
+                (<CardLeadershipMember content={member} />)
+                :
+                ("")
+            ))
+        }
+    </ul> -->
+  </div>
+</div>

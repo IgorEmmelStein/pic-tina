@@ -1,0 +1,111 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CardBlog from "../../components/blog/CardBlog.astro";
+import CardBlogRecent from "../../components/blog/CardBlogRecent.astro";
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../../data/consts";
+import HeaderMain from "../../components/headers/HeaderMainAlternative.astro";
+import CTALeft from "../../components/ctas/CTALeft.astro";
+import CTARight from "../../components/ctas/CTARight.astro";
+import BlogSidebar from "../../components/blog/BlogSidebar.astro";
+import HeaderMainAlternative from "../../components/headers/HeaderMainAlternative.astro";
+import BlogSearchMobile from "../../components/blog/BlogSearchMobile.astro";
+
+// Get all blogs post in English and sort them based on publish date
+
+const englishBlogEntries = await getCollection("blog");
+
+const blogPosts: CollectionEntry<"blog">[] = englishBlogEntries.sort(
+  (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
+    b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+// Separate the most recent post from others
+const mostRecentPost: CollectionEntry<"blog"> = blogPosts[0];
+const otherPosts: CollectionEntry<"blog">[] = blogPosts.slice(1);
+
+// Define variables for page content
+const title: string = "PIC Blog";
+const subTitle: string =
+  "Your co-pilot for flight training tips, aviation news, and stories from the sky. Whether you're a prospective student or a seasoned pilot, find valuable insights to fuel your passion for flying.";
+const secondTitle: string = "Pilot Spotlights";
+const secondSubTitle: string =
+  "Go behind the scenes and read stories from our students, instructors, and graduates. Learn about their journeys, challenges, and triumphs in aviation.";
+
+const pageTitle: string = `Blog | ${SITE_TITLE}`;
+const metaDescription =
+  "The official blog for PIC Above Flight School. Get flight training tips, read pilot stories, and stay updated on the latest in aviation.";
+const ogTitle = `The PIC Blog | ${SITE_TITLE}`;
+
+const data = {
+  siteTitle: "PIC Blog | Aviation Tips, Training Guides & Student Resources",
+  siteDescription:
+    "Read expert articles from PIC instructors on aviation safety, flight training tips, FAA regulations, career paths, and inspiring student success stories.",
+  siteKeywords:
+    "aviation blog, flight training tips, FAA regulations, pilot resources, Kansas City flight school",
+
+  header: {
+    upperHeader: "Blog",
+    title: `The Pilot Instructional Center Aviation & Training Blog`,
+    description:
+      "Learn more about aviation and the most relevant news for student pilots.",
+    image: {
+      src: "/src/assets/stock/stock_Plane-ground-sunset_roland-denes-MsZEJYU8alE-unsplash.jpg",
+      alt: "Airplane on ground at sunset by Roland Denes",
+    },
+  },
+};
+const headerButton = { href: "#blog-main", text: "Read More" };
+---
+
+<BaseLayout
+  siteTitle={data.siteTitle}
+  siteDescription={data.siteDescription}
+  siteKeywords={data.siteKeywords}
+>
+  <HeaderMain
+    content={data.header}
+    mainSize={false}
+    showButton={false}
+    images={[data.header.image]}
+    button={headerButton}
+  />
+
+  <section
+    class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14"
+    id="blog-main"
+  >
+    {/* 1. Featured Post - Full Width */}
+    <section class="mb-16">
+      <CardBlogRecent blogEntry={mostRecentPost} />
+    </section>
+
+    {/* 2. Main Content Grid (Posts + Sidebar) */}
+    <div class="grid grid-cols-1 gap-12 lg:grid-cols-12">
+      {/* Blog Posts Column */}
+      <section class="lg:col-span-8">
+        <h2 class="mb-8 text-2xl font-bold text-primary-800 border-b pb-4">
+          Latest Updates
+        </h2>
+        <BlogSearchMobile />
+        <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-2">
+          {
+            otherPosts.map((blogEntry, index) => (
+              <CardBlog blogEntry={blogEntry} index={index} />
+            ))
+          }
+        </div>
+      </section>
+
+      {/* Sidebar Column */}
+      <aside class="lg:col-span-4">
+        <div class="sticky top-24 space-y-8">
+          <BlogSidebar />
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <CTARight />
+</BaseLayout>

@@ -1,0 +1,4 @@
+interface:
+  display_name: "RRM Blog Copywriter"
+  short_description: "Writes verified, human flight school blog posts"
+  default_prompt: "Use $rrm-blog-copywriter to draft a company-voice flight school blog post from the brand guide, author/byline strategy, and approved aviation facts, then run the image/link validator and human voice lint."

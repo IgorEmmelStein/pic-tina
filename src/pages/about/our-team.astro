@@ -1,0 +1,129 @@
+---
+import CTALeft from "../../components/ctas/CTALeft.astro";
+import CTARight from "../../components/ctas/CTARight.astro";
+import Enroll from "../../components/forms/Enroll.astro";
+import HeaderMain from "../../components/headers/HeaderMainAlternative.astro";
+import FAQ from "../../components/sections/FAQ.astro";
+import TextIcons from "../../components/sections/TextIcons.astro";
+import Why from "../../components/sections/Why.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../../data/consts";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProgramsComponent from "../../components/sections/ProgramsComponent.astro";
+
+import "aos/dist/aos.css";
+import LeadershipMembers from "../../components/team/LeadershipMembers.astro";
+import TeamMembers from "../../components/team/TeamMembers.astro";
+
+const data = {
+  siteTitle: "Our Team | Pilot Instructional Center | Near Kansas City",
+  siteDescription:
+    "Meet the senior flight instructors and leadership at PIC. Learn about the certifications and dedication used to help students become safe, skilled pilots.",
+  siteKeywords:
+    "flight instructors, PIC team, aviation professionals, CFI Kansas City, CFII instructors",
+
+  header: {
+    upperHeader: "Meet the Team",
+    title: `The Instructors Behind Kansas City’s Premier Flight School`,
+    description:
+      "PIC is built on professionalism, safety, and a passion for aviation. Meet the instructors who guide our students toward successful, confident flying.",
+    buttons: [
+      { text: "Start Training", href: "#enroll", style: "btn-secondary" },
+      { text: "Learn More", href: "/contact/", style: "btn-transparent" },
+    ],
+    image: {
+      src: "/src/assets/rrm-visit/pilot-instructional-center_new-century-KS_cfis-preparing-plane-cessna-airport-near-Kansas-city-MO-cropped.png",
+      alt: "CFI's from PIC preparing Cessna aircraft Kansas city",
+    },
+  },
+
+  // ============================
+  // TEAM SECTION
+  // ============================
+  team: {
+    upperHeader: "Our Instructors",
+    title: "Dedicated. Experienced. Student-Focused.",
+    description:
+      "Every instructor at PIC brings professionalism, real-world flying experience, and a commitment to exceptional aviation training.",
+    members: [
+      {
+        name: "Logan Fahy",
+        role: "Chief Safety Officer / Advanced Flight Instructor",
+        bio: [
+          "Logan began flying in 2022 and became a flight instructor in 2024.",
+          "He has accumulated over 1,000 hours of dual given and also serves as a contract pilot with Kansas University Athletics, flying the Cessna Citation CJ4.",
+          "Logan’s favorite part of instructing is seeing his students earn their certificates and achieve lifelong aviation goals.",
+        ],
+        credentials: "CFI, CFII, CE-525 SIC",
+        image: {
+          src: "/src/assets/team/logan.jpg",
+          alt: "Flight Instructor Logan Fahy",
+        },
+      },
+      {
+        name: "Ryan Tindall",
+        role: "Advanced Flight Instructor",
+        bio: [
+          "Ryan began flying in 2016 and became an instructor in 2022.",
+          "He is a Gold Seal instructor with over 1,500 hours of dual given.",
+          "Ryan loves exploring new airports across the Midwest and enjoys witnessing the 'light bulb' moments when his students understand a concept and progress toward their goals.",
+        ],
+        credentials: "CFI, CFII, MEI",
+        image: {
+          src: "/src/assets/team/ryan.jpg",
+          alt: "Flight Instructor Ryan Tindall",
+        },
+      },
+    ],
+  },
+
+  // =============================
+  // CTA FLOATING
+  // =============================
+  ctas: {
+    ctaFloating: {
+      upperHeading: "Excellence in Aviation Education",
+      title: "A Team Committed to Your Success",
+      description:
+        "PIC instructors combine real-world flying experience, strong teaching foundations, and a student-first mindset. From your first lesson to your checkride, our team is here to guide you every step of the way.",
+      images: [
+        {
+          src: "/src/assets/student using simulator 2.jpg",
+          alt: "Student training with instructor at PIC",
+        },
+      ],
+    },
+  },
+
+  // =============================
+  // CTA BOTTOM
+  // =============================
+  cta: {
+    title: "Train With Instructors Who Care About Your Success",
+    description:
+      "Whether you're pursuing a Private Pilot Certificate or advanced ratings, our instructors provide safe, structured, and personalized training to help you thrive.",
+    button: { text: "Book a Discovery Session", href: "/discovery-session" },
+    image: {
+      src: "/src/assets/cta-flight-solid-ground-aviation.webp",
+      alt: "View of the sky from an airplane window",
+    },
+  },
+};
+---
+
+<BaseLayout
+  siteTitle={data.siteTitle}
+  siteDescription={data.siteDescription}
+  siteKeywords={data.siteKeywords}
+>
+  <HeaderMain
+    content={data.header}
+    mainSize={false}
+    showButton={false}
+    images={[data.header.image]}
+  />
+  <CTALeft />
+  <LeadershipMembers />
+  <TeamMembers />
+  <CTARight />
+  <Enroll />
+</BaseLayout>

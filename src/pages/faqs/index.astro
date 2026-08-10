@@ -1,0 +1,434 @@
+---
+import CTALeft from "../../components/ctas/CTALeft.astro";
+import Enroll from "../../components/forms/Enroll.astro";
+import HeaderMain from "../../components/headers/HeaderMainAlternative.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+import "aos/dist/aos.css";
+import FAQsContainer from "../../components/sections/FAQsContainer.astro";
+
+const data = {
+  siteTitle:
+    "Frequently Asked Questions | Pilot Instructional Center  | New Century KS",
+  siteDescription:
+    "Find answers about flight training, costs, aircraft, scheduling, requirements, and PIC’s senior-instructor training model.",
+  siteKeywords:
+    "flight school FAQ, pilot training questions, aviation costs, start flying Kansas City",
+
+  header: {
+    upperHeader: "FAQs",
+    title: `Frequently Asked Questions`,
+    description:
+      "Find quick answers about simulator training, enrollment, pricing, scheduling, FAA requirements, and more. If you still have questions, our team is here to help.",
+    buttons: [
+      { text: "Contact Support", href: "/contact/", style: "btn-secondary" },
+      { text: "Enroll Now", href: "#faq-general", style: "btn-transparent" },
+    ],
+    image: {
+      src: "/src/assets/stock-man-airplanes-museum.jpg",
+      alt: "",
+    },
+  },
+
+  cta: {
+    title: "Still Have Questions?",
+    description:
+      "Our team is happy to guide you through enrollment, scheduling, or training requirements. Reach out anytime, we’re here to help future pilots succeed.",
+    button: { text: "Get in Touch", href: "/contact/" },
+    image: {
+      src: "/src/assets/cta-flight-solid-ground-aviation.webp",
+      alt: "Flight simulator cockpit view",
+    },
+  },
+
+  ctas: {
+    ctaFloating: {
+      upperHeading: "Flight Training Support",
+      title: "We’re Here to Make Your Training Clear and Simple",
+      description:
+        "Our FAQ center covers everything from simulator training to pricing and student requirements. Explore below or reach out for personalized assistance.",
+      images: [
+        {
+          src: "/src/assets/student using simulator 2.jpg",
+          alt: "Student using FAA Compliant flight simulator",
+        },
+      ],
+    },
+  },
+
+  faqOverview: {
+    upperHeading: "FAQs",
+    title: "Frequently asked questions",
+    questions: [
+      {
+        question:
+          "Why choose Pilot Instructional Center for flight training in Kansas City?",
+        answer:
+          "Pilot Instructional Center (PIC) stands out for its team of senior instructors with real-world jet experience and a passion for helping students succeed. Our training programs emphasize safety, integrity, and personalized instruction, offering a higher level of mentorship than large, fast-paced schools. Located in New Century, near Kansas City, PIC provides an ideal balance of professional standards, accessible airspace, and a supportive learning environment.",
+      },
+      {
+        question:
+          "What can I expect from flight training at Pilot Instructional Center?",
+        answer:
+          "At PIC, students receive individualized attention from instructors who genuinely care about their progress. Training covers everything from Private Pilot basics to advanced Instrument and Commercial ratings. You’ll fly modern aircraft, gain simulator experience, and develop strong decision-making skills through structured lessons and mentorship. Whether your goal is recreational flying or a professional career, PIC prepares you for success in real-world aviation.",
+      },
+      {
+        question: "What are the requirements to start flight training at PIC?",
+        answer:
+          "No prior flight experience is needed to begin. Students must be at least 17 years old for a Private Pilot License, hold an FAA medical certificate (Class 2 or higher), and be proficient in English. Our team helps guide new students through each step, from medical certification to enrollment, ensuring a smooth and supportive start to your training journey.",
+      },
+      {
+        question:
+          "Does Pilot Instructional Center offer financing or flexible payment options?",
+        answer:
+          "Yes. PIC partners with aviation financing programs to make flight training more accessible for motivated students. We also offer pay-as-you-go options, allowing you to progress at your own pace while managing costs effectively. Our team can assist you in finding the best plan based on your goals and financial situation.",
+      },
+      {
+        question: "How long does it take to earn a pilot license at PIC?",
+        answer:
+          "Training time varies depending on your schedule, weather, and how frequently you fly. Dedicated students can complete their Private Pilot License in as little as 2–3 months, while others may take 6–12 months on a part-time basis. Our experienced instructors help you stay on track with a structured plan designed around your availability and goals.",
+      },
+    ],
+    buttons: [
+      {
+        name: "Contact us",
+        link: "/contact/",
+        primary: true,
+      },
+    ],
+  },
+
+  faqGeneral: {
+    upperHeading: "General Information",
+    title: "Pilot Instructional Center FAQs",
+    questions: [
+      {
+        question: "What is Pilot Instructional Center?",
+        answer:
+          "Pilot Instructional Center (PIC) is a Part 61 flight training organization based at New Century Airport (KIXD), serving the Kansas City area. We offer professional pilot training, instructor certifications, simulator instruction, and aircraft rental, all guided by senior, experienced instructors and strict safety-focused Standard Operating Procedures (SOPs).",
+      },
+      {
+        question: "Do I need previous flight experience to begin training?",
+        answer:
+          "No prior flight experience is required. Many of our students start with zero time. Our instructors guide you step by step, from your first lesson through solo flight, cross-country operations, and FAA checkride preparation.",
+      },
+      {
+        question: "Where are you located?",
+        answer:
+          "All training operations are conducted at New Century Airport (KIXD), conveniently located southwest of Kansas City. Visit our contact page for directions, airport access details, and parking information.",
+      },
+      {
+        question: "What safety standards do you follow?",
+        answer:
+          "PIC operates under FAA Parts 61 and 91 and enforces comprehensive internal SOPs. These include weather minimums, solo authorization policies, aircraft handling standards, instructor oversight, and formal safety reporting procedures.",
+      },
+      {
+        question: "What should I do if I notice a maintenance issue?",
+        answer:
+          "Any aircraft concern must be immediately documented in the squawk system and reported to an instructor or staff member. Aircraft are grounded when safety is in question, no exceptions.",
+      },
+      {
+        question: "Who should I contact in case of an emergency or incident?",
+        answer:
+          "Any injury, aircraft damage, or safety incident must be reported immediately to the Chief Safety Officer and General Manager. FAA reporting requirements under 49 CFR Part 830 may also apply.",
+      },
+    ],
+  },
+
+  faqTraining: {
+    upperHeading: "Training & Courses",
+    title: "Training Program FAQs",
+    questions: [
+      {
+        question: "What training programs do you offer?",
+        answer:
+          "PIC offers training for Private Pilot, Instrument Rating, Commercial Pilot, Certified Flight Instructor (CFI and CFII), Multi-Engine add-ons, simulator instruction, flight reviews, proficiency training, and aircraft renter checkouts.",
+      },
+      {
+        question: "How long does it take to earn a Private Pilot License?",
+        answer:
+          "Full-time students may complete training in approximately 2–3 months. Most part-time students finish within 6–12 months, depending on proficiency, scheduling consistency, and weather conditions.",
+      },
+      {
+        question:
+          "What are the instructor requirements at Pilot Instructional Center?",
+        answer:
+          "All instruction is conducted by PIC-approved instructors. Our CFIs are experienced professionals, not time-builders, and outside instruction is not permitted without written authorization.",
+      },
+      {
+        question: "What are the student solo requirements?",
+        answer:
+          "Students must meet all PIC SOP requirements before solo flight. These include instructor authorization, approved maneuvers only, daylight operations, runway length minimums, instructor availability on-site, and defined fuel and weather minimums.",
+      },
+      {
+        question: "Are there weather minimums for training and solo flights?",
+        answer:
+          "Yes. PIC enforces conservative weather policies for visibility, ceilings, winds, turbulence, icing, and convective activity. Solo weather minimums are published separately and strictly enforced.",
+      },
+      {
+        question: "Do you help students prepare for FAA written exams?",
+        answer:
+          "Yes. We provide personalized ground instruction, structured study plans, instructor mentoring, and access to online ground school resources to ensure students are fully prepared.",
+      },
+      {
+        question: "Can I transfer from another flight school?",
+        answer:
+          "Yes. Transfer students are welcome. We review prior training records and create a customized continuation plan aligned with PIC standards and SOPs.",
+      },
+
+      {
+        question: "What are the requirements to begin CFI training?",
+        answer:
+          "CFI applicants must be at least 18 years old, proficient in English, hold a Commercial or ATP certificate, possess a valid FAA medical (Class 3 or higher), and complete required FAA knowledge exams prior to the practical test.",
+      },
+      {
+        question: "How long does the CFI course take?",
+        answer:
+          "The CFI program is typically completed in approximately one month, depending on availability, preparation, and individual proficiency.",
+      },
+      {
+        question: "What is included in the CFI program?",
+        answer:
+          "The program includes 15 hours of dual flight instruction and 25 hours of personalized ground training, with a strong emphasis on teaching techniques, fundamentals of instruction, and checkride readiness.",
+      },
+      {
+        question: "What does the CFII program include?",
+        answer:
+          "CFII training includes 10 hours of dual flight instruction, 5 hours of AATD simulator time, and 20 hours of focused ground instruction covering advanced instrument teaching concepts.",
+      },
+      {
+        question: "Can I complete both CFI and CFII at PIC?",
+        answer:
+          "Yes. Students may complete both programs at PIC. Combined enrollment offers streamlined scheduling and priority consideration for future instructor opportunities.",
+      },
+    ],
+  },
+
+  faqPricing: {
+    upperHeading: "Pricing & Requirements",
+    title: "Payments, Rentals & Requirements",
+    questions: [
+      {
+        question:
+          "How does aircraft rental work at Pilot Instructional Center?",
+        answer:
+          "Renters must complete a checkout every 90 days, maintain currency, comply with Part 91 regulations, and follow all PIC SOPs. Aircraft must be properly preflighted, secured after flight, and any discrepancies reported immediately.",
+      },
+      {
+        question: "What costs should I expect for training or rental?",
+        answer:
+          "Costs may include aircraft rental, instructor fees, simulator time, online ground school, FAA medical exams, written tests, and checkride examiner fees. PIC pricing is transparent with no hidden charges.",
+      },
+      {
+        question: "Do you offer financing or payment plans?",
+        answer:
+          "Training is pay-as-you-go. We can also provide information on reputable third-party aviation financing options upon request.",
+      },
+      {
+        question: "Who is responsible for fuel, maintenance, or damage?",
+        answer:
+          "Fuel purchases are reimbursed up to KIXD rates. Renters are responsible for damage beyond insurance coverage, including deductibles. Maintenance may not be authorized without PIC approval.",
+      },
+      {
+        question: "What are the requirements to begin training?",
+        answer:
+          "Students must be at least 16 years old to solo, 17 for certification, proficient in English, and hold the appropriate FAA medical certificate for their training goals.",
+      },
+      {
+        question: "Is there a cancellation policy?",
+        answer:
+          "Yes. Lessons must be canceled at least 24 hours in advance. Weather-related cancellations are allowed up to one hour prior if conditions fall below PIC safety minimums.",
+      },
+      {
+        question: "Do you provide rental insurance coverage?",
+        answer:
+          "PIC provides liability and limited physical damage coverage with a deductible. Additional renter’s insurance is strongly recommended.",
+      },
+      {
+        question: "Can I pause or resume training?",
+        answer:
+          "Yes. Students may pause and resume training at any time. Consistent training is encouraged to reduce overall cost and improve learning efficiency.",
+      },
+
+      {
+        question: "How much does the CFI program cost?",
+        answer:
+          "The estimated cost is $5,975, which includes 15 hours of dual instruction and 25 hours of ground training. Final cost varies based on proficiency and additional training needs.",
+      },
+      {
+        question: "How much does the CFII program cost?",
+        answer:
+          "The CFII program is estimated at $5,050 and includes dual instruction, simulator time, and focused ground training.",
+      },
+      {
+        question: "Is there an enrollment fee for CFI and CFII?",
+        answer:
+          "Yes. A $1,200 enrollment fee applies to CFI and CFII programs and may be split when starting each course.",
+      },
+    ],
+  },
+
+  faqCost: {
+    upperHeading: "Cost & Pricing",
+    title: "Flight Training Costs in Kansas City",
+    questions: [
+      {
+        question: "How much does flight training cost in Kansas City?",
+        answer:
+          "Flight training costs in Kansas City typically range from $12,000 to $18,000 for a Private Pilot License, depending on aircraft type, training frequency, and student proficiency. At PIC, we focus on efficient, safety-driven training to help students reach certification without unnecessary hours.",
+      },
+      {
+        question: "Is flight training paid per hour?",
+        answer:
+          "Yes. Flight training is billed per hour for both aircraft rental and instructor time. This pay-as-you-go model gives students flexibility and transparency, allowing you to control your training pace and overall cost.",
+      },
+      {
+        question: "Are there minimum flight hours required by the FAA?",
+        answer:
+          "Yes. The FAA requires a minimum number of hours for each certificate, but most students exceed these minimums. PIC structures training to build proficiency efficiently while meeting all FAA and internal SOP standards.",
+      },
+      {
+        question: "What factors affect the total cost of flight training?",
+        answer:
+          "Total cost depends on training consistency, aircraft availability, weather, individual learning pace, and preparation for lessons. Consistent scheduling and proper ground preparation significantly reduce overall expenses.",
+      },
+    ],
+  },
+
+  faqGettingStarted: {
+    upperHeading: "Getting Started",
+    title: "How to Start Flight Training",
+    questions: [
+      {
+        question: "What is the first step to becoming a pilot?",
+        answer:
+          'The best first step is scheduling a <a href="/discovery-flight/">Discovery Flight</a>. This introductory flight lets you experience flying firsthand, meet an instructor, and determine if pilot training is right for you.',
+      },
+      {
+        question:
+          "Do I need a medical certificate before starting flight training?",
+        answer:
+          "A medical certificate is not required to begin training, but it is recommended early in the process. A third-class medical is required before solo flight for most students.",
+      },
+      {
+        question: "How often should I fly to make progress?",
+        answer:
+          "We recommend flying at least 2–3 times per week. Consistent training improves skill retention, reduces total hours needed, and lowers overall cost.",
+      },
+      {
+        question: "Can I train part-time while working a full-time job?",
+        answer:
+          "Yes. Many PIC students train part-time. Flexible scheduling allows you to balance flight training with work or school while still making steady progress.",
+      },
+    ],
+  },
+
+  faqCareer: {
+    upperHeading: "Career Path",
+    title: "Professional Pilot & Airline Training FAQs",
+    questions: [
+      {
+        question: "Can flight training lead to an airline career?",
+        answer:
+          "Yes. Many students train with the goal of becoming professional pilots. PIC provides structured Commercial, CFI, and CFII training to prepare pilots for airline and corporate aviation careers.",
+      },
+      {
+        question: "Do your instructors focus on teaching or time-building?",
+        answer:
+          "PIC instructors are experienced professionals focused on mentorship and instructional quality, not just building flight time. This ensures students receive consistent, high-standard training aligned with real-world aviation operations.",
+      },
+      {
+        question: "Does PIC offer CFI employment after training?",
+        answer:
+          "Graduates of the CFI and CFII programs may be considered for instructor opportunities based on performance, professionalism, and operational needs.",
+      },
+    ],
+  },
+
+  faqPrograms: {
+    upperHeading: "Programs Overview",
+    title: "Pilot Training Programs at PIC",
+    questions: [
+      {
+        question: "What certificates can I earn at Pilot Instructional Center?",
+        answer:
+          'PIC offers <a href="/private-pilot/">Private Pilot</a>, Instrument Rating, Commercial Pilot, <a href="/cfi-training/">CFI</a>, <a href="/cfii-training/">CFII</a>, Multi-Engine add-ons, and recurrent training programs.',
+      },
+      {
+        question: "Is simulator training available?",
+        answer:
+          "Yes. We offer AATD simulator training for instrument proficiency, currency, and CFII instruction to enhance learning while reducing aircraft costs.",
+      },
+    ],
+  },
+
+  faqComparisonTable: {
+    upperHeading: "Training Overview",
+    title: "Flight Training Time & Cost Comparison",
+    table: {
+      headers: ["Certificate", "Typical Hours", "Estimated Cost Range"],
+      rows: [
+        ["Discovery Flight", "1 hour", "$150 – $200"],
+        ["Private Pilot", "55–70 hours", "$12,000 – $18,000"],
+        ["Instrument Rating", "40–50 hours", "$8,000 – $10,000"],
+        ["Commercial Pilot", "120–150 hours", "$25,000 – $35,000"],
+        ["CFI", "15 flight / 25 ground", "~$5,975"],
+        ["CFII", "10 flight / 5 sim", "~$5,050"],
+      ],
+    },
+  },
+};
+
+const allFAQs = [
+  data.faqGeneral,
+  data.faqCareer,
+  data.faqCost,
+  data.faqGettingStarted,
+  data.faqPrograms,
+  data.faqPricing,
+  data.faqTraining,
+  data.faqOverview,
+];
+
+const categories = [
+  { id: "general", name: "General", data: data.faqGeneral },
+  { id: "career", name: "Career", data: data.faqCareer },
+  { id: "cost", name: "Cost", data: data.faqCost },
+  {
+    id: "getting-started",
+    name: "Getting Started",
+    data: data.faqGettingStarted,
+  },
+  { id: "programs", name: "Programs", data: data.faqPrograms },
+  { id: "pricing", name: "Pricing", data: data.faqPricing },
+  { id: "training", name: "Training", data: data.faqTraining },
+  { id: "overview", name: "Overview", data: data.faqOverview },
+];
+---
+
+<BaseLayout
+  siteTitle={data.siteTitle}
+  siteDescription={data.siteDescription}
+  siteKeywords={data.siteKeywords}
+>
+  <HeaderMain
+    content={data.header}
+    mainSize={false}
+    showButton={false}
+    images={[data.header.image]}
+  />
+  <!-- <FAQ content={data.faqGeneral} />
+  <FAQ content={data.faqTraining} />
+  <FAQ content={data.faqPricing} />
+  <FAQ /> -->
+
+  <!-- {
+    allFAQs.map((faq, index) => {
+      return <FAQ content={faq} key={index} />;
+    })
+  } -->
+  <FAQsContainer categories={categories} />
+
+  <CTALeft />
+  <Enroll />
+</BaseLayout>

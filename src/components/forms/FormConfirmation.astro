@@ -1,0 +1,59 @@
+---
+import { COMPANY_NAME } from "../../data/consts";
+const example = {
+  title: "Contact Confirmation",
+  description: `Thank you for reaching out to ${COMPANY_NAME}! Your message has been received and we will get back to you shortly. You will receive an email confirming your contact along with any additional information you may need, if you don't see it please check your spam folder.`,
+  suggestion: {
+    title: "Looking for a discovery flight?",
+    link: {
+      title: "Book a Discovery Flight",
+      href: "/discovery-flight/",
+    },
+  },
+};
+
+const { content = example } = Astro.props;
+---
+
+<section
+  class="min-h-[80vh] pt-32 lg:p-44 lg:py-56 flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-logo"
+>
+  <div class="max-w-md mx-auto text-center">
+    <div class="text-primary-600 mb-8">
+      <svg class="w-24 h-24 mx-auto" viewBox="0 0 24 24"
+        ><path
+          fill="currentColor"
+          fill-rule="evenodd"
+          d="M12 21a9 9 0 1 0 0-18a9 9 0 0 0 0 18m-.232-5.36l5-6l-1.536-1.28l-4.3 5.159l-2.225-2.226l-1.414 1.414l3 3l.774.774z"
+          clip-rule="evenodd"></path></svg
+      >
+    </div>
+
+    <h1 class="text-4xl font-bold text-primary-600 mb-4">
+      {content.title}
+    </h1>
+
+    <p class="text-lg text-gray-600 mb-8">
+      {content.description}
+    </p>
+
+    <div class="space-y-4">
+      <a href="/" class="btn-accent btn-middle"> Return Home </a>
+    </div>
+
+    <!-- Optional suggestion -->
+    {
+      content.suggestion && (
+        <div class="mt-8 p-4 rounded-lg">
+          <h2 class="text-sm text-gray-600 mb-2">{content.suggestion.title}</h2>
+          <a
+            href={content.suggestion.link.href}
+            class="text-primary-600 hover:text-primary-700 font-medium transition-colors"
+          >
+            {content.suggestion.link.title} →
+          </a>
+        </div>
+      )
+    }
+  </div>
+</section>

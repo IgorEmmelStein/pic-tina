@@ -1,0 +1,96 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+// import BlogPostCard from "../../../components/BlogPostCard.astro";
+// import Hero75 from "../../../components/Hero75.astro";
+import BlogSidebar from "../../../components/blog/BlogSidebar.astro";
+import { slugify } from "../../../components/blog/utils";
+import { ADDRESS_STATE, COMPANY_NICKNAME } from "../../../data/consts";
+import CardBlog from "../../../components/blog/CardBlog.astro";
+import HeaderMain from "../../../components/headers/HeaderMain.astro";
+import HeaderMainAlternative from "../../../components/headers/HeaderMainAlternative.astro";
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection("blog");
+  const uniqueTags = [
+    ...new Set(allPosts.map((post) => post.data.tags || []).flat()),
+  ];
+
+  return uniqueTags.map((tag) => {
+    const tagSlug = slugify(tag);
+
+    return {
+      params: { tag: tagSlug },
+      props: {
+        tagName: tag, // "Flight Training"
+        posts: allPosts.filter((post) => post.data.tags?.includes(tag)),
+      },
+    };
+  });
+}
+
+const { tagName, posts } = Astro.props;
+
+const heroData = {
+  image: {
+    src: "/src/assets/stock/stock_Plane-ground-sunset_roland-denes-MsZEJYU8alE-unsplash.jpg",
+    alt: "Aviation",
+  },
+  upperHeader: "Tag Archive",
+  title: `Articles tagged with: ${tagName}`,
+  subTitle: `Explore ${COMPANY_NICKNAME}'s, ${ADDRESS_STATE}, collection of articles regarding ${tagName} in the aviation industry.`,
+  cta: [{ url: "/blog", text: "Back to Blog" }],
+};
+const headerButton = { href: "#blog-main", text: "Read More" };
+---
+
+<BaseLayout
+  siteTitle={`Blog posts tagged with ${tagName} | ${COMPANY_NICKNAME} in ${ADDRESS_STATE}`}
+  siteDescription={`Explore ${COMPANY_NICKNAME}'s, ${ADDRESS_STATE}, collection of articles regarding ${tagName} in the aviation industry.`}
+>
+  <HeaderMainAlternative
+    content={heroData}
+    mainSize={false}
+    showButton={false}
+    images={[heroData.image]}
+    button={headerButton}
+  />
+  <!-- <Hero75 data={heroData} /> -->
+
+  <section class="py-16 px-4 bg-muted-50" id="blog-main">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <div class="lg:col-span-8">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {
+              posts.length > 0 ? (
+                posts.map(
+                  (post, index) => <CardBlog blogEntry={post} index={index} />,
+                  // <BlogPostCard post={post} />
+                )
+              ) : (
+                <div class="col-span-full py-10 text-center">
+                  <p class="text-gray-500 italic text-lg">
+                    No articles found with this tag.
+                  </p>
+                  <a
+                    href="/blog"
+                    class="text-monza-700 font-bold hover:underline mt-4 inline-block"
+                  >
+                    View all posts
+                  </a>
+                </div>
+              )
+            }
+          </div>
+        </div>
+
+        <aside class="lg:col-span-4">
+          <div class="top-24">
+            <BlogSidebar />
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

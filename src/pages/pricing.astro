@@ -1,0 +1,68 @@
+---
+import CTALeft from "../components/ctas/CTALeft.astro";
+import CTARight from "../components/ctas/CTARight.astro";
+import Enroll from "../components/forms/Enroll.astro";
+import HeaderMain from "../components/headers/HeaderMainAlternative.astro";
+import FAQ from "../components/sections/FAQ.astro";
+import TextIcons from "../components/sections/TextIcons.astro";
+import Why from "../components/sections/Why.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../data/consts";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProgramsComponent from "../components/sections/ProgramsComponent.astro";
+
+import "aos/dist/aos.css";
+import MapLocation from "../components/external/MapLocation.astro";
+import CardsContainter from "../components/cards/CardsContainter.astro";
+import BlogFeed from "../components/blog/BlogFeed.astro";
+import GoogleReviews from "../components/external/GoogleReviews.astro";
+import PricingComponent from "../components/pricing/PricingComponent.astro";
+import WhyChooseUs from "../components/pricing/WhyChooseUs.astro";
+
+const data = {
+  siteTitle: "Flight Training Pricing | Pilot Instructional Center",
+  siteDescription:
+    "View transparent flight training pricing at Pilot Instructional Center near Kansas City. Understand the exact costs for every pilot certificate and rating.",
+  siteKeywords:
+    "flight training pricing Kansas City, pilot training cost, flight school pricing, PIC pricing, pilot instructional center pricing",
+
+  header: {
+    image: {
+      src: "/src/assets/rrm-visit/pilot-instructional-center_new-century-KS_ground-school-cfi-teaching.png",
+      alt: "CFI explaining on whiteboard",
+    },
+    upperHeader: "Transparent Flight Training Pricing Near Kansas City",
+    title: `Flight Training Pricing  at Pilot Instructional Center`,
+    description:
+      "PIC provides clear, honest pricing for every stage of pilot training. Review program costs, understand what’s included, and plan your aviation journey with confidence.",
+    buttons: [
+      {
+        text: "Request Pricing Info",
+        href: "/contact/",
+        style: "btn-secondary",
+      },
+      {
+        text: "View Programs",
+        href: "/flight-training/",
+        style: "btn-transparent",
+      },
+    ],
+  },
+};
+---
+
+<BaseLayout
+  siteTitle={data.siteTitle}
+  siteDescription={data.siteDescription}
+  siteKeywords={data.siteKeywords}
+>
+  <HeaderMain
+    content={data.header}
+    mainSize={false}
+    showButton={false}
+    images={[data.header.image]}
+  />
+  <PricingComponent />
+  <FAQ />
+  <Enroll />
+  <MapLocation />
+</BaseLayout>

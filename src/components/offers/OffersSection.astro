@@ -1,0 +1,188 @@
+---
+import { website_links } from '../../data/consts';
+interface Offer {
+  badge: string;
+  featured?: boolean;
+  price: string;
+  priceUnit: string;
+  title: string;
+  description: string;
+  ctaLabel: string;
+  ctaHref: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  heading?: string;
+  headingEm?: string;
+  offers?: Offer[];
+  contactForm?: boolean;
+}
+
+const {
+  eyebrow = "Current offers",
+  heading = "Exceptional value,",
+  headingEm = "every step of the way.",
+  offers = [
+    {
+      badge: "Discovery",
+      featured: false,
+      price: "$200",
+      priceUnit: "/ flight",
+      title: "Discovery flight",
+      description:
+        "Experience flight firsthand. Take a Discovery Flight and get your money back after enrolling!",
+      ctaLabel: "Book a flight",
+      ctaHref: `#${website_links.enroll.id}`,
+    },
+    {
+      badge: "Block rate",
+      featured: true,
+      price: "$60",
+      priceUnit: "/ hour",
+      title: "Special simulators block rate",
+      description:
+        "Purchase 10 or more hours and lock in our preferred simulators rate. More time with effective learning, less spent worrying about cost or weather.",
+      ctaLabel: "Lock in your rate",
+      ctaHref: `#${website_links.enroll.id}`,
+    },
+    {
+      badge: "Limited time",
+      featured: false,
+      price: "Free",
+      priceUnit: "checkout",
+      title: "Free simulator checkout",
+      description:
+        "Receive a complimentary simulator checkout with any block time purchase. Get oriented before your first session,  no extra cost.",
+      ctaLabel: "Claim the offer",
+      ctaHref: `#${website_links.enroll.id}`,
+    },
+  ],
+  contactForm = false,
+} = Astro.props;
+---
+
+<section class="py-16 lg:py-24 bg-[#f1f5f8] font-sans">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+
+    <!-- Eyebrow -->
+    <div class="flex items-center gap-3 mb-5">
+      <span class="text-[10px] tracking-[0.3em] uppercase text-[#4b7992] font-medium">
+        {eyebrow}
+      </span>
+      <div class="flex-1 h-px bg-[#c2d5df]"></div>
+    </div>
+
+    <!-- Section heading -->
+    <h2 class="font-serif text-[clamp(2rem,5vw,3.2rem)] font-normal leading-[1.05] tracking-tight text-[#423731] mb-10">
+      {heading}<br />
+      <em class="italic text-[#745e4d]">{headingEm}</em>
+    </h2>
+
+    <!-- Offers grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      {offers.map((offer) => (
+        <a
+            href={contactForm ? `#${website_links.contact.id}` : offer.ctaHref}
+          class:list={[
+            "group rounded-[22px] border p-7 flex flex-col gap-4 transition-all duration-300 hover:-translate-y-1.5 ",
+            offer.featured
+              ? "bg-[#423731] border-[#423731]"
+              : "bg-white border-[#c2d5df] hover:border-[#4b7992]",
+          ]}
+        >
+          <!-- Badge -->
+          <span
+            class:list={[
+              "inline-flex items-center gap-1.5 text-[10px] tracking-[0.2em] uppercase font-medium px-3 py-1 rounded-full w-fit",
+              offer.featured
+                ? "bg-white/10 text-[#dcc1a6]"
+                : "bg-[#f1f5f8] text-[#4b7992]",
+            ]}
+          >
+            <span
+              class:list={[
+                "w-1.5 h-1.5 rounded-full",
+                offer.featured ? "bg-[#dcc1a6]" : "bg-[#4b7992]",
+              ]}
+            ></span>
+            {offer.badge}
+          </span>
+
+          <!-- Price -->
+          <div>
+            <span
+              class:list={[
+                "font-serif text-[2.4rem] font-normal leading-none",
+                offer.featured ? "text-[#dcc1a6]" : "text-[#423731]",
+              ]}
+            >
+              {offer.price}
+            </span>
+            <span
+              class:list={[
+                "text-base ml-1",
+                offer.featured ? "text-[#c2d5df]" : "text-[#4b7992]",
+              ]}
+            >
+              {offer.priceUnit}
+            </span>
+          </div>
+
+          <!-- Title -->
+          <p
+            class:list={[
+              "text-[15px] font-medium",
+              offer.featured ? "text-[#f1f5f8]" : "text-[#423731]",
+            ]}
+          >
+            {offer.title}
+          </p>
+
+          <!-- Description -->
+          <p
+            class:list={[
+              "text-[13px] leading-relaxed flex-1",
+              offer.featured ? "text-[#c2d5df]" : "text-[#745e4d]",
+            ]}
+          >
+            {offer.description}
+          </p>
+
+          <!-- Divider -->
+          <div
+            class:list={[
+              "h-px",
+              offer.featured ? "bg-white/10" : "bg-[#e0eaef]",
+            ]}
+          ></div>
+
+          <!-- CTA -->
+          <div
+            class:list={[
+              "inline-flex items-center gap-1.5 text-[11px] tracking-[0.15em] uppercase font-medium transition-all duration-200 group-hover:gap-3 no-underline group",
+              offer.featured ? "text-[#dcc1a6]" : "text-[#4b7992]",
+            ]}
+          >
+            {offer.ctaLabel}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </div>
+        </a>
+      ))}
+    </div>
+
+  </div>
+</section>

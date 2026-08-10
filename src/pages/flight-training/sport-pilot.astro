@@ -1,0 +1,372 @@
+---
+import CTALeft from "../../components/ctas/CTALeft.astro";
+import CTARight from "../../components/ctas/CTARight.astro";
+import Enroll from "../../components/forms/Enroll.astro";
+import HeaderMain from "../../components/headers/HeaderMainAlternative.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProgramsComponent from "../../components/sections/ProgramsComponent.astro";
+
+import "aos/dist/aos.css";
+import ProgramsComponentDesign from "../../components/sections/ProgramsComponentDesign.astro";
+import FleetGallery from "../../components/fleet/FleetGallery.astro";
+import { fleet } from "../about/our-fleet.astro";
+import { website_links } from "../../data/consts";
+import OffersStripCTA from "../../components/offers/OffersStripCTA.astro";
+import OffersSection from "../../components/offers/OffersSection.astro";
+import SimulatorImageSection from "../../components/offers/SimulatorImageSection.astro";
+
+const data = {
+  siteTitle:
+    "Sport Pilot Certificate Training | Pilot Instructional Center | Near Kansas City",
+  siteDescription:
+    "Earn your Sport Pilot Certificate near Kansas City with structured Part 61 training at FAA minimum cost of $7,100.",
+  siteKeywords:
+    "sport pilot certificate cost, light sport aircraft training Kansas City, sport pilot training near me",
+
+  header: {
+    image: {
+      src: "/src/assets/rrm-visit/pilot-instructional-center_new-century-KS_logan-fahy-cfi_cesnna-background.jpg",
+      alt: "Airplane flying by Mathias Reding",
+    },
+    upperHeader: "Now Enrolling Sport Pilot Students",
+    title: `Sport Pilot Certificate (Part 61)`,
+    description:
+      "Start flying sooner with Sport Pilot training at Pilot Instructional Center in New Century, KS, just minutes from Kansas City. FAA minimum cost starts at $7,100 and can vary based on student proficiency.",
+    buttons: [
+      { text: "Start Training", href: "#enroll", style: "btn-secondary" },
+      { text: "Learn More", href: "/contact/", style: "btn-transparent" },
+    ],
+  },
+
+  // program: {
+  //   overview: {
+  //     image: {
+  //       src: "/src/assets/stock/stock_Cockpit_plane-ground_jose-lebron-hJijNmuwh7g-unsplash.jpg",
+  //       alt: "Aircraft cockpit on the ground by Jose Lebron",
+  //     },
+  //     upperHeader: "THE MOST AFFORDABLE PATH INTO FLYING",
+  //     title: "Become a Sport Pilot and Start Flying Sooner",
+  //     description:
+  //       "The Sport Pilot Certificate offers a faster and more affordable way to begin flying under FAA Part 61. This program requires fewer flight hours and does not require an FAA medical certificate.",
+  //     descriptions: [
+  //       "Training is based on FAA minimums of 20 flight hours (15 dual + 5 solo) plus ground instruction. Total cost is estimated at $7,100 and may vary depending on individual proficiency.",
+  //     ],
+  //     bullets: [
+  //       {
+  //         icon: "",
+  //         title: "FAA Minimum 20 Flight Hours",
+  //         description:
+  //           "15 hours dual instruction and 5 hours solo flight time.",
+  //       },
+  //       {
+  //         icon: "",
+  //         title: "Structured Ground Training",
+  //         description:
+  //           "Includes 10 hours of ground instruction plus 7.5 hours of pre/post-flight briefing.",
+  //       },
+  //       {
+  //         icon: "",
+  //         title: "No FAA Medical Required",
+  //         description:
+  //           "A valid U.S. driver’s license may be used in place of a medical certificate.",
+  //       },
+  //     ],
+  //     button: {
+  //       text: "Get Started",
+  //       href: "/contact/",
+  //     },
+  //     requirements: [
+  //       "At least 16 years old to solo",
+  //       "At least 17 years old for certification",
+  //       "Read, speak, write, and understand English",
+  //       "Valid U.S. driver’s license",
+  //       "Pass FAA knowledge (written) test",
+  //       "Pass FAA practical (checkride) test",
+  //     ],
+  //     included: [
+  //       "15 hours dual flight instruction",
+  //       "5 hours solo flight time",
+  //       "10 hours ground instruction",
+  //       "7.5 hours pre/post flight briefing",
+  //       "Online ground school",
+  //     ],
+  //     summary: [
+  //       {
+  //         title: "Estimated Cost",
+  //         value: "$7,100",
+  //       },
+  //       {
+  //         title: "Flight Time",
+  //         value: "20 hours minimum",
+  //       },
+  //       {
+  //         title: "Duration",
+  //         value: "3–6 months",
+  //       },
+  //     ],
+  //   },
+
+  //   advantages: {
+  //     upperHeader: "WHY TRAIN WITH PIC?",
+  //     title: "Structured, Transparent Sport Pilot Training",
+  //     description:
+  //       "Our Sport Pilot program follows FAA minimum requirements with clear pricing and structured lessons designed to help students progress efficiently.",
+  //     bullets: [
+  //       {
+  //         icon: "",
+  //         title: "Transparent Pricing",
+  //         description:
+  //           "Upfront cost breakdown so you understand exactly what is included.",
+  //       },
+  //       {
+  //         icon: "",
+  //         title: "Efficient Training Path",
+  //         description:
+  //           "Designed around FAA minimums while allowing flexibility based on student proficiency.",
+  //       },
+  //       {
+  //         icon: "",
+  //         title: "Safety-First Instruction",
+  //         description:
+  //           "Professional instruction focused on safe decision-making and real-world skills.",
+  //       },
+  //     ],
+  //   },
+
+  //   price: {
+  //     image: {
+  //       src: "/src/assets/stock/stock_pilot-window_pasqualino-capobianco-3_zFKZGxWzs-unsplash.jpg",
+  //       alt: "Pilot looking out aircraft window",
+  //     },
+  //     upperHeader: "SPORT PILOT COST BREAKDOWN",
+  //     title: "Estimated Total: $7,100 (FAA Minimum)",
+  //     description:
+  //       "Pricing is based on FAA minimum requirements and may vary depending on student pace and training needs.",
+  //     descriptions: [
+  //       "Price includes instructor, aircraft, fuel surcharge, online ground school, and enrollment fee.",
+  //       "Does NOT include tax, headset, FAA written exam fee, or FAA checkride examiner fee.",
+  //     ],
+  //     prices: [
+  //       {
+  //         value: "3,975",
+  //         title: "Dual Flight Time",
+  //         duration: "15 hrs",
+  //         rate: "$265/hr",
+  //       },
+  //       {
+  //         value: "925",
+  //         title: "Solo Flight Time",
+  //         duration: "5 hrs",
+  //         rate: "$185/hr",
+  //       },
+  //       {
+  //         value: "600",
+  //         title: "Pre/Post Flight Briefing",
+  //         duration: "7.5 hrs",
+  //         rate: "$80/hr",
+  //       },
+  //       {
+  //         value: "800",
+  //         title: "Ground Instruction",
+  //         duration: "10 hrs",
+  //         rate: "$80/hr",
+  //       },
+  //       {
+  //         value: "500",
+  //         title: "Online Ground School",
+  //       },
+  //       {
+  //         value: "300",
+  //         title: "Enrollment Fee",
+  //       },
+  //     ],
+  //     price: "7,100",
+  //   },
+  // },
+
+  program: {
+    overview: {
+      image: {
+        src: "/src/assets/stock/stock_Cockpit_plane-ground_jose-lebron-hJijNmuwh7g-unsplash.jpg",
+        alt: "Aircraft cockpit on the ground by Jose Lebron",
+      },
+      upperHeader: "THE MOST AFFORDABLE PATH INTO FLYING",
+      title: "Become a Sport Pilot and Start Flying Sooner",
+      description:
+        "The Sport Pilot Certificate offers a faster and more affordable way to begin flying under FAA Part 61. This program is ideal for those looking to enjoy aviation with fewer required flight hours and simplified medical requirements.",
+      targetAudience: {
+        title: "Is this right for you?",
+        points: [
+          "Flyers wanting to start with a lower time commitment",
+          "Pilots who prefer using a U.S. driver’s license in lieu of a medical",
+          "Aviation enthusiasts focused on recreational flying",
+        ],
+      },
+      requirements: [
+        "At least 16 years old to solo, 17 for certification",
+        "Read, speak, write, and understand English",
+        "Valid U.S. driver’s license",
+        "Pass FAA knowledge (written) and practical (checkride) tests",
+      ],
+      included: [
+        "15 hours dual flight instruction",
+        "5 hours solo flight time",
+        "10 hours ground instruction",
+        "7.5 hours pre/post flight briefing",
+        "Online ground school access",
+      ],
+      summary: [
+        {
+          title: "Estimated Cost",
+          value: "$7,100",
+        },
+        {
+          title: "Flight Time",
+          value: "20 hours min",
+        },
+        {
+          title: "Duration",
+          value: "3–6 months",
+        },
+      ],
+    },
+
+    advantages: {
+      upperHeader: "WHY TRAIN WITH PIC?",
+      title: "Structured & Transparent Training",
+      description:
+        "Our Sport Pilot program follows strict FAA requirements with a focus on efficiency, clarity, and safety.",
+      bullets: [
+        {
+          title: "No FAA Medical Required",
+          description:
+            "For many, a valid U.S. driver’s license is all you need to meet the medical eligibility requirements for sport piloting.",
+        },
+        {
+          title: "Efficient Training Path",
+          description:
+            "Designed specifically around the 20-hour FAA minimum, allowing you to reach your goals faster while maintaining high standards.",
+        },
+        {
+          title: "Transparent Costing",
+          description:
+            "We provide an upfront, line-item breakdown so you know exactly where your investment is going from day one.",
+        },
+      ],
+    },
+
+    price: {
+      upperHeader: "SPORT PILOT COST BREAKDOWN",
+      title: "Estimated Total: $7,100",
+      description:
+        "Based on FAA minimums. Price includes instructor, aircraft, and fuel. Does not include tax, headsets, or FAA exam fees.",
+      priceTotal: "7,100",
+      breakdown: [
+        {
+          title: "Dual Flight Time",
+          duration: "15 hrs",
+          rate: "$265/hr",
+          value: "3,975",
+        },
+        {
+          title: "Solo Flight Time",
+          duration: "5 hrs",
+          rate: "$185/hr",
+          value: "925",
+        },
+        {
+          title: "Pre/Post Flight Briefing",
+          duration: "7.5 hrs",
+          rate: "$80/hr",
+          value: "600",
+        },
+        {
+          title: "Ground Instruction",
+          duration: "10 hrs",
+          rate: "$80/hr",
+          value: "800",
+        },
+        {
+          title: "Online Ground School",
+          value: "500",
+        },
+        {
+          title: "Enrollment Fee",
+          value: "300",
+        },
+      ],
+    },
+  },
+
+  cta: {
+    title: "Ready to Start Flying?",
+    description:
+      "Begin your Sport Pilot training at Pilot Instructional Center near Kansas City.",
+    button: { text: "Book a Discovery Flight", href: "/discovery-flight" },
+    image: {
+      src: "/src/assets/cta-flight-solid-ground-aviation.webp",
+      alt: "View from airplane window",
+    },
+  },
+
+  ctas: {
+    ctaPrivatePilot: {
+      image: {
+        src: "/src/assets/stock/stock_Planes-ground_aidan-tottori-phvVorGReGE-unsplash.jpg",
+        alt: "Airplanes on ground",
+      },
+      title: "Explore All Flight Training Programs",
+      description:
+        "See how Sport Pilot compares to Private Pilot training near Kansas City.",
+      button: {
+        text: "Explore Programs",
+        href: "/flight-training/",
+      },
+    },
+
+    ctaDiscoveryFlight: {
+      image: {
+        src: "/src/assets/stock/stock_Pilots-cockpit_pasqualino-capobianco-he1PuIA6-UY-unsplash.jpg",
+        alt: "Pilots in cockpit",
+      },
+      title: "Take the First Step Into Flying",
+      description:
+        "Experience flight firsthand with a discovery flight at PIC.",
+      button: {
+        text: "Schedule Discovery Flight",
+        href: "/discovery-flight/",
+      },
+    },
+  },
+};
+---
+
+<BaseLayout
+  siteTitle={data.siteTitle}
+  siteDescription={data.siteDescription}
+  siteKeywords={data.siteKeywords}
+>
+  <HeaderMain
+    content={data.header}
+    mainSize={false}
+    showButton={false}
+    images={[data.header.image]}
+  />
+  <!-- <ProgramsComponent content={data.program} /> -->
+
+  <ProgramsComponentDesign program={data.program} />
+  <OffersStripCTA />
+  <FleetGallery
+    fleet={fleet}
+    selfLink={false}
+    button={{
+      title: "Start Your Journey",
+      path: `#${website_links.enroll.id}`,
+    }}
+  />
+  <SimulatorImageSection />
+  <Enroll />
+  <CTALeft content={data.ctas.ctaDiscoveryFlight} />
+  <OffersSection />
+  <CTARight content={data.ctas.ctaPrivatePilot} />
+</BaseLayout>

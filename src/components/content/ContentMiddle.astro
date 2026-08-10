@@ -1,0 +1,111 @@
+---
+import ImageComp from "../utils/ImageComp.astro";
+const example = {
+  image: {
+    src: "",
+    alt: "",
+  },
+  upperHeader: "EXAMPLE UPPER HEADER",
+  title: "Example Title for Content Right Component",
+  description:
+    "This is an example description for the Content Right component. It provides information about the content displayed on the right side of the layout.",
+  descriptions: [
+    "First example description point.",
+    "Second example description point.",
+    "Third example description point.",
+  ],
+  bullets: [
+    {
+      icon: "",
+      title: "First Bullet",
+      description: "Description for the first bullet point.",
+    },
+    {
+      icon: "",
+      title: "Second Bullet",
+      description: "Description for the second bullet point.",
+    },
+    {
+      icon: "",
+      title: "Third Bullet",
+      description: "Description for the third bullet point.",
+    },
+  ],
+  button: {
+    text: "Learn More",
+    href: "/flight-training/",
+  },
+};
+
+const { content = example } = Astro.props;
+---
+
+<section class="relative py-24 px-6 bg-white">
+  <div class="max-w-5xl mx-auto flex flex-col items-center text-center">
+    <span
+      class="text-accent-500 font-bold tracking-[0.25em] uppercase text-xs mb-6"
+      data-aos="fade-up"
+    >
+      {content.upperHeader}
+    </span>
+
+    <h2
+      class="text-4xl sm:text-5xl font-bold text-primary-800 max-w-2xl leading-tight"
+      data-aos="fade-up"
+      data-aos-delay="100"
+    >
+      {content.title}
+    </h2>
+
+    <p
+      class="text-lg text-primary-600/80 py-10 mt-6 border-y border-primary-800/10 max-w-3xl leading-relaxed"
+      data-aos="fade-up"
+      data-aos-delay="200"
+    >
+      {content.description}
+    </p>
+
+    <ul class="grid grid-cols-1 sm:grid-cols-3 gap-8 py-12 w-full">
+      {
+        content.bullets.map((bullet) => (
+          <li
+            class="flex flex-col items-center p-8 rounded-[2rem] bg-stone-50 border border-stone-100 hover:border-accent-500/20 hover:shadow-xl hover:shadow-accent-500/5 transition-all duration-500"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
+            <div class="mb-6 text-accent-500 bg-accent-500/10 p-4 rounded-full">
+              <svg
+                class="size-8"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d={bullet.icon || "M5 13l4 4L19 7"}
+                />
+              </svg>
+            </div>
+            <h3 class="font-bold text-primary-800 mb-3 uppercase tracking-wider text-sm">
+              {bullet.title}
+            </h3>
+            <p class="text-primary-600/70 text-sm leading-relaxed">
+              {bullet.description}
+            </p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="mt-8" data-aos="fade-up" data-aos-delay="400">
+      <a
+        href={content.button.href}
+        class="btn-accent btn-middle transition-all hover:-translate-y-1"
+      >
+        {content.button.text}
+      </a>
+    </div>
+  </div>
+</section>

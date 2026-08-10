@@ -1,0 +1,175 @@
+---
+import { website_links } from "../../data/consts";
+import ImageComp from "../utils/ImageComp.astro";
+
+const example = {
+  title: "Training Programs Designed to Build Skilled, Confident Pilots",
+  description:
+    "Explore PIC’s flight training programs built on safety, integrity, and real-world experience. From first solo to professional ratings, receive personalized mentorship not found at large schools.",
+  cards: [
+    {
+      title: "Private Pilot <br/>(PPL)",
+      image: {
+        src: "/src/assets/facebook/student-passing-checkride_student-cfi-shaking-hands_PIC_Pilot-instructional-center_Flight-school_cropped.jpg",
+        alt: "Student passing checkride - Student and CFI shaking hands at Pilot Instructional Center flight school cropped version",
+      },
+      tags: ["Part 61", "PPL", "Beginner"],
+      href: "/flight-training/private-pilot/",
+    },
+    {
+      title: "Instrument Rating <br/>(IR)",
+      image: {
+        src: "/src/assets/rrm-visit/pilot-instructional-center_new-century-KS_plane-cockpit-cessna_flight-school_pilo-training.png",
+        alt: "Pilot Instructional Center New Century KS - Cessna plane cockpit view during flight school pilot training",
+      },
+      tags: ["IFR", "Safety", "Advanced"],
+      href: "/flight-training/instrument-rating/",
+    },
+    {
+      title: "Flight Instructor <br/>(CFI)",
+      image: {
+        src: "/src/assets/rrm-visit/pilot-instructional-center_pilot-cockpit-checking-plane_pilot-training.png",
+        alt: "Pilot Instructional Center - Pilot checking cockpit instruments during pilot training",
+      },
+      tags: ["CFI", "Teaching", "Professional"],
+      href: "/flight-training/certified-flight-instructor-cfi/",
+    },
+    {
+      title: "Instrument Instructor <br/>(CFII)",
+      image: {
+        src: "/src/assets/rrm-visit/pilot-instructional-center_pilot-preparing-plane_flight-school_pilot-training.png",
+        alt: "Pilot Instructional Center - Pilot preparing plane for flight school pilot training",
+      },
+      tags: ["CFII", "IFR", "Instructor"],
+      href: "/flight-training/certified-flight-instructor-instrument-cfii/",
+    },
+    {
+      title: "Commercial Pilot <br/>(CPL)",
+      image: {
+        src: "/src/assets/stock/stock_Plane-commercial-airport_ern-low-QMAhB9P0RXg-unsplash.jpg",
+        alt: "Commercial airplane",
+      },
+      tags: ["Career", "CPL", "Professional"],
+      href: "/flight-training/commercial-pilot/",
+    },
+    {
+      title: "Sports Pilot",
+      image: {
+        src: "/src/assets/stock/stock-joao-lopes-S2ftkdYZGM0-unsplash-cutted.png",
+        alt: "Pilot standing by aircraft",
+      },
+      tags: ["Sport", "Beginner"],
+      href: "/flight-training/sport-pilot/",
+    },
+  ],
+};
+
+const { content = example } = Astro.props;
+---
+
+<section class="bg-white py-24 px-6 overflow-hidden">
+  <div class="mx-auto max-w-7xl">
+    <div class="max-w-3xl mb-16" data-aos="fade-right">
+      <span
+        class="text-[#745e4d] font-black uppercase tracking-[0.4em] text-xs mb-4 block"
+        >Our Programs</span
+      >
+      <h2
+        class="text-4xl md:text-6xl font-black text-[#423731] leading-[1.1] mb-6"
+      >
+        {content.title}
+      </h2>
+      <p class="text-lg text-[#745e4d] leading-relaxed opacity-90">
+        {content.description}
+      </p>
+      <div class="text-left mt-8">
+        <p
+          class="text-accent-500 font-semibold text-xs lg:text-base tracking-[0.2em] uppercase"
+        >
+          Take a <a href={website_links.discoveryFlight.path} class=""
+            >Discovery Flight</a
+          > and get your money back after enrolling!
+        </p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+      {
+        content.cards.map((card: any, index: number) => {
+          const isLast = index === content.cards.length - 1;
+          const isFirst = index === 0;
+
+          return (
+            <a
+              href={card.href}
+              class={`group relative flex flex-col min-h-[450px] outline-none 
+              ${isLast || isFirst || (index !== 1 && index !== 3 && index !== 2) ? "lg:col-span-3 md:col-span-2" : "lg:col-span-1"}
+            `}
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
+            >
+              <div
+                class={`relative flex-1 flex border  border-primary-800 flex-col justify-center items-center transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:-translate-y-3 shadow-2xl shadow-black/40 isolate transform-gpu
+                ${isLast || isFirst || (index !== 1 && index !== 3 && index !== 2) ? "lg:rounded-full" : `rounded-lg ${index === 1 ? "lg:rounded-l-full" : index === 3 ? "lg:rounded-r-full" : ""}`}
+              `}
+                style="backface-visibility: hidden; -webkit-mask-image: -webkit-radial-gradient(white, black); overflow: hidden;"
+              >
+                <div class="absolute inset-0 z-0 ">
+                  <ImageComp
+                    src={card.image.src}
+                    alt={card.image.alt}
+                    classes="h-full w-full object-cover group-hover:blur-xs transition-transform duration-700 ease-out group-hover:scale-110 "
+                    quality={60}
+                  />
+                  <div class="absolute inset-0 bg-linear-to-t from-[#423731] via-neutral-900/80 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
+                </div>
+
+                <div
+                  class={`relative flex flex-col items-center justify-center text-center z-10 p-10 w-full ${isLast ? "lg:max-w-2xl" : ""}`}
+                >
+                  <div class="flex flex-wrap gap-2 mb-4">
+                    {card.tags.map((tag: string) => (
+                      <span class="text-xs font-black uppercase tracking-widest text-[#dcc1a6] bg-white/10 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <h3
+                    class={`font-bold text-white leading-tight mb-6 transform transition-transform duration-500 group-hover:translate-x-2 
+                    ${isLast ? "text-4xl md:text-5xl" : "text-3xl"}
+                  `}
+                    set:html={card.title}
+                  />
+
+                  <div class="flex items-center gap-3 text-white font-black uppercase tracking-[0.2em] text-xs opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
+                    <span>View Program Details</span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-4 w-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="3"
+                        d="M14 5l7 7m0 0l-7 7m7-7H3"
+                      />
+                    </svg>
+                  </div>
+                  <div class="text-center mt-1 gap-3 text-accent-500 backdrop-blur-2xl brightness-150 rounded-full px-4 py-1  uppercase tracking-widest text-xs opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
+                    <span>
+                      Do a Discovery Flight, enroll,<br /> and save $200!
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>

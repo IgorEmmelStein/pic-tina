@@ -1,0 +1,36 @@
+---
+import Icon from "./Icon.astro";
+// Destructure the properties from Astro.props
+const { title, url, noArrow, id, blank } = Astro.props;
+// Define TypeScript interface for the properties
+interface Props {
+  title?: string;
+  url?: string;
+  noArrow?: boolean;
+  id?: string;
+  blank?: boolean;
+}
+// Define CSS classes for styling the button
+const baseClasses =
+  "group btn-accent btn-left inline-flex items-center justify-center gap-x-2 rounded-lg px-4 py-3 text-sm font-bold text-neutral-50 ring-zinc-500 transition duration-300 focus-visible:ring-3 outline-hidden";
+const borderClasses = "border border-transparent";
+const bgColorClasses =
+  "bg-primary-600 hover:bg-primary-600 active:bg-primary-600";
+const disableClasses = "disabled:pointer-events-none disabled:opacity-50";
+const fontSizeClasses = "2xl:text-base";
+const ringClasses = "delete-ring-zinc-200";
+---
+
+<!-- Link styled as a button, with dynamic title, URL, and optional arrow -->
+<a
+  class={`${baseClasses} ${borderClasses} ${bgColorClasses} ${disableClasses} ${fontSizeClasses} ${ringClasses}`}
+  href={url}
+  id={id}
+  target={blank ? "_blank" : "_self"}
+  rel="noopener noreferrer"
+>
+  {title}
+  <!-- Display the arrow based on the 'noArrow' property -->
+
+  {noArrow ? null : <Icon name="arrowRight" />}
+</a>

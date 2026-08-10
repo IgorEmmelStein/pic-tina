@@ -1,0 +1,88 @@
+{
+  "skill_name": "rrm-brand-strategy-specialist",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Use $rrm-brand-strategy-specialist to create the canonical brand guide from a flight school repo with program pages, FAQs, reviews, financing content, and location pages.",
+      "expected_output": "A sourced .agents/right-rudder-marketing/shared/outputs/brand-guide.md with UVP, ICP, personas, offers, objections, proof points, risky claims, voice, conversion paths, and evergreen blog opportunities.",
+      "files": [],
+      "expectations": [
+        "Scans repo content before asking questions",
+        "Creates or updates the canonical brand-guide.md artifact",
+        "Includes source paths for concrete claims",
+        "Separates safe claims from risky claims",
+        "Creates behavior-based ICPs",
+        "Identifies durable blog opportunities grounded in client positioning"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Use $rrm-brand-strategy-specialist when .agents/right-rudder-marketing/shared/outputs/brand-guide.md already exists and the reviewed source material has no material changes.",
+      "expected_output": "A no-update-needed response that lists the reviewed sources and explains that the existing brand guide remains current.",
+      "files": [],
+      "expectations": [
+        "Does not rewrite the guide for style",
+        "Compares source inventory against the existing guide",
+        "Reports no update needed",
+        "Does not create a tactical blog brief"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Use $rrm-brand-strategy-specialist when a flight school has changed pricing, program inclusions, and proof claims since the existing brand guide was created.",
+      "expected_output": "An updated brand-guide.md with update notes describing the pricing, program, and proof changes, while preserving sourced claims and risky-claim cautions.",
+      "files": [],
+      "expectations": [
+        "Updates only materially affected guide sections",
+        "Preserves source paths for concrete claims",
+        "Adds update notes with reasons",
+        "Flags aviation claims needing rrm-aviation-industry-expert review",
+        "Does not create a per-post blog brief by default"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "The site has thin content and no clear proof points. Build what you can and tell me what is missing.",
+      "expected_output": "A partial brand guide plus a concise list of high-impact missing questions.",
+      "files": [],
+      "expectations": [
+        "Does not invent proof",
+        "Labels inferences clearly",
+        "Asks only strategic questions",
+        "Still produces a usable partial guide"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Use $rrm-brand-strategy-specialist to build the canonical brand guide from a flight school repo with program pages, testimonials, homepage copy, and interview notes that reveal how students talk about the school.",
+      "expected_output": "A sourced brand guide that includes the usual strategy sections plus a company voice sourcebook with company POV, reusable phrases, testimonial language worth echoing, aviation moments, reader aspiration and fear, safe excitement boundaries, and banned robotic phrases.",
+      "files": [],
+      "expectations": [
+        "Extracts voice from client-owned copy and testimonials instead of inventing tone adjectives",
+        "Captures phrases that sound like the company",
+        "Captures company-seat rewrites for fleet, simulator, airport, instructor, financing, and student-story language",
+        "Captures aviation scenes future blogs can reuse",
+        "Captures reader aspirations and fears",
+        "Defines safe excitement boundaries",
+        "Lists robotic, source-audit, and outside-reviewer phrases to avoid in future blog posts",
+        "Defines natural confirmation phrasing for current details that may change",
+        "Preserves source paths for all concrete claims"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Use $rrm-brand-strategy-specialist to build the canonical brand guide from a flight school repo with existing blog frontmatter, staff bios, an about page, and client notes that identify one named author with military background plus some team-authored posts.",
+      "expected_output": "A sourced brand guide with an Author Voice And Byline Strategy section that distinguishes team voice from named-author voice, records author evidence, permits only light sourced persona cues, and defines team fallback voice when no author bio exists.",
+      "files": [],
+      "expectations": [
+        "Inspects existing blog author fields, author images, staff bios, about pages, and extra-information notes",
+        "Identifies whether the durable byline mode is team or named-author",
+        "Records source-backed author role, credentials, and aviation background when available",
+        "Defines permitted persona cues without encouraging heavy first-person writing",
+        "Says to keep a named author credit but fall back to team voice when no usable bio exists",
+        "Flags invented author credentials, service history, airline experience, and personal anecdotes as off-limits",
+        "Treats author/byline changes as material voice changes"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+---
+// Import all required components and utilities
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import AvatarBlogLarge from "./AvatarBlogLarge.astro";
+import PrimaryCTA from "./PrimaryCTA.astro";
+import ImageComp from "../utils/ImageComp.astro";
+import { formatDate } from "./utils";
+
+const { blogEntry, recentBlogLocale = "" } = Astro.props;
+
+interface Props {
+  blogEntry: CollectionEntry<"blog">;
+  recentBlogLocale?: string;
+}
+---
+
+<!-- Root container, which is divided into 2 grid column layout for larger screens -->
+<div class="grid gap-8 sm:grid-cols-2 sm:items-start">
+  <!-- Container for the blog post's cover image -->
+  <div class="sm:order-2">
+    <div class="relative rounded-lg pt-[50%] sm:pt-[100%]">
+      <!-- <Image
+        class="absolute start-0 top-0 size-full rounded-xl object-cover"
+        src={blogEntry.data.cardImage}
+        alt={blogEntry.data.cardImageAlt}
+        draggable={"false"}
+        loading={"eager"}
+        format={"avif"}
+      /> -->
+      <ImageComp
+        classes="absolute start-0 top-0 size-full rounded-tl-full rounded-bl-full shadow-xl shadow-black/70 object-cover lg:h-3/4"
+        src={blogEntry.data.cardImage}
+        alt={blogEntry.data.cardImageAlt}
+        loading={"eager"}
+      />
+    </div>
+  </div>
+  <!-- Container for the blog post's heading, author avatar, author's role, and read more button -->
+  <div class="sm:order-1 flex flex-col lg:py-12">
+    <!-- Blog title which is also a hyperlink to the blog detail page  -->
+    <h2
+      class="text-balance text-2xl font-bold tracking-tight text-primary-800 md:text-3xl lg:text-4xl lg:leading-tight xl:text-5xl xl:leading-tight"
+    >
+      <a
+        class="outline-hidden ring-zinc-500 transition duration-300 hover:text-primary-400 focus-visible:ring-3"
+        href={`/blog/${blogEntry.slug}/`}
+      >
+        {blogEntry.data.title}
+      </a>
+    </h2>
+    <p class="mt-4 text-primary-800 max-w-130">{blogEntry.data.description}</p>
+    <!-- Container for the author's avatar and metadata -->
+    <div class="mt-6 flex items-center sm:mt-10">
+      <AvatarBlogLarge blogEntry={blogEntry} />
+
+      <div class="ms-3 sm:ms-4">
+        <p class="font-bold text-primary-800 sm:mb-1">
+          {blogEntry.data.author}
+        </p>
+        <p class="text-xs text-primary-400">
+          {blogEntry.data.role}
+        </p>
+          <p class="text-xs text-primary-800">
+            {formatDate(blogEntry.data.pubDate)}
+          </p>
+      </div>
+    </div>
+    <!-- Read More button which is a link to the blog post detailed page -->
+    <div class="mt-5">
+      <PrimaryCTA
+        url={recentBlogLocale && recentBlogLocale !== "en"
+          ? `/${recentBlogLocale}/blog/${blogEntry.slug.replace(/^fr\//, "")}/`
+          : `/blog/${blogEntry.slug.replace(/^en\//, "")}/`}
+        title="Read More"
+        data-astro-prefetch
+      />
+    </div>
+  </div>
+</div>

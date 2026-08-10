@@ -1,0 +1,157 @@
+---
+import HeaderMain from "../components/headers/HeaderMainAlternative.astro";
+import FAQ from "../components/sections/FAQ.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+import "aos/dist/aos.css";
+import MapLocation from "../components/external/MapLocation.astro";
+import ListComponent from "../components/discovery-flight/ListComponent.astro";
+import CFIConfirmationForm from "../components/forms/CFIConfirmationForm.astro";
+import ContentRight from "../components/content/ContentRight.astro";
+
+const data = {
+  siteTitle: "CFI Candidate Application | Pilot Instructional Center | New Century KS",
+  siteDescription:
+    "Apply to become a CFI instructor at Pilot Instructional Center. Join our team of passionate aviation mentors dedicated to training the next generation of professional pilots.",
+  siteKeywords:
+    "CFI candidate, CFI application, pilot instruction, flight training, Kansas City, aviation education",
+
+  header: {
+    image: {
+      src: "/src/assets/facebook/student-first-solo-ride-_PIC_Pilot-instructional-center_Pilot-training_cropped.jpg",
+      alt: "PIC's Student first solo ride Kansas city",
+    },
+    upperHeader: " ",
+    title: "Join Our Instructor Team",
+    description:
+      "We're looking for experienced aviators who are passionate about teaching the next generation of professional pilots.",
+    button: {
+      href: "#cfi-application-form",
+      text: "Apply Now",
+    },
+    descriptions: [
+      "Reach out to us anytime, whether you're exploring aviation for the first time or preparing to continue your training.",
+      "Our experienced staff responds quickly and can help you determine the best path forward based on your goals.",
+      "We’re committed to clear communication, transparency, and student success.",
+    ],
+    bullets: [
+      {
+        title: "Fast Response",
+        description: "Our team typically replies within one business day.",
+        icon: "Mail",
+      },
+      {
+        title: "Talk to Experienced Instructors",
+        description:
+          "Get real answers from aviation professionals, not sales reps.",
+        icon: "Headphones",
+      },
+    ],
+  },
+};
+
+const JoinOurTeam = {
+  title: "What We Look for in a PIC Instructor",
+  paragraphs: [
+    "At Pilot Instructional Center, our instructors are more than pilots, they are mentors, leaders, and the foundation of our training culture. What makes the PIC experience exceptional is the quality of instruction, the professionalism of our team, and the supportive environment we create together.",
+    "We build a team passionate about aviation and committed to student success. The ideal PIC instructor values teaching, mentorship, and safety, understanding that every lesson is an opportunity to build skill and sound decision-making in the next generation of aviators.",
+    "All instructors undergo a rigorous standardization process to ensure training meets the highest standards of safety, consistency, and professionalism. Just as importantly, we maintain a culture where students feel supported, respected, and comfortable learning from mistakes.",
+    "Our philosophy is rooted in passing aviation knowledge from one generation to the next. We look for candidates who value mentorship, take pride in teaching, and understand the responsibility of shaping tomorrow's aviators. Our mission is simple: train safe, confident, and professional pilots.",
+  ],
+  bgImage: {
+    src: "/src/assets/facebook/student-passing-checkride_student-cfi-shaking-hands_PIC_Pilot-instructional-center_Flight-school_cropped.jpg",
+    alt: "CFI and student pilot shaking hands",
+  },
+  image: {
+    src: "/src/assets/rrm-visit/pilot-instructional-center_pilot-preparing-plane_flight-school_pilot-training.png",
+    alt: "Pilot checking instruments during flight training",
+  },
+  cta: {
+    text: "Apply now!",
+    href: "#form",
+  },
+  imageRight: true,
+};
+
+const WhatMakesaGreatPICInstructor = {
+  image: {
+    src: "/src/assets/female-pilot-assisting-captain-takeoff-fly-airplane-using-buttons-dashboard-command-pilot-cockpit-airliners-flying-plane-jet-with-navigation-windscreen-control-panel.jpg",
+    alt: "Female pilot assisting captain during takeoff",
+  },
+  upperHeader: "responsibilities",
+  title: "What Makes a Great PIC Instructor",
+
+  descriptions: [
+    'A strong commitment to safety and professionalism',
+    'A genuine passion for teaching and mentoring',
+    'The ability to deliver consistent, standardized instruction',
+    'Clear and effective communication skills',
+    'A positive attitude that contributes to a team-focused culture',
+    'The ability to adapt instruction to individual student needs',
+    'Pride in representing the PIC brand and community',
+  ],
+  button: {
+    text: "Apply now!",
+    href: "#form",
+  },
+};
+
+const MinimumQualifications = {
+  title: "Minimum Qualifications",
+  paragraphs: [" "],
+  bgImage: {
+    src: "/src/assets/facebook/student-passing-checkride_student-cfi-shaking-hands_PIC_Pilot-instructional-center_Flight-school_cropped.jpg",
+    alt: "CFI and student pilot shaking hands",
+  },
+  image: {
+    src: "/src/assets/rrm-visit/pilot-instructional-center_new-century-KS_cfis-preparing-plane-cessna-airport.png",
+    alt: "Pilot checking instruments during flight training",
+  },
+  notes: [
+    {
+      title: "Certified",
+      text: "Hold a Certified Flight Instructor (CFI) certificate",
+    },
+    {
+      title: "Location",
+      text: "Be eligible to work within the United States",
+    },
+    {
+      title: "one-year agreemen",
+      text: "Commit to a minimum one-year instructing agreement at PIC",
+    },
+    {
+      title: "fingerprinting",
+      text: "Successfully complete fingerprinting and required background screening",
+    },
+  ],
+  cta: {
+    text: "Apply now!",
+    href: "#form",
+  },
+  imageRight: true,
+};
+---
+
+<BaseLayout
+  siteTitle={data.siteTitle}
+  siteDescription={data.siteDescription}
+  siteKeywords={data.siteKeywords}
+>
+  <HeaderMain
+    content={data.header}
+    mainSize={false}
+    showButton={false}
+    images={[data.header.image]}
+    button={data.header.button}
+  />
+
+  <ListComponent content={JoinOurTeam} />
+  <ContentRight content={WhatMakesaGreatPICInstructor} />
+  <ListComponent content={MinimumQualifications} />
+  <div id="form">
+    <CFIConfirmationForm />
+  </div>
+  <MapLocation />
+  <FAQ />
+</BaseLayout>

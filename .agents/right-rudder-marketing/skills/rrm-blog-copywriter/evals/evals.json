@@ -1,0 +1,241 @@
+{
+  "skill_name": "rrm-blog-copywriter",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Use $rrm-blog-copywriter to draft a blog post from the canonical brand guide, approved aviation fact-check context, and the raw topic 'how long does flight school take'.",
+      "expected_output": "A complete blog draft with SEO metadata, direct opening answer, useful decision sections, FAQ, CTA, section-level internal links, financing mention, useful bold emphasis, and only approved claims.",
+      "files": [],
+      "expectations": [
+        "Uses the brand guide as the source of durable strategy",
+        "Owns per-post SEO title, slug, meta description, angle, outline, links, and CTA planning",
+        "Does not invent aviation or client claims",
+        "Explains timeline tradeoffs clearly",
+        "Includes FAQ and CTA",
+        "Mentions financing at least once with supported or qualified wording",
+        "Plans at least one internal backlink for every section",
+        "Stays in blog-post format"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Write a landing page for a flight school's instrument rating program using $rrm-blog-copywriter.",
+      "expected_output": "A refusal or redirect explaining that the skill is blog-only and should not write landing pages.",
+      "files": [],
+      "expectations": [
+        "Does not produce landing page copy",
+        "Explains the skill boundary",
+        "Suggests using or creating a separate copywriting skill"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Improve an existing blog post draft with weak evidence and no fact-check report.",
+      "expected_output": "A response that identifies missing strategic or fact-checking inputs before rewriting unsupported claims.",
+      "files": [],
+      "expectations": [
+        "Does not pad weak evidence",
+        "Requests missing brand guide or fact-check inputs",
+        "Can still suggest structural improvements",
+        "Keeps unsupported aviation claims out of the final draft"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Use $rrm-blog-copywriter to create a new blog post file in an Astro repo where src/content/config.ts defines required blog fields: title, description, author, authorImage, tags, categories, readingTime, pubDate, and updDate.",
+      "expected_output": "A schema-valid .md blog post file in the resolved blog content folder with frontmatter that matches the live blog collection schema and existing repo conventions, including a non-reused heroImage when that field is present.",
+      "files": [],
+      "expectations": [
+        "Inspects the live content config before writing",
+        "Creates exactly one .md file by default",
+        "Includes all required blog frontmatter fields",
+        "Uses a .md filename that is the normalized-title slug",
+        "Uses only allowed category values",
+        "Reports the created file path and schema assumptions",
+        "Checks that heroImage is not reused from another existing blog post when present"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Create a repo-ready blog file from the brand guide and approved aviation facts in an Astro project that already has blog posts and a schema helper.",
+      "expected_output": "A repo-compatible blog post that matches existing frontmatter conventions, does not reuse an existing heroImage, and does not duplicate structured data if the repo already handles it.",
+      "files": [],
+      "expectations": [
+        "Inspects existing posts before choosing frontmatter format",
+        "Matches date, image, tag, and category conventions",
+        "Uses at least 3 body image figures with figcaptions ending in (Source: {COMPANY_NAME} media archive)",
+        "Chooses a heroImage that has not already been used by another blog post when heroImage is present",
+        "Uses only public-subfolder paths for body figure images and verifies the files exist with the validator script",
+        "Does not hardcode a generic schema",
+        "Does not duplicate existing structured-data helpers"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Use $rrm-blog-copywriter to create a repo-ready Astro blog post with three body figure images in a repo that stores optimized body images under public/blog and frontmatter images under src/assets.",
+      "expected_output": "A schema-valid .md blog post with at least three body <figure> image blocks whose src values point to existing public subfolder files such as /blog/example.jpg, whose figcaptions end with (Source: {COMPANY_NAME} media archive), whose heroImage is not reused when present, and whose frontmatter image fields continue to follow the repo schema conventions.",
+      "files": [],
+      "expectations": [
+        "Distinguishes frontmatter image conventions from Markdown body image rendering",
+        "Uses raw HTML <figure>, <img>, and <figcaption> for every body image",
+        "Does not use /src/assets, src/assets, or ../assets paths inside body figures",
+        "Verifies each body figure src resolves to a file under a public subfolder by running the body image validator script",
+        "Uses the validator script to catch heroImage reuse when heroImage is present",
+        "Ensures every figcaption ends with the exact media archive source suffix",
+        "Includes descriptive alt text for each body figure image"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "Use $rrm-blog-copywriter to plan a post from the raw title 'instrument rating cost'.",
+      "expected_output": "A blog plan with an SEO title that places the keyword near the front, uses the current year because cost content is time-sensitive, stays within the title length guardrails, includes a valid slug, and includes a 120-160 character meta description when possible.",
+      "files": [],
+      "expectations": [
+        "Does not copy the raw title unchanged",
+        "Uses a current-year title for cost intent",
+        "Makes the SEO title benefit-led and click-worthy without clickbait",
+        "Keeps the SEO title at 50-60 characters when possible and not over 65",
+        "Generates a lowercase kebab-case filename/slug from the full final title, not a shortened fragment",
+        "Includes CTA, section-level internal links, financing mention, program page link opportunities, and claims needing fact-check"
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "Use $rrm-blog-copywriter to plan a post from the raw title 'what is a cfii'.",
+      "expected_output": "A blog plan with a question-format SEO title because the search intent is question-based, plus a readable slug, meta description, angle, and aviation claims to verify.",
+      "files": [],
+      "expectations": [
+        "Uses question format for question-based intent",
+        "Explains CFII in plain language",
+        "Makes the SEO title promise a clear answer without unsupported hype",
+        "Does not add the current year unless freshness is justified",
+        "Keeps the title within SEO length guardrails",
+        "Lists aviation claims needing fact-check"
+      ]
+    },
+    {
+      "id": 9,
+      "prompt": "Use $rrm-blog-copywriter to plan a post from the raw title 'part 141 flight schools in [target state]'.",
+      "expected_output": "A blog plan with an SEO title that uses the primary keyword or close variant near the front, handles the target location naturally, uses the current year only if framed as a comparison or guide, and avoids question format unless the search intent requires it.",
+      "files": [],
+      "expectations": [
+        "Does not default to a question title for non-question intent",
+        "Uses the target location and Part 141 terminology naturally",
+        "Makes the SEO title useful to the searcher without clickbait",
+        "Uses the current year only if the plan frames the post as a freshness-sensitive guide or comparison",
+        "Keeps the title within SEO length guardrails",
+        "Generates a lowercase kebab-case filename/slug from the full final title, not a shortened fragment"
+      ]
+    },
+    {
+      "id": 10,
+      "prompt": "Use $rrm-blog-copywriter to create a blog post from the brand guide and latest fact-check report. The user does not repeat the topic in this prompt.",
+      "expected_output": "A blog plan and post that use the fact-check report Topic Context as the raw topic/title source before creating the SEO title, normalized-title filename/slug, meta description, angle, outline, links, and CTA.",
+      "files": [],
+      "expectations": [
+        "Reads Topic Context from the fact-check report",
+        "Does not ask the user to repeat the same raw topic/title",
+        "Uses the Topic Context to create the SEO title and normalized-title filename/slug",
+        "Uses approved language, avoid list, and qualifiers from the same fact-check report"
+      ]
+    },
+    {
+      "id": 11,
+      "prompt": "Use $rrm-blog-copywriter to improve a mechanically correct flight school blog draft that has generic H2s, repeated phrases like 'that matters' and 'in plain English', excessive source-report wording, and a final CTA with several competing links.",
+      "expected_output": "A revised blog post that keeps verified claims, rewrites the opening with reader stakes or a concrete aviation moment, replaces label headings with editorial promises, removes robotic phrase repetition, places qualifiers once near the claims they limit, and ends with one primary CTA.",
+      "files": [],
+      "expectations": [
+        "Keeps aviation claims within the fact-check report",
+        "Adds human hook, reader stakes, company POV, and sourced scene/example to planning",
+        "Rewrites generic H2s into reader-value promises",
+        "Removes repeated robotic transitions and source-report texture",
+        "Avoids over-hedging verified claims",
+        "Ends with one primary CTA",
+        "Runs the human voice lint script before delivery"
+      ]
+    },
+    {
+      "id": 12,
+      "prompt": "Use $rrm-blog-copywriter to create a new blog post from a strong brand guide and approved aviation fact-check report.",
+      "expected_output": "A schema-valid blog post that passes the image/link validator and human voice lint script, with a direct but human opening, specific aviation scenarios, editorial headings, precise qualifiers, FAQ friction answers, and one CTA.",
+      "files": [],
+      "expectations": [
+        "Plans a human hook before drafting",
+        "Makes aviation feel serious, exciting, and attainable without unsupported hype",
+        "Turns client proof into scenarios, mechanisms, or consequences",
+        "Uses qualified safety, cost, timeline, and career language without blanket disclaimers",
+        "Avoids label headings and generic SEO texture",
+        "Runs validate-blog-body-images with --fix and without --fix",
+        "Runs lint-blog-human-voice and revises until it passes"
+      ]
+    },
+    {
+      "id": 13,
+      "prompt": "Use $rrm-blog-copywriter to revise a flight school blog draft that says 'The current fleet page shows...', 'listed in the repo as FAA-approved', 'the exact current aircraft count should be confirmed', and 'Ask the school how its flight simulator is used'.",
+      "expected_output": "A revised blog post that removes outside-reviewer and source-audit voice, translates supported facts into company-seat language, omits or generalizes unverified exact details, and passes the human voice lint script.",
+      "files": [],
+      "expectations": [
+        "Rewrites company-specific facts with we, our, or us after the first company reference",
+        "Removes repo, current-page, episode-notes, and source-audit phrasing from final copy",
+        "Does not tell the reader to ask the named client what the client does",
+        "Handles uncertain current details by omission, supported generalization, or one natural contact-us sentence",
+        "Keeps you/your language more frequent than we/our/us",
+        "Runs lint-blog-human-voice and revises until it passes"
+      ]
+    },
+    {
+      "id": 14,
+      "prompt": "Use $rrm-blog-copywriter to create a blog post with authorContext: 'Author: School Name Team'.",
+      "expected_output": "A schema-valid blog post credited to the team that sounds like warm school staff speaking to prospective students, not like an outside evaluator or agency summary.",
+      "files": [],
+      "expectations": [
+        "Uses the team byline in frontmatter when it matches the live schema",
+        "Writes from the school's seat with we/our/us for company-specific facts",
+        "Keeps you/your language more frequent than company pronouns",
+        "Does not add fake personal anecdotes or named-author persona",
+        "Avoids page-summary, repo, source-audit, and ask-the-school phrasing",
+        "Runs lint-blog-human-voice and revises until it passes"
+      ]
+    },
+    {
+      "id": 15,
+      "prompt": "Use $rrm-blog-copywriter to create a blog post with authorContext: 'Author: Alex Rivera. Source-backed background: former military pilot and current chief flight instructor.'",
+      "expected_output": "A schema-valid blog post credited to Alex Rivera that uses light, relevant, source-backed military or instructor voice cues without turning the article into a first-person memoir.",
+      "files": [],
+      "expectations": [
+        "Uses the named author in frontmatter when it matches the live schema",
+        "Uses military or instructor language only when useful to the topic",
+        "Does not invent service history, credentials, missions, aircraft, or personal anecdotes",
+        "Avoids first-person singular unless existing authored posts or prompt notes clearly support it",
+        "Keeps the article primarily reader-focused and school-staff warm",
+        "Runs lint-blog-human-voice and revises until it passes"
+      ]
+    },
+    {
+      "id": 16,
+      "prompt": "Use $rrm-blog-copywriter to create a blog post with authorContext: 'Author: Jamie Lee' and no available author bio or background source.",
+      "expected_output": "A schema-valid blog post that keeps Jamie Lee as the credited author but falls back to the school's team voice instead of inventing a persona.",
+      "files": [],
+      "expectations": [
+        "Keeps the named author credit when the schema requires author frontmatter",
+        "Uses team voice in the body because no usable author background exists",
+        "Does not invent credentials, aviation history, airline experience, or personal stories",
+        "Writes from inside the school rather than as an outside evaluator",
+        "Runs lint-blog-human-voice and revises until it passes"
+      ]
+    },
+    {
+      "id": 17,
+      "prompt": "Use $rrm-blog-copywriter to revise a flight school blog draft that says 'Our rentals page lists aircraft available for checkout' and 'Our website says students can rent after approval'.",
+      "expected_output": "A revised blog post that removes page-as-source phrasing and rewrites supported facts into direct, warm company language such as 'Here at the school, our rental options include...' or 'We can help you confirm current rental availability.'",
+      "files": [],
+      "expectations": [
+        "Rewrites our-page and website-source phrasing into direct company offer language",
+        "Does not publish page lists, page shows, website says, or source-audit wording",
+        "Uses a natural contact-us sentence only when a current detail genuinely needs confirmation",
+        "Keeps verified rental facts confident and warm",
+        "Runs lint-blog-human-voice and revises until it passes"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,482 @@
+---
+import {
+  FACEBOOK_URL,
+  INSTAGRAM_URL,
+  PHONE_NUMBER,
+  PHONE_NUMBER_NO_FORMAT,
+} from "../../data/consts";
+import PhoneIcon from "../icons/PhoneIcon.astro";
+import Logo from "./Logo.astro";
+const currentPath = Astro.url.pathname;
+
+export type MenuItem = {
+  label: string;
+  url: string;
+  children?: MenuItem[];
+};
+
+export type NavbarButton = {
+  text: string;
+  href: string;
+  style: string;
+};
+
+export const menuLeft: MenuItem[] = [
+  {
+    label: "New to flying",
+    url: "/new-to-flying/",
+    children: [
+      { label: "Why become a pilot", url: "/new-to-flying/" },
+      { label: "Airline Pilot Track", url: "/airline-pilot-track/" },
+      { label: "Discovery Flight", url: "/discovery-flight/" },
+    ],
+  },
+  {
+    label: "Pilot Training",
+    url: "/flight-training/",
+    children: [
+      { label: "Sport Pilot", url: "/flight-training/sport-pilot/" },
+      {
+        label: "Private Pilot",
+        url: "/flight-training/private-pilot/",
+      },
+      {
+        label: "Instrument Rating",
+        url: "/flight-training/instrument-rating/",
+      },
+      {
+        label: "Commercial Pilot",
+        url: "/flight-training/commercial-pilot/",
+      },
+      {
+        label: "Flight Instructor",
+        url: "/flight-training/certified-flight-instructor-cfi/",
+      },
+      {
+        label: "Instrument Instructor",
+        url: "/flight-training/certified-flight-instructor-instrument-cfii/",
+      },
+      { label: "Airline Pilot", url: "/airline-pilot-track/" },
+    ],
+  },
+];
+
+export const menuRight: MenuItem[] = [
+  {
+    label: "About Us",
+    url: "/about/",
+    children: [
+      { label: "About Us", url: "/about/" },
+      { label: "Our Team", url: "/about/our-team/" },
+      { label: "Our Fleet", url: "/about/our-fleet/" },
+      { label: "FAQs", url: "/faqs/" },
+      { label: "Pricing", url: "/pricing/" },
+      { label: "Blog", url: "/blog/" },
+      { label: "Career", url: "/cfi-candidate-application/" },
+      { label: "Contact Us", url: "/contact/" },
+    ],
+  },
+];
+
+export const buttons: NavbarButton[] = [
+  {
+    text: `Contact Us`,
+    href: "/contact/",
+    style:
+      "bg-primary-600 text-white text-2xl rounded-full px-6 py-1 hover:brightness-110 transition",
+  },
+];
+
+const { pathname } = Astro.props;
+---
+
+<nav
+  id="navbar"
+  class="fixed md:top-10 w-full z-50 transition-all duration-500"
+>
+  <!-- Desktop Menu (Untouched) -->
+  <div
+    class="hidden relative lg:flex items-center md:justify-center justify-end bg-black/40 backdrop-blur-2xl rounded-full px-6 py-2 max-w-7xl mx-auto border border-white/10 shadow-2xl"
+  >
+    <div
+      class="hidden md:flex items-center justify-around w-full relative h-16"
+    >
+      <ul class="flex items-center gap-10 text-white">
+        {
+          menuLeft.map((item) => (
+            <li class="relative group py-2">
+              <a
+                href={item.url}
+                class="font-bold text-sm uppercase tracking-[0.15em] transition-all duration-300 group-hover:text-[#dcc1a6] flex items-center gap-1"
+              >
+                {item.label}
+                {item.children && (
+                  <svg
+                    class="w-3 h-3 opacity-40 group-hover:rotate-180 group-hover:text-[#dcc1a6] transition-all duration-500"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="3"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                )}
+              </a>
+
+              {item.children && (
+                <ul class="absolute top-full left-1/2 -translate-x-1/2 mt-4 min-w-[260px] bg-primary-800/90 backdrop-blur-2xl border border-white/10 text-white rounded-[1.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.5)] opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-500 overflow-hidden p-2 z-50">
+                  {/* Subtle Internal Glow */}
+                  <div class="absolute -top-10 -right-10 w-24 h-24 bg-[#4b7992]/20 blur-2xl rounded-full pointer-events-none" />
+
+                  {item.children.map((child) => (
+                    <li>
+                      <a
+                        href={child.url}
+                        class={`group/item relative flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-300 overflow-hidden ${
+                          child.url === pathname
+                            ? "bg-[#dcc1a6]/10 text-[#dcc1a6] border border-[#dcc1a6]/20"
+                            : "hover:text-white"
+                        }`}
+                      >
+                        {/* Animated Hover Background */}
+                        <div class="absolute inset-0 bg-[#4b7992] scale-x-0 group-hover/item:scale-x-100 origin-left transition-transform duration-500 ease-out z-0" />
+
+                        <span class="relative z-10 text-xs uppercase font-semibold tracking-widest transition-transform duration-500 group-hover/item:translate-x-2">
+                          {child.label}
+                        </span>
+
+                        <svg
+                          class="relative z-10 w-3 h-3 text-[#dcc1a6] opacity-0 -translate-x-4 group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all duration-500"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          stroke-width="4"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+
+      <a
+        href="/"
+        class="absolute left-1/2 -translate-x-1/2 shrink-0 flex justify-center items-center z-10 hover:scale-110 hover:drop-shadow-[0_0_15px_rgba(220,193,166,0.4)] transition-all duration-500"
+      >
+        <Logo classes="w-24 md:w-28" blackAndWhite={true} />
+      </a>
+
+      <div class="flex items-center gap-10">
+        <ul class="flex items-center gap-10 text-white">
+          {
+            menuRight.map((item) => (
+              <li class="relative group py-2">
+                <a
+                  href={item.url}
+                  class="font-bold text-sm uppercase tracking-[0.15em] transition-all duration-300 group-hover:text-[#dcc1a6] flex items-center gap-1"
+                >
+                  {item.label}
+                  {item.children && (
+                    <svg
+                      class="w-3 h-3 opacity-40 group-hover:rotate-180 transition-all duration-500"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="3"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  )}
+                </a>
+                {/* Dropdown structure repeated for Right Menu */}
+                {item.children && (
+                  <ul class="absolute top-full left-1/2 -translate-x-1/2 mt-4 min-w-[260px] bg-primary-800/90 backdrop-blur-2xl border border-white/10 text-white rounded-[1.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.5)] opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-500 overflow-hidden p-2 z-50">
+                    <div class="absolute -top-10 -right-10 w-24 h-24 bg-[#4b7992]/20 blur-2xl rounded-full pointer-events-none" />
+                    {item.children.map((child) => (
+                      <li>
+                        <a
+                          href={child.url}
+                          class="group/item relative flex items-center justify-between px-5 py-3 rounded-xl transition-all duration-300 overflow-hidden hover:text-white"
+                        >
+                          <div class="absolute inset-0 bg-[#4b7992] scale-x-0 group-hover/item:scale-x-100 origin-left transition-transform duration-500 ease-out z-0" />
+                          <span class="relative z-10 text-xs uppercase font-semibold tracking-widest transition-transform duration-500 group-hover/item:translate-x-2">
+                            {child.label}
+                          </span>
+                          <svg
+                            class="relative z-10 w-3 h-3 text-[#dcc1a6] opacity-0 -translate-x-4 group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all duration-500"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="4"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M9 5l7 7-7 7"
+                            />
+                          </svg>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))
+          }
+        </ul>
+
+        {/* Action Buttons */}
+        <div class="flex items-center gap-3">
+          {
+            buttons.map((button) => (
+              <a
+                href={
+                  currentPath.includes("flight-training")
+                    ? "#enroll"
+                    : button.href
+                }
+                class="group/btn text-lg relative w-full overflow-hidden bg-accent-500 text-white text-center font-semibold text-title py-2 px-4 rounded-full uppercase tracking-widest transition-all hover:bg-primary-800"
+              >
+                <span class="relative z-10">{button.text}</span>
+                <div class="absolute bottom-0 left-0 h-1 bg-[#dcc1a6] w-0 transition-all duration-500 group-hover/btn:w-full" />
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Header Bar -->
+  <div
+    class="lg:hidden fixed top-0 inset-x-0 h-20 bg-primary-800/90 backdrop-blur-2xl border-b border-white/10 z-[60] flex items-center justify-between px-6"
+  >
+    <!-- Logo on the Left -->
+    <div
+      class="flex items-center gap-1 text-white motion-safe:animate-[bounce_1.5s_ease-in-out_4.5]"
+    >
+      °<PhoneIcon />°
+    </div>
+    <a href="/" class="flex items-center gap-3 group">
+      <div
+        class="bg-white p-1.5 rounded-full shadow-lg transition-transform group-active:scale-95"
+      >
+        <!-- Increased size so text inside logo is actually readable -->
+        <Logo classes="w-12 h-12" blackAndWhite={false} />
+      </div>
+    </a>
+
+    <!-- <a
+      href={`tel:${PHONE_NUMBER_NO_FORMAT}`}
+      class="text-white uppercase tracking-wider">{PHONE_NUMBER}</a
+    > -->
+    <!-- Simple, Clean Toggle on the Right -->
+    <button
+      id="mobile-toggle"
+      class="flex items-center justify-center -mr-12 w-20 h-14 text-white rounded-full bg-white/5 border border-white/10 active:bg-white/20 transition-all"
+      aria-label="Toggle menu"
+    >
+      <div class="relative w-6 h-6 mr-3">
+        <svg
+          id="bars"
+          xmlns="http://www.w3.org/2000/svg"
+          class="absolute inset-0 w-6 h-6 transition-all duration-300"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+        >
+          <line x1="3" x2="21" y1="6" y2="6"></line>
+          <line x1="3" x2="21" y1="12" y2="12"></line>
+          <line x1="3" x2="21" y1="18" y2="18"></line>
+        </svg>
+        <svg
+          id="xmark"
+          xmlns="http://www.w3.org/2000/svg"
+          class="absolute inset-0 w-6 h-6 transition-all duration-300 opacity-0 scale-50"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+        >
+          <path d="M6 6l12 12M18 6L6 18"></path>
+        </svg>
+      </div>
+    </button>
+  </div>
+
+  <!-- Mobile Menu Backdrop -->
+  <div
+    id="mobile-backdrop"
+    class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 opacity-0 pointer-events-none transition-opacity duration-500 lg:hidden"
+  >
+  </div>
+
+  <!-- Mobile Menu Drawer -->
+  <div
+    id="mobile-menu"
+    class="fixed top-0 right-0 w-full sm:w-[400px] h-full bg-primary-900 text-white z-50 transform translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] overflow-y-auto flex flex-col shadow-2xl lg:hidden"
+  >
+    <!-- pt-28 ensures menu items start below the floating header -->
+    <div class="flex-grow pt-28 pb-8 px-8">
+      <ul class="flex flex-col space-y-1 w-full">
+        {
+          [...menuLeft, ...menuRight].map((item) => (
+            <li class="border-b border-white/5">
+              <button class="submenu-toggle w-full flex justify-between items-center py-5 font-semibold text-lg uppercase tracking-widest hover:text-primary-300 transition-colors group">
+                <span>{item.label}</span>
+                {item.children && (
+                  <svg
+                    class="w-5 h-5 text-white/30 transition-transform duration-300 submenu-chevron group-hover:text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M6 9l6 6 6-6" />
+                  </svg>
+                )}
+              </button>
+
+              {item.children && (
+                <div
+                  class="submenu-container overflow-hidden transition-all duration-300 ease-in-out"
+                  style="max-height: 0px;"
+                >
+                  <ul class="pl-4 flex-col space-y-1 pb-4">
+                    {item.children.map((child) => (
+                      <li>
+                        <a
+                          href={child.url}
+                          class="block py-3 text-sm text-white/60 hover:text-white hover:translate-x-2 transition-all uppercase tracking-wider"
+                        >
+                          {child.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <!-- Footer Area -->
+    <div
+      class="mt-auto bg-primary-950/80 backdrop-blur-md p-8 border-t border-white/10 text-center"
+    >
+      <p class="text-white/40 uppercase text-xs tracking-[0.2em] mb-4">
+        Get in touch
+      </p>
+      <a
+        href={`tel:${PHONE_NUMBER_NO_FORMAT}`}
+        class="text-2xl font-light mb-8 block hover:text-primary-300 transition-colors"
+      >
+        {PHONE_NUMBER}
+      </a>
+
+      {
+        buttons.map((button) => (
+          <a
+            href={button.href}
+            class="block w-full bg-primary-600 py-4 rounded-full font-bold uppercase tracking-widest shadow-xl active:scale-95 transition-all mb-8"
+          >
+            {button.text}
+          </a>
+        ))
+      }
+
+      <div class="flex justify-center gap-8 opacity-70">
+        <!-- Social SVGs here... -->
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script type="module">
+  const toggle = document.getElementById("mobile-toggle");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const backdrop = document.getElementById("mobile-backdrop");
+  const bars = document.getElementById("bars");
+  const xmark = document.getElementById("xmark");
+  let isOpen = false;
+
+  function toggleMenu() {
+    isOpen = !isOpen;
+
+    // Animate Drawer Slide
+    mobileMenu.classList.toggle("translate-x-full", !isOpen);
+    mobileMenu.classList.toggle("translate-x-0", isOpen);
+
+    // Animate Backdrop Fade
+    backdrop.classList.toggle("opacity-0", !isOpen);
+    backdrop.classList.toggle("pointer-events-none", !isOpen);
+    backdrop.classList.toggle("opacity-100", isOpen);
+    backdrop.classList.toggle("pointer-events-auto", isOpen);
+
+    // Animate Hamburger to X
+    bars.classList.toggle("opacity-100", !isOpen);
+    bars.classList.toggle("rotate-0", !isOpen);
+    bars.classList.toggle("opacity-0", isOpen);
+    bars.classList.toggle("-rotate-90", isOpen);
+
+    xmark.classList.toggle("opacity-0", !isOpen);
+    xmark.classList.toggle("-rotate-90", !isOpen);
+    xmark.classList.toggle("opacity-100", isOpen);
+    xmark.classList.toggle("rotate-0", isOpen);
+
+    // Lock background scrolling
+    document.body.classList.toggle("overflow-hidden", isOpen);
+  }
+
+  toggle.addEventListener("click", toggleMenu);
+  backdrop.addEventListener("click", toggleMenu); // Close when clicking the dark background
+
+  // Silky Smooth Accordion Submenus using scrollHeight
+  document.querySelectorAll(".submenu-toggle").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const submenu = btn.nextElementSibling;
+      const chevron = btn.querySelector(".submenu-chevron");
+
+      if (!submenu) return;
+
+      const isExpanded = submenu.style.maxHeight !== "0px";
+
+      // Close all other accordions (optional, remove if you want multiple open at once)
+      document.querySelectorAll(".submenu-container").forEach((container) => {
+        if (container !== submenu) {
+          container.style.maxHeight = "0px";
+          container.previousElementSibling
+            ?.querySelector(".submenu-chevron")
+            ?.classList.remove("rotate-180");
+        }
+      });
+
+      // Toggle current accordion
+      if (isExpanded) {
+        submenu.style.maxHeight = "0px";
+        chevron?.classList.remove("rotate-180");
+      } else {
+        submenu.style.maxHeight = submenu.scrollHeight + "px";
+        chevron?.classList.add("rotate-180");
+      }
+    });
+  });
+</script>

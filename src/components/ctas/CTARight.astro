@@ -1,0 +1,84 @@
+---
+import ImageComp from "../utils/ImageComp.astro";
+
+const example = {
+  image: {
+    src: "/src/assets/mathias-reding-qYcDyPilTn0-unsplash.jpg",
+    alt: "Jet engine close-up by Mathias Reding",
+  },
+  title: "Welcome to Pilot Instructional Center",
+  description:
+    "Discover the freedom of flight with personalized, professional instruction from Kansas City's premier flight school. At Pilot Instructional Center (PIC), we combine modern aircraft, experienced instructors, and a passion for aviation to help you achieve your pilot dreams safely and confidently.",
+  descriptions: [
+    "Train with certified instructors who bring real-world airline and corporate aviation experience into every lesson.",
+    "Learn in a supportive, safety-first environment designed to help students of all backgrounds succeed.",
+    "Enjoy modern facilities and a versatile fleet equipped with advanced avionics for hands-on, industry-relevant training.",
+  ],
+  button: {
+    text: "Contact Us",
+    href: "/contact/",
+  },
+};
+
+const { content = example } = Astro.props;
+---
+
+<!-- CTA Right -->
+<div class="relative py-12 bg-stone-200 text-primary-600">
+  <a
+    href={content.button.href}
+    class="bg-primary-300 text-white rounded-l-full text-2xl px-4 py-2 pr-[20%] lg:pr-[30%] absolute top-6 right-0 sm:right-0 sm:top-16"
+    data-aos="fade-right"
+    data-aos-delay="300"
+    data-aos-duration="1500"
+  >
+    {content.button.text}
+  </a>
+  <!-- Image -->
+  <div
+    class="lg:absolute inset-0 left-0 top-12 z-10 md:w-3/4 lg:w-1/3 xl:1/3 max-h-3/4 mt-12 flex justify-end"
+  >
+    <ImageComp
+      src={content.image.src}
+      alt={content.image.alt}
+      classes="object-cover h-full rounded-tr-full rounded-br-full w-full"
+    />
+  </div>
+  <!-- Text -->
+  <div class="mx-auto flex max-w-3xl flex-col overflow-hidden md:flex-row">
+    <div
+      class="flex flex-col px-6 py-10 sm:px-10 lg:py-16 text-right items-end text-primary-600 w-full pb-20"
+      data-aos="zoom-in"
+      data-aos-delay="700"
+      data-aos-duration="1500"
+    >
+      <h2
+        class="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-pretty my-6 max-w-3xl"
+      >
+        {content.title}
+      </h2>
+
+      {
+        !content.descriptions && (
+          <p class="mt-4 sm:mt-6 text-base sm:text-lg lg:text-xl text-pretty lg:w-2/3">
+            {content.description}
+          </p>
+        )
+      }
+      <div class="max-w-xl pl-12 flex flex-col justify-end items-end">
+        {
+          content.descriptions &&
+            content.descriptions.map((description: any) => (
+              <p class="text-sm lg:text-lg  text-primary-300">{description}</p>
+            ))
+        }
+      </div>
+      <a
+        href={content.button.href}
+        class="btn-accent btn-middle mt-6 bottom-6 right-6 sm:right-0 sm:bottom-8"
+      >
+        {content.button.text}
+      </a>
+    </div>
+  </div>
+</div>

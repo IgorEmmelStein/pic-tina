@@ -1,0 +1,217 @@
+@import "tailwindcss";
+@tailwind utilities;
+@import "aos/dist/aos.css";
+
+@theme {
+  --color-primary-300: #745e4d;
+  --color-primary-400: #dcc1a6;
+  --color-primary-600: #5d4d40;
+  --color-primary-800: #423731;
+  --color-accent-50: #f1f5f8;
+  --color-accent-100: #e0eaef;
+  --color-accent-200: #c2d5df;
+  --color-accent-500: #4b7992; /* Base Accent */
+
+  --color-accent-300: #9dbccc;
+  --color-accent-400: #719eb6;
+  --color-accent-600: #40677c;
+  --color-accent-700: #304e5e;
+  --color-accent-800: #223743;
+  --color-accent-900: #16242b;
+  --color-accent-950: #0d161a;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  font-family: "Open Sans Variable", system-ui, sans-serif;
+}
+
+.btn-primary {
+  @apply text-center tracking-wide font-bold text-base py-2 px-4 bg-stone-100 w-fit h-fit text-white hover:bg-orange-400 duration-300 ease-in-out;
+}
+
+.btn-accent {
+  @apply cursor-pointer shadow-lg shadow-black/20 text-center tracking-wide font-bold text-lg lg:text-2xl py-2 bg-primary-600 ring-3 ring-primary-300 text-white hover:scale-110 hover:bg-primary-800 hover:ring-white duration-300 ease-in-out;
+}
+
+.btn-accent:disabled {
+  @apply cursor-not-allowed text-gray-500 bg-gray-400 ring-gray-500 hover:scale-100 hover:bg-gray-400;
+}
+
+.btn-left {
+  @apply rounded-tr-full rounded-br-full px-6 lg:px-12 pl-10;
+}
+
+.btn-right {
+  @apply pl-10 pr-12 rounded-tl-full rounded-bl-full;
+}
+
+.btn-middle {
+  @apply rounded-full px-6 lg:px-20;
+}
+
+.btn-secondary {
+  @apply text-center tracking-wide font-bold text-base py-2 px-4 bg-gray-100 w-fit h-fit text-[#0367a9]!  hover:bg-[#0367a9] hover:text-white! duration-300 ease-in-out;
+}
+
+.btn-transparent {
+  @apply text-center tracking-wide font-bold text-base py-2 px-4 border bg-transparent w-fit h-fit text-gray-100  hover:bg-gray-100 hover:text-[#0367a9] duration-300 ease-in-out;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 20px;
+  border-radius: 4px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 0;
+}
+
+.btn-main {
+  background: #fff;
+  color: #111;
+  margin-right: 8px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
+  border-radius: 0.5rem;
+  transition: transform 0.3s ease-in-out;
+}
+
+.btn-main:hover {
+  transform: translateY(-2px);
+  background: #0367a9;
+  color: #fff;
+}
+
+.btn-second {
+  background: transparent;
+  color: #e06900 !important;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  border-radius: 0.5rem;
+  transition: transform 0.3s ease-in-out;
+}
+
+.btn-second:hover {
+  background: #fff;
+  color: #0367a9;
+}
+
+.btn-enroll {
+  background: #007ecb !important;
+  color: #fff;
+  margin-right: 8px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
+  border-radius: 1.5rem;
+  padding: 4px 6px;
+}
+
+.btn-enroll:hover {
+  background: #e06900 !important;
+  color: #fff;
+}
+
+body {
+  font-family: "Crimson Pro Variable", serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Playfair Display Variable", serif;
+}
+
+.bg-logo {
+  position: relative;
+  background: linear-gradient(to right, #ffffff 0%, #ffffff 100%);
+  z-index: 0;
+}
+
+.bg-logo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/PIC-Logo_No-Background_No-Text_Color.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.07;
+  filter: grayscale(1);
+  z-index: -1;
+}
+
+.bg-logo-dark {
+  position: relative;
+  background: linear-gradient(to right, #745e4d 0%, #745e4d 100%);
+  z-index: 0;
+}
+
+.bg-logo-dark:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/PIC-Logo_No-Background_No-Text_White.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.07;
+  filter: grayscale(1);
+  z-index: -1;
+}
+
+.bg-logo-darker {
+  position: relative;
+  background: linear-gradient(to right, #423731 0%, #423731 100%);
+  z-index: 0;
+}
+
+.bg-logo-darker::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/PIC-Logo_No-Background_No-Text_White.png");
+  background-size: 1024px auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.07;
+  filter: grayscale(1);
+  z-index: -1;
+  transition: all 0.3s ease-in-out;
+}
+
+.bg-checkered {
+  background-image:
+    linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.95) 100%),
+    url("/LogoPIlotInstructionalCenter.png");
+  z-index: -100;
+}
+
+.bg-back {
+  z-index: -100;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .group.js-hover .group-hover\:rotate-180 {
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+.faq-item a {
+  color: var(--color-primary-400) !important; /* Forces the tan/accent color */
+  text-decoration: underline !important; /* Forces the underline */
+  text-decoration-color: rgba(220, 193, 166, 0.4) !important; /* Softens the underline */
+  text-underline-offset: 4px !important;
+  font-weight: 700 !important; /* Makes it bold so it stands out */
+  transition: all 0.3s ease !important;
+}
+
+.faq-item a:hover,
+.faq-item a:focus {
+  color: #ffffff !important; /* Turns bright white on hover */
+  text-decoration-color: #ffffff !important;
+}

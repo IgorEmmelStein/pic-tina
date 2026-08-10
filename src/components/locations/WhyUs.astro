@@ -1,0 +1,95 @@
+---
+import ImageComp from "../utils/ImageComp.astro";
+const { content } = Astro.props;
+---
+
+<section class="bg-white py-24 px-6 overflow-hidden">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex flex-col lg:flex-row items-center gap-16 mb-20">
+      <div class="lg:w-1/2" data-aos="fade-right">
+        <span
+          class="text-[#745e4d] font-black uppercase tracking-[0.4em] text-xs mb-4 block"
+        >
+          {content.upperHeading}
+        </span>
+        <h2 class="text-5xl font-black text-[#423731] leading-tight mb-8">
+          {content.title}
+        </h2>
+        <div class="space-y-6">
+          <p class="text-xl text-[#745e4d] font-medium leading-relaxed">
+            {content.description}
+          </p>
+          {/* Mapping the descriptions from the YAML content */}
+          <p class="text-[#5d4d40] text-sm opacity-80 leading-loose">
+            New Century AirCenter (KIXD) is one of the most active training
+            airports in the Kansas City area, offering an ideal environment for
+            student pilots.
+          </p>
+          <p class="text-[#5d4d40] text-sm opacity-80 leading-loose">
+            Our instruction-first approach allows students to progress
+            efficiently with experienced instructors who are invested in your
+            success.
+          </p>
+        </div>
+
+        <div class="mt-10">
+          <a
+            href={content.button.href}
+            class="inline-block bg-[#423731] text-[#dcc1a6] px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-[#745e4d] hover:text-white transition-all transform hover:-translate-y-1 shadow-2xl"
+          >
+            {content.button.text}
+          </a>
+        </div>
+      </div>
+
+      <div class="lg:w-1/2 relative" data-aos="fade-left">
+        <div
+          class="relative z-10 rounded-[4rem] overflow-hidden shadow-2xl border-[16px] border-[#fcfaf8]"
+        >
+          <div class="bg-[#dcc1a6]/40 flex items-center justify-center">
+            <ImageComp
+              src={content.image.src ||
+                "/src/assets/cody-f-OdHh60XP7EI-unsplash.jpg"}
+              alt={content.image.alt}
+              class="object-cover w-full h-full"
+            />
+          </div>
+        </div>
+        <div
+          class="absolute -top-10 -right-10 w-48 h-48 bg-[#dcc1a6] rounded-full flex items-center justify-center p-8 text-center z-20 animate-pulse"
+        >
+          <p
+            class="text-[#423731] font-black text-[10px] lg:text-xl uppercase tracking-tighter leading-none"
+          >
+            High Integrity <br /> Flight Training
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {
+        content.bullets.map((bullet: any, index: number) => (
+          <div
+            class="relative p-10 rounded-[3rem] bg-[#fcfaf8] border border-transparent hover:border-[#dcc1a6] transition-all duration-500 group"
+            data-aos="fade-up"
+            data-aos-delay={index * 100}
+          >
+            <span class="absolute top-6 right-8 text-6xl font-black text-[#dcc1a6]/20 group-hover:text-[#dcc1a6]/40 transition-colors">
+              0{index + 1}
+            </span>
+
+            <h3 class="text-xl font-black text-[#423731] mb-4 relative z-10 group-hover:text-[#745e4d]">
+              {bullet.title}
+            </h3>
+            <p class="text-sm text-[#745e4d] leading-relaxed relative z-10">
+              {bullet.description}
+            </p>
+
+            <div class="mt-6 w-8 h-1 bg-[#423731] group-hover:w-full transition-all duration-700" />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,107 @@
+---
+// FAQ Data based on PIC Operational Records
+const faqData = {
+  title: "Professional Path FAQ",
+  subtitle:
+    "Everything you need to know about transitioning from a student to a professional airline pilot at PIC.",
+  faqs: [
+    {
+      question: "Does PIC offer a direct path to employment?",
+      answer:
+        "Yes. Our primary goal is to provide priority hiring to any student who completes their CFI and CFII certifications at our school. This allows you to build your required 1,500 hours while working in a high-integrity environment.",
+      aos: "fade-up",
+      delay: "0",
+    },
+    {
+      question: "What makes your Airline Track different from 'Pilot Mills'?",
+      answer:
+        "We focus on mentorship over volume. Our instructors are senior, jet-rated pilots who are not just 'building time' but are dedicated to teaching. We also maintain strict safety SOPs and maintenance requirements that many high-volume schools may overlook.",
+      aos: "fade-up",
+      delay: "100",
+    },
+    {
+      question: "What are the age and medical requirements?",
+      answer:
+        "To fly solo, you must be 16, and 17 for your Private Pilot certification. For the Commercial and Instructor levels, you must be at least 18. A current FAA medical certificate (at least third class) is required for all ratings.",
+      aos: "fade-up",
+      delay: "200",
+    },
+    {
+      question: "Where will I fly during my training?",
+      answer:
+        "Training takes place at New Century AirCenter (IXD). You'll experience both controlled and uncontrolled airspace, and our discovery flights even take you over landmarks like GEHA Field at Arrowhead Stadium and Kauffman Stadium.",
+      aos: "fade-up",
+      delay: "300",
+    },
+    {
+      question: "What equipment will I be training on?",
+      answer:
+        "Our primary trainer is a Cessna 172M (N13659) equipped with a Garmin GNS 430. For Instrument and Commercial ratings, we also utilize an AATD Simulator to refine your skills in a cost-effective, high-tech environment.",
+      aos: "fade-up",
+      delay: "400",
+    },
+  ],
+};
+---
+
+<section class="bg-white py-24 px-6">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-16" data-aos="fade-up">
+      <h2 class="text-4xl font-extrabold text-[#423731] mb-4">
+        {faqData.title}
+      </h2>
+      <p class="text-[#745e4d] text-lg">{faqData.subtitle}</p>
+    </div>
+
+    <div class="space-y-6">
+      {
+        faqData.faqs.map((faq) => (
+          <div
+            class="group border-2 border-[#dcc1a6]/30 rounded-2xl p-6 transition-all hover:border-[#745e4d] hover:bg-[#fcfaf8]"
+            data-aos={faq.aos}
+            data-aos-delay={faq.delay}
+          >
+            <div class="flex items-start gap-4">
+              <div class="mt-1 bg-[#dcc1a6] p-1 rounded-full text-[#423731]">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="3"
+                    d="8.25 4.5l7.5 7.5-7.5 7.5"
+                  />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-[#423731] mb-3 group-hover:text-[#5d4d40] transition-colors">
+                  {faq.question}
+                </h3>
+                <p class="text-[#745e4d] leading-relaxed text-sm opacity-90">
+                  {faq.answer}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="mt-16 text-center" data-aos="zoom-in">
+      <p class="text-[#423731] font-semibold mb-4 text-lg">
+        Still have questions about your career path?
+      </p>
+      <a
+        href="/contact/"
+        class="inline-block bg-[#5d4d40] text-white px-8 py-3 rounded-full font-bold uppercase tracking-widest text-sm hover:bg-[#423731] transition-all transform hover:scale-105 shadow-lg"
+      >
+        Contact an Instructor
+      </a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,134 @@
+---
+import { website_links } from "../../data/consts";
+
+interface StripOffer {
+  tag: string;
+  name: string;
+  detail: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  titleEm?: string;
+  offers?: StripOffer[];
+  contactForm?: boolean;
+}
+
+// const {
+//   eyebrow = "Active offers",
+//   title = "3 ways to",
+//   titleEm = "save today",
+//   offers = [
+//     {
+//       tag: "Discovery",
+//       name: "$200 discovery flight",
+//       detail:
+//         "Book a discovery flight, and if you enroll you get that flight for free.",
+//       ctaLabel: "Claim",
+//       ctaHref: `#${website_links.enroll.id}`,
+//     },
+//     {
+//       tag: "Simulator Block rate",
+//       name: "$60 / hour simulator block rate",
+//       detail: "Purchase 10+ hours of simulator time, lock in the rate.",
+//       ctaLabel: "Claim",
+//       ctaHref: `#${website_links.enroll.id}`,
+//     },
+//     {
+//       tag: "Limited time",
+//       name: "Free simulator checkout",
+//       detail: "With any block time purchase.",
+//       ctaLabel: "Claim",
+//       ctaHref: `#${website_links.enroll.id}`,
+//     },
+//   ],
+//   contactForm = false,
+// } = Astro.props;
+
+const {
+  eyebrow = "Active offers",
+  title = "Save on your training",
+  titleEm = "save today",
+  offers = [
+    {
+      tag: "Discovery",
+      name: "$200 discovery flight",
+      detail:
+        "Book a discovery flight, and if you enroll you get that flight for free.",
+      ctaLabel: "Claim",
+      ctaHref: `${website_links.discoveryFlight.path}`,
+    },
+    {
+      tag: "Simulator Block rate",
+      name: "$60 / hour simulator block rate",
+      detail: "Purchase 10+ hours of simulator time, lock in the rate.",
+      ctaLabel: "Claim",
+      ctaHref: `${website_links.contact.path}`,
+    },
+    // {
+    //   tag: "Limited time",
+    //   name: "Free simulator checkout",
+    //   detail: "With any block time purchase.",
+    //   ctaLabel: "Claim",
+    //   ctaHref: `#${website_links.enroll.id}`,
+    // },
+  ],
+  contactForm = false,
+} = Astro.props;
+---
+
+<div class="px-6 lg:px-8 py-6 bg-accent-500">
+  <div
+    class="bg-[#423731] font-sans max-w-7xl mx-auto rounded-[28px] px-8 md:px-10 py-8 flex flex-col lg:flex-row justify-around items-center"
+  >
+    <div class="flex flex-col gap-1">
+      <span class="text-xs tracking-[0.3em] uppercase text-[#4b7992]">
+        {eyebrow}
+      </span>
+      <div
+        class="font-serif text-2xl font-normal text-[#f1f5f8] leading-snug whitespace-nowrap"
+      >
+        {title}<br />
+        <em class="italic text-[#dcc1a6]">{titleEm}</em>
+      </div>
+    </div>
+    {
+      offers.map((offer, i) => (
+        <a
+          href={contactForm ? `#${website_links.contact.id}` : offer.ctaHref}
+          class={`group  gap-1.5 py-6 hover:-translate-y-1 transition-all duration-200 ${i === 0 ? "flex flex-col" : "hidden lg:flex lg:flex-col "}`}
+        >
+          <span class="text-xs tracking-[0.2em] uppercase text-[#4b7992] flex items-center gap-1.5">
+            <span class="w-3 h-px bg-[#4b7992] inline-block" />
+            {offer.tag}
+          </span>
+          <div class="text-lg font-medium text-[#f1f5f8] leading-snug ">
+            {offer.name}
+          </div>
+          <div class=" text-[#c2d5df] leading-relaxed lg:max-w-xs">
+            {offer.detail}
+          </div>
+          <div class="inline-flex items-center gap-1.5 text-xs lg:text-base tracking-[0.15em] uppercase text-[#dcc1a6] no-underline mt-1 transition-all duration-200 group-hover:gap-2.5 w-fit">
+            {offer.ctaLabel ?? "Claim"}
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </div>
+        </a>
+      ))
+    }
+  </div>
+</div>

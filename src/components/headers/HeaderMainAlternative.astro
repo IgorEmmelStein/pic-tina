@@ -1,0 +1,253 @@
+---
+import {
+  ADDRESS_CITY,
+  ADDRESS_STATE,
+  ADDRESS_STATE_SHORT,
+  PHONE_NUMBER,
+  PHONE_NUMBER_NO_FORMAT,
+  PRIMARY_AREA,
+  website_links,
+} from "../../data/consts";
+import ImageComp from "../utils/ImageComp.astro";
+import SocialIcons from "./SocialIcons.astro";
+
+const slides = [
+  {
+    src: "/src/assets/rrm-visit/pilot-instructional-center_new-century-KS_cfis-preparing-plane-cessna-airport-near-Kansas-city-MO.png",
+    alt: "Pilot Instructional Center New Century KS - CFIs preparing Cessna plane at airport near Kansas City MO",
+  },
+  {
+    src: "/src/assets/rrm-visit/pilot-instructional-center_new-century-KS_ground-school-cfi-teaching.png",
+    alt: "Pilot Instructional Center New Century KS - Ground school CFI teaching students",
+  },
+  // {
+  //   src: "/src/assets/rrm-visit/pilot-instructional-center_new-century-KS_logan-fahy-cfi_cesnna-background.jpg",
+  //   alt: "Pilot Instructional Center New Century KS - Logan Fahy CFI with Cessna in background"
+  // },
+  {
+    src: "/src/assets/rrm-visit/pilot-instructional-center_new-century-KS_pilot-training_student.png",
+    alt: "Pilot Instructional Center New Century KS - Pilot training student",
+  },
+  {
+    src: "/src/assets/rrm-visit/pilot-instructional-center_new-century-KS_plane-cockpit-cessna_flight-school_pilo-training.png",
+    alt: "Pilot Instructional Center New Century KS - Cessna plane cockpit view during flight school pilot training",
+  },
+  // {
+  //   src: "/src/assets/rrm-visit/pilot-instructional-center_new-century-KS_ryan-tindall-cfi_cesnna-background.jpg",
+  //   alt: "Pilot Instructional Center New Century KS - Ryan Tindall CFI with Cessna in background"
+  // },
+  // {
+  //   src: "/src/assets/rrm-visit/pilot-instructional-center_new-century-KS_stephanie-fahy-at-desk.png",
+  //   alt: "Pilot Instructional Center New Century KS - Stephanie Fahy at desk"
+  // },
+  {
+    src: "/src/assets/rrm-visit/pilot-instructional-center_pilot-checking-wing-plane_flight-school_pilot-training.png",
+    alt: "Pilot Instructional Center - Pilot checking wing of plane during flight school pilot training",
+  },
+  {
+    src: "/src/assets/rrm-visit/pilot-instructional-center_pilot-cockpit-checking-plane_pilot-training.png",
+    alt: "Pilot Instructional Center - Pilot checking cockpit instruments during pilot training",
+  },
+  {
+    src: "/src/assets/rrm-visit/pilot-instructional-center_pilot-preparing-plane_flight-school_pilot-training.png",
+    alt: "Pilot Instructional Center - Pilot preparing plane for flight school pilot training",
+  },
+  {
+    src: "/src/assets/facebook/student-passing-checkride_student-cfi-shaking-hands_PIC_Pilot-instructional-center_Flight-school_cropped.jpg",
+    alt: "Student passing checkride - Student and CFI shaking hands at Pilot Instructional Center flight school",
+  },
+];
+
+const headerContent = {
+  upperHeader: `${ADDRESS_CITY}, ${ADDRESS_STATE} `,
+  title: "Professional Flight Training in Kansas City",
+  description:
+    "Personalized instruction, experienced mentors, and career-focused pilot training at PIC.",
+};
+
+const {
+  content = headerContent,
+  button = { href: website_links.contact.path, text: "Start Your Journey" },
+  buttonSecondary = {
+    href: website_links.discoveryFlight.path,
+    text: "Discovery Flight",
+  },
+  floatingWords = {
+    upper: "Safety. Integrity. Skill.",
+    bottom: "Flight Excellence",
+  },
+  mainSize = true,
+  showButton = true,
+  images = slides,
+  textSizeBig = true,
+  showDescription = true,
+  showOffer = true,
+} = Astro.props;
+---
+
+<section
+  class={`relative  flex items-center overflow-hidden bg-black ${mainSize ? "min-h-screen" : "min-h-[65vh]"}`}
+>
+  <div
+    id="hero-slider"
+    class="absolute inset-0 z-0"
+    data-images={JSON.stringify(slides)}
+  >
+    {
+      images
+        .sort(() => Math.random() - 0.5)
+        .map((img: any, index: number) => (
+          <div
+            class={`absolute inset-0 transition-opacity duration-[2000ms] ease-in-out ${index === 0 ? "opacity-100" : "opacity-0"}`}
+          >
+            <ImageComp
+              src={img.src}
+              alt={img.alt}
+              classes="object-cover w-full h-full aspect-video"
+            />
+          </div>
+        ))
+    }
+    <!-- Darker, more professional gradient overlay -->
+    <div
+      class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"
+    >
+    </div>
+    <div class="absolute inset-0 bg-black/20"></div>
+  </div>
+
+  <!-- Content Container -->
+  <div class="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 w-full pt-32 pb-16">
+    <div class="grid lg:grid-cols-2 items-center gap-12">
+      <div class="max-w-2xl" data-aos="fade-up" data-aos-duration="1200">
+        <!-- Location Badge - Refined Glass Style -->
+        <div
+          class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-white/90 backdrop-blur-md border border-primary-600/90 mb-8"
+        >
+          <span class="relative flex items-center h-2 w-2 lg:w-3 lg:h-3">
+            <span
+              class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-400 opacity-75"
+            ></span>
+            <span
+              class="relative inline-flex rounded-full h-2 w-2 lg:w-3 lg:h-3 bg-accent-500"
+            ></span>
+          </span>
+          <a
+            href={`tel:${PHONE_NUMBER_NO_FORMAT}`}
+            class="flex items-center text-xs lg:text-xl font-semibold uppercase tracking-widest text-primary-600"
+          >
+            {PHONE_NUMBER}
+            <span class="text-xs font-light self-center">
+              - {PRIMARY_AREA}, {ADDRESS_STATE_SHORT}</span
+            >
+          </a>
+        </div>
+
+        <!-- Headline with Serif/Italic Accent -->
+        <h1
+          class={` font-bold tracking-tight text-white leading-[1.1] uppercase font-title ${textSizeBig ? "text-4xl md:text-5xl lg:text-6xl" : "text-3xl lg:text-4xl"}`}
+        >
+          {
+            content.title.split("with PIC").map((part: string, i: number) =>
+              i === 0 ? (
+                part
+              ) : (
+                <>
+                  <>
+                    <br />
+                    <span class="text-[#dcc1a6] italic font-serif normal-case">
+                      with PIC
+                    </span>
+                  </>
+                </>
+              ),
+            )
+          }
+        </h1>
+
+        <p
+          class={`mt-8 text-lg md:text-xl text-white/70 leading-relaxed max-w-xl font-light ${showDescription ? "" : "hidden md:inline-block"}`}
+        >
+          {content.description}
+        </p>
+
+        {
+          showOffer && (
+            <div class="text-left mt-8">
+              <p
+                class={`text-accent-500 brightness-150 font-semibold text-xs  tracking-[0.3em] uppercase ${textSizeBig ? "lg:text-base" : ""}`}
+              >
+                Take a{" "}
+                <a href={website_links.discoveryFlight.path} class="">
+                  Discovery Flight
+                </a>{" "}
+                and get your money back after enrolling!
+              </p>
+            </div>
+          )
+        }
+
+        <!-- CTA Buttons -->
+        {
+          showButton && (
+            <div class="mt-12 flex flex-wrap gap-5">
+              <a
+                href={button.href}
+                class="group relative px-8 py-4 bg-[#4b7992] text-white rounded-full font-bold uppercase tracking-widest text-sm transition-all hover:bg-[#3a5f73] hover:scale-105 hover:shadow-[0_0_30px_rgba(75,121,146,0.4)] overflow-hidden"
+              >
+                <span class="relative z-10">{button.text}</span>
+                <div class="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform" />
+              </a>
+
+              <a
+                href={buttonSecondary.href}
+                class={`px-8 py-4 bg-white/5 backdrop-blur-md border border-white/20 text-white rounded-full font-bold uppercase tracking-widest transition-all hover:bg-white/10 ${textSizeBig ? "text-sm" : "text-xs"}`}
+              >
+                {buttonSecondary.text}
+              </a>
+            </div>
+          )
+        }
+      </div>
+
+      <!-- Right Side: Vertical Stats or Socials -->
+      <div
+        class="hidden lg:flex flex-col items-end gap-8"
+        data-aos="fade-left"
+        data-aos-delay="400"
+      >
+        <div class="h-px w-24 bg-[#dcc1a6]/50"></div>
+        <SocialIcons />
+        <div class="text-right">
+          <p class="text-[#dcc1a6] font-serif italic text-2xl">
+            {floatingWords.upper}
+          </p>
+          <p class="text-white/40 text-xs tracking-[0.3em] uppercase mt-2">
+            {floatingWords.bottom}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decorative Scroll Indicator -->
+  <div
+    class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50"
+  >
+    <div class="w-px h-12 bg-gradient-to-b from-[#dcc1a6] to-transparent"></div>
+  </div>
+</section>
+
+<script>
+  // Smoother Slider Logic
+  const slider = document.getElementById("hero-slider");
+  if (slider) {
+    const slides = slider.querySelectorAll('div[class*="transition-opacity"]');
+    let current = 0;
+    setInterval(() => {
+      slides[current].classList.replace("opacity-100", "opacity-0");
+      current = (current + 1) % slides.length;
+      slides[current].classList.replace("opacity-0", "opacity-100");
+    }, 6000); // Slightly longer for a more relaxed feel
+  }
+</script>
