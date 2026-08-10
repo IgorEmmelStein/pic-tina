@@ -10,3 +10,4 @@ faqs:
     answer: test
 ---
 
+test
