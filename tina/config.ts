@@ -1,6 +1,5 @@
 import { defineConfig } from "tinacms";
 
-// Your hosting provider likely exposes this as an environment variable
 const branch =
   process.env.GITHUB_BRANCH ||
   process.env.VERCEL_GIT_COMMIT_REF ||
@@ -8,78 +7,279 @@ const branch =
   "main";
 
 export default defineConfig({
-  branch,
-
-  // Get this from tina.io
+  branch: "main",
   clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
-  // Get this from tina.io
   token: process.env.TINA_TOKEN,
-
   build: {
     outputFolder: "admin",
     publicFolder: "public",
   },
-  // Uncomment to allow cross-origin requests from non-localhost origins
-  // during local development (e.g. GitHub Codespaces, Gitpod, Docker).
-  // Use 'private' to allow all private-network IPs (WSL2, Docker, etc.)
-  // server: {
-  //   allowedOrigins: ['https://your-codespace.github.dev'],
-  // },
   media: {
     tina: {
-      mediaRoot: "",
-      publicFolder: "public",
+      publicFolder: "src",
+      mediaRoot: "assets",
     },
+  }, search: {
+    tina: {
+      indexerToken: process.env.TINA_SEARCH_TOKEN,
+      stopwordLanguages: ["eng"],
+    },
+    indexBatchSize: 100,
+    maxSearchIndexFieldLength: 100,
   },
-  // See docs on content modeling for more info on how to setup new content models: https://tina.io/docs/r/content-modelling-collections/
   schema: {
     collections: [
       {
-        name: "post",
-        label: "Posts",
-        path: "content/posts",
+        name: "blog",
+        label: "Blog",
+        path: "src/content/blog",
+        format: "md",
         fields: [
           {
             type: "string",
-            name: "eyebrow",
-            label: "Eyebrow",
-          },
-          {
-            type: "string",
             name: "title",
-            label: "Headline",
+            label: "Title",
             isTitle: true,
             required: true,
           },
           {
+            type: "string",
+            name: "description",
+            label: "Description",
+            ui: { component: "textarea" },
+          },
+          {
+            type: "datetime",
+            name: "pubDate",
+            label: "Publish Date",
+            required: true,
+          },
+          {
+            type: "string",
+            name: "author",
+            label: "Author",
+          },
+          {
+            type: "string",
+            name: "role",
+            label: "Author Role",
+          },
+          {
+            type: "image",
+            name: "authorImage",
+            label: "Author Image",
+          },
+          {
+            type: "string",
+            name: "authorImageAlt",
+            label: "Author Image Alt",
+          },
+          {
+            type: "image",
+            name: "cardImage",
+            label: "Card Image",
+          },
+          {
+            type: "string",
+            name: "cardImageAlt",
+            label: "Card Image Alt",
+          },
+          {
+            type: "number",
+            name: "readTime",
+            label: "Read Time",
+          },
+          {
+            type: "string",
+            name: "tags",
+            label: "Tags",
+            list: true,
+          },
+          {
+            type: "string",
+            name: "categories",
+            label: "Categories",
+            list: true,
+            options: [
+              "Pilot News",
+              "International Aviation",
+              "Aviation Safety",
+              "Community",
+              "Aviation Training",
+              "Pilot Training and Certification",
+              "Career Change",
+              "Aircraft Guides",
+              "Pilot Guides",
+              "Commercial Pilot",
+              "Flight Training",
+              "Pilot Career Guides",
+              "Uncategorized",
+              "Pilot Mindset",
+              "Pilot's Way of Life",
+              "Design",
+              "Flight School Comparison",
+              "Private Pilot Flight School",
+              "Aviation Technology",
+            ],
+          },
+          {
+            type: "object",
+            name: "contents",
+            label: "Contents",
+            list: true,
+            fields: [
+              { type: "string", name: "title", label: "Section Title" },
+              { type: "string", name: "paragraph", label: "Paragraph", ui: { component: "textarea" } },
+            ],
+          },
+          {
             type: "rich-text",
             name: "body",
-            label: "Tagline",
+            label: "Body Content",
             isBody: true,
           },
+        ],
+      },
+      {
+        name: "pilotTraining",
+        label: "Pilot Training",
+        path: "src/content/pilot-training",
+        format: "md",
+        fields: [
           {
-            type: "object",
-            name: "ctaPrimary",
-            label: "Primary button",
-            fields: [
-              { type: "string", name: "label", label: "Label" },
-              { type: "string", name: "href", label: "Link" },
-            ],
+            type: "string",
+            name: "siteTitle",
+            label: "Site Title",
+            isTitle: true,
+            required: true,
+          },
+          {
+            type: "string",
+            name: "siteDescription",
+            label: "Site Description",
+            ui: { component: "textarea" },
+          },
+          {
+            type: "string",
+            name: "siteKeywords",
+            label: "Site Keywords",
+          },
+          {
+            type: "string",
+            name: "city",
+            label: "City",
+          },
+          {
+            type: "string",
+            name: "stateShort",
+            label: "State Short",
+          },
+          {
+            type: "string",
+            name: "stateLong",
+            label: "State Long",
+          },
+          {
+            type: "string",
+            name: "keyPlace1",
+            label: "Key Place 1",
+          },
+          {
+            type: "string",
+            name: "keyPlace2",
+            label: "Key Place 2",
+          },
+          {
+            type: "string",
+            name: "distance",
+            label: "Distance",
+          },
+          {
+            type: "string",
+            name: "headlines",
+            label: "Headlines",
+            list: true,
           },
           {
             type: "object",
-            name: "ctaSecondary",
-            label: "Secondary button",
+            name: "header",
+            label: "Header Section",
             fields: [
-              { type: "string", name: "label", label: "Label" },
-              { type: "string", name: "href", label: "Link" },
+              { type: "string", name: "upperHeader", label: "Upper Header" },
+              { type: "string", name: "title", label: "Title" },
+              { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
+              {
+                type: "object",
+                name: "buttons",
+                label: "Buttons",
+                list: true,
+                fields: [
+                  { type: "string", name: "text", label: "Text" },
+                  { type: "string", name: "href", label: "Link" },
+                  { type: "string", name: "style", label: "Style" },
+                ],
+              },
             ],
+          },
+          {
+            type: "rich-text",
+            name: "body",
+            label: "Body Content",
+            isBody: true,
           },
         ],
-        ui: {
-          // Opens the /tinacms-demo page for visual editing. Change or remove to fit your site.
-          router: () => "/tinacms-demo",
-        },
+      },
+      {
+        name: "faqs",
+        label: "FAQs",
+        path: "src/content/faqs",
+        format: "md",
+        fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Title",
+            isTitle: true,
+            required: true,
+          },
+          {
+            type: "string",
+            name: "upperHeading",
+            label: "Upper Heading",
+          },
+          {
+            type: "string",
+            name: "paragraphs",
+            label: "Paragraphs",
+            list: true,
+          },
+          {
+            type: "string",
+            name: "ctaUrl",
+            label: "CTA URL",
+          },
+          {
+            type: "string",
+            name: "ctaTitle",
+            label: "CTA Title",
+          },
+          {
+            type: "object",
+            name: "faqs",
+            label: "FAQ Items",
+            list: true,
+            fields: [
+              { type: "string", name: "question", label: "Question" },
+              { type: "string", name: "answer", label: "Answer", ui: { component: "textarea" } },
+            ],
+          },
+          {
+            type: "rich-text",
+            name: "body",
+            label: "Body Content",
+            isBody: true,
+          },
+        ],
       },
     ],
   },
