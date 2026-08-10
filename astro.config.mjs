@@ -5,10 +5,14 @@ import sitemap from "@astrojs/sitemap";
 // import partytown from "@astrojs/partytown";
 import tailwindcss from "@tailwindcss/vite";
 import astroLLMsGenerator from "astro-llms-generate";
+import node from '@astrojs/node';
 
 import react from "@astrojs/react";
 
 export default defineConfig({
+  adapter: node({
+    mode: 'standalone',
+  }),
   site: "https://pilotinstructionalcenter.com",
 
   integrations: [sitemap({
