@@ -16,10 +16,11 @@ export default defineConfig({
   },
   media: {
     tina: {
-      publicFolder: "src",
-      mediaRoot: "assets",
+      publicFolder: "",
+      mediaRoot: "src/assets",
     },
-  }, search: {
+  },
+  search: {
     tina: {
       indexerToken: process.env.TINA_SEARCH_TOKEN,
       stopwordLanguages: ["eng"],
