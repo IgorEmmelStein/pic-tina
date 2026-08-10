@@ -64,7 +64,7 @@ export const images = [
     alt: "Pilot in cockpit by Pasqualino Capobianco",
   },
   {
-    src: "/src/assets/PIC Primary Logo.png",
+    src: "/src/assets/PIC-Primary-Logo.png",
     alt: "Pilot Instructional Center primary logo",
   },
   {
