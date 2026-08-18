@@ -9,9 +9,6 @@ authorImageAlt: hello
 cardImage: /src/assets/lukas-souza-CKP4Rktp_ws-unsplash.jpg
 cardImageAlt: plane
 readTime: 3
-tags:
-  - flight training
-  - ''
 categories:
   - Community
   - Flight Training
