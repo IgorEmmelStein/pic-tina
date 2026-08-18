@@ -5,7 +5,9 @@ pubDate: 2026-08-18T14:38:52.938Z
 author: Doug
 role: CEO
 authorImage: /src/assets/Placeholder_Pilot-Silhouette.png
+authorImageAlt: hello
 cardImage: /src/assets/luciano-faiolo-8oI1W0ugZRw-unsplash.jpg
+cardImageAlt: hello
 readTime: 8
 categories:
   - Pilot News
@@ -16,6 +18,5 @@ contents:
 ---
 
 testing
-
 
 ### [hello](###hello) world
