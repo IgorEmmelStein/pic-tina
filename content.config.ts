@@ -19,10 +19,10 @@ const blogCollection = defineCollection({
       author: z.string(),
       role: z.string().optional(),
       authorImage: z.string(),
-      authorImageAlt: z.string(),
+      authorImageAlt: z.string().optional(),
       pubDate: z.date(),
       cardImage: z.string(),
-      cardImageAlt: z.string(),
+      cardImageAlt: z.string().optional(),
       readTime: z.number(),
       tags: z.array(z.string()).optional(),
       categories: z
