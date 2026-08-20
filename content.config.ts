@@ -1,57 +1,51 @@
-// https://docs.astro.build/en/guides/content-collections/#defining-collections
-
 import { z, defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
-import { text } from "stream/consumers";
 
 const blogCollection = defineCollection({
   loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/blog" }),
-  schema: () =>
-    z.object({
-      title: z.string(),
-      description: z.string(),
-      contents: z.array(
-        z.object({
-          title: z.string().optional(),
-          paragraph: z.string(),
-        }),
-      ),
-      author: z.string(),
-      role: z.string().optional(),
-      authorImage: z.string(),
-      authorImageAlt: z.string(),
-      pubDate: z.date(),
-      cardImage: z.string(),
-      cardImageAlt: z.string(),
-      readTime: z.number(),
-      tags: z.array(z.string()).optional(),
-      categories: z
-        .array(
-          z.enum([
-            "Pilot News",
-            "International Aviation",
-            "Aviation Safety",
-            "Community",
-            "Aviation Training",
-            "Pilot Training and Certification",
-            "Career Change",
-            "Aircraft Guides",
-            "Pilot Guides",
-            "Commercial Pilot",
-            "Flight Training",
-            "Pilot Career Guides",
-            "Career Change",
-            "Uncategorized",
-            "Pilot Mindset",
-            "Pilot's Way of Life",
-            "Design",
-            "Flight School Comparison",
-            "Private Pilot Flight School",
-            "Aviation Technology",
-          ]),
-        )
-        .optional(),
-    }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    contents: z.array(
+      z.object({
+        title: z.string().optional(),
+        paragraph: z.string(),
+      }),
+    ).optional(),
+    author: z.string().optional(),
+    role: z.string().optional(),
+    authorImage: z.string().optional(),
+    authorImageAlt: z.string().optional(),
+    pubDate: z.coerce.date(),
+    cardImage: z.string().optional(),
+    cardImageAlt: z.string().optional(),
+    readTime: z.number().optional(),
+    tags: z.array(z.string()).optional(),
+    categories: z.array(z.string()).optional(),
+  }),
+});
+
+const fleetCollection = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/fleet" }),
+  schema: z.object({
+    id: z.string().optional(),
+    upperHeader: z.string().optional(),
+    title: z.string(),
+    description: z.string(),
+    image: z.object({
+      src: z.string(),
+      alt: z.string(),
+    }).optional(),
+    descriptions: z.array(z.string()).default([]),
+    bullets: z.array(
+      z.object({
+        title: z.string(),
+        description: z.string(),
+        icon: z.string().optional(),
+      })
+    ).default([]),
+    features: z.array(z.string()).default([]),
+  }),
 });
 
 const pilotTraining = defineCollection({
@@ -179,17 +173,19 @@ const pilotTraining = defineCollection({
 });
 
 const faqsCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/faqs" }),
   schema: z.object({
     upperHeading: z.string().optional(),
     title: z.string(),
     paragraphs: z.array(z.string()).default([]),
     ctaUrl: z.string().optional(),
     ctaTitle: z.string().optional(),
-    faqs: z.array(z.object({
-      question: z.string(),
-      answer: z.string(),
-    })),
+    faqs: z.array(
+      z.object({
+        question: z.string(),
+        answer: z.string(),
+      })
+    ).optional(),
   }),
 });
 
@@ -197,4 +193,5 @@ export const collections = {
   blog: blogCollection,
   "pilot-training": pilotTraining,
   faqs: faqsCollection,
+  fleet: fleetCollection,
 };

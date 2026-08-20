@@ -6,7 +6,6 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import "aos/dist/aos.css";
 import CTAAirlineTrack from "../../../components/ctas/CTAAirlineTrack.astro";
 import FleetGallery from "../../../components/fleet/FleetGallery.astro";
-import { fleet } from "../../about/our-fleet.astro";
 import SimulatorOfferCTA from "../../../components/simulators/SimulatorOfferCTA.astro";
 import SimulatorImageSection from "../../../components/offers/SimulatorImageSection.astro";
 import ContactFormStrip from "../../../components/forms/ContactFormStrip.astro";
@@ -127,5 +126,4 @@ const data = {
   <CTAAirlineTrack />
   <ContactFormStrip />
   <!-- <Enroll /> -->
-  <FleetGallery fleet={fleet} selfLink={false} />
 </BaseLayout>

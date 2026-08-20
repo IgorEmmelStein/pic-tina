@@ -1,0 +1,74 @@
+---
+import CTARight from "../../../components/ctas/CTARight.astro";
+import Enroll from "../../../components/forms/Enroll.astro";
+import HeaderMain from "../../../components/headers/HeaderMainAlternative.astro";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import "aos/dist/aos.css";
+import FleetSection from "../../../components/fleet/FleetSection.astro";
+
+export async function getStaticPaths() {
+  const fleet = await getCollection("fleet");
+  return fleet.map((item) => {
+    const slug = item.id.replace(/\.[^/.]+$/, "");
+    return {
+      params: { slug },
+      props: { aircraft: { ...item.data, id: slug } },
+    };
+  });
+}
+
+const { aircraft } = Astro.props;
+
+const data = {
+  siteTitle: `${aircraft.title} | Pilot Instructional Center | New Century AirCenter KIXD`,
+  siteDescription: aircraft.description,
+  siteKeywords: `aircraft fleet PIC, ${aircraft.title}, training aircraft, flight school planes, Kansas City aviation`,
+  header: {
+    upperHeader: aircraft.upperHeader || "Our Fleet",
+    title: aircraft.title,
+    description: aircraft.description,
+    buttons: [
+      { text: "Schedule a Tour", href: "/contact/", style: "btn-secondary" },
+      { text: "Training Programs", href: "/flight-training/", style: "btn-transparent" },
+    ],
+    image: aircraft.image ? aircraft.image : {
+      src: "/src/assets/rrm-visit/pilot-instructional-center_pilot-checking-wing-plane_flight-school_pilot-training.png",
+      alt: aircraft.title,
+    },
+  },
+  cta: {
+    image: aircraft.image ? aircraft.image : {
+      src: "/src/assets/rrm-visit/pilot-instructional-center_pilot-checking-wing-plane_flight-school_pilot-training.png",
+      alt: "Pilot looking out aircraft window",
+    },
+    title: "Committed to a High-Quality Training Fleet",
+    description: "Every aircraft associated with PIC, from modern trainers to legacy models, represents our dedication to aviation excellence. We maintain aircraft to the highest safety standards and continue expanding our fleet to support student growth.",
+    descriptions: [
+      "All PIC aircraft are maintained under strict FAA compliance and overseen by experienced aviation professionals.",
+      "Our heritage aircraft reflect the deep aviation roots that shape the PIC training philosophy.",
+      "A strong, reliable fleet ensures safe, efficient, and professional training for every student pilot.",
+    ],
+    button: {
+      text: "Explore Training Programs",
+      href: "/flight-training/",
+    },
+  },
+};
+---
+
+<BaseLayout
+  siteTitle={data.siteTitle}
+  siteDescription={data.siteDescription}
+  siteKeywords={data.siteKeywords}
+>
+  <HeaderMain
+    content={data.header}
+    mainSize={false}
+    showButton={false}
+    images={[data.header.image]}
+  />
+  <FleetSection aircraft={aircraft} />
+  <CTARight content={data.cta} />
+  <Enroll />
+</BaseLayout>

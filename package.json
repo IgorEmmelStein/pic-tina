@@ -1,14 +1,12 @@
 {
-  "name": "",
+  "name": "pic-tina",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "tinacms dev -c \"astro dev\"",
+    "dev": "astro dev",
+    "tina:dev": "tinacms dev -c \"astro dev\"",
     "build": "tinacms build && astro build",
-    "preview": "astro preview",
-    "bpreview": "astro build && astro preview",
-    "binspect": "astro build && node scripts/inspect-seo-2.js",
-    "astro": "astro"
+    "preview": "astro preview"
   },
   "dependencies": {
     "@astrojs/node": "^9.5.5",
@@ -18,7 +16,7 @@
     "@astrojs/sitemap": "^3.6.0",
     "@fontsource-variable/crimson-pro": "^5.2.8",
     "@fontsource-variable/playfair-display": "^5.2.8",
-    "@tailwindcss/vite": "^4.1.16",
+    "@tailwindcss/vite": "^4.3.3",
     "@tinacms/astro": "^0.6.1",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
@@ -28,7 +26,7 @@
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "swiper": "^12.0.3",
-    "tailwindcss": "^4.1.16",
+    "tailwindcss": "^4.3.3",
     "tinacms": "^3.11.0"
   },
   "devDependencies": {

@@ -13,7 +13,7 @@ import ContentMiddle from "../../components/content/ContentMiddle.astro";
 import CardProgram from "../../components/cards/CardProgram.astro";
 import CTAAirlineTrack from "../../components/ctas/CTAAirlineTrack.astro";
 import FleetGallery from "../../components/fleet/FleetGallery.astro";
-import { fleet } from "../about/our-fleet.astro";
+
 
 const data = {
   siteTitle:
@@ -319,5 +319,5 @@ const data = {
   <!-- <CTALeft content={data.cta} /> -->
   <!-- <CTARight /> -->
   <Enroll />
-  <FleetGallery fleet={fleet} selfLink={false} />
+  <FleetGallery />
 </BaseLayout>

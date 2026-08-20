@@ -16,7 +16,7 @@ export default defineConfig({
   },
   media: {
     tina: {
-      publicFolder: "",
+      publicFolder: "public",
       mediaRoot: "src/assets",
     },
   },
@@ -131,95 +131,6 @@ export default defineConfig({
             fields: [
               { type: "string", name: "title", label: "Section Title" },
               { type: "string", name: "paragraph", label: "Paragraph", ui: { component: "textarea" } },
-            ],
-          },
-          {
-            type: "rich-text",
-            name: "body",
-            label: "Body Content",
-            isBody: true,
-          },
-        ],
-      },
-      {
-        name: "pilotTraining",
-        label: "Pilot Training",
-        path: "src/content/pilot-training",
-        format: "md",
-        fields: [
-          {
-            type: "string",
-            name: "siteTitle",
-            label: "Site Title",
-            isTitle: true,
-            required: true,
-          },
-          {
-            type: "string",
-            name: "siteDescription",
-            label: "Site Description",
-            ui: { component: "textarea" },
-          },
-          {
-            type: "string",
-            name: "siteKeywords",
-            label: "Site Keywords",
-          },
-          {
-            type: "string",
-            name: "city",
-            label: "City",
-          },
-          {
-            type: "string",
-            name: "stateShort",
-            label: "State Short",
-          },
-          {
-            type: "string",
-            name: "stateLong",
-            label: "State Long",
-          },
-          {
-            type: "string",
-            name: "keyPlace1",
-            label: "Key Place 1",
-          },
-          {
-            type: "string",
-            name: "keyPlace2",
-            label: "Key Place 2",
-          },
-          {
-            type: "string",
-            name: "distance",
-            label: "Distance",
-          },
-          {
-            type: "string",
-            name: "headlines",
-            label: "Headlines",
-            list: true,
-          },
-          {
-            type: "object",
-            name: "header",
-            label: "Header Section",
-            fields: [
-              { type: "string", name: "upperHeader", label: "Upper Header" },
-              { type: "string", name: "title", label: "Title" },
-              { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
-              {
-                type: "object",
-                name: "buttons",
-                label: "Buttons",
-                list: true,
-                fields: [
-                  { type: "string", name: "text", label: "Text" },
-                  { type: "string", name: "href", label: "Link" },
-                  { type: "string", name: "style", label: "Style" },
-                ],
-              },
             ],
           },
           {

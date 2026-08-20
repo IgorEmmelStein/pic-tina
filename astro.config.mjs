@@ -56,5 +56,14 @@ export default defineConfig({
 
   vite: {
     plugins: [tailwindcss()],
+    optimizeDeps: {
+      include: ["graphiql"],
+    },
+    server: {
+      hmr: true,
+    },
+    esbuild: {
+      jsx: "automatic",
+    },
   },
 });

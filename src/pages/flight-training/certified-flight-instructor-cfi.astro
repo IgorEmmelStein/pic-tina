@@ -18,7 +18,6 @@ import CardProgram from "../../components/cards/CardProgram.astro";
 import ImageComp from "../../components/utils/ImageComp.astro";
 import ProgramsComponentDesign from "../../components/sections/ProgramsComponentDesign.astro";
 import FleetGallery from "../../components/fleet/FleetGallery.astro";
-import { fleet } from "../about/our-fleet.astro";
 import OffersStripCTA from "../../components/offers/OffersStripCTA.astro";
 import OffersSection from "../../components/offers/OffersSection.astro";
 import SimulatorImageSection from "../../components/offers/SimulatorImageSection.astro";
@@ -347,14 +346,7 @@ const data = {
   <!-- <ProgramsComponent content={data.program} /> -->
   <ProgramsComponentDesign program={data.program} />
   <OffersStripCTA />
-  <FleetGallery
-    fleet={fleet}
-    selfLink={false}
-    button={{
-      title: "Start Your Journey",
-      path: `#${website_links.enroll.id}`,
-    }}
-  />
+  <FleetGallery />
   <SimulatorImageSection />
   <Enroll />
   <CTALeft content={data.ctas.ctaDiscoveryFlight} />
