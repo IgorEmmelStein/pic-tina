@@ -397,10 +397,26 @@ const faqsCollection = defineCollection({
   }),
 });
 
+const teamCollection = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/team" }),
+  schema: z.object({
+    name: z.string(),
+    role: z.string(),
+    category: z.enum(["leadership", "cfi"]),
+    credentials: z.string(),
+    bio: z.array(z.string()).min(1, "At least one bio paragraph is required."),
+    image: z.object({
+      src: z.string(),
+      alt: z.string(),
+    }),
+  }),
+});
+
 export const collections = {
   blog: blogCollection,
   "pilot-training": pilotTraining,
   faqs: faqsCollection,
   fleet: fleetCollection,
   simulator: simulatorCollection,
+  team: teamCollection
 };

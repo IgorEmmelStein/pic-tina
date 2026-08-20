@@ -1,0 +1,50 @@
+---
+import CTALeft from "../../../components/ctas/CTALeft.astro";
+import CTARight from "../../../components/ctas/CTARight.astro";
+import Enroll from "../../../components/forms/Enroll.astro";
+import HeaderMain from "../../../components/headers/HeaderMainAlternative.astro";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+
+import "aos/dist/aos.css";
+import LeadershipMembers from "../../../components/team/LeadershipMembers.astro";
+import TeamMembers from "../../../components/team/TeamMembers.astro";
+
+const data = {
+  siteTitle: "Our Team | Pilot Instructional Center | Near Kansas City",
+  siteDescription:
+    "Meet the senior flight instructors and leadership at PIC. Learn about the certifications and dedication used to help students become safe, skilled pilots.",
+  siteKeywords:
+    "flight instructors, PIC team, aviation professionals, CFI Kansas City, CFII instructors",
+
+  header: {
+    upperHeader: "Meet the Team",
+    title: `The Instructors Behind Kansas City’s Premier Flight School`,
+    description:
+      "PIC is built on professionalism, safety, and a passion for aviation. Meet the instructors who guide our students toward successful, confident flying.",
+    buttons: [
+      { text: "Start Training", href: "#enroll", style: "btn-secondary" },
+      { text: "Learn More", href: "/contact/", style: "btn-transparent" },
+    ],
+    image: {
+      src: "/src/assets/rrm-visit/pilot-instructional-center_new-century-KS_cfis-preparing-plane-cessna-airport-near-Kansas-city-MO-cropped.png",
+      alt: "CFI's from PIC preparing Cessna aircraft Kansas city",
+    },
+  },
+};
+---
+
+<BaseLayout
+  siteTitle={data.siteTitle}
+  siteDescription={data.siteDescription}
+  siteKeywords={data.siteKeywords}
+>
+  <HeaderMain
+    content={data.header}
+    mainSize={false}
+    showButton={false}
+    images={[data.header.image]}
+  />
+  <TeamMembers />
+  <CTARight />
+  <Enroll />
+</BaseLayout>

@@ -76,11 +76,13 @@ export default defineConfig({
                 type: "image",
                 name: "src",
                 label: "Image File",
+                required: true,
               },
               {
                 type: "string",
                 name: "alt",
                 label: "Alt Text",
+                required: true,
               },
             ],
           },
@@ -89,6 +91,7 @@ export default defineConfig({
             name: "descriptions",
             label: "Detailed Paragraphs",
             list: true,
+            required: true,
             ui: {
               component: "textarea",
             },
@@ -98,6 +101,7 @@ export default defineConfig({
             name: "bullets",
             label: "Feature / Specification Cards",
             list: true,
+            required: true,
             ui: {
               itemProps: (item) => ({
                 label: item?.title ? item.title : "Specification Item",
@@ -126,6 +130,86 @@ export default defineConfig({
             name: "features",
             label: "Features Checklist",
             list: true,
+            required: true,
+          },
+        ],
+      },
+      {
+        name: "team",
+        label: "Team Members",
+        path: "src/content/team",
+        format: "md",
+        ui: {
+          allowedActions: {
+            create: true,
+            delete: true,
+          },
+          itemProps: (item) => ({ label: item?.name || "Team Member" }),
+        },
+        fields: [
+          {
+            type: "string",
+            name: "name",
+            label: "Full Name",
+            isTitle: true,
+            required: true,
+          },
+          {
+            type: "string",
+            name: "role",
+            label: "Role / Position (e.g. Founder & CEO / Advanced Flight Instructor)",
+            required: true,
+          },
+          {
+            type: "string",
+            name: "category",
+            label: "Team Category",
+            required: true,
+            options: [
+              {
+                label: "Leadership",
+                value: "leadership",
+              },
+              {
+                label: "CFI",
+                value: "cfi",
+              },
+            ],
+          },
+          {
+            type: "string",
+            name: "credentials",
+            label: "Credentials (e.g. CFI, CFII, MEI)",
+            required: true,
+          },
+          {
+            type: "string",
+            name: "bio",
+            label: "Biography Paragraphs",
+            list: true,
+            required: true,
+            ui: {
+              component: "textarea",
+            },
+          }, {
+            type: "object",
+            name: "image",
+            label: "Instructor Photo",
+            required: true,
+            fields: [
+              {
+                type: "image",
+                name: "src",
+                label: "Image File",
+                required: true,
+              },
+              {
+                type: "string",
+                name: "alt",
+                label: "Alt Text",
+                required: true,
+              },
+            ],
           },
         ],
       },
@@ -133,6 +217,7 @@ export default defineConfig({
       // =======================================================================
       // 3. SIMULATOR COLLECTION
       // =======================================================================
+      
       {
         name: "simulator",
         label: "Simulator",
@@ -143,7 +228,7 @@ export default defineConfig({
         format: "md",
         ui: {
           allowedActions: {
-            create: false,
+            create: true,
             delete: true,
           },
         },
@@ -151,8 +236,6 @@ export default defineConfig({
           { type: "string", name: "siteTitle", label: "SEO Title", required: true },
           { type: "string", name: "siteDescription", label: "SEO Description", ui: { component: "textarea" }, required: true },
           { type: "string", name: "siteKeywords", label: "SEO Keywords", required: true },
-
-          // Header Hero
           {
             type: "object",
             name: "header",
@@ -165,9 +248,10 @@ export default defineConfig({
                 type: "object",
                 name: "image",
                 label: "Header Image",
+                required: true,
                 fields: [
-                  { type: "image", name: "src", label: "Image Source" },
-                  { type: "string", name: "alt", label: "Alt Text" },
+                  { type: "image", name: "src", label: "Image Source", required: true },
+                  { type: "string", name: "alt", label: "Alt Text", required: true },
                 ],
               },
               {
@@ -175,16 +259,17 @@ export default defineConfig({
                 name: "buttons",
                 label: "Hero Buttons",
                 list: true,
+                required: true,
                 fields: [
                   { type: "string", name: "text", label: "Button Text", required: true },
                   { type: "string", name: "href", label: "Button Link", required: true },
-                  { type: "string", name: "style", label: "Button Style" },
+                  { type: "string", name: "style", label: "Button Style", required: true },
                 ],
               },
             ],
           },
 
-          // Overview
+          // Overview Section
           {
             type: "object",
             name: "overview",
@@ -197,17 +282,19 @@ export default defineConfig({
                 type: "object",
                 name: "image",
                 label: "Overview Image",
+                required: true,
                 fields: [
-                  { type: "image", name: "src", label: "Image Source" },
-                  { type: "string", name: "alt", label: "Alt Text" },
+                  { type: "image", name: "src", label: "Image Source", required: true },
+                  { type: "string", name: "alt", label: "Alt Text", required: true },
                 ],
               },
-              { type: "string", name: "descriptions", label: "Detailed Paragraphs", list: true, ui: { component: "textarea" } },
+              { type: "string", name: "descriptions", label: "Detailed Paragraphs", list: true, required: true, ui: { component: "textarea" } },
               {
                 type: "object",
                 name: "bullets",
                 label: "Feature Bullets",
                 list: true,
+                required: true,
                 ui: { itemProps: (item) => ({ label: item?.title || "Feature Bullet" }) },
                 fields: [
                   { type: "string", name: "title", label: "Title", required: true },
@@ -219,16 +306,17 @@ export default defineConfig({
                 type: "object",
                 name: "button",
                 label: "Call to Action Button",
+                required: true,
                 fields: [
                   { type: "string", name: "text", label: "Button Text", required: true },
                   { type: "string", name: "href", label: "Button Link", required: true },
-                  { type: "string", name: "style", label: "Button Style" },
+                  { type: "string", name: "style", label: "Button Style", required: true },
                 ],
               },
             ],
           },
 
-          // Offer CTA
+          // Offer CTA Section
           {
             type: "object",
             name: "offerCta",
@@ -237,12 +325,13 @@ export default defineConfig({
               { type: "string", name: "upperHeader", label: "System Status / Eyebrow", required: true },
               { type: "string", name: "title", label: "Section Title", required: true },
               { type: "string", name: "description", label: "Quote Description", ui: { component: "textarea" }, required: true },
-              { type: "string", name: "descriptions", label: "Paragraphs", list: true, ui: { component: "textarea" } },
+              { type: "string", name: "descriptions", label: "Paragraphs", list: true, required: true, ui: { component: "textarea" } },
               {
                 type: "object",
                 name: "stats",
                 label: "Stats Cards",
                 list: true,
+                required: true,
                 ui: { itemProps: (item) => ({ label: item?.label || "Stat Item" }) },
                 fields: [
                   { type: "string", name: "value", label: "Value", required: true },
@@ -255,19 +344,21 @@ export default defineConfig({
                 name: "images",
                 label: "Slider Images",
                 list: true,
+                required: true,
                 ui: { itemProps: (item) => ({ label: item?.alt || "Slider Image" }) },
                 fields: [
-                  { type: "image", name: "src", label: "Image Source" },
-                  { type: "string", name: "alt", label: "Alt Text" },
+                  { type: "image", name: "src", label: "Image Source", required: true },
+                  { type: "string", name: "alt", label: "Alt Text", required: true },
                 ],
               },
-              { type: "string", name: "faaCredit", label: "FAA Loggable Credits", list: true },
-              { type: "string", name: "configurations", label: "Configurations", list: true },
+              { type: "string", name: "faaCredit", label: "FAA Loggable Credits", list: true, required: true },
+              { type: "string", name: "configurations", label: "Configurations", list: true, required: true },
               {
                 type: "object",
                 name: "bullets",
                 label: "Numbered Bullet Cards",
                 list: true,
+                required: true,
                 ui: { itemProps: (item) => ({ label: item?.title || "Bullet Item" }) },
                 fields: [
                   { type: "string", name: "title", label: "Card Title", required: true },
@@ -277,7 +368,7 @@ export default defineConfig({
             ],
           },
 
-          // Image Section
+          // Image / Advantage Section
           {
             type: "object",
             name: "imageSection",
@@ -287,6 +378,7 @@ export default defineConfig({
                 type: "object",
                 name: "content",
                 label: "Header Content & Cards",
+                required: true,
                 fields: [
                   { type: "string", name: "upperHeader", label: "Upper Header", required: true },
                   { type: "string", name: "title", label: "Title", required: true },
@@ -296,6 +388,7 @@ export default defineConfig({
                     name: "cards",
                     label: "Metric Cards",
                     list: true,
+                    required: true,
                     ui: { itemProps: (item) => ({ label: item?.title || "Metric Card" }) },
                     fields: [
                       { type: "string", name: "title", label: "Card Title", required: true },
@@ -309,14 +402,16 @@ export default defineConfig({
                 type: "object",
                 name: "offerSection",
                 label: "Promo Card & Image",
+                required: true,
                 fields: [
                   {
                     type: "object",
                     name: "image",
                     label: "Main Image",
+                    required: true,
                     fields: [
-                      { type: "image", name: "src", label: "Image Source" },
-                      { type: "string", name: "alt", label: "Alt Text" },
+                      { type: "image", name: "src", label: "Image Source", required: true },
+                      { type: "string", name: "alt", label: "Alt Text", required: true },
                     ],
                   },
                   { type: "string", name: "path", label: "Target URL", required: true },
@@ -327,6 +422,7 @@ export default defineConfig({
                     name: "offers",
                     label: "Offers List",
                     list: true,
+                    required: true,
                     ui: { itemProps: (item) => ({ label: item?.title || "Offer Item" }) },
                     fields: [
                       { type: "string", name: "title", label: "Title", required: true },
@@ -337,6 +433,7 @@ export default defineConfig({
                     type: "object",
                     name: "advantages",
                     label: "Advantages Strip",
+                    required: true,
                     fields: [
                       { type: "string", name: "costReduction", label: "Cost Reduction Text", required: true },
                       { type: "string", name: "label", label: "Button Label", required: true },
@@ -359,15 +456,17 @@ export default defineConfig({
                 type: "object",
                 name: "image",
                 label: "Image",
+                required: true,
                 fields: [
-                  { type: "image", name: "src", label: "Image Source" },
-                  { type: "string", name: "alt", label: "Alt Text" },
+                  { type: "image", name: "src", label: "Image Source", required: true },
+                  { type: "string", name: "alt", label: "Alt Text", required: true },
                 ],
               },
               {
                 type: "object",
                 name: "button",
                 label: "Primary Button",
+                required: true,
                 fields: [
                   { type: "string", name: "text", label: "Button Text", required: true },
                   { type: "string", name: "href", label: "Button URL", required: true },
