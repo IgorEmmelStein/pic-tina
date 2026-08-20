@@ -1,6 +1,35 @@
 ---
 import ImageComp from "../utils/ImageComp.astro";
 
+interface Bullet {
+  icon?: string;
+  title?: string;
+  description?: string;
+}
+
+interface ButtonItem {
+  text?: string;
+  href?: string;
+  style?: string;
+}
+
+interface Props {
+  content?: {
+    image?: {
+      src?: string;
+      alt?: string;
+    };
+    upperHeader?: string;
+    upperHeading?: string;
+    title?: string;
+    description?: string;
+    descriptions?: string[];
+    bullets?: Bullet[];
+    button?: ButtonItem;
+    buttons?: ButtonItem[];
+  };
+}
+
 const example = {
   image: {
     src: "/src/assets/stock-man-airplanes-museum.jpg",
@@ -29,7 +58,7 @@ const example = {
         "Enjoy the unmatched perspective of seeing the world from above. Flying offers a lifestyle of independence, excitement, and exploration few other careers can match.",
     },
     {
-      icon: "",
+      icon: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z",
       title: "Challenge & Achievement",
       description:
         "Learning to fly is one of life’s most rewarding accomplishments, an achievement that builds confidence, discipline, and problem-solving skills that last a lifetime.",
@@ -41,11 +70,22 @@ const example = {
   },
 };
 
-const { content = example } = Astro.props;
+const { content: rawContent } = Astro.props;
+
+// Safe merge: Guarantees bullets and buttons never throw undefined errors
+const content = {
+  ...example,
+  ...rawContent,
+  upperHeader: rawContent?.upperHeader || rawContent?.upperHeading || example.upperHeader,
+  bullets: rawContent?.bullets?.length ? rawContent.bullets : example.bullets,
+  button: rawContent?.button || rawContent?.buttons?.[0] || example.button,
+};
+
+const bullets = content.bullets || [];
+const button = content.button;
 ---
 
-<section class="relative overflow-hidden bg-logo py-16 sm:py-24">
-  <!-- Backgroun Pattern -->
+<section class="relative overflow-hidden bg-logo py-16 sm:py-24 font-sans">
   <div
     class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/3 w-96 h-96 rounded-full border-[1px] border-accent-500 opacity-30 pointer-events-none"
   >
@@ -53,37 +93,40 @@ const { content = example } = Astro.props;
 
   <div class="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
     <div class="flex flex-col items-center text-center">
-      <span
-        class="inline-block px-4 py-1.5 rounded-full bg-primary-800 text-white text-xs font-bold tracking-widest uppercase mb-6"
-        data-aos="fade-down"
-        data-aos-duration="1000"
-      >
-        {content.upperHeader}
-      </span>
+      {content.upperHeader && (
+        <span
+          class="inline-block px-4 py-1.5 rounded-full bg-primary-800 text-white text-xs font-bold tracking-widest uppercase mb-6"
+          data-aos="fade-down"
+          data-aos-duration="1000"
+          set:html={content.upperHeader}
+        />
+      )}
 
-      <h2
-        class="text-4xl font-bold tracking-tight text-primary-800 sm:text-5xl max-w-3xl"
-        data-aos="fade-up"
-        data-aos-duration="1000"
-        data-aos-delay="200"
-      >
-        {content.title}
-      </h2>
+      {content.title && (
+        <h2
+          class="text-4xl font-bold tracking-tight text-primary-800 sm:text-5xl max-w-3xl"
+          data-aos="fade-up"
+          data-aos-duration="1000"
+          data-aos-delay="200"
+          set:html={content.title}
+        />
+      )}
 
-      <p
-        class="mt-6 text-lg leading-8 text-primary-600 max-w-2xl font-light"
-        data-aos="fade-up"
-        data-aos-duration="1000"
-        data-aos-delay="400"
-      >
-        {content.description}
-      </p>
+      {content.description && (
+        <p
+          class="mt-6 text-lg leading-8 text-primary-600 max-w-2xl font-light"
+          data-aos="fade-up"
+          data-aos-duration="1000"
+          data-aos-delay="400"
+          set:html={content.description}
+        />
+      )}
 
-      <ul
-        class="mt-16 grid grid-cols-1 gap-y-12 sm:grid-cols-3 sm:gap-x-8 lg:gap-x-12 w-full max-w-5xl"
-      >
-        {
-          content.bullets.map((bullet, index) => (
+      {bullets.length > 0 && (
+        <ul
+          class="mt-16 grid grid-cols-1 gap-y-12 sm:grid-cols-3 sm:gap-x-8 lg:gap-x-12 w-full max-w-5xl"
+        >
+          {bullets.map((bullet, index) => (
             <li
               class="group flex flex-col items-center"
               data-aos="fade-up"
@@ -111,47 +154,53 @@ const { content = example } = Astro.props;
                 </div>
               </div>
 
-              <h3 class="text-xl font-bold text-primary-800 mb-3">
-                {bullet.title}
-              </h3>
-              <p class="text-sm text-primary-600 leading-relaxed text-pretty text-center px-4">
-                {bullet.description}
-              </p>
+              {bullet.title && (
+                <h3 class="text-xl font-bold text-primary-800 mb-3" set:html={bullet.title} />
+              )}
+              {bullet.description && (
+                <p
+                  class="text-sm text-primary-600 leading-relaxed text-pretty text-center px-4"
+                  set:html={bullet.description}
+                />
+              )}
             </li>
-          ))
-        }
-      </ul>
+          ))}
+        </ul>
+      )}
 
-      <div
-        class="mt-16"
-        data-aos="zoom-in"
-        data-aos-duration="1000"
-        data-aos-delay="1200"
-      >
-        <a
-          href={content.button.href}
-          class="inline-flex btn-accent items-center justify-center rounded-full bg-accent-500 px-10 py-4 text-sm font-bold text-white shadow-xl shadow-accent-500/20 hover:bg-accent-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-500 transition-all transform hover:-translate-y-1 active:scale-95"
+      {button?.href && button?.text && (
+        <div
+          class="mt-16"
+          data-aos="zoom-in"
+          data-aos-duration="1000"
+          data-aos-delay="1200"
         >
-          {content.button.text}
-          <svg
-            class="ml-2 w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            ><path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg
+          <a
+            href={button.href}
+            class="inline-flex btn-accent items-center justify-center rounded-full bg-accent-500 px-10 py-4 text-sm font-bold text-white shadow-xl shadow-accent-500/20 hover:bg-accent-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-500 transition-all transform hover:-translate-y-1 active:scale-95"
           >
-        </a>
-      </div>
+            <span>{button.text}</span>
+            <svg
+              class="ml-2 w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M14 5l7 7m0 0l-7 7m7-7H3"
+              />
+            </svg>
+          </a>
+        </div>
+      )}
     </div>
   </div>
 </section>
 
 <style>
-  /* This maps your utility classes to the JS-triggered state */
   .group.js-hover .group-hover\:opacity-100 {
     opacity: 1 !important;
   }
@@ -168,32 +217,24 @@ const { content = example } = Astro.props;
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    // Define the observer options
     const options = {
-      root: null, // use the viewport
-      threshold: 0.5, // trigger when 50% of the card is visible
+      root: null,
+      threshold: 0.5,
     };
 
-    const observer = new IntersectionObserver((entries, observer) => {
+    const observer = new IntersectionObserver((entries, observerInstance) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const card = entry.target;
-
-          // Add the trigger class
           card.classList.add("js-hover");
-
-          // Remove after 2 seconds
           setTimeout(() => {
             card.classList.remove("js-hover");
           }, 2000);
-
-          // Stop observing once the animation has triggered so it doesn't repeat
-          observer.unobserve(card);
+          observerInstance.unobserve(card);
         }
       });
     }, options);
 
-    // Observe all cards
     document.querySelectorAll(".group").forEach((card) => {
       observer.observe(card);
     });

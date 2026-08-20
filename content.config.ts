@@ -88,7 +88,6 @@ const simulatorCollection = defineCollection({
       )
       .default([]),
     features: z.array(z.string()).default([]),
-    configurations: z.array(z.string()).default([]),
 
     // Header Hero
     header: z
