@@ -5,14 +5,14 @@ import Enroll from "../../../components/forms/Enroll.astro";
 import HeaderMain from "../../../components/headers/HeaderMainAlternative.astro";
 import { SITE_DESCRIPTION, SITE_TITLE, website_links } from "../../../data/consts";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
-
+import { getEntry } from "astro:content";
 import "aos/dist/aos.css";
 import MapLocation from "../../../components/external/MapLocation.astro";
 import FleetSection from "../../../components/fleet/FleetSection.astro";
 import FleetGallery from "../../../components/fleet/FleetGallery.astro";
 import SimulatorImageSection from "../../../components/offers/SimulatorImageSection.astro";
 
-const data = {
+const fleetData = {
   siteTitle:
     "Our Fleet | Pilot Instructional Center | New Century AirCenter KIXD",
   siteDescription:
@@ -58,22 +58,30 @@ const data = {
     },
   },
 };
+
+const entry = await getEntry("simulator", "simulator-redbird-fmx-full-motion-aatd");
+
+if (!entry) {
+  throw new Error("Simulator entry not found in src/content/simulator/");
+}
+
+const { data } = entry;
 ---
 
 <BaseLayout
-  siteTitle={data.siteTitle}
-  siteDescription={data.siteDescription}
-  siteKeywords={data.siteKeywords}
+  siteTitle={fleetData.siteTitle}
+  siteDescription={fleetData.siteDescription}
+  siteKeywords={fleetData.siteKeywords}
 >
   <HeaderMain
-    content={data.header}
+    content={fleetData.header}
     mainSize={false}
     showButton={false}
-    images={[data.header.image]}
+    images={[fleetData.header.image]}
   />
   <FleetGallery />
-  <SimulatorImageSection />
+  <SimulatorImageSection content={data.imageSection} />
   <MapLocation />
-  <CTARight content={data.cta} />
+  <CTARight content={fleetData.cta} />
   <Enroll />
 </BaseLayout>

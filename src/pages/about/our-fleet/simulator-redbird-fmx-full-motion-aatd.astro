@@ -1,129 +1,31 @@
 ---
-import Enroll from "../../../components/forms/Enroll.astro";
+import { getEntry } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
 import HeaderMain from "../../../components/headers/HeaderMainAlternative.astro";
 import TextIcons from "../../../components/sections/TextIcons.astro";
-import BaseLayout from "../../../layouts/BaseLayout.astro";
-import "aos/dist/aos.css";
-import CTAAirlineTrack from "../../../components/ctas/CTAAirlineTrack.astro";
-import FleetGallery from "../../../components/fleet/FleetGallery.astro";
 import SimulatorOfferCTA from "../../../components/simulators/SimulatorOfferCTA.astro";
 import SimulatorImageSection from "../../../components/offers/SimulatorImageSection.astro";
+import CTAAirlineTrack from "../../../components/ctas/CTAAirlineTrack.astro";
 import ContactFormStrip from "../../../components/forms/ContactFormStrip.astro";
 
-const data = {
-  siteTitle: "Flight Simulator Training | Redbird FMX AATD | Kansas City",
-  siteDescription:
-    "Master your flight skills with our Redbird FMX Full Motion Simulator. Log FAA-approved hours for PPL, IR, and Commercial ratings at Pilot Instructional Center.",
-  siteKeywords:
-    "flight simulator Kansas City, Redbird FMX, AATD training, instrument rating simulator, pilot training",
+const entry = await getEntry("simulator", "simulator-redbird-fmx-full-motion-aatd");
 
-  header: {
-    image: {
-      src: "/src/assets/drive/student-simulator-Flight-Pilot-instructional-center_flight-school_PIC-Kansas-city-Missouri.jpeg",
-      alt: "Student pilot training in the Redbird FMX simulator at Pilot Instructional Center",
-    },
-    upperHeader: "Advanced Aviation Training Device",
-    title: "Master the Skies from the Ground",
-    description:
-      "The Redbird FMX is a superior training tool designed to enhance your proficiency and safety. Train through any weather in a fully immersive, full-motion environment.",
-    buttons: [
-      { text: "Book Simulator Time", href: "#enroll", style: "btn-secondary" },
-      {
-        text: "View Fleet",
-        href: "/about/our-fleet/",
-        style: "btn-transparent",
-      },
-    ],
-  },
+if (!entry) {
+  throw new Error("Simulator entry not found in src/content/simulator/");
+}
 
-  overview: {
-    image: {
-      src: "/src/assets/fleet/red-bird-fx-simulator_motion-movement_pilot-instructional-center.png",
-      alt: "Redbird FMX flight simulator movement and motion platform",
-    },
-    upperHeader: "Featured Simulator",
-    title: "Redbird FMX (Full Motion AATD)",
-    description:
-      "A fully certified Advanced Aviation Training Device (AATD), the Redbird FMX delivers immersive, full-motion simulation that allows students to train safely, efficiently, and realistically in a wide range of scenarios.",
-    descriptions: [
-      "From the moment you step inside, the FMX recreates the feel of real flight with full-motion feedback, responsive controls, and wraparound visuals that place you directly into the flying environment.",
-      "Whether you're practicing instrument procedures, handling emergencies, or building hours toward your ratings, the FMX provides a controlled setting to develop skills faster, with zero weather delays and maximum repetition.",
-    ],
-    bullets: [
-      {
-        icon: "M3 18h18v2H3zm18.509-9.473a1.61 1.61 0 0 0-2.036-1.019L15 9L7 6L5 7l6 4l-4 2l-4-2l-1 1l4 4l14.547-5.455a1.61 1.61 0 0 0 .962-2.018",
-        title: "Full Motion Realism",
-        description:
-          "Dynamic motion system simulates climbs, turns, descents, and turbulence for a true-to-life flying experience.",
-      },
-      {
-        icon: "M12 2a1 1 0 0 1 .932.638l7 18a1 1 0 0 1-1.326 1.281L13 19.517V13a1 1 0 1 0-2 0v6.517l-5.606 2.402a1 1 0 0 1-1.326-1.281l7-18A1 1 0 0 1 12 2",
-        title: "Immersive Visual System",
-        description:
-          "Over 200° wraparound high-definition visuals replicate real-world airports, terrain, and weather conditions.",
-      },
-      {
-        icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4",
-        title: "Efficient Hour Building",
-        description:
-          "FAA-approved AATD time can be logged toward Private, Instrument, and Commercial ratings.",
-      },
-    ],
-    button: {
-      text: "Lock In Block Rates",
-      href: "#enroll",
-    },
-  },
-
-  specs: {
-    upperHeader: "Training Specifications",
-    title: "Capabilities & FAA Credits",
-    description:
-      "Maximize your training budget by utilizing the Redbird FMX for your ratings. High-quality simulation reduces total training costs while increasing procedural proficiency.",
-    bullets: [
-      {
-        title: "Limited Time Offer",
-        description:
-          "Receive a FREE simulator checkout with any block time purchase.",
-      },
-      {
-        title: "Special Block Rate",
-        description: "Purchase 10+ hours and lock in a $60/hour block rate.",
-      },
-      {
-        title: "Year-Round Training",
-        description:
-          "Zero weather delays. Train on your schedule regardless of Kansas City weather.",
-      },
-    ],
-    faaCredits: [
-      { label: "Private Pilot", value: "Up to 2.5 hours" },
-      { label: "Instrument Rating", value: "Up to 20 hours" },
-      { label: "Commercial Pilot", value: "Up to 50 hours" },
-      { label: "Instrument Currency", value: "Maintain IFR Currency" },
-    ],
-    features: [
-      "Full motion platform with realistic flight feedback",
-      "200°+ wraparound visual system",
-      "Multiple aircraft: C172S, C206, Beechcraft Baron",
-      "G1000 and analog 6-pack options",
-    ],
-  },
-};
+const { data } = entry;
 ---
 
 <BaseLayout
-  siteTitle={data.siteTitle}
-  siteDescription={data.siteDescription}
-  siteKeywords={data.siteKeywords}
+  siteTitle={data.siteTitle || "Flight Simulator Training | Pilot Instructional Center"}
+  siteDescription={data.siteDescription || "Redbird FMX flight simulator training."}
+  siteKeywords={data.siteKeywords || "flight simulator, Kansas City"}
 >
   <HeaderMain content={data.header} />
-
   <TextIcons content={data.overview} />
-
-  <SimulatorOfferCTA />
-  <SimulatorImageSection />
-  <CTAAirlineTrack />
+  <SimulatorOfferCTA content={data.offerCta} />
+  <SimulatorImageSection content={data.imageSection} />
+  <CTAAirlineTrack content={data.airlineTrackCTA} />
   <ContactFormStrip />
-  <!-- <Enroll /> -->
 </BaseLayout>

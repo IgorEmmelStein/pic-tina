@@ -3,16 +3,52 @@ import { website_links } from "../../data/consts";
 import ImageComp from "../utils/ImageComp.astro";
 import { getCollection } from "astro:content";
 
+// 1. Fetch physical aircraft from the "fleet" collection
 const fleetEntries = await getCollection("fleet");
-const fleet = fleetEntries.map(entry => ({
-  ...entry.data,
-  id: entry.id.replace(/\.[^/.]+$/, "")
-}));
+const fleetList = fleetEntries.map((entry) => {
+  const data = entry.data;
+  return {
+    id: entry.id.replace(/\.[^/.]+$/, ""),
+    title: data.title || "Aircraft",
+    description: data.description || "",
+    image: data.image || { src: "", alt: "" },
+    bullets: data.bullets || [],
+    targetUrl: `/about/our-fleet/${entry.id.replace(/\.[^/.]+$/, "")}/`,
+    isSimulator: false,
+    badgeText: "Ready for Training",
+    pill1: data.bullets?.[0]?.title?.split(" ")[0] || "IFR",
+    pill2: data.bullets?.[1]?.description?.match(/\d+ HP/)?.[0] ?? "180 HP",
+  };
+});
+
+// 2. Fetch simulator entries from the "simulator" collection with safe fallbacks
+const simulatorEntries = await getCollection("simulator");
+const simulatorList = simulatorEntries.map((entry) => {
+  const data = entry.data;
+  return {
+    id: entry.id.replace(/\.[^/.]+$/, ""),
+    title: data.title || data.overview?.title || data.header?.title || "Redbird FMX Simulator",
+    description: data.description || data.overview?.description || data.header?.description || "",
+    image: data.image || data.overview?.image || data.header?.image || {
+      src: "/src/assets/fleet/red-bird-fmx_pilot-instructional-center.webp",
+      alt: "Redbird FMX Flight Simulator",
+    },
+    bullets: data.bullets || data.overview?.bullets || [],
+    targetUrl: "/about/our-fleet/simulator-redbird-fmx-full-motion-aatd/",
+    isSimulator: true,
+    badgeText: "AATD Simulator",
+    pill1: data.bullets?.[0]?.title || "Full Motion",
+    pill2: data.bullets?.[1]?.title || "FAA Loggable",
+  };
+});
+
+// 3. Combine both collections into a single fleet list
+const allFleet = [...fleetList, ...simulatorList];
 
 const {
   button = {
     title: "Book a Discovery Flight",
-    path: website_links.discoveryFlight.path,
+    path: website_links?.discoveryFlight?.path || "/discovery-flight/",
   },
 } = Astro.props;
 ---
@@ -20,28 +56,28 @@ const {
 <section class="bg-[#fcfaf8] py-12 lg:py-24 font-sans">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="text-center mb-12">
-      <h2 class="text-3xl font-bold tracking-tight text-primary-800 sm:text-4xl uppercase">
+      <h2
+        class="text-3xl font-bold tracking-tight text-primary-800 sm:text-4xl uppercase"
+      >
         Explore Our <span class="text-accent-500">Fleet</span>
       </h2>
       <p class="mt-4 text-primary-600/70">
-        Select an aircraft to view full specifications and training capabilities.
+        Select an aircraft or simulator to view full specifications and training capabilities.
       </p>
     </div>
 
     <div class="flex flex-wrap justify-center gap-6 lg:gap-4">
       {
-        fleet.map((aircraft) => {
-          const isSimulator = aircraft.id.includes("redbird-fmx-full-motion-aatd");
-          const targetUrl = isSimulator
-            ? "/about/our-fleet/simulator-redbird-fmx-full-motion-aatd/"
-            : `/about/our-fleet/${aircraft.id}/`;
-
+        allFleet.map((item: any) => {
           return (
             <a
-              href={targetUrl}
+              href={item.targetUrl}
               class="group relative w-full lg:max-w-2xs aspect-4/5 rounded-3xl overflow-hidden bg-primary-800 shadow-2xl shadow-neutral-950 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:inset-shadow-sm hover:inset-shadow-white hover:shadow-accent-800"
             >
-              <svg class="absolute inset-0 w-full h-full z-50 pointer-events-none" fill="none">
+              <svg
+                class="absolute inset-0 w-full h-full z-50 pointer-events-none"
+                fill="none"
+              >
                 <rect
                   x="1"
                   y="1"
@@ -54,10 +90,10 @@ const {
               </svg>
 
               <div class="absolute inset-0 z-0">
-                {aircraft.image && (
+                {item.image?.src && (
                   <ImageComp
-                    src={aircraft.image.src}
-                    alt={aircraft.image.alt}
+                    src={item.image.src}
+                    alt={item.image.alt || item.title}
                     classes="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-60"
                   />
                 )}
@@ -67,21 +103,40 @@ const {
 
               <div class="absolute inset-0 z-20 p-8 flex flex-col justify-end">
                 <span class="text-primary-400 text-xs font-bold uppercase tracking-[0.2em] mb-2 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-                  Ready for Training
+                  {item.badgeText}
                 </span>
-                <h3 class="text-2xl font-bold text-white mb-2 leading-tight" set:html={aircraft.title} />
+                
+                <h3
+                  class="text-2xl font-bold text-white mb-2 leading-tight"
+                  set:html={item.title}
+                />
 
                 <div class="max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-40">
-                  <p class="text-white/80 text-sm line-clamp-2 mb-4" set:html={aircraft.description} />
-                  <div class="flex gap-3 items-center">
-                    {aircraft.bullets && aircraft.bullets[0] && (
-                      <span class="px-3 py-1 rounded-full bg-white/10 border border-white/20 text-[10px] text-white uppercase font-semibold inline-flex items-center gap-1.5" set:html={aircraft.bullets[0].title.split(" ")[0]} />
-                    )}
-                    {aircraft.bullets && aircraft.bullets[1] && (
+                  <p
+                    class="text-white/80 text-sm line-clamp-2 mb-4"
+                    set:html={item.description}
+                  />
+
+                  <div class="flex flex-wrap gap-2 items-center">
+                    {item.pill1 && (
                       <span class="px-3 py-1 rounded-full bg-white/10 border border-white/20 text-[10px] text-white uppercase font-semibold inline-flex items-center gap-1.5">
-                        {aircraft.bullets[1].description.includes("HP")
-                          ? aircraft.bullets[1].description.match(/\d+ HP/)?.[0] ?? "180 HP"
-                          : "IFR Ready"}
+                        {item.bullets?.[0]?.icon && (
+                          <svg class="w-3 h-3 text-accent-400 fill-current" viewBox="0 0 24 24">
+                            <path d={item.bullets[0].icon} />
+                          </svg>
+                        )}
+                        <span>{item.pill1}</span>
+                      </span>
+                    )}
+
+                    {item.pill2 && (
+                      <span class="px-3 py-1 rounded-full bg-white/10 border border-white/20 text-[10px] text-white uppercase font-semibold inline-flex items-center gap-1.5">
+                        {item.bullets?.[1]?.icon && (
+                          <svg class="w-3 h-3 text-accent-400 fill-current" viewBox="0 0 24 24">
+                            <path d={item.bullets[1].icon} />
+                          </svg>
+                        )}
+                        <span>{item.pill2}</span>
                       </span>
                     )}
                   </div>
@@ -89,23 +144,26 @@ const {
 
                 <div class="mt-4 h-1 w-12 bg-accent-500 transition-all duration-500 group-hover:w-full" />
               </div>
-
-              {aircraft.coming && (
-                <div class="absolute top-6 right-6 z-30 bg-primary-400 text-primary-800 text-[10px] font-bold px-3 py-1 rounded-full shadow-lg uppercase tracking-wider" set:html={aircraft.coming} />
-              )}
             </a>
           );
         })
       }
     </div>
   </div>
+
   <div class="flex justify-center pt-12">
     <a
       href={button.path}
       class="group relative inline-flex items-center justify-center px-10 py-5 bg-primary-800 text-white font-bold rounded-full overflow-hidden transition-all hover:bg-accent-500 shadow-xl"
     >
-      <span class="relative z-10 uppercase tracking-[0.2em] text-sm" set:html={button.title} />
-      <div class="absolute bottom-0 left-0 h-1 bg-primary-400 w-0 transition-all duration-500 group-hover:w-full" />
+      <span
+        class="relative z-10 uppercase tracking-[0.2em] text-sm"
+        set:html={button.title}
+      />
+      <div
+        class="absolute bottom-0 left-0 h-1 bg-primary-400 w-0 transition-all duration-500 group-hover:w-full"
+      >
+      </div>
     </a>
   </div>
 </section>

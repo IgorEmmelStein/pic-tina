@@ -3,9 +3,9 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
-    "tina:dev": "tinacms dev -c \"astro dev\"",
+    "dev": "tinacms dev -c \"astro dev\"",
     "build": "tinacms build && astro build",
+    "tina:dev": "tinacms dev -c \"astro dev\"",
     "preview": "astro preview"
   },
   "dependencies": {
