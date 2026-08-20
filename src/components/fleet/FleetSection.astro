@@ -3,11 +3,11 @@ import ImageComp from "../utils/ImageComp.astro";
 
 const { aircraft, index = 0 } = Astro.props;
 
-const iconMap: Record<string, string> = {
-  Plane: `<svg class="w-5 h-5 text-accent-500 group-hover/bullet:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>`,
-  Gauge: `<svg class="w-5 h-5 text-accent-500 group-hover/bullet:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`,
-  ClipboardCheck: `<svg class="w-5 h-5 text-accent-500 group-hover/bullet:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012-2m-6 9l2 2 4-4"/></svg>`
-};
+const iconList = [
+  `<svg class="w-5 h-5 text-accent-500 group-hover/bullet:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>`,
+  `<svg class="w-5 h-5 text-accent-500 group-hover/bullet:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`,
+  `<svg class="w-5 h-5 text-accent-500 group-hover/bullet:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012-2m-6 9l2 2 4-4"/></svg>`
+];
 
 const isEven = index % 2 === 0;
 const aircraftId = aircraft.id ? aircraft.id.replace(/\.[^/.]+$/, "") : "";
@@ -31,10 +31,10 @@ const aircraftId = aircraft.id ? aircraft.id.replace(/\.[^/.]+$/, "") : "";
           <div class="absolute inset-0 bg-accent-400/60 rounded-4xl transform -translate-y-4 lg:-translate-y-12 translate-x-3 lg:translate-x-10 -rotate-3 transition-transform duration-700 group-hover:rotate-0" />
 
           <div class="relative w-full max-w-[90%] lg:max-w-full bg-white rounded-4xl overflow-hidden shadow-2xl ring-1 ring-black/5">
-            {aircraft.image && (
+            {aircraft.imageSrc && (
               <ImageComp
-                src={aircraft.image.src}
-                alt={aircraft.image.alt}
+                src={aircraft.imageSrc}
+                alt={aircraft.imageAlt || aircraft.title}
                 classes="w-full h-full object-cover p-6 rounded-4xl transition-transform duration-700 group-hover:scale-105"
               />
             )}
@@ -102,15 +102,28 @@ const aircraftId = aircraft.id ? aircraft.id.replace(/\.[^/.]+$/, "") : "";
 
         {aircraft.bullets && aircraft.bullets.length > 0 && (
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 py-12 border-t border-primary-400/40">
-            {aircraft.bullets.map((bullet: any) => (
-              <div class="flex flex-col group/bullet">
-                <div class="w-10 h-10 rounded-full bg-accent-500/10 flex items-center justify-center mb-4 transition-colors group-hover/bullet:bg-accent-500">
-                  <span class="w-5 h-5 inline-flex items-center justify-center [&>svg]:w-full [&>svg]:h-full" set:html={iconMap[bullet.icon || "Plane"]} />
+            {aircraft.bullets.map((item: any, i: number) => {
+              // Handles string strings like "Title: Description" or bullet objects
+              const isString = typeof item === "string";
+              const colonIndex = isString ? item.indexOf(":") : -1;
+              const title = isString
+                ? (colonIndex !== -1 ? item.slice(0, colonIndex).trim() : `Feature ${i + 1}`)
+                : item.title;
+              const desc = isString
+                ? (colonIndex !== -1 ? item.slice(colonIndex + 1).trim() : item)
+                : item.description;
+              const iconSvg = iconList[i % iconList.length];
+
+              return (
+                <div class="flex flex-col group/bullet">
+                  <div class="w-10 h-10 rounded-full bg-accent-500/10 flex items-center justify-center mb-4 transition-colors group-hover/bullet:bg-accent-500">
+                    <span class="w-5 h-5 inline-flex items-center justify-center [&>svg]:w-full [&>svg]:h-full" set:html={iconSvg} />
+                  </div>
+                  <h3 class="font-bold text-primary-800 mb-2 text-sm uppercase tracking-wide" set:html={title} />
+                  <p class="text-sm text-primary-600/80 leading-relaxed" set:html={desc} />
                 </div>
-                <h3 class="font-bold text-primary-800 mb-2 text-sm uppercase tracking-wide" set:html={bullet.title} />
-                <p class="text-sm text-primary-600/80 leading-relaxed" set:html={bullet.description} />
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
 

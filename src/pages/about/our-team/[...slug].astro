@@ -21,26 +21,21 @@ export async function getStaticPaths() {
 
 const { member } = Astro.props;
 
+// Dynamic SEO and Header Setup
 const data = {
   siteTitle: `${member.name} - ${member.role} | Pilot Instructional Center`,
-  siteDescription:
-    member.bio?.[0] ||
-    `Meet ${member.name}, ${member.role} at Pilot Instructional Center.`,
+  siteDescription: member.bio?.[0] || `Get to know more about ${member.name}, ${member.role} at Pilot Instructional Center.`,
   siteKeywords: `${member.name}, ${member.role}, flight instructor Kansas City, PIC team`,
 
   header: {
     upperHeader: "Meet the Team",
     title: `Get to know more about ${member.name}`,
-    description: `Get to know everything about our instructors and leadership team at Pilot Instructional Center.`,
+    description: "Get to know everything about our cfis and leadership team at Pilot Instructional Center.",
     buttons: [
       { text: "Start Training", href: "#enroll", style: "btn-secondary" },
-      {
-        text: "Back to Team",
-        href: "/about/our-team/",
-        style: "btn-transparent",
-      },
+      { text: "Back to Team", href: "/about/our-team/", style: "btn-transparent" },
     ],
-    image: {
+    image: member.image || {
       src: "/src/assets/rrm-visit/pilot-instructional-center_new-century-KS_cfis-preparing-plane-cessna-airport-near-Kansas-city-MO-cropped.png",
       alt: member.name,
     },
@@ -48,8 +43,7 @@ const data = {
 
   cta: {
     title: "Train With Instructors Who Care About Your Success",
-    description:
-      "Whether you're pursuing a Private Pilot Certificate or advanced ratings, our instructors provide safe, structured, and personalized training.",
+    description: "Whether you're pursuing a Private Pilot Certificate or advanced ratings, our instructors provide safe, structured, and personalized training.",
     button: { text: "Book a Discovery Session", href: "/discovery-session" },
     image: {
       src: "/src/assets/cta-flight-solid-ground-aviation.webp",
@@ -58,11 +52,11 @@ const data = {
   },
 };
 
-// Map member collection data structure to match the component's expected format
+// Map collection properties to match the LeadershipMembers component props structure
 const componentContent = {
   upperHeading: "Team Member Profile",
   title: member.name,
-  description: member.role,
+  description: member.credentials || member.role,
   descriptions: member.bio,
   team: [
     {
@@ -88,6 +82,6 @@ const componentContent = {
     images={[data.header.image]}
   />
   <LeadershipMembers content={componentContent} />
-  <CTARight />
+  <CTARight content={data.cta} />
   <Enroll />
 </BaseLayout>

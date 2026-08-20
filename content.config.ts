@@ -43,22 +43,13 @@ const buttonSchema = z
 const fleetCollection = defineCollection({
   loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/fleet" }),
   schema: z.object({
-    id: z.string().optional(),
     upperHeader: z.string().optional(),
     title: z.string(),
     description: z.string(),
-    image: z.object({
-      src: z.string(),
-      alt: z.string(),
-    }).optional(),
+    imageSrc: z.string(),
+    imageAlt: z.string(),
     descriptions: z.array(z.string()).default([]),
-    bullets: z.array(
-      z.object({
-        title: z.string(),
-        description: z.string(),
-        icon: z.string().optional(),
-      })
-    ).default([]),
+    bullets: z.array(z.string()).default([]),
     features: z.array(z.string()).default([]),
   }),
 });

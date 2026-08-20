@@ -4,7 +4,18 @@ import ImageComp from "../utils/ImageComp.astro";
 import { getCollection } from "astro:content";
 
 // Default fallback SVG path (Modern Aviation Badge Icon)
-const DEFAULT_SVG_ICON = "M12 2a1 1 0 0 1 .932.638l7 18a1 1 0 0 1-1.326 1.281L13 19.517V13a1 1 0 1 0-2 0v6.517l-5.606 2.402a1 1 0 0 1-1.326-1.281l7-18A1 1 0 0 1 12 2";
+const DEFAULT_SVG_ICON =
+  "M12 2a1 1 0 0 1 .932.638l7 18a1 1 0 0 1-1.326 1.281L13 19.517V13a1 1 0 1 0-2 0v6.517l-5.606 2.402a1 1 0 0 1-1.326-1.281l7-18A1 1 0 0 1 12 2";
+
+// Helper to extract clean pill title from string or object bullets
+const getPillTitle = (bullet: any, fallback: string) => {
+  if (!bullet) return fallback;
+  if (typeof bullet === "string") {
+    const colonIdx = bullet.indexOf(":");
+    return colonIdx !== -1 ? bullet.slice(0, colonIdx).trim() : bullet.trim();
+  }
+  return bullet.title || fallback;
+};
 
 // 1. Fetch physical aircraft from the "fleet" collection
 const fleetEntries = await getCollection("fleet");
@@ -14,15 +25,16 @@ const fleetList = fleetEntries.map((entry) => {
     id: entry.id.replace(/\.[^/.]+$/, ""),
     title: data.title || "Aircraft",
     description: data.description || "",
-    image: data.image || { src: "", alt: "" },
+    imageSrc: data.imageSrc || "",
+    imageAlt: data.imageAlt || data.title || "Aircraft",
     bullets: data.bullets || [],
     targetUrl: `/about/our-fleet/${entry.id.replace(/\.[^/.]+$/, "")}/`,
     isSimulator: false,
     badgeText: "Ready for Training",
-    pill1: data.bullets?.[0]?.title || "IFR",
-    pill2: data.bullets?.[1]?.title || "180 HP",
-    icon1: data.bullets?.[0]?.icon || DEFAULT_SVG_ICON,
-    icon2: data.bullets?.[1]?.icon || DEFAULT_SVG_ICON,
+    pill1: getPillTitle(data.bullets?.[0], "IFR"),
+    pill2: getPillTitle(data.bullets?.[1], "180 HP"),
+    icon1: DEFAULT_SVG_ICON,
+    icon2: DEFAULT_SVG_ICON,
   };
 });
 
@@ -30,6 +42,17 @@ const fleetList = fleetEntries.map((entry) => {
 const simulatorEntries = await getCollection("simulator");
 const simulatorList = simulatorEntries.map((entry) => {
   const data = entry.data;
+  const simImageSrc =
+    data.imageSrc ||
+    data.overview?.imageSrc ||
+    data.header?.imageSrc ||
+    "/src/assets/fleet/red-bird-fmx_pilot-instructional-center.webp";
+  const simImageAlt =
+    data.imageAlt ||
+    data.overview?.imageAlt ||
+    data.header?.imageAlt ||
+    "Redbird FMX Flight Simulator";
+
   return {
     id: entry.id.replace(/\.[^/.]+$/, ""),
     title:
@@ -42,21 +65,16 @@ const simulatorList = simulatorEntries.map((entry) => {
       data.overview?.description ||
       data.header?.description ||
       "",
-    image:
-      data.image ||
-      data.overview?.image ||
-      data.header?.image || {
-        src: "/src/assets/fleet/red-bird-fmx_pilot-instructional-center.webp",
-        alt: "Redbird FMX Flight Simulator",
-      },
+    imageSrc: simImageSrc,
+    imageAlt: simImageAlt,
     bullets: data.bullets || data.overview?.bullets || [],
     targetUrl: "/about/our-fleet/simulator-redbird-fmx-full-motion-aatd/",
     isSimulator: true,
     badgeText: "AATD Simulator",
-    pill1: data.bullets?.[0]?.title || "Full Motion",
-    pill2: data.bullets?.[1]?.title || "FAA Loggable",
-    icon1: data.bullets?.[0]?.icon || DEFAULT_SVG_ICON,
-    icon2: data.bullets?.[1]?.icon || DEFAULT_SVG_ICON,
+    pill1: getPillTitle(data.bullets?.[0] || data.overview?.bullets?.[0], "Full Motion"),
+    pill2: getPillTitle(data.bullets?.[1] || data.overview?.bullets?.[1], "FAA Loggable"),
+    icon1: DEFAULT_SVG_ICON,
+    icon2: DEFAULT_SVG_ICON,
   };
 });
 
@@ -109,10 +127,10 @@ const {
               </svg>
 
               <div class="absolute inset-0 z-0">
-                {item.image?.src && (
+                {item.imageSrc && (
                   <ImageComp
-                    src={item.image.src}
-                    alt={item.image.alt || item.title}
+                    src={item.imageSrc}
+                    alt={item.imageAlt || item.title}
                     classes="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-60"
                   />
                 )}
@@ -132,7 +150,7 @@ const {
 
                 <div class="max-h-0 overflow-hidden transition-all duration-500 group-hover:max-h-40">
                   <p
-                    class="text-white/80 text-sm line-clamp-2 mb-4"
+                    class="text-white/80 text-sm line-clamp-2 mb-4 font-light"
                     set:html={item.description}
                   />
 
