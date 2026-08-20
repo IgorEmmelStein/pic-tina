@@ -3,171 +3,76 @@ import { website_links } from "../../data/consts";
 import ImageComp from "../utils/ImageComp.astro";
 import SliderImageSimulator from "./SliderImageSimulator.astro";
 
-interface SimInventoryItem {
-  model: string;
-  spec: string;
-  useCase: string;
-  description: string;
-}
-
-interface CardItem {
-  title: string;
-  description: string;
-  path: string;
-}
-
-interface OfferItem {
-  title: string;
-  description: string;
-  path?: string;
-}
-
-interface OfferSectionData {
-  image?: {
-    src?: string;
-    alt?: string;
-  };
-  path?: string;
-  quote?: string;
-  title?: string;
-  offers?: OfferItem[];
-  advantages?: {
-    costReduction?: string;
-    label?: string;
-  };
-}
-
-interface SectionContentData {
-  upperHeader?: string;
-  title?: string;
-  descriptions?: string;
-  cards?: CardItem[];
-}
-
-interface CTAData {
-  title?: string;
-  path?: string;
-}
-
-interface Props {
-  content?: SectionContentData | any;
-  imageSection?: any;
-  simInventory?: SimInventoryItem[];
-  offerSection?: OfferSectionData;
-  cta?: CTAData;
-}
-
-// 1. Default fallback data for pages without Markdown props
-const defaultSimInventory: SimInventoryItem[] = [
-  {
-    model: "Redbird FMX",
-    spec: "Full Motion AATD",
-    useCase: "Instrument & Commercial Hours",
-    description:
-      "The gold standard for multi-engine and IFR training. Log significant FAA-certified hours in a 3-axis motion platform.",
-  },
-];
-
-const defaultContent: SectionContentData = {
-  upperHeader: "Precision Flight Technology",
-  title: `The Simulator <span class="italic font-light text-accent-500">Advantage</span>`,
-  descriptions: `Forge confidence, optimize your hour-building, and master complex flight procedures within a controlled, high-fidelity environment.`,
-  cards: [
+const {
+  simInventory = [
     {
-      path: website_links?.ourSimulator?.path || "/about/our-fleet/simulator-redbird-fmx-full-motion-aatd/",
-      title: "Uncompromised Weather",
+      model: "Redbird FMX",
+      spec: "Full Motion AATD",
+      useCase: "Instrument & Commercial Hours",
       description:
-        "If the weather turns, your training schedule doesn't. Maintain complete consistency on PIC’s advanced motion platforms regardless of local atmospheric patterns.",
-    },
-    {
-      path: website_links?.ourSimulator?.path || "/about/our-fleet/simulator-redbird-fmx-full-motion-aatd/",
-      title: "FAA-Certified Logbook",
-      description:
-        "Maximize your training efficiency. Secure officially recognized, FAA-approved credit hours toward your ratings under the supervision of expert instructors.",
-    },
-    {
-      path: website_links?.ourSimulator?.path || "/about/our-fleet/simulator-redbird-fmx-full-motion-aatd/",
-      title: "Precision Maneuvers",
-      description:
-        "Perfect your multi-engine and procedural mastery on the ground. Build deep muscle memory and complete confidence before consuming real-world aircraft fuel.",
+        "The gold standard for multi-engine and IFR training. Log significant FAA-certified hours in a 3-axis motion platform.",
     },
   ],
-};
-
-const defaultOfferSection: OfferSectionData = {
-  image: {
-    src: "/src/assets/drive/student-simulator-Flight-Pilot-instructional-center_flight-school_PIC-Kansas-city-Missouri.jpeg",
-    alt: "Redbird Full Motion Flight Simulator at Pilot Instructional Center",
+  content = {
+    upperHeader: "Precision Flight Technology",
+    title: `The Simulator <span class="italic font-light text-accent-500">Advantage</span`,
+    descriptions: ` Forge confidence, optimize your hour-building, and master complex flight
+        procedures within a controlled, high-fidelity environment.`,
+    cards: [
+      {
+        path: website_links.ourSimulator.path,
+        title: "Uncompromised Weather",
+        description:
+          "If the weather turns, your training schedule doesn't. Maintain complete consistency on PIC’s advanced motion platforms regardless of local atmospheric patterns.",
+      },
+      {
+        path: website_links.ourSimulator.path,
+        title: "FAA-Certified Logbook",
+        description:
+          "Maximize your training efficiency. Secure officially recognized, FAA-approved credit hours toward your ratings under the supervision of expert instructors.",
+      },
+      {
+        path: website_links.ourSimulator.path,
+        title: "Precision Maneuvers",
+        description:
+          "Perfect your multi-engine and procedural mastery on the ground. Build deep muscle memory and complete confidence before consuming real-world aircraft fuel.",
+      },
+    ],
   },
-  path: website_links?.contact?.path || "/contact/",
-  quote:
-    '"True proficiency is built when muscle memory outpaces conditions, translating simulated precision into real-world command."',
-  title: "Limited Availability Promotions",
-  offers: [
-    {
-      path: website_links?.ourSimulator?.path || "/about/our-fleet/simulator-redbird-fmx-full-motion-aatd/",
-      title: "Special Fleet Rate",
-      description: "Purchase 10+ hours and lock in a preferred $60 / hour block rate.",
+  offerSection = {
+    image: {
+      src: "/src/assets/drive/student-simulator-Flight-Pilot-instructional-center_flight-school_PIC-Kansas-city-Missouri.jpeg",
+      alt: "Redbird Full Motion Flight Simulator at Pilot Instructional Center",
     },
-    {
-      path: website_links?.ourSimulator?.path || "/about/our-fleet/simulator-redbird-fmx-full-motion-aatd/",
-      title: "Complimentary Onboarding",
-      description: "Receive a FREE simulator checkout authorization alongside any block time purchase.",
+    path: website_links.contact.path,
+    quote:
+      '"True proficiency is built when muscle memory outpaces conditions, translating simulated precision into real-world command."',
+    title: "Limited Availability Promotions",
+    offers: [
+      {
+        path: website_links.ourSimulator.path,
+        title: "Special Fleet Rate",
+        description:
+          "Purchase 10+ hours and lock in a preferred $60 / hour block rate.",
+      },
+      {
+        path: website_links.ourSimulator.path,
+        title: "Complimentary Onboarding",
+        description:
+          "Receive a FREE simulator checkout authorization alongside any block time purchase.",
+      },
+    ],
+    advantages: {
+      costReduction:
+        "Average 40% reduction in flight hour expenses for active IFR candidates.",
+      label: "Secure Block Rate",
     },
-  ],
-  advantages: {
-    costReduction: "Average 40% reduction in flight hour expenses for active IFR candidates.",
-    label: "Secure Block Rate",
   },
-};
-
-const defaultCta: CTAData = {
-  title: "Explore our full simulator suite",
-  path: website_links?.ourSimulator?.path || "/about/our-fleet/simulator-redbird-fmx-full-motion-aatd/",
-};
-
-// 2. Resolve incoming props (handles both nested block and individual props)
-const props = Astro.props;
-const isNestedBlock = props.content?.simInventory || props.content?.content || props.content?.offerSection || props.imageSection;
-const sourceData = isNestedBlock ? (props.imageSection || props.content) : null;
-
-const simInventory: SimInventoryItem[] =
-  sourceData?.simInventory?.length > 0
-    ? sourceData.simInventory
-    : (props.simInventory?.length ? props.simInventory : defaultSimInventory);
-
-const rawContent = sourceData?.content || (props.content && !isNestedBlock ? props.content : null);
-const content: SectionContentData = {
-  upperHeader: rawContent?.upperHeader ?? defaultContent.upperHeader,
-  title: rawContent?.title ?? defaultContent.title,
-  descriptions: rawContent?.descriptions ?? defaultContent.descriptions,
-  cards: rawContent?.cards?.length > 0 ? rawContent.cards : defaultContent.cards,
-};
-
-const rawOffer = sourceData?.offerSection || props.offerSection;
-const offerSection: OfferSectionData = {
-  ...defaultOfferSection,
-  ...rawOffer,
-  image: {
-    ...defaultOfferSection.image!,
-    ...(rawOffer?.image || {}),
+  cta = {
+    title: "Explore our full simulator suite",
+    path: website_links.ourSimulator.path,
   },
-  offers: rawOffer?.offers?.length > 0 ? rawOffer.offers : defaultOfferSection.offers,
-  advantages: {
-    ...defaultOfferSection.advantages!,
-    ...(rawOffer?.advantages || {}),
-  },
-};
-
-const cta: CTAData = {
-  ...defaultCta,
-  ...(sourceData?.cta || props.cta || {}),
-};
-
-const cards = content.cards || [];
-const offers = offerSection.offers || [];
-const advantages = offerSection.advantages || {};
-const offerImage = offerSection.image || defaultOfferSection.image!;
+} = Astro.props;
 ---
 
 <section
@@ -189,27 +94,20 @@ const offerImage = offerSection.image || defaultOfferSection.image!;
       class="flex flex-col lg:flex-row items-start gap-12 mb-16 justify-between"
     >
       <div class="max-w-3xl mb-12" data-aos="fade-up">
-        {content.upperHeader && (
-          <p
-            class="text-xs font-semibold tracking-widest text-accent-500 uppercase mb-3"
-            set:html={content.upperHeader}
-          />
-        )}
-        {content.title && (
-          <h2
-            class="text-5xl md:text-7xl font-title font-normal text-primary-800 tracking-tight leading-tight"
-            set:html={content.title}
-          />
-        )}
-        {content.descriptions && (
-          <p
-            class="mt-4 text-primary-600 text-lg font-sans tracking-wide leading-relaxed max-w-xl"
-            set:html={content.descriptions}
-          />
-        )}
+        <p
+          class="text-xs font-semibold tracking-widest text-accent-500 uppercase mb-3"
+          set:html={content.upperHeader}
+        />
+        <h2
+          class="text-5xl md:text-7xl font-title font-normal text-primary-800 tracking-tight leading-tight"
+          set:html={content.title}
+        />
+        <p
+          class="mt-4 text-primary-600 text-lg font-sans tracking-wide leading-relaxed max-w-xl"
+          set:html={content.descriptions}
+        />
       </div>
-
-      {/* SliderImageSimulator */}
+      {/* SliderImageSimulator  */}
       <div
         class="w-full lg:w-auto lg:max-w-2xl aos-init aos-animate"
         data-aos="fade-up"
@@ -219,60 +117,63 @@ const offerImage = offerSection.image || defaultOfferSection.image!;
       </div>
     </div>
 
-    {/* Metric Cards */}
-    {cards.length > 0 && (
-      <div
-        class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20"
-        data-aos="fade-up"
-        data-aos-delay="100"
-      >
-        {cards.map((card: CardItem, index: number) => (
-          <a
-            href={card.path || website_links?.ourSimulator?.path || "#"}
-            target={card.path?.includes("http") ? "_blank" : "_self"}
-            class="group bg-white/40 backdrop-blur-md border border-white/60 rounded-3xl p-8 shadow-sm transition-all duration-500 hover:shadow-md hover:-translate-y-1.5 hover:bg-accent-500"
-          >
-            <span class="block font-title text-5xl font-light text-accent-500 mb-4 group-hover:text-primary-400 transition-colors">
-              {String(index + 1).padStart(2, "0")}
-            </span>
-            <h3 class="text-xl font-title text-primary-800 mb-2 group-hover:text-white transition-colors">
-              {card.title}
-            </h3>
-            <p class="text-xs text-primary-600 font-sans tracking-wide leading-relaxed group-hover:text-white transition-colors">
-              {card.description}
-            </p>
-          </a>
-        ))}
-      </div>
-    )}
+    {/* Metric Cards - Stats Lead Everything */}
+    <div
+      class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20"
+      data-aos="fade-up"
+      data-aos-delay="100"
+    >
+      {
+        content.cards.map(
+          (
+            card: { title: string; description: string; path: string },
+            index: number,
+          ) => (
+            <a
+              href={card.path}
+              target={card.path.includes("http") ? "_blank" : "_self"}
+              class="group bg-white/40 backdrop-blur-md border border-white/60 rounded-3xl p-8 shadow-sm transition-all duration-500  hover:shadow-md hover:-translate-y-1.5 hover:bg-accent-500"
+            >
+              <span class="block font-title text-5xl font-light text-accent-500 mb-4 group-hover:text-primary-400 transition-colors ">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <h3 class="text-xl font-title text-primary-800 mb-2 group-hover:text-white transition-colors">
+                {card.title}
+              </h3>
+              <p class="text-xs text-primary-600  font-sans tracking-wide leading-relaxed group-hover:text-white transition-colors">
+                {card.description}
+              </p>
+            </a>
+          ),
+        )
+      }
+    </div>
 
     {/* Lower Content Grid */}
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
       {/* Editorial Content / Left Column */}
       <a
-        href={cta.path || "#"}
+        href={cta.path}
         class="group lg:col-span-5 flex flex-col space-y-8"
         data-aos="fade-up"
         data-aos-delay="200"
-        target={cta.path?.includes("http") ? "_blank" : "_self"}
-        rel={cta.path?.includes("http") ? "noopener noreferrer" : undefined}
+        target={cta.path.includes("http") ? "_blank" : "_self"}
+        rel={cta.path.includes("http") ? "noopener noreferrer" : undefined}
       >
         {/* Editorial Pull Quote */}
-        {offerSection.quote && (
-          <div class="border-l border-primary-400 pl-6 py-2">
-            <p
-              class="font-title italic text-xl text-primary-800 leading-relaxed"
-              set:html={offerSection.quote}
-            />
-          </div>
-        )}
+        <div class="border-l border-primary-400 pl-6 py-2">
+          <p
+            class="font-title italic text-xl text-primary-800 leading-relaxed"
+            set:html={offerSection.quote}
+          />
+        </div>
 
         {/* Dynamic Sim Grid Mapping */}
-        {simInventory.length > 0 && (
-          <div
-            class="space-y-6 group-hover:bg-accent-100 group-hover:-translate-y-1.5 p-6 rounded-3xl transition-all duration-500"
-          >
-            {simInventory.map((sim: SimInventoryItem) => (
+        <div
+          class="space-y-6 group-hover:bg-accent-100 group-hover:-translate-y-1.5 p-6 rounded-3xl transition-all duration-500"
+        >
+          {
+            simInventory.map((sim) => (
               <div class="flex items-start gap-4">
                 <div class="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary-400 shrink-0" />
                 <div>
@@ -290,30 +191,28 @@ const offerImage = offerSection.image || defaultOfferSection.image!;
                   </p>
                 </div>
               </div>
-            ))}
-          </div>
-        )}
+            ))
+          }
+        </div>
 
         {/* Anchor Link / Global CTA */}
-        {cta.title && (
-          <div>
-            <p
-              class="inline-flex items-center gap-4 text-xs font-medium uppercase tracking-widest text-primary-800 group-hover:text-accent-500 transition-colors"
+        <div>
+          <p
+            class="inline-flex items-center gap-4 text-xs font-medium uppercase tracking-widest text-primary-800 group-hover:text-accent-500 transition-colors"
+          >
+            <span>{cta.title}</span>
+            <svg
+              class="w-4 h-4 transform transition-transform group-hover:translate-x-1"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
             >
-              <span>{cta.title}</span>
-              <svg
-                class="w-4 h-4 transform transition-transform group-hover:translate-x-1"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </p>
-          </div>
-        )}
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </p>
+        </div>
       </a>
 
       {/* Media & Dark Promo Box / Right Column */}
@@ -328,8 +227,10 @@ const offerImage = offerSection.image || defaultOfferSection.image!;
         >
           <div class="w-full h-full rounded-4xl overflow-hidden relative">
             <ImageComp
-              src={offerImage.src || "/src/assets/drive/student-simulator-Flight-Pilot-instructional-center_flight-school_PIC-Kansas-city-Missouri.jpeg"}
-              alt={offerImage.alt || "Redbird Full Motion Flight Simulator at Pilot Instructional Center"}
+              src={offerSection.image.src ||
+                "/src/assets/drive/student-simulator-Flight-Pilot-instructional-center_flight-school_PIC-Kansas-city-Missouri.jpeg"}
+              alt={offerSection.image.alt ||
+                "Redbird Full Motion Flight Simulator at Pilot Instructional Center"}
               classes="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-102"
             />
             {/* Soft Cinematic Overlays */}
@@ -346,62 +247,62 @@ const offerImage = offerSection.image || defaultOfferSection.image!;
 
         {/* Dark Offer Strip / Anchor Block */}
         <a
-          href={offerSection.path || website_links?.contact?.path || "#contact"}
-          target={offerSection.path?.includes("http") ? "_blank" : "_self"}
-          rel={offerSection.path?.includes("http") ? "noopener noreferrer" : undefined}
+          href={offerSection.path}
+          target={offerSection.path.includes("http") ? "_blank" : "_self"}
+          rel={offerSection.path.includes("http")
+            ? "noopener noreferrer"
+            : undefined}
           class="group hover:-translate-y-1.5 transition-all duration-500 flex flex-col items-center justify-center lg:absolute -bottom-10 right-6 left-6 lg:-right-6 lg:left-auto p-8 bg-accent-500 rounded-4xl shadow-2xl border border-primary-400/20 max-w-md text-accent-50"
         >
-          {offerSection.title && (
-            <div class="flex items-center gap-2 mb-4">
-              <div class="w-1.5 h-1.5 rounded-full bg-primary-400 animate-pulse">
-              </div>
-              <span
-                class="text-[10px] font-medium tracking-widest uppercase text-accent-200"
-                set:html={offerSection.title}
-              />
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-1.5 h-1.5 rounded-full bg-primary-400 animate-pulse">
             </div>
-          )}
+            <span
+              class="text-[10px] font-medium tracking-widest uppercase text-accent-200"
+              set:html={offerSection.title}
+            />
+          </div>
 
-          {offers.length > 0 && (
-            <div class="space-y-4 border-b border-white/10 pb-6 mb-6 w-full">
-              {offers.map((offer: OfferItem) => (
-                <div>
-                  <p class="text-xs text-primary-400 tracking-wide font-medium uppercase">
-                    {offer.title}
-                  </p>
-                  <p class="text-base font-serif font-light mt-1">
-                    {offer.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          )}
+          <div class="space-y-4 border-b border-white/10 pb-6 mb-6">
+            {
+              offerSection.offers.map(
+                (offer: { title: string; description: string }) => (
+                  <div>
+                    <p class="text-xs text-primary-400 tracking-wide font-medium uppercase">
+                      {offer.title}
+                    </p>
+                    <p class="text-base font-serif font-light mt-1">
+                      {offer.description}
+                    </p>
+                  </div>
+                ),
+              )
+            }
+          </div>
 
           <div
-            class="flex flex-col lg:flex-row items-center justify-between gap-4 w-full"
+            class="flex flex-col lg:flex-row items-center justify-between gap-4"
           >
-            {advantages.costReduction && (
-              <p class="text-xs text-accent-200 font-light leading-snug max-w-[180px]">
-                {advantages.costReduction}
-              </p>
-            )}
-            {advantages.label && (
-              <div
-                class="flex items-center justify-center gap-2 px-6 py-3.5 bg-accent-50 text-primary-800 rounded-xl text-xs font-medium tracking-wider uppercase shadow-md hover:bg-accent-100 transition-colors whitespace-nowrap"
+            <p
+              class="text-xs text-accent-200 font-light leading-snug max-w-[180px]"
+            >
+              {offerSection.advantages.costReduction}
+            </p>
+            <div
+              class="flex items-center justify-center gap-2 px-6 py-3.5 bg-accent-50 text-primary-800 rounded-xl text-xs font-medium tracking-wider uppercase shadow-md hover:bg-accent-100 transition-colors whitespace-nowrap"
+            >
+              {offerSection.advantages.label}
+              <svg
+                class="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
               >
-                {advantages.label}
-                <svg
-                  class="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </div>
-            )}
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </div>
           </div>
         </a>
       </div>

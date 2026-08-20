@@ -38,41 +38,27 @@ const fleetList = fleetEntries.map((entry) => {
   };
 });
 
-// 2. Fetch simulator entries from the "simulator" collection with safe fallbacks
+// 2. Fetch simulator entries from the reworked "simulator" collection
 const simulatorEntries = await getCollection("simulator");
 const simulatorList = simulatorEntries.map((entry) => {
   const data = entry.data;
-  const simImageSrc =
-    data.imageSrc ||
-    data.overview?.imageSrc ||
-    data.header?.imageSrc ||
-    "/src/assets/fleet/red-bird-fmx_pilot-instructional-center.webp";
-  const simImageAlt =
-    data.imageAlt ||
-    data.overview?.imageAlt ||
-    data.header?.imageAlt ||
-    "Redbird FMX Flight Simulator";
+  
+  // Pull the first image from the new 'images' array field
+  const simImageSrc = data.images?.[0]?.src || "/src/assets/fleet/red-bird-fmx_pilot-instructional-center.webp";
+  const simImageAlt = data.images?.[0]?.alt || data.title || "Redbird FMX Flight Simulator";
 
   return {
     id: entry.id.replace(/\.[^/.]+$/, ""),
-    title:
-      data.title ||
-      data.overview?.title ||
-      data.header?.title ||
-      "Redbird FMX Simulator",
-    description:
-      data.description ||
-      data.overview?.description ||
-      data.header?.description ||
-      "",
+    title: data.title || "Full Motion Simulator",
+    description: data.description || "",
     imageSrc: simImageSrc,
     imageAlt: simImageAlt,
-    bullets: data.bullets || data.overview?.bullets || [],
+    bullets: data.bullets || [],
     targetUrl: "/about/our-fleet/simulator-redbird-fmx-full-motion-aatd/",
     isSimulator: true,
-    badgeText: "AATD Simulator",
-    pill1: getPillTitle(data.bullets?.[0] || data.overview?.bullets?.[0], "Full Motion"),
-    pill2: getPillTitle(data.bullets?.[1] || data.overview?.bullets?.[1], "FAA Loggable"),
+    badgeText: data.upperHeader || "AATD Simulator",
+    pill1: getPillTitle(data.bullets?.[0], "Full Motion"),
+    pill2: getPillTitle(data.bullets?.[1], "FAA Loggable"),
     icon1: DEFAULT_SVG_ICON,
     icon2: DEFAULT_SVG_ICON,
   };

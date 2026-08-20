@@ -1,29 +1,7 @@
 ---
 import ImageComp from "../utils/ImageComp.astro";
 
-interface ImageItem {
-  src: string;
-  alt: string;
-}
-
-interface ButtonItem {
-  text: string;
-  href: string;
-}
-
-interface AirlineTrackData {
-  title?: string;
-  description?: string;
-  image?: ImageItem;
-  button?: ButtonItem;
-  secondaryButton?: ButtonItem;
-}
-
-interface Props {
-  content?: AirlineTrackData;
-}
-
-const defaultData: AirlineTrackData = {
+const example = {
   image: {
     src: "/src/assets/eliezer-fernandes-y7E8qfllcY0-unsplash.jpg",
     alt: "Commercial airliner on the runway by Eliezer Fernandes",
@@ -35,30 +13,9 @@ const defaultData: AirlineTrackData = {
     text: "Explore the Airline Pilot Track",
     href: "/airline-pilot-track/",
   },
-  secondaryButton: {
-    text: "Talk to an Advisor",
-    href: "/contact/",
-  },
 };
 
-const { content: rawContent } = Astro.props;
-
-const content: AirlineTrackData = {
-  ...defaultData,
-  ...rawContent,
-  image: {
-    ...defaultData.image!,
-    ...(rawContent?.image || {}),
-  },
-  button: {
-    ...defaultData.button!,
-    ...(rawContent?.button || {}),
-  },
-  secondaryButton: {
-    ...defaultData.secondaryButton!,
-    ...(rawContent?.secondaryButton || {}),
-  },
-};
+const { content = example } = Astro.props;
 ---
 
 <section class="relative bg-[#fcfaf8] py-20 lg:py-32 overflow-hidden">
@@ -67,9 +24,8 @@ const content: AirlineTrackData = {
   >
     <span
       class="text-[20rem] font-black text-[#423731] absolute -top-20 -left-20 italic"
+      >JET</span
     >
-      JET
-    </span>
   </div>
 
   <div class="max-w-7xl mx-auto px-6 relative z-10">
@@ -79,45 +35,36 @@ const content: AirlineTrackData = {
           <div class="w-10 h-[2px] bg-[#dcc1a6]"></div>
           <span
             class="text-[#745e4d] font-black uppercase tracking-[0.3em] text-xs"
+            >Professional Path</span
           >
-            Professional Path
-          </span>
         </div>
 
-        {content.title && (
-          <h2
-            class="text-4xl md:text-6xl lg:text-7xl font-black text-[#423731] leading-[1.1] mb-8"
-          >
-            {content.title}
-          </h2>
-        )}
+        <h2
+          class="text-4xl md:text-6xl lg:text-7xl font-black text-[#423731] leading-[1.1] mb-8"
+        >
+          {content.title}
+        </h2>
 
-        {content.description && (
-          <p
-            class="text-lg md:text-xl text-[#745e4d] leading-relaxed mb-10 max-w-xl"
-          >
-            {content.description}
-          </p>
-        )}
+        <p
+          class="text-lg md:text-xl text-[#745e4d] leading-relaxed mb-10 max-w-xl"
+        >
+          {content.description}
+        </p>
 
         <div class="flex flex-wrap gap-4">
-          {content.button?.text && (
-            <a
-              href={content.button.href || "/airline-pilot-track/"}
-              class="bg-[#423731] text-[#dcc1a6] px-10 py-5 rounded-full font-black uppercase tracking-widest text-sm hover:bg-[#745e4d] hover:text-white transition-all transform hover:-translate-y-1 shadow-2xl"
-            >
-              {content.button.text}
-            </a>
-          )}
+          <a
+            href={content.button.href}
+            class="bg-[#423731] text-[#dcc1a6] px-10 py-5 rounded-full font-black uppercase tracking-widest text-sm hover:bg-[#745e4d] hover:text-white transition-all transform hover:-translate-y-1 shadow-2xl"
+          >
+            {content.button.text}
+          </a>
 
-          {content.secondaryButton?.text && (
-            <a
-              href={content.secondaryButton.href || "/contact/"}
-              class="px-10 py-5 rounded-full font-black uppercase tracking-widest text-sm text-[#423731] border-2 border-[#dcc1a6] hover:bg-[#fcfaf8] transition-all"
-            >
-              {content.secondaryButton.text}
-            </a>
-          )}
+          <a
+            href="/contact/"
+            class="px-10 py-5 rounded-full font-black uppercase tracking-widest text-sm text-[#423731] border-2 border-[#dcc1a6] hover:bg-[#fcfaf8] transition-all"
+          >
+            Talk to an Advisor
+          </a>
         </div>
       </div>
 
@@ -126,14 +73,12 @@ const content: AirlineTrackData = {
           <div
             class="rounded-l-full overflow-hidden border-[12px] border-white shadow-2xl"
           >
-            {content.image?.src && (
-              <ImageComp
-                src={content.image.src}
-                alt={content.image.alt || "Airline Pilot Track"}
-                classes="h-full w-full object-cover group-hover:scale-110 transition-transform duration-1000 ease-out"
-                quality={80}
-              />
-            )}
+            <ImageComp
+              src={content.image.src}
+              alt={content.image.alt}
+              classes="h-full w-full object-cover group-hover:scale-110 transition-transform duration-1000 ease-out"
+              quality={80}
+            />
             <div
               class="absolute inset-0 group-hover:bg-transparent transition-colors duration-500"
             >

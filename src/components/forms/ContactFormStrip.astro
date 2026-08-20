@@ -7,53 +7,9 @@ import {
 } from "../../data/consts";
 import ImageComp from "../utils/ImageComp.astro";
 
-interface ImageItem {
-  src: string;
-  alt: string;
-}
-
-interface ContactStripData {
-  upperHeader?: string;
-  title?: string;
-  description?: string;
-  promoText?: string;
-  backgroundImage?: ImageItem;
-  image?: ImageItem;
-}
-
-interface Props {
-  content?: ContactStripData;
-}
-
-const defaultData: ContactStripData = {
-  upperHeader: "Let's Connect",
-  title: 'Your Journey <br /><span class="text-[#dcc1a6] italic font-serif">Starts Here</span>',
-  description:
-    "Whether you're taking your first discovery flight or advancing your ratings, our team is ready to guide you.",
-  promoText: `Take a <a href="${website_links?.discoveryFlight?.path || '/discovery-flight/'}" class="underline hover:text-white transition-colors">Discovery Flight</a> and get your money back after enrolling!`,
-  backgroundImage: {
-    src: "/src/assets/rrm-visit/pilot-instructional-center_new-century-KS_cfis-preparing-plane-cessna-airport-near-Kansas-city-MO-cropped.png",
-    alt: "Pilot Instructional Center New Century KS - CFIs preparing Cessna plane at airport near Kansas City MO original",
-  },
-  image: {
-    src: "/src/assets/drive/Riley-Riggs-Discovery-Flight-Pilot-instructional-center_flight-school_PIC-Kansas-city-Missouri.jpeg",
-    alt: "Pilot looking at the sunset",
-  },
-};
-
-const { content: rawContent } = Astro.props;
-
-const content: ContactStripData = {
-  ...defaultData,
-  ...rawContent,
-  backgroundImage: {
-    ...defaultData.backgroundImage!,
-    ...(rawContent?.backgroundImage || {}),
-  },
-  image: {
-    ...defaultData.image!,
-    ...(rawContent?.image || {}),
-  },
+const backgroundFixedImage = {
+  src: "/src/assets/rrm-visit/pilot-instructional-center_new-century-KS_cfis-preparing-plane-cessna-airport-near-Kansas-city-MO-cropped.png",
+  alt: "Pilot Instructional Center New Century KS - CFIs preparing Cessna plane at airport near Kansas City MO original",
 };
 
 const FORM_WEBHOOK_URL = import.meta.env.CONTACT_FORM_WEBHOOK_URL;
@@ -63,14 +19,13 @@ const inputClass =
 ---
 
 <div id="contact" class="py-24 sm:py-32 relative overflow-hidden font-sans">
+  <!-- Fixed Background Image -->
   <div class="fixed inset-0 -z-50 pointer-events-none">
-    {content.backgroundImage?.src && (
-      <ImageComp
-        src={content.backgroundImage.src}
-        alt={content.backgroundImage.alt}
-        classes="w-full h-full object-cover mix-blend-multiply"
-      />
-    )}
+    <ImageComp
+      src={backgroundFixedImage.src}
+      alt={backgroundFixedImage.alt}
+      classes="w-full h-full object-cover mix-blend-multiply"
+    />
     <div class="absolute inset-0 bg-black/70 mix-blend-multiply"></div>
   </div>
 
@@ -92,56 +47,51 @@ const inputClass =
         data-aos="fade-right"
         data-aos-duration="1000"
       >
-        {content.upperHeader && (
-          <div class="flex items-center gap-4 mb-6">
-            <span
-              class="text-[#dcc1a6] font-bold tracking-widest uppercase text-sm"
-              set:html={content.upperHeader}
-            />
-            <div class="h-px w-12 bg-[#dcc1a6]/50"></div>
-          </div>
-        )}
+        <div class="flex items-center gap-4 mb-6">
+          <span
+            class="text-[#dcc1a6] font-bold tracking-widest uppercase text-sm"
+            >Let's Connect</span
+          >
+          <div class="h-px w-12 bg-[#dcc1a6]/50"></div>
+        </div>
 
-        {content.title && (
-          <h2
-            class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight font-title text-white uppercase leading-tight"
-            set:html={content.title}
-          />
-        )}
+        <h2
+          class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight font-title text-white uppercase leading-tight"
+        >
+          Your Journey <br />
+          <span class="text-[#dcc1a6] italic font-serif">Starts Here</span>
+        </h2>
 
-        {content.description && (
-          <p class="mt-6 text-lg leading-relaxed text-white/70 max-w-md">
-            {content.description}
+        <p class="mt-6 text-lg leading-relaxed text-white/70 max-w-md">
+          Whether you're taking your first discovery flight or advancing your
+          ratings, our team is ready to guide you.
+        </p>
+        <div class="text-left mt-8">
+          <p
+            class="text-accent-500 brightness-150 font-semibold text-xs lg:text-base tracking-[0.3em] uppercase"
+          >
+            Take a <a href={website_links.discoveryFlight.path} class=""
+              >Discovery Flight</a
+            > and get your money back after enrolling!
           </p>
-        )}
-
-        {content.promoText && (
-          <div class="text-left mt-8">
-            <p
-              class="text-accent-500 brightness-150 font-semibold text-xs lg:text-base tracking-[0.3em] uppercase"
-              set:html={content.promoText}
+        </div>
+        {/* Animated Graphic & Image Arrangement */}
+        <div class="mt-12 relative max-w-sm">
+          {/* Main Image (Replace src with your actual image) */}
+          <div
+            class="relative rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl aspect-[4/3] group"
+          >
+            <div
+              class="absolute inset-0 bg-[#4b7992]/20 group-hover:bg-transparent transition-colors duration-500 z-10"
+            >
+            </div>
+            <ImageComp
+              src="/src/assets/drive/Riley-Riggs-Discovery-Flight-Pilot-instructional-center_flight-school_PIC-Kansas-city-Missouri.jpeg"
+              alt="Pilot looking at the sunset"
+              classes="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
           </div>
-        )}
-
-        {/* Animated Graphic & Image Arrangement */}
-        {content.image?.src && (
-          <div class="mt-12 relative max-w-sm">
-            <div
-              class="relative rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl aspect-[4/3] group"
-            >
-              <div
-                class="absolute inset-0 bg-[#4b7992]/20 group-hover:bg-transparent transition-colors duration-500 z-10"
-              >
-              </div>
-              <ImageComp
-                src={content.image.src}
-                alt={content.image.alt}
-                classes="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-            </div>
-          </div>
-        )}
+        </div>
       </div>
 
       {/* Right Column: Glassmorphism Form */}
