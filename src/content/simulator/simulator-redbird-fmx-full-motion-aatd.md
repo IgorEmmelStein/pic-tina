@@ -17,15 +17,15 @@ stats:
     unit: ' cert.'
     label: Loggable credit
 images:
-  - src: /uploads/src/assets/drive/student-simulator-Flight-Pilot-instructional-center_flight-school_PIC-Kansas-city-Missouri.jpeg
+  - src: /src/assets/drive/student-simulator-Flight-Pilot-instructional-center_flight-school_PIC-Kansas-city-Missouri.jpeg
     alt: Cockpit view
-  - src: /uploads/src/assets/fleet/red-bird-fmx_pilot-instructional-center.webp
+  - src: /src/assets/fleet/red-bird-fmx_pilot-instructional-center.webp
     alt: Instrument panel
-  - src: /uploads/src/assets/fleet/red-bird-fx-simulator_motion-movement_pilot-instructional-center-1.png
+  - src: /src/assets/fleet/red-bird-fx-simulator_motion-movement_pilot-instructional-center-1.png
     alt: Motion platform
-  - src: /uploads/src/assets/fleet/red-bird-fx-simulator_motion-movement_pilot-instructional-center-2.png
+  - src: /src/assets/fleet/red-bird-fx-simulator_motion-movement_pilot-instructional-center-2.png
     alt: Motion platform
-  - src: /uploads/src/assets/fleet/red-bird-fx-simulator_motion-movement_pilot-instructional-center-3.png
+  - src: /src/assets/fleet/red-bird-fx-simulator_motion-movement_pilot-instructional-center-3.png
     alt: Motion platform
 faaCredit:
   - IFR instrument hours
@@ -43,4 +43,3 @@ bullets:
   - title: Full motion fidelity
     description: Six-axis motion delivers vestibular cues that transfer to the cockpit.
 ---
-
