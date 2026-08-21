@@ -5,7 +5,7 @@ category: cfi
 credentials: testtt
 bio:
   - testtt
-imageSrc: /uploads/aircraft-taking-off-Discovery-Flight-PIC-flight-school_kansas-city_pilot-training_Pilot-instructional-center-Missouri.JPEG
+imageSrc: /uploads/pilot-instructional-center_new-century-KS_cfis-preparing-plane-cessna-airport-near-Kansas-city-MO.png
 imageAlt: testtt
 ---
 
