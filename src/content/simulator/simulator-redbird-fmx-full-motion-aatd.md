@@ -1,6 +1,6 @@
 ---
 id: simulator-redbird-fmx-full-motion-aatd
-upperHeader: Operational
+upperHeader: Operational test
 title: Full Motion Simulator
 description: 'Next-generation training engineered for precision, realism, and confidence in the cockpit.'
 descriptions:
@@ -17,15 +17,15 @@ stats:
     unit: ' cert.'
     label: Loggable credit
 images:
-  - src: /src/assets/drive/student-simulator-Flight-Pilot-instructional-center_flight-school_PIC-Kansas-city-Missouri.jpeg
+  - src: /uploads/src/assets/drive/student-simulator-Flight-Pilot-instructional-center_flight-school_PIC-Kansas-city-Missouri.jpeg
     alt: Cockpit view
-  - src: /src/assets/fleet/red-bird-fmx_pilot-instructional-center.webp
+  - src: /uploads/src/assets/fleet/red-bird-fmx_pilot-instructional-center.webp
     alt: Instrument panel
-  - src: /src/assets/fleet/red-bird-fx-simulator_motion-movement_pilot-instructional-center-1.png
+  - src: /uploads/src/assets/fleet/red-bird-fx-simulator_motion-movement_pilot-instructional-center-1.png
     alt: Motion platform
-  - src: /src/assets/fleet/red-bird-fx-simulator_motion-movement_pilot-instructional-center-2.png
+  - src: /uploads/src/assets/fleet/red-bird-fx-simulator_motion-movement_pilot-instructional-center-2.png
     alt: Motion platform
-  - src: /src/assets/fleet/red-bird-fx-simulator_motion-movement_pilot-instructional-center-3.png
+  - src: /uploads/src/assets/fleet/red-bird-fx-simulator_motion-movement_pilot-instructional-center-3.png
     alt: Motion platform
 faaCredit:
   - IFR instrument hours
