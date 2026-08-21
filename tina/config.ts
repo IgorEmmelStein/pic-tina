@@ -8,16 +8,16 @@ const branch =
 
 export default defineConfig({
   branch: "main",
-  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
-  token: process.env.TINA_TOKEN,
+  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID || "",
+  token: process.env.TINA_TOKEN || "",
   build: {
     outputFolder: "admin",
     publicFolder: "public",
   },
   media: {
     tina: {
-      publicFolder: "",
-      mediaRoot: "src/assets",
+      publicFolder: "public",
+      mediaRoot: "uploads",
     },
   },
   search: {
@@ -30,12 +30,167 @@ export default defineConfig({
   },
   schema: {
     collections: [
+      // =======================================================================
+      // 1. FLEET COLLECTION
+      // =======================================================================
       {
-        name: "blog",
-        label: "Blog",
-        path: "src/content/blog",
+        name: "fleet",
+        label: "Our Fleet",
+        path: "src/content/fleet",
+        format: "md",
+        ui: {
+          allowedActions: {
+            create: true,
+            delete: true,
+          },
+        },
+        fields: [
+          {
+            type: "string",
+            name: "upperHeader",
+            label: "Upper Eyebrow Header",
+            required: true,
+          },
+          {
+            type: "string",
+            name: "title",
+            label: "Aircraft Name / Title",
+            isTitle: true,
+            required: true,
+          },
+          {
+            type: "string",
+            name: "description",
+            label: "Short Description",
+            ui: {
+              component: "textarea",
+            },
+            required: true,
+          },
+          {
+            type: "image",
+            name: "imageSrc",
+            label: "Main Aircraft Image",
+            required: true,
+          },
+          {
+            type: "string",
+            name: "imageAlt",
+            label: "Image Alt Text",
+            required: true,
+          },
+          {
+            type: "string",
+            name: "descriptions",
+            label: "Detailed Paragraphs",
+            list: true,
+            required: true,
+            ui: {
+              component: "textarea",
+            },
+          },
+          {
+            type: "string",
+            name: "bullets",
+            label: "Feature / Specification Cards",
+            list: true,
+            required: true,
+          },
+          {
+            type: "string",
+            name: "features",
+            label: "Features Checklist",
+            list: true,
+            required: true,
+          },
+        ],
+      },
+
+      // =======================================================================
+      // 2. TEAM MEMBERS COLLECTION
+      // =======================================================================
+      {
+        name: "team",
+        label: "Team Members",
+        path: "src/content/team",
+        format: "md",
+        ui: {
+          allowedActions: {
+            create: true,
+            delete: true,
+          },
+          itemProps: (item) => ({ label: item?.name ? `${item.name} (${item.category || 'Team'})` : "Team Member" }),
+        },
+        fields: [
+          {
+            type: "string",
+            name: "name",
+            label: "Full Name",
+            isTitle: true,
+            required: true,
+          },
+          {
+            type: "string",
+            name: "role",
+            label: "Role / Position (e.g. Founder & CEO / Advanced Flight Instructor)",
+            required: true,
+          },
+          {
+            type: "string",
+            name: "category",
+            label: "Team Grouping",
+            required: true,
+            options: [
+              { label: "Leadership", value: "leadership" },
+              { label: "CFI", value: "cfi" },
+            ],
+          },
+          {
+            type: "string",
+            name: "credentials",
+            label: "Credentials (e.g. CFI, CFII, MEI)",
+            required: true,
+          },
+          {
+            type: "string",
+            name: "bio",
+            label: "Biography Paragraphs",
+            list: true,
+            required: true,
+            ui: {
+              component: "textarea",
+            },
+          },
+          {
+            type: "image",
+            name: "imageSrc",
+            label: "Image File",
+            required: true,
+          },
+          {
+            type: "string",
+            name: "imageAlt",
+            label: "Image description (will not show on page, just on code for SEO)",
+            required: true,
+          },
+        ],
+      },
+
+      // =======================================================================
+      // 3. SIMULATOR COLLECTION
+      // =======================================================================
+      {
+        name: "simulator",
+        label: "Simulator",
+        path: "src/content/simulator",
         format: "md",
         fields: [
+          {
+            type: "string",
+            name: "upperHeader",
+            label: "Upper Header",
+            required: true,
+          },
           {
             type: "string",
             name: "title",
@@ -46,239 +201,82 @@ export default defineConfig({
           {
             type: "string",
             name: "description",
-            label: "Description",
-            ui: { component: "textarea" },
-          },
-          {
-            type: "datetime",
-            name: "pubDate",
-            label: "Publish Date",
+            label: "Main Description",
+            ui: {
+              component: "textarea",
+            },
             required: true,
           },
           {
             type: "string",
-            name: "author",
-            label: "Author",
-          },
-          {
-            type: "string",
-            name: "role",
-            label: "Author Role",
-          },
-          {
-            type: "image",
-            name: "authorImage",
-            label: "Author Image",
-          },
-          {
-            type: "string",
-            name: "authorImageAlt",
-            label: "Author Image Alt",
-          },
-          {
-            type: "image",
-            name: "cardImage",
-            label: "Card Image",
-          },
-          {
-            type: "string",
-            name: "cardImageAlt",
-            label: "Card Image Alt",
-          },
-          {
-            type: "number",
-            name: "readTime",
-            label: "Read Time",
-          },
-          {
-            type: "string",
-            name: "tags",
-            label: "Tags",
+            name: "descriptions",
+            label: "Paragraph Descriptions",
             list: true,
+            ui: {
+              component: "textarea",
+            },
+            required: true,
           },
           {
-            type: "string",
-            name: "categories",
-            label: "Categories",
+            type: "object",
+            name: "stats",
+            label: "Stats Cards",
             list: true,
-            options: [
-              "Pilot News",
-              "International Aviation",
-              "Aviation Safety",
-              "Community",
-              "Aviation Training",
-              "Pilot Training and Certification",
-              "Career Change",
-              "Aircraft Guides",
-              "Pilot Guides",
-              "Commercial Pilot",
-              "Flight Training",
-              "Pilot Career Guides",
-              "Uncategorized",
-              "Pilot Mindset",
-              "Pilot's Way of Life",
-              "Design",
-              "Flight School Comparison",
-              "Private Pilot Flight School",
-              "Aviation Technology",
+            required: true,
+            fields: [
+              { type: "string", name: "value", label: "Value", required: true },
+              { type: "string", name: "unit", label: "Unit", required: true },
+              { type: "string", name: "label", label: "Label", required: true },
             ],
           },
           {
             type: "object",
-            name: "contents",
-            label: "Contents",
+            name: "images",
+            label: "Gallery Images",
             list: true,
+            required: true,
             fields: [
-              { type: "string", name: "title", label: "Section Title" },
-              { type: "string", name: "paragraph", label: "Paragraph", ui: { component: "textarea" } },
+              { type: "image", name: "src", label: "Image Source", required: true },
+              { type: "string", name: "alt", label: "Alt Text", required: true },
             ],
           },
           {
-            type: "rich-text",
-            name: "body",
-            label: "Body Content",
-            isBody: true,
-          },
-        ],
-      },
-      {
-        name: "pilotTraining",
-        label: "Pilot Training",
-        path: "src/content/pilot-training",
-        format: "md",
-        fields: [
-          {
             type: "string",
-            name: "siteTitle",
-            label: "Site Title",
-            isTitle: true,
+            name: "faaCredit",
+            label: "FAA Loggable Credits",
+            list: true,
             required: true,
           },
           {
             type: "string",
-            name: "siteDescription",
-            label: "Site Description",
-            ui: { component: "textarea" },
-          },
-          {
-            type: "string",
-            name: "siteKeywords",
-            label: "Site Keywords",
-          },
-          {
-            type: "string",
-            name: "city",
-            label: "City",
-          },
-          {
-            type: "string",
-            name: "stateShort",
-            label: "State Short",
-          },
-          {
-            type: "string",
-            name: "stateLong",
-            label: "State Long",
-          },
-          {
-            type: "string",
-            name: "keyPlace1",
-            label: "Key Place 1",
-          },
-          {
-            type: "string",
-            name: "keyPlace2",
-            label: "Key Place 2",
-          },
-          {
-            type: "string",
-            name: "distance",
-            label: "Distance",
-          },
-          {
-            type: "string",
-            name: "headlines",
-            label: "Headlines",
+            name: "configurations",
+            label: "Available Configurations",
             list: true,
+            required: true,
           },
           {
             type: "object",
-            name: "header",
-            label: "Header Section",
+            name: "bullets",
+            label: "Feature Bullets",
+            list: true,
+            required: true,
+            ui: {
+              itemProps: (item) => ({
+                label: item?.title ? item.title : "Feature Bullet",
+              }),
+            },
             fields: [
-              { type: "string", name: "upperHeader", label: "Upper Header" },
-              { type: "string", name: "title", label: "Title" },
-              { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
+              { type: "string", name: "title", label: "Card Title", required: true },
               {
-                type: "object",
-                name: "buttons",
-                label: "Buttons",
-                list: true,
-                fields: [
-                  { type: "string", name: "text", label: "Text" },
-                  { type: "string", name: "href", label: "Link" },
-                  { type: "string", name: "style", label: "Style" },
-                ],
+                type: "string",
+                name: "description",
+                label: "Card Description",
+                ui: {
+                  component: "textarea",
+                },
+                required: true,
               },
             ],
-          },
-          {
-            type: "rich-text",
-            name: "body",
-            label: "Body Content",
-            isBody: true,
-          },
-        ],
-      },
-      {
-        name: "faqs",
-        label: "FAQs",
-        path: "src/content/faqs",
-        format: "md",
-        fields: [
-          {
-            type: "string",
-            name: "title",
-            label: "Title",
-            isTitle: true,
-            required: true,
-          },
-          {
-            type: "string",
-            name: "upperHeading",
-            label: "Upper Heading",
-          },
-          {
-            type: "string",
-            name: "paragraphs",
-            label: "Paragraphs",
-            list: true,
-          },
-          {
-            type: "string",
-            name: "ctaUrl",
-            label: "CTA URL",
-          },
-          {
-            type: "string",
-            name: "ctaTitle",
-            label: "CTA Title",
-          },
-          {
-            type: "object",
-            name: "faqs",
-            label: "FAQ Items",
-            list: true,
-            fields: [
-              { type: "string", name: "question", label: "Question" },
-              { type: "string", name: "answer", label: "Answer", ui: { component: "textarea" } },
-            ],
-          },
-          {
-            type: "rich-text",
-            name: "body",
-            label: "Body Content",
-            isBody: true,
           },
         ],
       },

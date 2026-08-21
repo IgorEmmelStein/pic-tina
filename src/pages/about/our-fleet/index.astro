@@ -1,0 +1,87 @@
+---
+import CTALeft from "../../../components/ctas/CTALeft.astro";
+import CTARight from "../../../components/ctas/CTARight.astro";
+import Enroll from "../../../components/forms/Enroll.astro";
+import HeaderMain from "../../../components/headers/HeaderMainAlternative.astro";
+import { SITE_DESCRIPTION, SITE_TITLE, website_links } from "../../../data/consts";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { getEntry } from "astro:content";
+import "aos/dist/aos.css";
+import MapLocation from "../../../components/external/MapLocation.astro";
+import FleetSection from "../../../components/fleet/FleetSection.astro";
+import FleetGallery from "../../../components/fleet/FleetGallery.astro";
+import SimulatorImageSection from "../../../components/offers/SimulatorImageSection.astro";
+
+const fleetData = {
+  siteTitle:
+    "Our Fleet | Pilot Instructional Center | New Century AirCenter KIXD",
+  siteDescription:
+    "Explore PIC’s aircraft, including the historic Stinson SR-5A. Learn about performance, specs, and how our fleet supports safe, high-quality pilot training.",
+  siteKeywords:
+    "aircraft fleet PIC, Stinson SR-5A, training aircraft, flight school planes, Kansas City aviation",
+  header: {
+    upperHeader: "Our Fleet",
+    title: `Our Fleet. Reliable. Proven. Purpose-Built for Training.`,
+    description:
+      "Pilot Instructional Center operates a fleet of trusted, high-performance Cessna training aircraft chosen for their reliability, safety, and real-world capability. Each aircraft is professionally maintained, IFR-equipped, and tailored to deliver a consistent, high-quality training experience for every stage of your pilot journey.",
+
+    buttons: [
+      { text: "Schedule a Tour", href: "/contact/", style: "btn-secondary" },
+      {
+        text: "Training Programs",
+        href: "/flight-training/",
+        style: "btn-transparent",
+      },
+    ],
+    image: {
+      src: "/src/assets/rrm-visit/pilot-instructional-center_pilot-checking-wing-plane_flight-school_pilot-training.png",
+      alt: "Pilot Instructional Center's Pilot checking plane",
+    },
+  },
+
+  cta: {
+    image: {
+      src: "/src/assets/rrm-visit/pilot-instructional-center_pilot-checking-wing-plane_flight-school_pilot-training.png",
+      alt: "Pilot looking out aircraft window by Pasqualino Capobianco",
+    },
+    title: "Committed to a High-Quality Training Fleet",
+    description:
+      "Every aircraft associated with PIC, from modern trainers to legacy models, represents our dedication to aviation excellence. We maintain aircraft to the highest safety standards and continue expanding our fleet to support student growth.",
+    descriptions: [
+      "All PIC aircraft are maintained under strict FAA compliance and overseen by experienced aviation professionals.",
+      "Our heritage aircraft, such as the Stinson SR-5A, reflect the deep aviation roots that shape the PIC training philosophy.",
+      "A strong, reliable fleet ensures safe, efficient, and professional training for every student pilot.",
+    ],
+    button: {
+      text: "Explore Training Programs",
+      href: "/flight-training/",
+    },
+  },
+};
+
+const entry = await getEntry("simulator", "simulator-redbird-fmx-full-motion-aatd");
+
+if (!entry) {
+  throw new Error("Simulator entry not found in src/content/simulator/");
+}
+
+const { data } = entry;
+---
+
+<BaseLayout
+  siteTitle={fleetData.siteTitle}
+  siteDescription={fleetData.siteDescription}
+  siteKeywords={fleetData.siteKeywords}
+>
+  <HeaderMain
+    content={fleetData.header}
+    mainSize={false}
+    showButton={false}
+    images={[fleetData.header.image]}
+  />
+  <FleetGallery />
+  <SimulatorImageSection content={data.imageSection} />
+  <MapLocation />
+  <CTARight content={fleetData.cta} />
+  <Enroll />
+</BaseLayout>

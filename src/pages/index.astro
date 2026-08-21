@@ -20,7 +20,6 @@ import ContentMiddle from "../components/content/ContentMiddle.astro";
 import ContentRight from "../components/content/ContentRight.astro";
 import HeaderMainAlternative from "../components/headers/HeaderMainAlternative.astro";
 import FleetGallery from "../components/fleet/FleetGallery.astro";
-import { fleet } from "./about/our-fleet.astro";
 import ContactFormStrip from "../components/forms/ContactFormStrip.astro";
 import OffersStripCTA from "../components/offers/OffersStripCTA.astro";
 import OffersSection from "../components/offers/OffersSection.astro";
@@ -362,7 +361,7 @@ const data = {
   <ContentLeft content={data.why[0]} />
   <CardsContainter />
   <CTAAirlineTrack />
-  <FleetGallery fleet={fleet} selfLink={false} />
+  <FleetGallery />
   <ContentMiddle content={data.why[1]} />
   <ContactFormStrip />
   <OffersSection contactForm={true} />
