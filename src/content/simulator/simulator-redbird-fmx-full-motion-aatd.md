@@ -1,6 +1,6 @@
 ---
 id: simulator-redbird-fmx-full-motion-aatd
-upperHeader: Operational test
+upperHeader: Operational
 title: Full Motion Simulator
 description: 'Next-generation training engineered for precision, realism, and confidence in the cockpit.'
 descriptions:
